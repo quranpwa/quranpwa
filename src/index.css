@@ -1,0 +1,30 @@
+:root {
+    --primary-color: #302AE6;
+    --secondary-color: #536390;
+    --font-color: #213547;
+    --bg-color: #fff;
+    --nav-bg-color: #ccc;
+    --selected-bg-color: #e2edf9;
+    --selected-font-color: #000;
+}
+
+[data-theme="dark"] {
+    --primary-color: #9A97F3;
+    --secondary-color: #818cab;
+    --font-color: rgba(255, 255, 255, 0.87);
+    --bg-color: #242424;
+    --nav-bg-color: #000;
+    --selected-bg-color: #345;
+    --selected-font-color: #fff;
+}
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color-scheme: light dark;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}

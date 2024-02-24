@@ -1,0 +1,121 @@
+@font-face {
+    font-family: 'amiri_quran';
+    src: url('./fonts/amiri_quran.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'hafs';
+    src: url('./fonts/hafs.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'kitab';
+    src: url('./fonts/kitab.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'me_quran';
+    src: url('./fonts/me_quran.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'noorehidayat';
+    src: url('./fonts/noorehidayat.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'noorehira';
+    src: url('./fonts/noorehira.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'noorehuda';
+    src: url('./fonts/noorehuda.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'quran_karim_114';
+    src: url('./fonts/quran_karim_114.ttf') format('truetype');
+}
+
+.sura-name-calligraphy {
+    font-family: quran_karim_114 !important;
+    font-size: 10rem;
+    text-align: center;
+    margin: -2.5rem 0 !important;
+}
+
+.sura-name-en {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.bismillah-arabic {
+    font-family: hafs;
+    font-size: 2rem;
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--font-color);
+}
+
+.selected-ayat {
+    background-color: var(--selected-bg-color);
+    color: var(--selected-font-color);
+}
+
+.navbar {
+    background-color: var(--nav-bg-color);
+}
+
+    .navbar h1 {
+        font-size: 1.5rem;
+        margin: 0 0.75rem;
+        font-weight: normal;
+    }
+
+.select {
+    font-size: 1.25rem;
+    padding: 0.25rem 0.75rem;
+    margin: 0 0.75rem;
+    border-radius: .75rem;
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}
+
+.container {
+    margin-top: 4rem !important;
+}
+
+.rtl {
+    direction: rtl !important;
+}
+
+.ltr {
+    direction: ltr !important;
+}
+
+.ruku-header {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.quran-text {
+    font-family: hafs;
+    font-size: 2rem;
+    text-align: justify;
+}
+
+.quran-translation {
+    font-size: 1.1rem;
+    line-height: 1.8rem;
+    text-align: justify;
+}
+
+.translation-ayat-number {
+    font-size: 1.2rem;
+    color: gray;
+    border: 1px solid gray;
+    border-radius: 25%;
+    padding: 0 0.25rem;
+    margin: 0 0.25rem;
+}
