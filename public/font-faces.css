@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'amiri_quran';
+    src: url('./fonts/amiri_quran.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'hafs';
+    src: url('./fonts/hafs.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'kitab';
+    src: url('./fonts/kitab.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'me_quran';
+    src: url('./fonts/me_quran.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'noorehidayat';
+    src: url('./fonts/noorehidayat.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'noorehira';
+    src: url('./fonts/noorehira.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'noorehuda';
+    src: url('./fonts/noorehuda.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'quran_karim_114';
+    src: url('./fonts/quran_karim_114.ttf') format('truetype');
+}
