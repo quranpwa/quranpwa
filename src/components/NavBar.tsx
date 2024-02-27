@@ -43,7 +43,7 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
         triggerOnNavigate();
     };
 
-    return <nav className='navbar fixed-top'>
+    return <nav className='navbar fixed-top px-2'>
         <h1>Daily Quran</h1>
 
         <div>
