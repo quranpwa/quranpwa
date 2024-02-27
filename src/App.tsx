@@ -1,9 +1,10 @@
 ﻿import { useEffect, useReducer, useState } from 'react';
-import './App.css'
-import { Ayat, QuranData } from './QuranData';
-import NavBar, { NavigationModel, NavigationMode } from './components/NavBar';
+import './App.css';
+import { Ayat, QuranData, Translation } from './QuranData';
+import NavBar, { NavigationMode, NavigationModel } from './components/NavBar';
 import QuranViewer from './components/QuranViewer';
 import SettingsPanel, { ReadingMode, SettingsModel } from './components/SettingsPanel';
+import translationList from './assets/translation-list.json'
 
 function App() {
     const [quranData] = useState<QuranData>(new QuranData());
@@ -44,13 +45,18 @@ function App() {
 
         return storedNavModel;
     };
+    const getDefaultTranslation = (): Translation => {
+        let navLang = navigator.languages[navigator.languages.length - 1] ?? 'en';
+
+        return translationList.filter(f => f.language == navLang)[0];
+    }
 
     const storedSettingsModelString = localStorage.getItem('SettingsModel');
     const storedSettingsModel: SettingsModel = storedSettingsModelString ? JSON.parse(storedSettingsModelString)
         : {
             readingMode: ReadingMode.Ruku_By_Ruku,
             quranFont: 'hafs',
-            translations: [],
+            translations: [getDefaultTranslation()],
             tafsirs:[]
         }
 
