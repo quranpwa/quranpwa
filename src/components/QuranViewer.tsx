@@ -60,7 +60,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
                             const ayatTranslationText = translation.texts[ayat.serial - 1];
                             const translationMeta = translation.translationMeta;
                             return <div className="quran-translation ltr" key={translationMeta.fileName + ayat.serial}>
-                                <div className="text-secondary small mt-3">{translationMeta.translator}</div>
+                                <div className="text-secondary small mt-3">{translationMeta.languageName + ' - ' + translationMeta.translator}</div>
                                 <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
                                 {ayatTranslationText}
                             </div>
@@ -73,7 +73,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
                         const ayatTafsirText = tafsirs.texts[ayat.serial - 1];
                         const translationMeta = tafsirs.translationMeta;
                         return <div className="quran-translation ltr" key={translationMeta.fileName + ayat.serial}>
-                            <div className="text-secondary small mt-3">{translationMeta.translator}</div>
+                            <div className="text-secondary small mt-3">{translationMeta.languageName + ' - ' + translationMeta.translator}</div>
                             <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
                             <pre style={{ textWrap: 'wrap' }} dangerouslySetInnerHTML={{ __html: ayatTafsirText }}></pre>
                         </div>
@@ -85,6 +85,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
     } else if (settingsModel?.readingMode == ReadingMode.Ruku_By_Ruku) {
 
         let ayatsGroupByRuku = groupBy(ayats, x => x.rukuIdx);
+        let firstTranslation = quranData.translations[0];
 
         for (let rukuIdx in ayatsGroupByRuku) {
             let ruku = quranData.rukus[+rukuIdx];
@@ -95,7 +96,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
                     suraHeader(rukuAyats[0].suraIdx)
                 }
                 <h3 className="ruku-header text-secondary mb-3">Ruku-{ruku.serial}: {ruku.displayText}</h3>
-                <div className="col-md-6 ps-md-4 quran-text" style={{ fontFamily: settingsModel.quranFont || 'hafs' }}>
+                <div className="col-md-6 ps-md-4 quran-text mt-2 pt-4" style={{ fontFamily: settingsModel.quranFont || 'hafs' }}>
                     {rukuAyats.map(ayat =>
                         <span key={ayat.serial}
                             onClick={() => handleAyatSelection(ayat)}
@@ -105,23 +106,22 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
                         </span>)}
                 </div>
 
-                <div className="col-md-6 pe-md-4 quran-translation ltr"> {rukuAyats.map(ayat =>
-                    <span key={ayat.serial}
-                        onClick={() => handleAyatSelection(ayat)}
-                        className={selectedAyat == ayat.serial ? 'selected-ayat' : ''}>
-                        {quranData.translations.map(translation => {
-                            if (translation.texts) {
-                                const ayatTranslationText = translation.texts[ayat.serial - 1];
-                                const translationMeta = translation.translationMeta;
+                {firstTranslation &&
+                    <div className="col-md-6 pe-md-4 quran-translation ltr">
+                        <div className="text-secondary small mt-3">{firstTranslation.translationMeta.languageName + ' - ' + firstTranslation.translationMeta.translator}</div>
+                        {
+                            rukuAyats.map(ayat =>
+                                <span key={ayat.serial}
+                                    onClick={() => handleAyatSelection(ayat)}
+                                    className={selectedAyat == ayat.serial ? 'selected-ayat quran-translation' : 'quran-translation'}>
 
-                                return <span className="quran-translation" key={translationMeta.fileName + ayat.serial}>
-                                    <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
-                                    {ayatTranslationText}
-                                </span>
-                            }
-                        })}
-                    </span>)}
-                </div>
+                                    <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(firstTranslation.translationMeta.locale ?? undefined)}</span>
+                                    {firstTranslation.texts[ayat.serial - 1]}
+                                    )
+                                </span>)
+                        }
+                    </div>
+                }
 
                 <div className="col-md-12 quran-translation ltr"> {rukuAyats.map(ayat =>
                     <div key={ayat.serial}>
