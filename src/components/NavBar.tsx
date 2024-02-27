@@ -44,7 +44,7 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
     };
 
     return <nav className='navbar fixed-top px-2'>
-        <h1>Daily Quran</h1>
+        <h1>Quran Majid</h1>
 
         <div>
             <select className='select' value={NavigationMode[navigationModel.navMode]} onChange={handleNavigationModeChange} title="Navigation Mode">
