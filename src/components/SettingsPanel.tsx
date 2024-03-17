@@ -31,7 +31,10 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
 
     return <div className="offcanvas offcanvas-end" id="offcanvasRight" data-bs-scroll="true" aria-labelledby="offcanvasRightLabel">
         <div className="offcanvas-header">
-            <h4 id="offcanvasRightLabel">⚙️ Settings</h4>
+            <h4 id="offcanvasRightLabel">
+                <img alt="Settings Icon" src="/images/settings.svg" width="20" className="me-2" />
+                Settings
+            </h4>
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
