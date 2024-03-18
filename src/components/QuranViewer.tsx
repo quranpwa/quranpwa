@@ -96,7 +96,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
                     suraHeader(rukuAyats[0].suraIdx)
                 }
                 <h3 className="ruku-header text-secondary mt-2">Ruku-{ruku.serial}: {ruku.displayText}</h3>
-                <div className="col-md-6 ps-md-4 quran-text mt-2 pt-4" style={{ fontFamily: settingsModel.quranFont || 'hafs' }}>
+                <div className="col-md-6 ps-md-4 pt-md-4 quran-text mt-2" style={{ fontFamily: settingsModel.quranFont || 'hafs' }}>
                     {rukuAyats.map(ayat =>
                         <span key={ayat.serial}
                             onClick={() => handleAyatSelection(ayat)}

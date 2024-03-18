@@ -54,24 +54,6 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
                 </div>
             </div>
             <hr />
-            <h5>Quran Font</h5>
-            <div className="row">
-                <label className="col-sm-4 col-form-label" htmlFor="QuranFontSelect">Quran Font</label>
-                <div className="col-sm-8">
-                    <select id="QuranFontSelect" className="form-select"
-                        value={settingsModel.quranFont}
-                        onChange={handleQuranFontChange}>
-                        <option value="hafs">KFGQPC Uthmanic Script HAFS</option>
-                        <option value="me_quran">Me_Quran</option>
-                        <option value="amiri_quran">Amiri Quran</option>
-                        <option value="kitab">Kitab</option>
-                        <option value="noorehidayat">Noore Hidayat</option>
-                        <option value="noorehira">Noore Hira</option>
-                        <option value="noorehuda">Noore Huda</option>
-                    </select>
-                </div>
-            </div>
-            <hr />
             <h5>Translations</h5>
             <Select isMulti
                 options={translationItemsMapToSelectOption(translationList)}
@@ -89,7 +71,24 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
                     settingsModel.tafsirs = selectedOptions.map(m => m.value)
                     onChange(settingsModel)
                 }} />
-
+            <hr />
+            <h5>Quran Font</h5>
+            <div className="row">
+                <label className="col-sm-4 col-form-label" htmlFor="QuranFontSelect">Quran Font</label>
+                <div className="col-sm-8">
+                    <select id="QuranFontSelect" className="form-select"
+                        value={settingsModel.quranFont}
+                        onChange={handleQuranFontChange}>
+                        <option value="hafs">KFGQPC Uthmanic Script HAFS</option>
+                        <option value="me_quran">Me Quran</option>
+                        <option value="amiri_quran">Amiri Quran</option>
+                        <option value="kitab">Kitab</option>
+                        <option value="noorehidayat">Noore Hidayat</option>
+                        <option value="noorehira">Noore Hira</option>
+                        <option value="noorehuda">Noore Huda</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>;
 }
