@@ -28,17 +28,17 @@
     background-color: var(--nav-bg-color);
 }
 
-    .navbar h1 {
-        font-size: 1.5rem;
-        margin: 0 0.75rem;
-        font-weight: normal;
-    }
+.nav-title {
+    font-size: 1.5rem;
+    margin: 0 0.25rem;
+    font-weight: normal;
+}
 
 .select {
     font-size: 1.25rem;
     padding: 0.25rem 0.75rem;
     margin: 0 0.75rem;
-    border-radius: .75rem;
+    border-radius: .5rem;
     background-color: var(--bg-color);
     color: var(--font-color);
 }
@@ -86,5 +86,16 @@
 @media screen and (max-width: 768px) {
     .nav-title {
         font-size: 1.2rem !important;
+        margin: 0;
+    }
+
+    .btn {
+        padding: 0 0.5rem 0.25rem 0.5rem !important;
+    }
+
+    .select {
+        font-size: 1rem;
+        padding: unset;
+        margin: unset;
     }
 }

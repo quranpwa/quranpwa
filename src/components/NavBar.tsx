@@ -44,7 +44,7 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
     };
 
     return <nav className='navbar fixed-top px-2'>
-        <button className="btn-secondary d-none" type="button" title="Menu"
+        <button className="btn btn-secondary d-none" type="button" title="Menu"
             data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">
             <img alt="Menu Icon" src="/images/menu.svg" width="16" />
         </button>
@@ -52,31 +52,31 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
         <h1 className="nav-title">Quran Majid</h1>
 
         <div className="">
-            <select className="me-2" value={NavigationMode[navigationModel.navMode]} onChange={handleNavigationModeChange} title="Navigation Mode">
+            <select className="select me-1 me-md-2" value={NavigationMode[navigationModel.navMode]} onChange={handleNavigationModeChange} title="Navigation Mode">
                 {Object.keys(NavigationMode).filter(f => isNaN(f as any)).map(item => <option key={item} value={item}>{item}</option>)}
             </select>
             {navigationModel.navMode == NavigationMode.Sura &&
-                <select className="" value={navigationModel.sura?.serial} onChange={handleSuraChange} title="Sura">
+                <select className="select" value={navigationModel.sura?.serial} onChange={handleSuraChange} title="Sura">
                     {quranData.suras.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.tname}</option>)}
                 </select>
             }
             {navigationModel.navMode == NavigationMode.Juz &&
-                <select className="" value={navigationModel.juz?.serial} onChange={handleJuzChange} title="Juz">
+                <select className="select" value={navigationModel.juz?.serial} onChange={handleJuzChange} title="Juz">
                     {quranData.juzs.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                 </select>
             }
             {navigationModel.navMode == NavigationMode.Hizb &&
-                <select className="" value={navigationModel.hizb?.serial} onChange={handleHizbChange} title="Hizb">
+                <select className="select" value={navigationModel.hizb?.serial} onChange={handleHizbChange} title="Hizb">
                     {quranData.hizb_quarters.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                 </select>
             }
             {navigationModel.navMode == NavigationMode.Ruku &&
-                <select className="" value={navigationModel.ruku?.serial} onChange={handleRukuChange} title="Ruku">
+                <select className="select" value={navigationModel.ruku?.serial} onChange={handleRukuChange} title="Ruku">
                     {quranData.rukus.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.displayText}</option>)}
                 </select>
             }
             {navigationModel.navMode == NavigationMode.Page &&
-                <select className="" value={navigationModel.page?.serial} onChange={handlePageChange} title="Ruku">
+                <select className="select" value={navigationModel.page?.serial} onChange={handlePageChange} title="Ruku">
                     {quranData.pages.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                 </select>
             }
@@ -124,7 +124,7 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
             </div>
         </div>
 
-        <button className="btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <button className="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
             <img alt="Menu Icon" src="/images/settings.svg" width="16" />
             <span className="d-none d-md-inline ms-2">Settings</span> 
         </button>
