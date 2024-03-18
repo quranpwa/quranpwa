@@ -14,7 +14,7 @@
     --font-color: rgba(255, 255, 255, 0.87);
     --bg-color: #242424;
     --nav-bg-color: #000;
-    --selected-bg-color: #345;
+    --selected-bg-color: #212b35;
     --selected-font-color: #fff;
 }
 
@@ -37,7 +37,7 @@
         --font-color: rgba(255, 255, 255, 0.87);
         --bg-color: #242424;
         --nav-bg-color: #000;
-        --selected-bg-color: #345;
+        --selected-bg-color: #212b35;
         --selected-font-color: #fff;
     }
 }
