@@ -58,6 +58,8 @@
 .ruku-header {
     font-size: 1rem;
     text-align: center;
+    border: 1px solid;
+    padding: 5px;
 }
 
 .quran-text {
