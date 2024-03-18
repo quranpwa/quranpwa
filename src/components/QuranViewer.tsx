@@ -52,7 +52,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
                     onClick={() => handleAyatSelection(ayat)}>
                     <div className="quran-text rtl" style={{ fontFamily: settingsModel.quranFont || 'hafs' }}>
                         <span>{ayat.arabicText}</span>
-                        <span>{ayat.serialInSura.toLocaleString('ar-SA')}</span>
+                        <span> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
                     </div>
 
                     {quranData.translations.map(translation => {
