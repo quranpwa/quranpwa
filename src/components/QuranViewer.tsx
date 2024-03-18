@@ -95,7 +95,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
                 {rukuAyats[0].serialInSura == 1 &&
                     suraHeader(rukuAyats[0].suraIdx)
                 }
-                <h3 className="ruku-header text-secondary mb-3">Ruku-{ruku.serial}: {ruku.displayText}</h3>
+                <h3 className="ruku-header text-secondary mt-2">Ruku-{ruku.serial}: {ruku.displayText}</h3>
                 <div className="col-md-6 ps-md-4 quran-text mt-2 pt-4" style={{ fontFamily: settingsModel.quranFont || 'hafs' }}>
                     {rukuAyats.map(ayat =>
                         <span key={ayat.serial}
@@ -108,7 +108,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
 
                 {firstTranslation &&
                     <div className="col-md-6 pe-md-4 quran-translation ltr">
-                        <div className="text-secondary small mt-3">{firstTranslation.translationMeta.languageName + ' - ' + firstTranslation.translationMeta.translator}</div>
+                        <div className="text-secondary small">{firstTranslation.translationMeta.languageName + ' - ' + firstTranslation.translationMeta.translator}</div>
                         {
                             rukuAyats.map(ayat =>
                                 <span key={ayat.serial}
