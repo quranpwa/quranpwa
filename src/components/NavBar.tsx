@@ -137,5 +137,5 @@ interface NavBarProps {
 export interface NavigationModel {
     navMode: NavigationMode,
     serial: number,
-    ayat?: Ayat
+    ayat?: number
 }

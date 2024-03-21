@@ -1,6 +1,6 @@
 ﻿import { useEffect, useReducer, useState } from 'react';
 import './App.css';
-import { Ayat, NavigationMode, QuranData, Translation } from './QuranData';
+import { NavigationMode, QuranData, Translation } from './QuranData';
 import NavBar, { NavigationModel } from './components/NavBar';
 import QuranViewer from './components/QuranViewer';
 import SettingsPanel, { ReadingMode, SettingsModel } from './components/SettingsPanel';
@@ -15,7 +15,7 @@ function App() {
             : {
                 navMode: NavigationMode.Ruku,
                 serial: 1,
-                ayat: quranData.ayats[0]
+                ayat: 1
             }
 
         let searchParams = new URLSearchParams(location.search);
@@ -27,7 +27,7 @@ function App() {
             return {
                 navMode: NavigationMode[navMode as keyof typeof NavigationMode],
                 serial: serialNumber ?? storedNavModel.serial,
-                ayat: quranData.ayats[ayatNumber - 1] ?? storedNavModel.ayat,
+                ayat: ayatNumber ?? storedNavModel.ayat,
             }
         }
 
@@ -70,7 +70,7 @@ function App() {
         url.searchParams.set('serial', model.serial.toString());
 
         if (model.ayat)
-            url.searchParams.set('ayat', String(model.ayat?.serial));
+            url.searchParams.set('ayat', String(model.ayat));
 
         window.history.pushState({}, '', url.toString());
     }
@@ -83,7 +83,7 @@ function App() {
         forceUpdate();
     }
 
-    const onAyatSelection = (selectedAyat: Ayat) => {
+    const onAyatSelection = (selectedAyat: number) => {
         navigationModel.ayat = selectedAyat;
         setNavigationModel(navigationModel);
         localStorage.setItem('NavigationModel', JSON.stringify(navigationModel));
