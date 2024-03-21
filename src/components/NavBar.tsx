@@ -39,7 +39,7 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
     };
 
     return <nav className='navbar fixed-top px-2'>
-        <button className="btn btn-secondary d-none" type="button" title="Menu"
+        <button className="btn btn-dark d-none" type="button" title="Menu"
             data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">
             <img alt="Menu Icon" src="/images/menu.svg" width="16" />
         </button>
@@ -119,7 +119,7 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
             </div>
         </div>
 
-        <button className="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <button className="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
             <img alt="Menu Icon" src="/images/settings.svg" width="16" />
             <span className="d-none d-md-inline ms-2">Settings</span> 
         </button>
