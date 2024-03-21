@@ -119,7 +119,7 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
             </div>
         </div>
 
-        <button className="btn btn-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+        <button className="btn theme-colored border" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
             <img alt="Menu Icon" src="/images/settings.svg" width="16" />
             <span className="d-none d-md-inline ms-2">Settings</span> 
         </button>

@@ -172,13 +172,16 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
     }
 
     console.info('QuranViewer has been rendered.');
+
     const navModeName = NavigationMode[navigationModel.navMode];
+    let prevButtonClasses = 'btn theme-colored border mx-2 ' + (navigationModel.serial > 1 ? '' : 'disabled');
+    let nextButtonClasses = 'btn theme-colored border mx-2 ' + (navigationModel.serial < maxSerial ? '' : 'disabled');
 
     return <article className="container">
         {contents}
         <div className="d-flex my-3" style={{ justifyContent: 'center' }}>
-            <button className={navigationModel.serial > 1 ? 'btn btn-dark border mx-2' : 'btn btn-dark border mx-2 disabled'} type="button" onClick={handlePrevious}>&lt; Previous {navModeName}</button>
-            <button className={navigationModel.serial < maxSerial ? 'btn btn-dark mx-2 border' : 'btn btn-dark border mx-2 disabled'} type="button" onClick={handleNext}>Next {navModeName} &gt;</button>
+            <button className={prevButtonClasses} type="button" onClick={handlePrevious}>&lt; Previous {navModeName}</button>
+            <button className={nextButtonClasses} type="button" onClick={handleNext}>Next {navModeName} &gt;</button>
         </div>
     </article >;
 }
