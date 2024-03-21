@@ -43,6 +43,23 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
             <h5>Themes</h5>
             <ThemeSwitch />
             <hr />
+            <h5>Translations</h5>
+            <Select isMulti
+                options={translationItemsMapToSelectOption(translationList)}
+                value={translationItemsMapToSelectOption(settingsModel.translations)}
+                onChange={selectedOptions => {
+                    settingsModel.translations = selectedOptions.map(m => m.value)
+                    onChange(settingsModel)
+                }} />
+            <h5 className="mt-3">Tafsirs</h5>
+            <Select isMulti
+                options={translationItemsMapToSelectOption(tafsirList)}
+                value={translationItemsMapToSelectOption(settingsModel.tafsirs)}
+                onChange={selectedOptions => {
+                    settingsModel.tafsirs = selectedOptions.map(m => m.value)
+                    onChange(settingsModel)
+                }} />
+            <hr />
             <h5>Layout</h5>
             <div className="row">
                 <label className="col-sm-4 col-form-label" htmlFor="ReadingModeSelect">Reading Mode</label>
@@ -55,26 +72,7 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
                     </select>
                 </div>
             </div>
-            <hr />
-            <h5>Translations</h5>
-            <Select isMulti
-                options={translationItemsMapToSelectOption(translationList)}
-                value={translationItemsMapToSelectOption(settingsModel.translations)}
-                onChange={selectedOptions => {
-                    settingsModel.translations = selectedOptions.map(m => m.value)
-                    onChange(settingsModel)
-                }} />
-            <hr />
-            <h5>Tafsirs</h5>
-            <Select isMulti
-                options={translationItemsMapToSelectOption(tafsirList)}
-                value={translationItemsMapToSelectOption(settingsModel.tafsirs)}
-                onChange={selectedOptions => {
-                    settingsModel.tafsirs = selectedOptions.map(m => m.value)
-                    onChange(settingsModel)
-                }} />
-            <hr />
-            <h5>Quran Font</h5>
+            <h5 className="mt-3">Quran Font</h5>
             <div className="row">
                 <label className="col-sm-4 col-form-label" htmlFor="QuranFontSelect">Quran Font</label>
                 <div className="col-sm-8">
