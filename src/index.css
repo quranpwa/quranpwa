@@ -5,7 +5,18 @@
     --bg-color: #fff;
     --nav-bg-color: #ccc;
     --selected-bg-color: #e2edf9;
-    --selected-font-color: #000;
+    --selected-font-color: #009a90;
+}
+@media (prefers-color-scheme: light) {
+    [data-theme="auto"] {
+        --primary-color: #302AE6;
+        --secondary-color: #536390;
+        --font-color: #213547;
+        --bg-color: #fff;
+        --nav-bg-color: #ccc;
+        --selected-bg-color: #e2edf9;
+        --selected-font-color: #009a90;
+    }
 }
 
 [data-theme="dark"] {
@@ -15,21 +26,8 @@
     --bg-color: #242424;
     --nav-bg-color: #000;
     --selected-bg-color: #212b35;
-    --selected-font-color: #fff;
+    --selected-font-color: #97f4eb;
 }
-
-@media (prefers-color-scheme: light) {
-    [data-theme="auto"] {
-        --primary-color: #302AE6;
-        --secondary-color: #536390;
-        --font-color: #213547;
-        --bg-color: #fff;
-        --nav-bg-color: #ccc;
-        --selected-bg-color: #e2edf9;
-        --selected-font-color: #000;
-    }
-}
-
 @media (prefers-color-scheme: dark) {
     [data-theme="auto"] {
         --primary-color: #9A97F3;
@@ -38,7 +36,7 @@
         --bg-color: #242424;
         --nav-bg-color: #000;
         --selected-bg-color: #212b35;
-        --selected-font-color: #fff;
+        --selected-font-color: #97f4eb;
     }
 }
 

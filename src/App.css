@@ -16,13 +16,11 @@
     font-size: 2rem;
     text-align: center;
     padding: 1rem;
-    border-bottom: 1px solid var(--font-color);
 }
 
 .selected-ayat {
-    background-color: var(--selected-bg-color);
+    /*background-color: var(--selected-bg-color);*/
     color: var(--selected-font-color);
-    border: 1px inset;
 }
 
 .navbar {
