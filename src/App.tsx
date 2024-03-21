@@ -76,6 +76,7 @@ function App() {
     }
 
     const onNavigate = (model: NavigationModel) => {
+        delete model.ayat;
         setNavigationModel(model);
         localStorage.setItem('NavigationModel', JSON.stringify(model));
         setNavDataToSearchParams(model);
