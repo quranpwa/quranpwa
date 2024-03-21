@@ -118,10 +118,8 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
                                 <span key={ayat.serial}
                                     onClick={() => handleAyatSelection(ayat.serial)}
                                     className={selectedAyat == ayat.serial ? 'selected-ayat quran-translation' : 'quran-translation'}>
-
                                     <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(firstTranslation.translationMeta.locale ?? undefined)}</span>
                                     {firstTranslation.texts[ayat.serial - 1]}
-                                    )
                                 </span>)
                         }
                     </div>
