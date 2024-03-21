@@ -234,6 +234,61 @@ export class QuranData {
         return this.getAyatRange(this._juzs);
     }
 
+    getMaxNavSerial(navMode: NavigationMode) {
+        let maxSerial = 0;
+
+        if (navMode == NavigationMode.Sura) {
+            maxSerial = this.suras.length;
+
+        } else if (navMode == NavigationMode.Juz) {
+            maxSerial = this.juzs.length;
+
+        } else if (navMode == NavigationMode.Hizb) {
+            maxSerial = this.hizb_quarters.length;
+
+        } else if (navMode == NavigationMode.Ruku) {
+            maxSerial = this.rukus.length;
+
+        } else if (navMode == NavigationMode.Page) {
+            maxSerial = this.pages.length;
+        }
+
+        return maxSerial;
+    }
+
+    getAyatRangeByNavSerial(navMode: NavigationMode, serial: number): { start: number, end: number } {
+        let start = 0;
+        let end = 0;
+
+        if (navMode == NavigationMode.Sura) {
+            const sura = this.suras[serial - 1];
+            start = sura?.start;
+            end = sura?.start + sura?.ayas;
+
+        } else if (navMode == NavigationMode.Juz) {
+            const jus = this.juzs[serial - 1];
+            start = jus?.start;
+            end = jus?.end;
+
+        } else if (navMode == NavigationMode.Hizb) {
+            const hizb = this.hizb_quarters[serial - 1];
+            start = hizb?.start;
+            end = hizb?.end;
+
+        } else if (navMode == NavigationMode.Ruku) {
+            const ruku = this.rukus[serial - 1];
+            start = ruku?.start;
+            end = ruku?.end;
+
+        } else if (navMode == NavigationMode.Page) {
+            const page = this.pages[serial - 1];
+            start = page?.start;
+            end = page?.end;
+        }
+
+        return { start: start, end: end };
+    }
+
     setAyats(quranTexts: string[]) {
         if (this.ayats.length >= 6236)
             return;
@@ -371,4 +426,12 @@ export interface Ayat {
     serialInSura: number,
     rukuIdx: number,
     sura: Sura,
+}
+
+export enum NavigationMode {
+    Sura,
+    Juz,
+    Hizb,
+    Ruku,
+    Page,
 }

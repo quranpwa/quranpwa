@@ -1,40 +1,15 @@
 ﻿import { useState } from 'react';
-import { QuranData, Ayat } from '../QuranData';
+import { Ayat, NavigationMode, QuranData } from '../QuranData';
 import { groupBy } from '../Utilities';
-import { NavigationMode, NavigationModel } from './NavBar';
+import { NavigationModel } from './NavBar';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 
 function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, onAyatSelection }: QuranViewerProps) {
     const [selectedAyat, setSelectedAyat] = useState<number>(navigationModel.ayat?.serial);
 
-    let ayats: Ayat[] = [];
-    let maxSerial = 0;
-
-    if (navigationModel?.navMode == NavigationMode.Sura) {
-        const sura = quranData.suras[navigationModel.serial - 1];
-        ayats = quranData.ayats.slice(sura?.start, sura?.start + sura?.ayas);
-        maxSerial = quranData.suras.length;
-
-    } else if (navigationModel?.navMode == NavigationMode.Juz) {
-        const jus = quranData.juzs[navigationModel.serial - 1];
-        ayats = quranData.ayats.slice(jus?.start, jus?.end);
-        maxSerial = quranData.juzs.length;
-
-    } else if (navigationModel?.navMode == NavigationMode.Hizb) {
-        const hizb = quranData.hizb_quarters[navigationModel.serial - 1];
-        ayats = quranData.ayats.slice(hizb?.start, hizb?.end);
-        maxSerial = quranData.hizb_quarters.length;
-
-    } else if (navigationModel?.navMode == NavigationMode.Ruku) {
-        const ruku = quranData.rukus[navigationModel.serial - 1];
-        ayats = quranData.ayats.slice(ruku?.start, ruku?.end);
-        maxSerial = quranData.rukus.length;
-
-    } else if (navigationModel?.navMode == NavigationMode.Page) {
-        const page = quranData.pages[navigationModel.serial - 1];
-        ayats = quranData.ayats.slice(page?.start, page?.end);
-        maxSerial = quranData.pages.length;
-    }
+    const { start, end } = quranData.getAyatRangeByNavSerial(navigationModel?.navMode, navigationModel?.serial);
+    let ayats: Ayat[] = quranData.ayats.slice(start, end);;
+    let maxSerial = quranData.getMaxNavSerial(navigationModel?.navMode);
 
     const handleAyatSelection = (selectedAyat: Ayat) => {
         setSelectedAyat(selectedAyat.serial);

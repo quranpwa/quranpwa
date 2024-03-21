@@ -1,4 +1,4 @@
-﻿import { Ayat, QuranData } from '../QuranData';
+﻿import { Ayat, NavigationMode, QuranData } from '../QuranData';
 
 function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
 
@@ -127,14 +127,6 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
 }
 
 export default NavBar
-
-export enum NavigationMode {
-    Sura,
-    Juz,
-    Hizb,
-    Ruku,
-    Page,
-}
 
 interface NavBarProps {
     quranData: QuranData,

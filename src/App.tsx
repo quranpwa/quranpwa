@@ -1,7 +1,7 @@
 ﻿import { useEffect, useReducer, useState } from 'react';
 import './App.css';
-import { Ayat, QuranData, Translation } from './QuranData';
-import NavBar, { NavigationMode, NavigationModel } from './components/NavBar';
+import { Ayat, NavigationMode, QuranData, Translation } from './QuranData';
+import NavBar, { NavigationModel } from './components/NavBar';
 import QuranViewer from './components/QuranViewer';
 import SettingsPanel, { ReadingMode, SettingsModel } from './components/SettingsPanel';
 import translationList from './assets/translation-list.json'
