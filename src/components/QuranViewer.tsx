@@ -4,26 +4,55 @@ import { groupBy } from '../Utilities';
 import { NavigationMode, NavigationModel } from './NavBar';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 
-function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelection }: QuranViewerProps) {
+function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, onAyatSelection }: QuranViewerProps) {
     const [selectedAyat, setSelectedAyat] = useState<number>(navigationModel.ayat?.serial);
 
     let ayats: Ayat[] = [];
+    let maxSerial = 0;
 
     if (navigationModel?.navMode == NavigationMode.Sura) {
-        ayats = quranData.ayats.slice(navigationModel?.sura.start, navigationModel?.sura.start + navigationModel?.sura.ayas);
+        const sura = quranData.suras[navigationModel.serial - 1];
+        ayats = quranData.ayats.slice(sura?.start, sura?.start + sura?.ayas);
+        maxSerial = quranData.suras.length;
+
     } else if (navigationModel?.navMode == NavigationMode.Juz) {
-        ayats = quranData.ayats.slice(navigationModel?.juz.start, navigationModel?.juz.end);
+        const jus = quranData.juzs[navigationModel.serial - 1];
+        ayats = quranData.ayats.slice(jus?.start, jus?.end);
+        maxSerial = quranData.juzs.length;
+
     } else if (navigationModel?.navMode == NavigationMode.Hizb) {
-        ayats = quranData.ayats.slice(navigationModel?.hizb.start, navigationModel?.hizb.end);
+        const hizb = quranData.hizb_quarters[navigationModel.serial - 1];
+        ayats = quranData.ayats.slice(hizb?.start, hizb?.end);
+        maxSerial = quranData.hizb_quarters.length;
+
     } else if (navigationModel?.navMode == NavigationMode.Ruku) {
-        ayats = quranData.ayats.slice(navigationModel?.ruku.start, navigationModel?.ruku.end);
+        const ruku = quranData.rukus[navigationModel.serial - 1];
+        ayats = quranData.ayats.slice(ruku?.start, ruku?.end);
+        maxSerial = quranData.rukus.length;
+
     } else if (navigationModel?.navMode == NavigationMode.Page) {
-        ayats = quranData.ayats.slice(navigationModel?.page.start, navigationModel?.page.end);
+        const page = quranData.pages[navigationModel.serial - 1];
+        ayats = quranData.ayats.slice(page?.start, page?.end);
+        maxSerial = quranData.pages.length;
     }
 
     const handleAyatSelection = (selectedAyat: Ayat) => {
         setSelectedAyat(selectedAyat.serial);
         onAyatSelection(selectedAyat);
+    };
+
+    const handleNext = () => {
+        if (navigationModel.serial < maxSerial) {
+            navigationModel.serial++;
+            onNavigate(navigationModel)
+        }
+    };
+
+    const handlePrevious = () => {
+        if (navigationModel.serial > 1) {
+            navigationModel.serial--;
+            onNavigate(navigationModel)
+        }
     };
 
     let quran_karim_114_font_chars = '!"#$%&\'()*+,-./0123456789:;<=>?@aAbBcCdDEeFfgGHhIiJjKklLMmnNOopPQqRrsStTuUvVWwxXyYZz[\\]^_`{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ';
@@ -143,10 +172,15 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onAyatSelectio
     }
 
     console.info('QuranViewer has been rendered.');
+    const navModeName = NavigationMode[navigationModel.navMode];
 
     return <article className="container">
         {contents}
-    </article>;
+        <div className="d-flex my-3" style={{ justifyContent: 'center' }}>
+            <button className={navigationModel.serial > 1 ? 'btn btn-dark border mx-2' : 'btn btn-dark border mx-2 disabled'} type="button" onClick={handlePrevious}>&lt; Previous {navModeName}</button>
+            <button className={navigationModel.serial < maxSerial ? 'btn btn-dark mx-2 border' : 'btn btn-dark border mx-2 disabled'} type="button" onClick={handleNext}>Next {navModeName} &gt;</button>
+        </div>
+    </article >;
 }
 
 export default QuranViewer
@@ -155,5 +189,6 @@ interface QuranViewerProps {
     quranData: QuranData,
     navigationModel: NavigationModel,
     settingsModel: SettingsModel,
+    onNavigate: (model: NavigationModel) => void,
     onAyatSelection: (ayat: Ayat) => void
 }

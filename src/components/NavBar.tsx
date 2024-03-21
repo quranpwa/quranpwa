@@ -1,4 +1,4 @@
-﻿import { Sura, QuranData, AyatRange, Ayat } from '../QuranData';
+﻿import { Ayat, QuranData } from '../QuranData';
 
 function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
 
@@ -14,32 +14,27 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
     };
 
     const handleSuraChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        let selectedItem = quranData.suras[+event.target.value - 1];
-        navigationModel.sura = selectedItem;
+        navigationModel.serial = +event.target.value;
         triggerOnNavigate();
     };
 
     const handleJuzChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        let selectedItem = quranData.juzs[+event.target.value - 1];
-        navigationModel.juz = selectedItem;
+        navigationModel.serial = +event.target.value;
         triggerOnNavigate();
     };
 
     const handleHizbChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        let selectedItem = quranData.hizb_quarters[+event.target.value - 1];
-        navigationModel.hizb = selectedItem;
+        navigationModel.serial = +event.target.value;
         triggerOnNavigate();
     };
 
     const handleRukuChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        let selectedItem = quranData.rukus[+event.target.value - 1];
-        navigationModel.ruku = selectedItem;
+        navigationModel.serial = +event.target.value;
         triggerOnNavigate();
     };
 
     const handlePageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        let selectedItem = quranData.pages[+event.target.value - 1];
-        navigationModel.page = selectedItem;
+        navigationModel.serial = +event.target.value;
         triggerOnNavigate();
     };
 
@@ -56,27 +51,27 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
                 {Object.keys(NavigationMode).filter(f => isNaN(f as any)).map(item => <option key={item} value={item}>{item}</option>)}
             </select>
             {navigationModel.navMode == NavigationMode.Sura &&
-                <select className="select" value={navigationModel.sura?.serial} onChange={handleSuraChange} title="Sura">
+                <select className="select" value={navigationModel?.serial} onChange={handleSuraChange} title="Sura">
                     {quranData.suras.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.tname}</option>)}
                 </select>
             }
             {navigationModel.navMode == NavigationMode.Juz &&
-                <select className="select" value={navigationModel.juz?.serial} onChange={handleJuzChange} title="Juz">
+                <select className="select" value={navigationModel?.serial} onChange={handleJuzChange} title="Juz">
                     {quranData.juzs.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                 </select>
             }
             {navigationModel.navMode == NavigationMode.Hizb &&
-                <select className="select" value={navigationModel.hizb?.serial} onChange={handleHizbChange} title="Hizb">
+                <select className="select" value={navigationModel?.serial} onChange={handleHizbChange} title="Hizb">
                     {quranData.hizb_quarters.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                 </select>
             }
             {navigationModel.navMode == NavigationMode.Ruku &&
-                <select className="select" value={navigationModel.ruku?.serial} onChange={handleRukuChange} title="Ruku">
+                <select className="select" value={navigationModel?.serial} onChange={handleRukuChange} title="Ruku">
                     {quranData.rukus.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.displayText}</option>)}
                 </select>
             }
             {navigationModel.navMode == NavigationMode.Page &&
-                <select className="select" value={navigationModel.page?.serial} onChange={handlePageChange} title="Ruku">
+                <select className="select" value={navigationModel?.serial} onChange={handlePageChange} title="Ruku">
                     {quranData.pages.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                 </select>
             }
@@ -97,27 +92,27 @@ function NavBar({ quranData, navigationModel, onNavigate }: NavBarProps) {
                 </select>
                 <hr />
                 {navigationModel.navMode == NavigationMode.Sura &&
-                    <select className='select w-100 m-0' value={navigationModel.sura?.serial} onChange={handleSuraChange} title="Sura">
+                    <select className='select w-100 m-0' value={navigationModel?.serial} onChange={handleSuraChange} title="Sura">
                         {quranData.suras.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.tname}</option>)}
                     </select>
                 }
                 {navigationModel.navMode == NavigationMode.Juz &&
-                    <select className='select w-100 m-0' value={navigationModel.juz?.serial} onChange={handleJuzChange} title="Juz">
+                    <select className='select w-100 m-0' value={navigationModel?.serial} onChange={handleJuzChange} title="Juz">
                         {quranData.juzs.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                     </select>
                 }
                 {navigationModel.navMode == NavigationMode.Hizb &&
-                    <select className='select w-100 m-0' value={navigationModel.hizb?.serial} onChange={handleHizbChange} title="Hizb">
+                    <select className='select w-100 m-0' value={navigationModel?.serial} onChange={handleHizbChange} title="Hizb">
                         {quranData.hizb_quarters.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                     </select>
                 }
                 {navigationModel.navMode == NavigationMode.Ruku &&
-                    <select className='select w-100 m-0' value={navigationModel.ruku?.serial} onChange={handleRukuChange} title="Ruku">
+                    <select className='select w-100 m-0' value={navigationModel?.serial} onChange={handleRukuChange} title="Ruku">
                         {quranData.rukus.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.displayText}</option>)}
                     </select>
                 }
                 {navigationModel.navMode == NavigationMode.Page &&
-                    <select className='select w-100 m-0' value={navigationModel.page?.serial} onChange={handlePageChange} title="Ruku">
+                    <select className='select w-100 m-0' value={navigationModel?.serial} onChange={handlePageChange} title="Ruku">
                         {quranData.pages.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                     </select>
                 }
@@ -149,10 +144,6 @@ interface NavBarProps {
 
 export interface NavigationModel {
     navMode: NavigationMode,
-    sura: Sura,
-    juz: AyatRange,
-    hizb: AyatRange,
-    page: AyatRange,
-    ruku: AyatRange,
+    serial: number,
     ayat: Ayat
 }

@@ -14,31 +14,19 @@ function App() {
         const storedNavModel: NavigationModel = storedNavModelString ? JSON.parse(storedNavModelString)
             : {
                 navMode: NavigationMode.Ruku,
-                sura: quranData.suras[0],
-                juz: quranData.juzs[0],
-                hizb: quranData.hizb_quarters[0],
-                page: quranData.pages[0],
-                ruku: quranData.rukus[0],
+                serial: 1,
                 ayat: quranData.ayats[0]
             }
 
         let searchParams = new URLSearchParams(location.search);
         const navMode = searchParams.get('navMode');
         if (navMode) {
-            const suraNumber = +(searchParams.get('sura') || -1);
-            const juzNumber = +(searchParams.get('juz') || -1);
-            const hizbNumber = +(searchParams.get('hizb') || -1);
-            const pageNumber = +(searchParams.get('page') || -1);
-            const rukuNumber = +(searchParams.get('ruku') || -1);
+            const serialNumber = +(searchParams.get('serial') || -1);
             const ayatNumber = +(searchParams.get('ayat') || -1);
 
             return {
                 navMode: NavigationMode[navMode as keyof typeof NavigationMode],
-                sura: quranData.suras[suraNumber - 1] ?? storedNavModel.sura,
-                juz: quranData.juzs[juzNumber - 1] ?? storedNavModel.juz,
-                hizb: quranData.hizb_quarters[hizbNumber - 1] ?? storedNavModel.hizb,
-                page: quranData.pages[pageNumber - 1] ?? storedNavModel.page,
-                ruku: quranData.rukus[rukuNumber - 1] ?? storedNavModel.ruku,
+                serial: serialNumber ?? storedNavModel.serial,
                 ayat: quranData.ayats[ayatNumber - 1] ?? storedNavModel.ayat,
             }
         }
@@ -79,8 +67,7 @@ function App() {
         let navModeString = NavigationMode[model.navMode];
         url.searchParams.set('navMode', navModeString);
 
-        let navItem = (model as any)[navModeString.toLowerCase()];
-        url.searchParams.set(navModeString.toLowerCase(), navItem?.serial.toString());
+        url.searchParams.set('serial', model.serial.toString());
 
         if (model.ayat)
             url.searchParams.set('ayat', String(model.ayat?.serial));
@@ -120,6 +107,7 @@ function App() {
             <QuranViewer quranData={quranData}
                 navigationModel={navigationModel}
                 settingsModel={settingsModel}
+                onNavigate={onNavigate}
                 onAyatSelection={onAyatSelection} />
 
             <SettingsPanel settingsModel={settingsModel}
