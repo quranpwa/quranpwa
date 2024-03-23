@@ -19,20 +19,27 @@ function App() {
             }
 
         let searchParams = new URLSearchParams(location.search);
-        const navMode = searchParams.get('navMode');
-        if (navMode) {
-            const serialNumber = +(searchParams.get('serial') || -1);
-            const ayatNumber = +(searchParams.get('ayat') || -1);
+        const navModeStr = searchParams.get('navMode');
+        if (navModeStr) {
+            const navMode = NavigationMode[navModeStr as keyof typeof NavigationMode];
+
+            const serialNumber = +(searchParams.get('serial') || -1) ?? storedNavModel.serial;
+            let ayatNumber = +(searchParams.get('ayat') || -1) ?? storedNavModel.ayat;
+
+            const { start, end } = quranData.getAyatRangeByNavSerial(navMode, serialNumber);
+            if (ayatNumber < start || ayatNumber > end)
+                ayatNumber = start + 1;
 
             return {
-                navMode: NavigationMode[navMode as keyof typeof NavigationMode],
-                serial: serialNumber ?? storedNavModel.serial,
-                ayat: ayatNumber ?? storedNavModel.ayat,
+                navMode: navMode,
+                serial: serialNumber,
+                ayat: ayatNumber,
             }
         }
 
         return storedNavModel;
     };
+
     const getDefaultTranslation = (): Translation => {
         let navLang = navigator.languages[navigator.languages.length - 1] ?? 'en';
 
@@ -45,7 +52,7 @@ function App() {
             readingMode: ReadingMode.Ruku_By_Ruku,
             quranFont: 'hafs',
             translations: [getDefaultTranslation()],
-            tafsirs:[]
+            tafsirs: []
         }
 
     const [navigationModel, setNavigationModel] = useState<NavigationModel>(getNavData());
@@ -76,7 +83,12 @@ function App() {
     }
 
     const onNavigate = (model: NavigationModel) => {
-        delete model.ayat;
+        const { start, end } = quranData.getAyatRangeByNavSerial(model?.navMode, model?.serial);
+        model.ayat ??= start + 1;
+
+        if ((model.ayat ?? 0) < start || (model.ayat ?? 0) > end)
+            model.ayat = start + 1;
+
         setNavigationModel(model);
         localStorage.setItem('NavigationModel', JSON.stringify(model));
         setNavDataToSearchParams(model);
@@ -89,6 +101,7 @@ function App() {
         setNavigationModel(navigationModel);
         localStorage.setItem('NavigationModel', JSON.stringify(navigationModel));
         setNavDataToSearchParams(navigationModel);
+        forceUpdate();
     }
 
     const onSettingsChanged = (model: SettingsModel) => {

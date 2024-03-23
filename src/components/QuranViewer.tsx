@@ -1,18 +1,18 @@
-﻿import { useState } from 'react';
-import { Ayat, NavigationMode, QuranData } from '../QuranData';
+﻿import { Ayat, NavigationMode, QuranData } from '../QuranData';
 import { groupBy } from '../Utilities';
 import { NavigationModel } from './NavBar';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
+import AudioPlayer from './AudioPlayer';
 
 function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, onAyatSelection }: QuranViewerProps) {
-    const [selectedAyat, setSelectedAyat] = useState<number>(navigationModel.ayat ?? 1);
 
     const { start, end } = quranData.getAyatRangeByNavSerial(navigationModel?.navMode, navigationModel?.serial);
     let ayats: Ayat[] = quranData.ayats.slice(start, end);;
     let maxSerial = quranData.getMaxNavSerial(navigationModel?.navMode);
 
+    const selectedAyatSerial = navigationModel.ayat;
+
     const handleAyatSelection = (selectedAyat: number) => {
-        setSelectedAyat(selectedAyat);
         onAyatSelection(selectedAyat);
     };
 
@@ -28,6 +28,10 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
             navigationModel.serial--;
             onNavigate(navigationModel)
         }
+    };
+
+    const handlePlayingAyatChanged = (ayat: Ayat) => {
+        onAyatSelection(ayat?.serial);
     };
 
     let quran_karim_114_font_chars = '!"#$%&\'()*+,-./0123456789:;<=>?@aAbBcCdDEeFfgGHhIiJjKklLMmnNOopPQqRrsStTuUvVWwxXyYZz[\\]^_`{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ';
@@ -52,7 +56,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
             ayats.map(ayat => <div key={ayat.serial}>
                 {ayat.serialInSura == 1 && suraHeader(ayat.suraIdx)}
 
-                <div className={selectedAyat == ayat.serial ? 'selected-ayat p-2' : 'p-2'}
+                <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat p-2' : 'p-2'}
                     onClick={() => handleAyatSelection(ayat.serial)}>
                     <div className="quran-text rtl" style={{ fontFamily: settingsModel.quranFont || 'hafs' }}>
                         <span>{ayat.arabicText}</span>
@@ -104,7 +108,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
                     {rukuAyats.map(ayat =>
                         <span key={ayat.serial}
                             onClick={() => handleAyatSelection(ayat.serial)}
-                            className={selectedAyat == ayat.serial ? 'selected-ayat' : ''}>
+                            className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}>
                             <span>{ayat.arabicText}</span>
                             <span> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
                         </span>)}
@@ -117,7 +121,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
                             rukuAyats.map(ayat =>
                                 <span key={ayat.serial}
                                     onClick={() => handleAyatSelection(ayat.serial)}
-                                    className={selectedAyat == ayat.serial ? 'selected-ayat quran-translation' : 'quran-translation'}>
+                                    className={selectedAyatSerial == ayat.serial ? 'selected-ayat quran-translation' : 'quran-translation'}>
                                     <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(firstTranslation.translationMeta.locale ?? undefined)}</span>
                                     {firstTranslation.texts[ayat.serial - 1]}
                                 </span>)
@@ -152,10 +156,14 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
 
     return <article className="container">
         {contents}
-        <div className="d-flex my-3" style={{ justifyContent: 'center' }}>
+
+        <div className="d-flex mt-3" style={{ justifyContent: 'center', marginBottom: '4rem' }}>
             <button className={prevButtonClasses} type="button" onClick={handlePrevious}>&lt; Previous {navModeName}</button>
             <button className={nextButtonClasses} type="button" onClick={handleNext}>Next {navModeName} &gt;</button>
         </div>
+
+        <AudioPlayer ayats={ayats} selectedAyat={selectedAyatSerial}
+            onPlayingAyatChanged={handlePlayingAyatChanged} />
     </article >;
 }
 

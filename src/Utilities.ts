@@ -6,3 +6,7 @@ export function groupBy<T>(arr: T[], fn: (item: T) => any) {
         return { ...prev, [groupKey]: group };
     }, {});
 }
+
+export function padLeft(str: string, numChars = 3, char = '0') {
+    return (Array.from({ length: numChars }).fill(char).join('') + str).slice(-1 * numChars)
+}
