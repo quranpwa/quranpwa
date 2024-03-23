@@ -81,6 +81,7 @@ function App() {
         localStorage.setItem('NavigationModel', JSON.stringify(model));
         setNavDataToSearchParams(model);
         forceUpdate();
+        window.scrollTo(0, 0);
     }
 
     const onAyatSelection = (selectedAyat: number) => {
