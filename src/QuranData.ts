@@ -134,7 +134,7 @@ export class QuranData {
 
     getAyatRangeByNavSerial(navMode: NavigationMode, serial: number): { start: number, end: number } {
         let start = 0;
-        let end = 0;
+        let end = 7;
 
         if (navMode == NavigationMode.Sura) {
             const sura = this.suras[serial - 1];
