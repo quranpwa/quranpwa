@@ -4,11 +4,11 @@ import { padLeft } from '../Utilities';
 import recitationList from '../assets/recitation-list.json';
 import { SettingsModel } from './SettingsPanel';
 
-function AudioPlayer({ ayats, selectedAyat, settingsModel, onPlayingAyatChanged }: AudioPlayerProps) {
+function AudioPlayer({ ayats, selectedAyat, settingsData, onPlayingAyatChanged }: AudioPlayerProps) {
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
     const getAudioUrl = (): string => {
-        let recitation = settingsModel.recitaions[0] || recitationList[0];
+        let recitation = settingsData.recitaions[0] || recitationList[0];
         let startingAyat = ayats[selectedAyat - ayats[0].serial];
         if (!startingAyat)
             startingAyat = ayats[0];
@@ -103,6 +103,6 @@ export default AudioPlayer
 interface AudioPlayerProps {
     ayats: Ayat[],
     selectedAyat: number,
-    settingsModel: SettingsModel,
+    settingsData: SettingsModel,
     onPlayingAyatChanged: (ayat: Ayat) => void,
 }

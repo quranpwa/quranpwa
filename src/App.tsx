@@ -47,8 +47,8 @@ function App() {
         return translationList.filter(f => f.language == navLang)[0];
     }
 
-    const storedSettingsModelString = localStorage.getItem('SettingsModel');
-    const storedSettingsModel: SettingsModel = storedSettingsModelString ? JSON.parse(storedSettingsModelString)
+    const storedSettingsDataString = localStorage.getItem('SettingsData');
+    const storedSettingsData: SettingsModel = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
         : {
             readingMode: ReadingMode.Ruku_By_Ruku,
             quranFont: 'hafs',
@@ -58,12 +58,12 @@ function App() {
         }
 
     const [navigationModel, setNavigationModel] = useState<NavigationModel>(getNavData());
-    const [settingsModel, setSettingsModel] = useState<SettingsModel>(storedSettingsModel);
+    const [settingsData, setSettingsData] = useState<SettingsModel>(storedSettingsData);
 
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     useEffect(() => {
-        onSettingsChanged(settingsModel);
+        onSettingsChanged(settingsData);
     }, []);
 
     function setNavDataToSearchParams(model: NavigationModel) {
@@ -107,8 +107,8 @@ function App() {
     }
 
     const onSettingsChanged = (model: SettingsModel) => {
-        setSettingsModel(model);
-        localStorage.setItem('SettingsModel', JSON.stringify(model));
+        setSettingsData(model);
+        localStorage.setItem('SettingsData', JSON.stringify(model));
 
         quranData.setTranslations(model.translations, forceUpdate);
         quranData.setTafsirs(model.tafsirs, forceUpdate);
@@ -123,11 +123,11 @@ function App() {
 
             <QuranViewer quranData={quranData}
                 navigationModel={navigationModel}
-                settingsModel={settingsModel}
+                settingsData={settingsData}
                 onNavigate={onNavigate}
                 onAyatSelection={onAyatSelection} />
 
-            <SettingsPanel settingsModel={settingsModel}
+            <SettingsPanel settingsData={settingsData}
                 onChange={onSettingsChanged} />
         </>
     )

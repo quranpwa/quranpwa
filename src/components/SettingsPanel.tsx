@@ -6,19 +6,19 @@ import './SettingsPanel.css'
 import { Recitaion, Translation } from '../QuranData';
 import Select from 'react-select'
 
-function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
+function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
 
     const handleReadingModeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         let selectedItem = event.target.value;
         const selectedReadingMode: ReadingMode = ReadingMode[selectedItem as keyof typeof ReadingMode];
-        settingsModel.readingMode = selectedReadingMode;
-        onChange(settingsModel);
+        settingsData.readingMode = selectedReadingMode;
+        onChange(settingsData);
     };
 
     const handleQuranFontChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         let selectedItem = event.target.value;
-        settingsModel.quranFont = selectedItem;
-        onChange(settingsModel);
+        settingsData.quranFont = selectedItem;
+        onChange(settingsData);
     };
 
     const translationItemsMapToSelectOption = (translationItems: Translation[]) => {
@@ -56,27 +56,27 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
             <h5>Translations</h5>
             <Select isMulti
                 options={translationItemsMapToSelectOption(translationList)}
-                value={translationItemsMapToSelectOption(settingsModel.translations)}
+                value={translationItemsMapToSelectOption(settingsData.translations)}
                 onChange={selectedOptions => {
-                    settingsModel.translations = selectedOptions.map(m => m.value)
-                    onChange(settingsModel)
+                    settingsData.translations = selectedOptions.map(m => m.value)
+                    onChange(settingsData)
                 }} />
             <h5 className="mt-3">Tafsirs</h5>
             <Select isMulti
                 options={translationItemsMapToSelectOption(tafsirList)}
-                value={translationItemsMapToSelectOption(settingsModel.tafsirs)}
+                value={translationItemsMapToSelectOption(settingsData.tafsirs)}
                 onChange={selectedOptions => {
-                    settingsModel.tafsirs = selectedOptions.map(m => m.value)
-                    onChange(settingsModel)
+                    settingsData.tafsirs = selectedOptions.map(m => m.value)
+                    onChange(settingsData)
                 }} />
             <hr />
             <h5 className="mt-3">Recitaions</h5>
             <Select isMulti
                 options={recitaionsMapToSelectOption(recitationList)}
-                value={recitaionsMapToSelectOption(settingsModel.recitaions || recitationList.filter(f => f.id == 'Alafasy_128kbps'))}
+                value={recitaionsMapToSelectOption(settingsData.recitaions || recitationList.filter(f => f.id == 'Alafasy_128kbps'))}
                 onChange={selectedOptions => {
-                    settingsModel.recitaions = selectedOptions.map(m => m.value)
-                    onChange(settingsModel)
+                    settingsData.recitaions = selectedOptions.map(m => m.value)
+                    onChange(settingsData)
                 }} />
             <hr />
             <h5>Layout</h5>
@@ -84,7 +84,7 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
                 <label className="col-sm-4 col-form-label" htmlFor="ReadingModeSelect">Reading Mode</label>
                 <div className="col-sm-8">
                     <select id="ReadingModeSelect" className="form-select"
-                        value={ReadingMode[settingsModel.readingMode]}
+                        value={ReadingMode[settingsData.readingMode]}
                         onChange={handleReadingModeChange}>
                         {Object.keys(ReadingMode).filter(f => isNaN(f as any)).map(item =>
                             <option key={item} value={item}>{item}</option>)}
@@ -96,7 +96,7 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
                 <label className="col-sm-4 col-form-label" htmlFor="QuranFontSelect">Quran Font</label>
                 <div className="col-sm-8">
                     <select id="QuranFontSelect" className="form-select"
-                        value={settingsModel.quranFont}
+                        value={settingsData.quranFont}
                         onChange={handleQuranFontChange}>
                         <option value="hafs">KFGQPC Uthmanic Script HAFS</option>
                         <option value="me_quran">Me Quran</option>
@@ -129,6 +129,6 @@ export interface SettingsModel {
 }
 
 interface SettingsPanelProps {
-    settingsModel: SettingsModel,
+    settingsData: SettingsModel,
     onChange: (model: SettingsModel) => void
 }

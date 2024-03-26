@@ -4,7 +4,7 @@ import { NavigationModel } from './NavBar';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 import AudioPlayer from './AudioPlayer';
 
-function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, onAyatSelection }: QuranViewerProps) {
+function QuranViewer({ quranData, navigationModel, settingsData, onNavigate, onAyatSelection }: QuranViewerProps) {
 
     const { start, end } = quranData.getAyatRangeByNavSerial(navigationModel?.navMode, navigationModel?.serial);
     let ayats: Ayat[] = quranData.ayats.slice(start, end);;
@@ -50,7 +50,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
         </>
     }
 
-    if (settingsModel?.readingMode == ReadingMode.Ayat_By_Ayat) {
+    if (settingsData?.readingMode == ReadingMode.Ayat_By_Ayat) {
         let keyA = 0;
         contents.push(<div key={keyA++}> {
             ayats.map(ayat => <div key={ayat.serial}>
@@ -58,7 +58,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
 
                 <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat p-2' : 'p-2'}
                     onClick={() => handleAyatSelection(ayat.serial)}>
-                    <div className="quran-text rtl" style={{ fontFamily: settingsModel.quranFont || 'hafs' }}>
+                    <div className="quran-text rtl" style={{ fontFamily: settingsData.quranFont || 'hafs' }}>
                         <span>{ayat.arabicText}</span>
                         <span> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
                     </div>
@@ -90,7 +90,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
 
             </div>)
         } </div>);
-    } else if (settingsModel?.readingMode == ReadingMode.Ruku_By_Ruku) {
+    } else if (settingsData?.readingMode == ReadingMode.Ruku_By_Ruku) {
 
         let ayatsGroupByRuku = groupBy(ayats, x => x.rukuIdx);
         let firstTranslation = quranData.translations[0];
@@ -104,7 +104,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
                     suraHeader(rukuAyats[0].suraIdx)
                 }
                 <h3 className="ruku-header text-secondary mt-2">Ruku-{ruku.serial}: {ruku.displayText}</h3>
-                <div className="col-md-6 ps-md-4 pt-md-4 quran-text mt-2" style={{ fontFamily: settingsModel.quranFont || 'hafs' }}>
+                <div className="col-md-6 ps-md-4 pt-md-4 quran-text mt-2" style={{ fontFamily: settingsData.quranFont || 'hafs' }}>
                     {rukuAyats.map(ayat =>
                         <span key={ayat.serial}
                             onClick={() => handleAyatSelection(ayat.serial)}
@@ -164,7 +164,7 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
 
         <AudioPlayer ayats={ayats} selectedAyat={selectedAyatSerial}
             onPlayingAyatChanged={handlePlayingAyatChanged}
-            settingsModel={settingsModel}
+            settingsData={settingsData}
         />
     </article >;
 }
@@ -174,7 +174,7 @@ export default QuranViewer
 interface QuranViewerProps {
     quranData: QuranData,
     navigationModel: NavigationModel,
-    settingsModel: SettingsModel,
+    settingsData: SettingsModel,
     onNavigate: (model: NavigationModel) => void,
     onAyatSelection: (ayat: number) => void
 }
