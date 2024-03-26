@@ -65,7 +65,7 @@ function AudioPlayer({ ayats, selectedAyat, settingsModel, onPlayingAyatChanged 
     return <div className='fixed-bottom d-flex p-2' style={{ justifyContent: 'center' }}>
 
 
-        <div className="btn-group">
+        <div className="btn-group d-none">
             {/*{!isPlaying &&*/}
             {/*    <button className="btn theme-colored border" type="button" onClick={handlePlayClick} title="Recite">*/}
             {/*        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16">*/}
