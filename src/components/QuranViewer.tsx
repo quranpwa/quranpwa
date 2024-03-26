@@ -4,29 +4,29 @@ import { NavigationModel } from './NavBar';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 import AudioPlayer from './AudioPlayer';
 
-function QuranViewer({ quranData, navigationModel, settingsData, onNavigate, onAyatSelection }: QuranViewerProps) {
+function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelection }: QuranViewerProps) {
 
-    const { start, end } = quranData.getAyatRangeByNavSerial(navigationModel?.navMode, navigationModel?.serial);
+    const { start, end } = quranData.getAyatRangeByNavSerial(navData?.navMode, navData?.serial);
     let ayats: Ayat[] = quranData.ayats.slice(start, end);;
-    let maxSerial = quranData.getMaxNavSerial(navigationModel?.navMode);
+    let maxSerial = quranData.getMaxNavSerial(navData?.navMode);
 
-    const selectedAyatSerial = navigationModel.ayat;
+    const selectedAyatSerial = navData.ayat;
 
     const handleAyatSelection = (selectedAyat: number) => {
         onAyatSelection(selectedAyat);
     };
 
     const handleNext = () => {
-        if (navigationModel.serial < maxSerial) {
-            navigationModel.serial++;
-            onNavigate(navigationModel)
+        if (navData.serial < maxSerial) {
+            navData.serial++;
+            onNavigate(navData)
         }
     };
 
     const handlePrevious = () => {
-        if (navigationModel.serial > 1) {
-            navigationModel.serial--;
-            onNavigate(navigationModel)
+        if (navData.serial > 1) {
+            navData.serial--;
+            onNavigate(navData)
         }
     };
 
@@ -150,9 +150,9 @@ function QuranViewer({ quranData, navigationModel, settingsData, onNavigate, onA
 
     console.info('QuranViewer has been rendered.');
 
-    const navModeName = NavigationMode[navigationModel.navMode];
-    let prevButtonClasses = 'btn theme-colored border mx-2 ' + (navigationModel.serial > 1 ? '' : 'disabled');
-    let nextButtonClasses = 'btn theme-colored border mx-2 ' + (navigationModel.serial < maxSerial ? '' : 'disabled');
+    const navModeName = NavigationMode[navData.navMode];
+    let prevButtonClasses = 'btn theme-colored border mx-2 ' + (navData.serial > 1 ? '' : 'disabled');
+    let nextButtonClasses = 'btn theme-colored border mx-2 ' + (navData.serial < maxSerial ? '' : 'disabled');
 
     return <article className="container">
         {contents}
@@ -173,7 +173,7 @@ export default QuranViewer
 
 interface QuranViewerProps {
     quranData: QuranData,
-    navigationModel: NavigationModel,
+    navData: NavigationModel,
     settingsData: SettingsModel,
     onNavigate: (model: NavigationModel) => void,
     onAyatSelection: (ayat: number) => void

@@ -11,8 +11,8 @@ function App() {
     const [quranData] = useState<QuranData>(new QuranData());
 
     let getNavData = (): NavigationModel => {
-        const storedNavModelString = localStorage.getItem('NavigationModel');
-        const storedNavModel: NavigationModel = storedNavModelString ? JSON.parse(storedNavModelString)
+        const storedNavDataString = localStorage.getItem('NavigationData');
+        const storedNavData: NavigationModel = storedNavDataString ? JSON.parse(storedNavDataString)
             : {
                 navMode: NavigationMode.Ruku,
                 serial: 1,
@@ -24,8 +24,8 @@ function App() {
         if (navModeStr) {
             const navMode = NavigationMode[navModeStr as keyof typeof NavigationMode];
 
-            const serialNumber = +(searchParams.get('serial') || storedNavModel.serial);
-            let ayatNumber = +(searchParams.get('ayat') || storedNavModel.ayat);
+            const serialNumber = +(searchParams.get('serial') || storedNavData.serial);
+            let ayatNumber = +(searchParams.get('ayat') || storedNavData.ayat);
 
             const { start, end } = quranData.getAyatRangeByNavSerial(navMode, serialNumber);
             if (ayatNumber < start || ayatNumber > end)
@@ -38,7 +38,7 @@ function App() {
             }
         }
 
-        return storedNavModel;
+        return storedNavData;
     };
 
     const getDefaultTranslation = (): Translation => {
@@ -57,7 +57,7 @@ function App() {
             recitaions: recitationList.filter(f => f.id == 'Alafasy_128kbps')
         }
 
-    const [navigationModel, setNavigationModel] = useState<NavigationModel>(getNavData());
+    const [navData, setNavData] = useState<NavigationModel>(getNavData());
     const [settingsData, setSettingsData] = useState<SettingsModel>(storedSettingsData);
 
     const [, forceUpdate] = useReducer(x => x + 1, 0);
@@ -91,18 +91,18 @@ function App() {
         if ((model.ayat ?? 0) < start || (model.ayat ?? 0) > end)
             model.ayat = start + 1;
 
-        setNavigationModel(model);
-        localStorage.setItem('NavigationModel', JSON.stringify(model));
+        setNavData(model);
+        localStorage.setItem('NavigationData', JSON.stringify(model));
         setNavDataToSearchParams(model);
         forceUpdate();
         window.scrollTo(0, 0);
     }
 
     const onAyatSelection = (selectedAyat: number) => {
-        navigationModel.ayat = selectedAyat;
-        setNavigationModel(navigationModel);
-        localStorage.setItem('NavigationModel', JSON.stringify(navigationModel));
-        setNavDataToSearchParams(navigationModel);
+        navData.ayat = selectedAyat;
+        setNavData(navData);
+        localStorage.setItem('NavigationData', JSON.stringify(navData));
+        setNavDataToSearchParams(navData);
         forceUpdate();
     }
 
@@ -114,15 +114,14 @@ function App() {
         quranData.setTafsirs(model.tafsirs, forceUpdate);
     }
 
-
     return (
         <>
             <NavBar quranData={quranData}
-                navigationModel={navigationModel}
+                navData={navData}
                 onNavigate={onNavigate} />
 
             <QuranViewer quranData={quranData}
-                navigationModel={navigationModel}
+                navData={navData}
                 settingsData={settingsData}
                 onNavigate={onNavigate}
                 onAyatSelection={onAyatSelection} />
