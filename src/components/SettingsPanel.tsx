@@ -5,6 +5,7 @@ import recitationList from '../assets/recitation-list.json'
 import './SettingsPanel.css'
 import { Recitaion, Translation } from '../QuranData';
 import Select from 'react-select'
+import { getDefaultSettings } from '../Utilities';
 
 function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
 
@@ -18,6 +19,15 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     const handleQuranFontChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         let selectedItem = event.target.value;
         settingsData.quranFont = selectedItem;
+        onChange(settingsData);
+    };
+
+    const hasSettingsChanged = () => {
+        return JSON.stringify(settingsData) != JSON.stringify(getDefaultSettings())
+    };
+
+    const handleResetSettings = () => {
+        settingsData = getDefaultSettings()
         onChange(settingsData);
     };
 
@@ -108,6 +118,12 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     </select>
                 </div>
             </div>
+            <hr />
+            <button type="button"
+                className={hasSettingsChanged() ? "btn btn-danger border" : "btn btn-danger border disabled"}
+                onClick={handleResetSettings}>
+                Reset Settings
+            </button>
         </div>
     </div>;
 }

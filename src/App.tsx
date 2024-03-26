@@ -1,11 +1,10 @@
 ﻿import { useEffect, useReducer, useState } from 'react';
 import './App.css';
-import { NavigationMode, QuranData, Translation } from './QuranData';
+import { NavigationMode, QuranData } from './QuranData';
+import { getDefaultSettings } from './Utilities';
 import NavBar, { NavigationModel } from './components/NavBar';
 import QuranViewer from './components/QuranViewer';
-import SettingsPanel, { ReadingMode, SettingsModel } from './components/SettingsPanel';
-import translationList from './assets/translation-list.json'
-import recitationList from './assets/recitation-list.json'
+import SettingsPanel, { SettingsModel } from './components/SettingsPanel';
 
 function App() {
     const [quranData] = useState<QuranData>(new QuranData());
@@ -41,21 +40,9 @@ function App() {
         return storedNavData;
     };
 
-    const getDefaultTranslation = (): Translation => {
-        let navLang = navigator.languages[navigator.languages.length - 1] ?? 'en';
-
-        return translationList.filter(f => f.language == navLang)[0];
-    }
-
     const storedSettingsDataString = localStorage.getItem('SettingsData');
     const storedSettingsData: SettingsModel = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
-        : {
-            readingMode: ReadingMode.Ruku_By_Ruku,
-            quranFont: 'hafs',
-            translations: [getDefaultTranslation()],
-            tafsirs: [],
-            recitaions: recitationList.filter(f => f.id == 'Alafasy_128kbps')
-        }
+        : getDefaultSettings()
 
     const [navData, setNavData] = useState<NavigationModel>(getNavData());
     const [settingsData, setSettingsData] = useState<SettingsModel>(storedSettingsData);
