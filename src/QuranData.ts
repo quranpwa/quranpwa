@@ -309,6 +309,7 @@ export interface Recitaion {
     name: string,
     language: string,
     url: string,
+    fileNameFormat: string,
     byWord: boolean,
     byVerse: boolean,
     bySura: boolean,

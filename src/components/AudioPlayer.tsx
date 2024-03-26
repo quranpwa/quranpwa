@@ -8,18 +8,36 @@ function AudioPlayer({ ayats, selectedAyat, settingsModel, onPlayingAyatChanged 
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
     const getAudioUrl = (): string => {
+        let recitation = settingsModel.recitaions[0] || recitationList[0];
+        let startingAyat = ayats[selectedAyat - ayats[0].serial];
+        if (!startingAyat)
+            startingAyat = ayats[0];
 
-        let ayat = ayats[selectedAyat - ayats[0].serial];
+        if (recitation.byVerse) {
+            if (recitation.fileNameFormat) {
+                let suraSerial = (startingAyat.suraIdx + 1).toString();
+                let ayatSerialInSura = startingAyat.serialInSura.toString();
 
-        if (!ayat)
-            ayat = ayats[0];
+                //if (startingAyat.suraIdx == 0)
+                //    ayatSerialInSura = (startingAyat.serialInSura - 1).toString();
 
-        let suraSerial = padLeft((ayat.suraIdx + 1).toString(), 3);
-        let ayatSerialInSura = padLeft(ayat.serialInSura.toString(), 3);
+                let fileName = recitation.fileNameFormat.replace('{suraSerial}', suraSerial);
+                fileName = fileName.replace('{suraSerial}', suraSerial);
+                fileName = fileName.replace('{ayatSerialInSura}', ayatSerialInSura);
 
-        let urlPrefix = (settingsModel.recitaions[0] || recitationList[0]).url;
+                return `${recitation.url}/${fileName}`;
 
-        return `${urlPrefix}/${suraSerial}${ayatSerialInSura}.mp3`;
+            } else {
+                let suraSerial = padLeft((startingAyat.suraIdx + 1).toString(), 3);
+                let ayatSerialInSura = padLeft(startingAyat.serialInSura.toString(), 3);
+
+                return `${recitation.url}/${suraSerial}${ayatSerialInSura}.mp3`;
+            }
+        } else if (recitation.bySura) {
+            let suraSerial = padLeft((startingAyat.suraIdx + 1).toString(), 3);
+
+            return `${recitation.url}/${suraSerial}.mp3`;
+        } else return ''
     };
 
     const handleOnPlay = () => {

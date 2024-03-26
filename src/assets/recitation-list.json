@@ -22,12 +22,22 @@
   {
     "id": "sharif_bayzid_gtaf",
     "name": "Sharif Bayzid (Bangla, Mohiuddin Khan)",
-    "lastModified": "12-03-24",
     "language": "bn",
     "url": "https://static.gtaf.org/files/v1/audio/quran/sharif_bayzid_gtaf",
     "byWord": false,
     "byVerse": false,
     "bySura": true,
+    "style": "Translation"
+  },
+  {
+    "id": "mahmudur_rahman_quran.gov.bd",
+    "name": "Mahmudur Rahman (Bangla, quran.gov.bd)",
+    "language": "bn",
+    "url": "http://quran.gov.bd/quran/Sound/bangla",
+    "fileNameFormat": "{suraSerial}/{suraSerial}-{ayatSerialInSura}.mp3",
+    "byWord": false,
+    "byVerse": true,
+    "bySura": false,
     "style": "Translation"
   }
 ]
