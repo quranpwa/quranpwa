@@ -304,6 +304,17 @@ export interface Ayat {
     sura: Sura,
 }
 
+export interface Recitaion {
+    id: string,
+    name: string,
+    language: string,
+    url: string,
+    byWord: boolean,
+    byVerse: boolean,
+    bySura: boolean,
+    style: string
+}
+
 export enum NavigationMode {
     Sura,
     Juz,

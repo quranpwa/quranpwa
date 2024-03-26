@@ -18,5 +18,16 @@
     "byVerse": true,
     "bySura": false,
     "style": "Mujawwad"
+  },
+  {
+    "id": "sharif_bayzid_gtaf",
+    "name": "Sharif Bayzid (Bangla, Mohiuddin Khan)",
+    "lastModified": "12-03-24",
+    "language": "bn",
+    "url": "https://static.gtaf.org/files/v1/audio/quran/sharif_bayzid_gtaf",
+    "byWord": false,
+    "byVerse": false,
+    "bySura": true,
+    "style": "Translation"
   }
 ]

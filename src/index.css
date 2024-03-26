@@ -7,6 +7,7 @@
     --selected-bg-color: #e2edf9;
     --selected-font-color: #009a90;
 }
+
 @media (prefers-color-scheme: light) {
     [data-theme="auto"] {
         --primary-color: #302AE6;
@@ -28,6 +29,7 @@
     --selected-bg-color: #212b35;
     --selected-font-color: #97f4eb;
 }
+
 @media (prefers-color-scheme: dark) {
     [data-theme="auto"] {
         --primary-color: #9A97F3;
@@ -55,3 +57,8 @@ body {
     background-color: var(--bg-color);
     color: var(--font-color);
 }
+
+    .theme-colored:hover, .theme-colored:active, .theme-colored:focus {
+        background-color: var(--bg-color) !important;
+        color: var(--font-color) !important;
+    }

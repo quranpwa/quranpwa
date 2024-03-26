@@ -1,8 +1,9 @@
 ﻿import ThemeSwitch from './ThemeSwitch';
 import translationList from '../assets/translation-list.json'
 import tafsirList from '../assets/tafsir-list.json'
+import recitationList from '../assets/recitation-list.json'
 import './SettingsPanel.css'
-import { Translation } from '../QuranData';
+import { Recitaion, Translation } from '../QuranData';
 import Select from 'react-select'
 
 function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
@@ -24,6 +25,15 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
         return translationItems.map(t => {
             return {
                 label: t.languageName + ' - ' + t.Name,
+                value: t
+            }
+        })
+    }
+
+    const recitaionsMapToSelectOption = (recitaions: Recitaion[]) => {
+        return recitaions.map(t => {
+            return {
+                label: t.name,
                 value: t
             }
         })
@@ -57,6 +67,15 @@ function SettingsPanel({ settingsModel, onChange }: SettingsPanelProps) {
                 value={translationItemsMapToSelectOption(settingsModel.tafsirs)}
                 onChange={selectedOptions => {
                     settingsModel.tafsirs = selectedOptions.map(m => m.value)
+                    onChange(settingsModel)
+                }} />
+            <hr />
+            <h5 className="mt-3">Recitaions</h5>
+            <Select isMulti
+                options={recitaionsMapToSelectOption(recitationList)}
+                value={recitaionsMapToSelectOption(settingsModel.recitaions || recitationList.filter(f => f.id == 'Alafasy_128kbps'))}
+                onChange={selectedOptions => {
+                    settingsModel.recitaions = selectedOptions.map(m => m.value)
                     onChange(settingsModel)
                 }} />
             <hr />
@@ -106,6 +125,7 @@ export interface SettingsModel {
     quranFont: string,
     translations: Translation[]
     tafsirs: Translation[]
+    recitaions: Recitaion[]
 }
 
 interface SettingsPanelProps {

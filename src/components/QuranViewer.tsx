@@ -163,7 +163,9 @@ function QuranViewer({ quranData, navigationModel, settingsModel, onNavigate, on
         </div>
 
         <AudioPlayer ayats={ayats} selectedAyat={selectedAyatSerial}
-            onPlayingAyatChanged={handlePlayingAyatChanged} />
+            onPlayingAyatChanged={handlePlayingAyatChanged}
+            settingsModel={settingsModel}
+        />
     </article >;
 }
 

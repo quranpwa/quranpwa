@@ -5,6 +5,7 @@ import NavBar, { NavigationModel } from './components/NavBar';
 import QuranViewer from './components/QuranViewer';
 import SettingsPanel, { ReadingMode, SettingsModel } from './components/SettingsPanel';
 import translationList from './assets/translation-list.json'
+import recitationList from './assets/recitation-list.json'
 
 function App() {
     const [quranData] = useState<QuranData>(new QuranData());
@@ -23,8 +24,8 @@ function App() {
         if (navModeStr) {
             const navMode = NavigationMode[navModeStr as keyof typeof NavigationMode];
 
-            const serialNumber = +(searchParams.get('serial') || -1) ?? storedNavModel.serial;
-            let ayatNumber = +(searchParams.get('ayat') || -1) ?? storedNavModel.ayat;
+            const serialNumber = +(searchParams.get('serial') || storedNavModel.serial);
+            let ayatNumber = +(searchParams.get('ayat') || storedNavModel.ayat);
 
             const { start, end } = quranData.getAyatRangeByNavSerial(navMode, serialNumber);
             if (ayatNumber < start || ayatNumber > end)
@@ -52,7 +53,8 @@ function App() {
             readingMode: ReadingMode.Ruku_By_Ruku,
             quranFont: 'hafs',
             translations: [getDefaultTranslation()],
-            tafsirs: []
+            tafsirs: [],
+            recitaions: recitationList.filter(f => f.id == 'Alafasy_128kbps')
         }
 
     const [navigationModel, setNavigationModel] = useState<NavigationModel>(getNavData());
