@@ -14,9 +14,10 @@ export class QuranData {
     ayats: Ayat[] = [];
     translations: TranslationWithData[] = [];
     tafsirs: TranslationWithData[] = [];
+    recitations: RecitaionWithData[] = [];
 
     constructor() {
-        this.suras =  this.getSuras();
+        this.suras = this.getSuras();
         this.hizb_quarters = this.getHizbQuarters();
         this.manzils = this.getManzils();
         this.rukus = this.getRukus();
@@ -250,6 +251,30 @@ export class QuranData {
         if (notFetchedTafsirs.length == 0)
             updateUI();
     }
+
+    setRecitations(recitations: Recitaion[]) {
+        this.recitations = this.recitations.filter(f =>
+            recitations.some(s => s.id === f.recitaionMeta.id));
+
+        let notFetchedRecitationTimings = recitations.filter(f =>
+            !this.recitations.some(s => s.recitaionMeta.id === f.id));
+
+        notFetchedRecitationTimings.forEach(recitation => {
+            if (recitation.bySura) {
+                fetch(`./recitaion-timings/${recitation.id}.json`)
+                    .then<[]>(response => response.json())
+                    .then(timings => {
+                        if (!this.recitations.some(s => s.recitaionMeta.id === recitation.id)) {
+
+                            this.recitations.push({ recitaionMeta: recitation, timings: timings });
+                        }
+                    })
+                    .catch(error => console.error(error));
+            } else {
+                this.recitations.push({ recitaionMeta: recitation, timings: [] });
+            }
+        });
+    }
 }
 
 export interface Sura {
@@ -314,6 +339,11 @@ export interface Recitaion {
     byVerse: boolean,
     bySura: boolean,
     style: string
+}
+
+export interface RecitaionWithData {
+    recitaionMeta: Recitaion,
+    timings: []
 }
 
 export enum NavigationMode {

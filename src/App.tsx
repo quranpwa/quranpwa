@@ -99,6 +99,7 @@ function App() {
 
         quranData.setTranslations(model.translations, forceUpdate);
         quranData.setTafsirs(model.tafsirs, forceUpdate);
+        quranData.setRecitations(model.recitaions);
     }
 
     return (
