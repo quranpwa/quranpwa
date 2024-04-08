@@ -1,10 +1,9 @@
 ﻿import { useState } from 'react';
 import { Ayat, QuranData } from '../QuranData';
 import { padLeft } from '../Utilities';
-import { SettingsModel } from './SettingsPanel';
 import React from 'react';
 
-function AudioPlayer({ quranData, ayats, selectedAyat, settingsData, onPlayingAyatChanged }: AudioPlayerProps) {
+function AudioPlayer({ quranData, ayats, selectedAyat, onPlayingAyatChanged }: AudioPlayerProps) {
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
     const getAudioUrl = (): string => {
@@ -47,7 +46,13 @@ function AudioPlayer({ quranData, ayats, selectedAyat, settingsData, onPlayingAy
 
     const handleOnPlay = (event: React.SyntheticEvent<HTMLAudioElement>) => {
         setIsPlaying(true);
-        //event.currentTarget.currentTime = 5;
+
+        let recitation = quranData.recitations[0];
+        if (recitation?.recitaionMeta?.bySura) {
+            let suraIdx = ayats[0].suraIdx
+            let [, , timing] = recitation.timings[selectedAyat - 1 + suraIdx];
+            event.currentTarget.currentTime = (timing || 0) / 1000;
+        }
     };
 
     const handleOnPause = () => {
@@ -110,6 +115,5 @@ interface AudioPlayerProps {
     quranData: QuranData,
     ayats: Ayat[],
     selectedAyat: number,
-    settingsData: SettingsModel,
     onPlayingAyatChanged: (ayat: Ayat) => void,
 }

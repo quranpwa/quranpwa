@@ -343,7 +343,7 @@ export interface Recitaion {
 
 export interface RecitaionWithData {
     recitaionMeta: Recitaion,
-    timings: []
+    timings: Array<[number, number, number]>
 }
 
 export enum NavigationMode {
