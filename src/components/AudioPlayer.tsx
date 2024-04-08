@@ -54,6 +54,28 @@ function AudioPlayer({ quranData, ayats, selectedAyat, onPlayingAyatChanged }: A
             event.currentTarget.currentTime = (timing || 0) / 1000;
         }
     };
+    const handleOnTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>) => {
+
+        let recitation = quranData.recitations[0];
+        if (recitation?.recitaionMeta?.bySura) {
+            let suraIdx = ayats[0].suraIdx
+            let [, , nextTiming] = recitation.timings[selectedAyat + suraIdx];
+
+            if (event.currentTarget.currentTime >= nextTiming / 1000) {
+                let currentAyatIdx = selectedAyat - ayats[0].serial;
+                let nextAyat = ayats[currentAyatIdx + 1];
+
+                if (nextAyat.serial > ayats[ayats.length - 1].serial) {
+                    setIsPlaying(false);
+                    event.currentTarget.pause();
+                    return;
+                }
+
+                onPlayingAyatChanged(nextAyat)
+                return;
+            }
+        }
+    };
 
     const handleOnPause = () => {
         //setIsPlaying(false);
@@ -104,6 +126,7 @@ function AudioPlayer({ quranData, ayats, selectedAyat, onPlayingAyatChanged }: A
         </div>
         <audio src={getAudioUrl()} controls autoPlay={isPlaying}
             onPlay={handleOnPlay}
+            onTimeUpdate={handleOnTimeUpdate}
             onPause={handleOnPause}
             onEnded={handleOnEnded}></audio>
     </div>;
