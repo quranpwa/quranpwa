@@ -5,7 +5,7 @@ import recitationList from '../assets/recitation-list.json'
 import './SettingsPanel.css'
 import { Recitaion, Translation } from '../QuranData';
 import Select from 'react-select'
-import { getDefaultSettings } from '../Utilities';
+import { getDefaultSettings, groupBy } from '../Utilities';
 
 function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
 
@@ -49,6 +49,9 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         })
     }
 
+    const translationsGroupByLang = groupBy(translationList, x => x.language);
+    const tafsirsGroupByLang = groupBy(tafsirList, x => x.language);
+
     return <div className="offcanvas offcanvas-end" id="offcanvasRight" data-bs-scroll="true" aria-labelledby="offcanvasRightLabel">
         <div className="offcanvas-header">
             <h4 id="offcanvasRightLabel">
@@ -63,7 +66,10 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             <h5>Themes</h5>
             <ThemeSwitch />
             <hr />
-            <h5>Translations</h5>
+            <h5>Translations
+                <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {translationList.length}</small>
+                <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(translationsGroupByLang).length}</small>
+            </h5>
             <Select isMulti
                 options={translationItemsMapToSelectOption(translationList)}
                 value={translationItemsMapToSelectOption(settingsData.translations)}
@@ -71,7 +77,10 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     settingsData.translations = selectedOptions.map(m => m.value)
                     onChange(settingsData)
                 }} />
-            <h5 className="mt-3">Tafsirs</h5>
+            <h5 className="mt-3">Tafsirs
+                <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {tafsirList.length}</small>
+                <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(tafsirsGroupByLang).length}</small>
+            </h5>
             <Select isMulti
                 options={translationItemsMapToSelectOption(tafsirList)}
                 value={translationItemsMapToSelectOption(settingsData.tafsirs)}
