@@ -46,7 +46,7 @@ function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
             </svg>
         </button>
 
-        <h1 className="nav-title">Quran Majid</h1>
+        <h1 className="nav-title"><img src="/images/quran-rehal.svg" alt="Quran Rehal" height="30" /> Quran Majid</h1>
 
         <div className="">
             <select className="select me-1 me-md-2" value={NavigationMode[navData.navMode]} onChange={handleNavigationModeChange} title="Navigation Mode">
