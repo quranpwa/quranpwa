@@ -58,11 +58,12 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
                 <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat p-2' : 'p-2'}
                     onClick={() => handleAyatSelection(ayat.serial)}>
-                    <div className="quran-text rtl" style={{ fontFamily: settingsData.quranFont || 'hafs' }}>
-                        <span>{ayat.arabicText}</span>
-                        <span> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
-                    </div>
-
+                    {!settingsData.hideQuranText &&
+                        <div className="quran-text rtl" style={{ fontFamily: settingsData.quranFont || 'hafs' }}>
+                            <span>{ayat.arabicText}</span>
+                            <span> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
+                        </div>
+                    }
                     {quranData.translations.map(translation => {
                         if (translation.texts) {
                             const ayatTranslationText = translation.texts[ayat.serial - 1];
@@ -98,24 +99,26 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         for (let rukuIdx in ayatsGroupByRuku) {
             let ruku = quranData.rukus[+rukuIdx];
             let rukuAyats = ayatsGroupByRuku[rukuIdx] as Ayat[];
+            let colClass = !settingsData.hideQuranText && firstTranslation ? "col-md-6" : "col-md-12";
 
             contents.push(<div className="row rtl" key={contents.length}>
                 {rukuAyats[0].serialInSura == 1 &&
                     suraHeader(rukuAyats[0].suraIdx)
                 }
                 <h3 className="ruku-header text-secondary mt-2">Ruku-{ruku.serial}: {ruku.displayText}</h3>
-                <div className="col-md-6 ps-md-4 pt-md-4 quran-text mt-2" style={{ fontFamily: settingsData.quranFont || 'hafs' }}>
-                    {rukuAyats.map(ayat =>
-                        <span key={ayat.serial}
-                            onClick={() => handleAyatSelection(ayat.serial)}
-                            className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}>
-                            <span>{ayat.arabicText}</span>
-                            <span> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
-                        </span>)}
-                </div>
-
+                {!settingsData.hideQuranText &&
+                    <div className={colClass + "ps-md-4 pt-md-4 quran-text mt-2"} style={{ fontFamily: settingsData.quranFont || 'hafs' }}>
+                        {rukuAyats.map(ayat =>
+                            <span key={ayat.serial}
+                                onClick={() => handleAyatSelection(ayat.serial)}
+                                className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}>
+                                <span>{ayat.arabicText}</span>
+                                <span> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
+                            </span>)}
+                    </div>
+                }
                 {firstTranslation &&
-                    <div className="col-md-6 pe-md-4 quran-translation ltr">
+                    <div className={colClass + "col-md-6 pe-md-4 quran-translation ltr"}>
                         <div className="text-secondary small">{firstTranslation.translationMeta.languageName + ' - ' + firstTranslation.translationMeta.translator}</div>
                         {
                             rukuAyats.map(ayat =>

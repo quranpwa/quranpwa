@@ -22,6 +22,11 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         onChange(settingsData);
     };
 
+    const handleHideQuranTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        settingsData.hideQuranText = event.target.checked;
+        onChange(settingsData);
+    };
+
     const hasSettingsChanged = () => {
         return JSON.stringify(settingsData) != JSON.stringify(getDefaultSettings())
     };
@@ -109,6 +114,12 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                             <option key={item} value={item}>{item}</option>)}
                     </select>
                 </div>
+                <div className="form-check ms-2">
+                    <input className="form-check-input" type="checkbox" id="HideQuranTextInput"
+                        checked={settingsData.hideQuranText}
+                        onChange={handleHideQuranTextChange} />
+                    <label className="form-check-label" htmlFor="HideQuranTextInput">Hide Quran Text</label>
+                </div>
             </div>
             <h5 className="mt-3">Quran Font</h5>
             <div className="row">
@@ -147,6 +158,7 @@ export enum ReadingMode {
 
 export interface SettingsModel {
     readingMode: ReadingMode,
+    hideQuranText: boolean,
     quranFont: string,
     translations: Translation[]
     tafsirs: Translation[]
