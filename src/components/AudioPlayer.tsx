@@ -124,7 +124,7 @@ function AudioPlayer({ quranData, ayats, selectedAyat, onPlayingAyatChanged }: A
                 </ul>
             </div>
         </div>
-        <audio src={getAudioUrl()} controls autoPlay={isPlaying}
+        <audio src={getAudioUrl()} controls crossOrigin="anonymous" autoPlay={isPlaying}
             onPlay={handleOnPlay}
             onTimeUpdate={handleOnTimeUpdate}
             onPause={handleOnPause}
