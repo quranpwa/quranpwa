@@ -23,7 +23,7 @@ export default defineConfig({
             name: 'Quran Majid',
             short_name: 'Quran',
             description: 'Quran Majid',
-            theme_color: '#ffffff',
+            theme_color: '#000',
             display: 'standalone',
             icons: [
                 {
