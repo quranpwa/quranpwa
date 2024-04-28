@@ -95,11 +95,11 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
         let ayatsGroupByRuku = groupBy(ayats, x => x.rukuIdx);
         let firstTranslation = quranData.translations[0];
+        let colClass = !settingsData.hideQuranText && firstTranslation ? "col-md-6 " : "col-md-12 ";
 
         for (let rukuIdx in ayatsGroupByRuku) {
             let ruku = quranData.rukus[+rukuIdx];
             let rukuAyats = ayatsGroupByRuku[rukuIdx] as Ayat[];
-            let colClass = !settingsData.hideQuranText && firstTranslation ? "col-md-6" : "col-md-12";
 
             contents.push(<div className="row rtl" key={contents.length}>
                 {rukuAyats[0].serialInSura == 1 &&
@@ -118,7 +118,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                     </div>
                 }
                 {firstTranslation &&
-                    <div className={colClass + "col-md-6 pe-md-4 quran-translation ltr"}>
+                    <div className={colClass + "pe-md-4 quran-translation ltr"}>
                         <div className="text-secondary small">{firstTranslation.translationMeta.languageName + ' - ' + firstTranslation.translationMeta.translator}</div>
                         {
                             rukuAyats.map(ayat =>
