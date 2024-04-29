@@ -1,4 +1,4 @@
-﻿import quranSimpleText from './assets/quran-texts/quran-simple.json'
+﻿import quranText from './assets/quran-texts/quran.json'
 import quranData from './assets/quran-data.json'
 
 export class QuranData {
@@ -25,7 +25,7 @@ export class QuranData {
         this.sajdas = this.getSajdas();
         this.juzs = this.getJuzs();
 
-        this.setAyats(quranSimpleText)
+        this.setAyats(quranText)
     }
 
     private getSuras(): Sura[] {
