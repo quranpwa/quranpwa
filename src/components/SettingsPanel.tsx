@@ -46,12 +46,10 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     }
 
     const recitaionsMapToSelectOption = (recitaions: Recitaion[]) => {
-        return recitaions.map(t => {
-            return {
-                label: t.name,
-                value: t
-            }
-        })
+        return recitaions.filter(f => f.byVerse)
+            .map(t => {
+                return { label: t.name, value: t }
+            })
     }
 
     const translationsGroupByLang = groupBy(translationList, x => x.language);
