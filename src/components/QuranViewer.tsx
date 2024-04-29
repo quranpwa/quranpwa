@@ -165,7 +165,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
             <button className={nextButtonClasses} type="button" onClick={handleNext}>Next {navModeName} &gt;</button>
         </div>
 
-        <AudioPlayer quranData={quranData} ayats={ayats} selectedAyat={selectedAyatSerial}
+        <AudioPlayer quranData={quranData} settingsData={settingsData} ayats={ayats} selectedAyat={selectedAyatSerial}
             onPlayingAyatChanged={handlePlayingAyatChanged}
         />
     </article >;
