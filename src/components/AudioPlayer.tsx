@@ -18,30 +18,17 @@ function AudioPlayer({ quranData, ayats, selectedAyat, onPlayingAyatChanged }: A
             startingAyat = ayats[0];
 
         if (recitationMeta.byVerse) {
-            if (recitationMeta.fileNameFormat) {
-                let suraSerial = (startingAyat.suraIdx + 1).toString();
-                let ayatSerialInSura = startingAyat.serialInSura.toString();
+            let suraSerial = padLeft((startingAyat.suraIdx + 1).toString(), 3);
+            let ayatSerialInSura = padLeft(startingAyat.serialInSura.toString(), 3);
 
-                //if (startingAyat.suraIdx == 0)
-                //    ayatSerialInSura = (startingAyat.serialInSura - 1).toString();
-
-                let fileName = recitationMeta.fileNameFormat.replace('{suraSerial}', suraSerial);
-                fileName = fileName.replace('{suraSerial}', suraSerial);
-                fileName = fileName.replace('{ayatSerialInSura}', ayatSerialInSura);
-
-                return `${recitationMeta.url}/${fileName}`;
-
-            } else {
-                let suraSerial = padLeft((startingAyat.suraIdx + 1).toString(), 3);
-                let ayatSerialInSura = padLeft(startingAyat.serialInSura.toString(), 3);
-
-                return `${recitationMeta.url}/${suraSerial}${ayatSerialInSura}.mp3`;
-            }
-        } else if (recitationMeta.bySura) {
+            return `${recitationMeta.url}/${suraSerial}${ayatSerialInSura}.mp3`;
+        }
+        else if (recitationMeta.bySura) {
             let suraSerial = padLeft((startingAyat.suraIdx + 1).toString(), 3);
 
             return `${recitationMeta.url}/${suraSerial}.mp3`;
-        } else return ''
+        }
+        else return ''
     };
 
     const handleOnPlay = (event: React.SyntheticEvent<HTMLAudioElement>) => {
