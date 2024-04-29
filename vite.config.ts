@@ -20,9 +20,9 @@ export default defineConfig({
             }]
         },
         manifest: {
-            name: 'Quran Majid',
+            name: 'Quran PWA',
             short_name: 'Quran',
-            description: 'Quran Majid',
+            description: 'Quran PWA',
             theme_color: '#000000',
             display: 'standalone',
             icons: [

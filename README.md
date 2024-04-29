@@ -1,1 +1,1 @@
-# Quran Majid
+# Quran PWA
