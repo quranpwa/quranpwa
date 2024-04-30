@@ -1,28 +1,4 @@
 
-.sura-name-calligraphy {
-    font-family: quran_karim_114 !important;
-    font-size: 10rem;
-    text-align: center;
-    margin: -2.5rem 0 !important;
-    direction: ltr; /*Otherwise, sura fil («) does not display*/
-}
-
-.sura-name-en {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-.bismillah-arabic {
-    font-family: hafs;
-    font-size: 2rem;
-    text-align: center;
-    padding: 1rem;
-}
-
-.selected-ayat {
-    color: var(--selected-font-color);
-}
-
 .navbar {
     background-color: var(--nav-bg-color);
 }
@@ -40,47 +16,6 @@
     border-radius: .5rem;
     background-color: var(--bg-color);
     color: var(--font-color);
-}
-
-.container {
-    margin-top: 4rem !important;
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-}
-
-.rtl {
-    direction: rtl !important;
-}
-
-.ltr {
-    direction: ltr !important;
-}
-
-.ruku-header {
-    font-size: 1rem;
-    text-align: center;
-    border: 1px solid;
-    padding: 5px;
-}
-
-.quran-text {
-    font-family: hafs;
-    font-size: 2rem;
-    text-align: justify;
-}
-
-.quran-translation {
-    font-size: 1.1rem;
-    line-height: 1.8rem;
-    text-align: justify;
-}
-
-.translation-ayat-number {
-    color: gray;
-    border: 1px solid gray;
-    border-radius: 25%;
-    padding: 0 0.25rem;
-    margin: 0 0.25rem;
 }
 
 @media screen and (max-width: 768px) {

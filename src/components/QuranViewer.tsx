@@ -3,6 +3,7 @@ import { groupBy } from '../Utilities';
 import { NavigationModel } from './NavBar';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 import AudioPlayer from './AudioPlayer';
+import './QuranViewer.css'
 
 function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelection }: QuranViewerProps) {
 
