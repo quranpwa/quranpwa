@@ -4,12 +4,12 @@ import quranData from './assets/quran-data.json'
 export class QuranData {
 
     suras: Sura[];
-    hizb_quarters: any[];
-    manzils: any[];
+    hizb_quarters: AyatRange[];
+    manzils: AyatRange[];
     rukus: AyatRange[];
-    pages: any[];
+    pages: AyatRange[];
     sajdas: Sajdah[];
-    juzs: any[];
+    juzs: AyatRange[];
 
     ayats: Ayat[] = [];
     translations: TranslationWithData[] = [];
@@ -81,8 +81,6 @@ export class QuranData {
 
             r.push({
                 serial: i + 1,
-                surah: suraNumber,
-                ayah: segmentStartAyat,
                 start: thisSegmentStart,
                 end: thisSegmentEnd,
                 displayText: sura.tname + '[' + segmentStartAyat + '-' + (segmentStartAyat + (thisSegmentEnd - thisSegmentStart - 1)) + ']'
@@ -292,8 +290,6 @@ export interface Sura {
 
 export interface AyatRange {
     serial: number,
-    surah: number,
-    ayah: number,
     start: number,
     end: number,
     displayText: string
