@@ -85,13 +85,12 @@ function App() {
         window.scrollTo(0, 0);
     }
 
-    const onAyatSelection = (selectedAyat: number, isTranslation: boolean) => {
+    const onAyatSelection = (selectedAyat: number, isTranslation?: boolean) => {
         navData.ayat = selectedAyat;
         setNavData(navData);
         localStorage.setItem('NavigationData', JSON.stringify(navData));
-        //setNavDataToSearchParams(navData);
-        location.hash = isTranslation ? 't' + selectedAyat : String(selectedAyat);
         forceUpdate();
+        location.hash = isTranslation ? 't' + selectedAyat : String(selectedAyat);
     }
 
     const onSettingsChanged = (model: SettingsModel) => {
