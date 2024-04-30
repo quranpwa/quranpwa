@@ -18,6 +18,10 @@
     color: var(--font-color);
 }
 
+.offcanvas-backdrop {
+    opacity: 0.25 !important;
+}
+
 @media screen and (max-width: 768px) {
     .nav-title {
         font-size: 1.2rem !important;

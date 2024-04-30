@@ -1,11 +1,10 @@
-﻿import ThemeSwitch from './ThemeSwitch';
-import translationList from '../assets/translation-list.json'
-import tafsirList from '../assets/tafsir-list.json'
-import recitationList from '../assets/recitation-list.json'
-import './SettingsPanel.css'
+﻿import Select from 'react-select';
 import { Recitaion, Translation } from '../QuranData';
-import Select from 'react-select'
 import { getDefaultSettings, groupBy } from '../Utilities';
+import recitationList from '../assets/recitation-list.json';
+import tafsirList from '../assets/tafsir-list.json';
+import translationList from '../assets/translation-list.json';
+import ThemeSwitch from './ThemeSwitch';
 
 function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
 

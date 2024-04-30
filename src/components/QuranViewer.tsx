@@ -1,9 +1,9 @@
 ﻿import { Ayat, NavigationMode, QuranData } from '../QuranData';
 import { groupBy } from '../Utilities';
-import { NavigationModel } from './NavBar';
-import { ReadingMode, SettingsModel } from './SettingsPanel';
 import AudioPlayer from './AudioPlayer';
-import './QuranViewer.css'
+import { NavigationModel } from './NavBar';
+import './QuranViewer.css';
+import { ReadingMode, SettingsModel } from './SettingsPanel';
 
 function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelection }: QuranViewerProps) {
 
