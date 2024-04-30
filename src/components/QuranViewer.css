@@ -35,6 +35,7 @@
 
 .selected-ayat {
     color: var(--selected-font-color);
+    scroll-margin-top: 5rem;
 }
 
 .ruku-header {
