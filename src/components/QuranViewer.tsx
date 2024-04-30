@@ -152,8 +152,6 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         }
     }
 
-    console.info('QuranViewer has been rendered.');
-
     const navModeName = NavigationMode[navData.navMode];
     let prevButtonClasses = 'btn theme-colored border mx-2 ' + (navData.serial > 1 ? '' : 'disabled');
     let nextButtonClasses = 'btn theme-colored border mx-2 ' + (navData.serial < maxSerial ? '' : 'disabled');
