@@ -56,7 +56,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
             ayats.map(ayat => <div key={ayat.serial}>
                 {ayat.serialInSura == 1 && suraHeader(ayat.suraIdx)}
 
-                <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat p-2' : 'p-2'}
+                <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}
                     onClick={() => handleAyatSelection(ayat.serial)}>
                     {!settingsData.hideQuranText &&
                         <div className="quran-text rtl" style={{ fontFamily: settingsData.quranFont || 'hafs' }}>
