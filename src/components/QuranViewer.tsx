@@ -4,6 +4,7 @@ import AudioPlayer from './AudioPlayer';
 import { NavigationModel } from './NavBar';
 import './QuranViewer.css';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
+import SuraHeader from './SuraHeader';
 
 function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelection }: QuranViewerProps) {
 
@@ -35,27 +36,13 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         onAyatSelection(ayat?.serial);
     };
 
-    let quran_karim_114_font_chars = '!"#$%&\'()*+,-./0123456789:;<=>?@aAbBcCdDEeFfgGHhIiJjKklLMmnNOopPQqRrsStTuUvVWwxXyYZz[\\]^_`{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ';
-
     let contents: JSX.Element[] = [];
-
-    const suraHeader = (suraIdx: number) => {
-        let sura = quranData.suras[suraIdx];
-        return <>
-            <h2 className="sura-name-calligraphy">{quran_karim_114_font_chars[suraIdx]}</h2>
-            <h2 className="sura-name-en ltr">{suraIdx + 1}. Sura {sura.tname}</h2>
-            <div className="sura-info text-center text-secondary ltr">{sura.type} | Ayats: {sura.ayas}</div>
-
-            {suraIdx != 0 && suraIdx != 8 &&
-                <p className="bismillah-arabic">{quranData.ayats[0].arabicText}</p>}
-        </>
-    }
 
     if (settingsData?.readingMode == ReadingMode.Ayat_By_Ayat) {
         let keyA = 0;
         contents.push(<div key={keyA++}> {
             ayats.map(ayat => <div key={ayat.serial} id={ayat.serial.toString()}>
-                {ayat.serialInSura == 1 && suraHeader(ayat.suraIdx)}
+                {ayat.serialInSura == 1 && <SuraHeader quranData={quranData} suraIdx={ayat.suraIdx} />}
 
                 <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}
                     onClick={() => handleAyatSelection(ayat.serial)}>
@@ -104,8 +91,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
             contents.push(<div className="row rtl" key={contents.length}>
                 {rukuAyats[0].serialInSura == 1 &&
-                    suraHeader(rukuAyats[0].suraIdx)
-                }
+                    <SuraHeader quranData={quranData} suraIdx={rukuAyats[0].suraIdx} />}
+
                 <h3 className="ruku-header text-secondary mt-2">Ruku-{ruku.serial}: {ruku.displayText}</h3>
                 {!settingsData.hideQuranText &&
                     <div className={colClass + "ps-md-4 pt-md-4 quran-text mt-2"}>
