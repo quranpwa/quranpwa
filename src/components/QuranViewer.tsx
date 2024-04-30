@@ -60,9 +60,9 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}
                     onClick={() => handleAyatSelection(ayat.serial)}>
                     {!settingsData.hideQuranText &&
-                        <div className="quran-text rtl" style={{ fontFamily: settingsData.quranFont || 'hafs' }}>
-                            <span>{ayat.arabicText}</span>
-                            <span> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
+                        <div className="quran-text rtl">
+                            <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
+                            <span style={{ fontFamily: 'hafs' }}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
                         </div>
                     }
                     {quranData.translations.map(translation => {
@@ -108,13 +108,13 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 }
                 <h3 className="ruku-header text-secondary mt-2">Ruku-{ruku.serial}: {ruku.displayText}</h3>
                 {!settingsData.hideQuranText &&
-                    <div className={colClass + "ps-md-4 pt-md-4 quran-text mt-2"} style={{ fontFamily: settingsData.quranFont || 'hafs' }}>
+                    <div className={colClass + "ps-md-4 pt-md-4 quran-text mt-2"}>
                         {rukuAyats.map(ayat =>
                             <span id={ayat.serial.toString()} key={ayat.serial}
                                 onClick={() => handleAyatSelection(ayat.serial)}
                                 className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}>
-                                <span>{ayat.arabicText}</span>
-                                <span> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
+                                <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
+                                <span style={{ fontFamily: 'hafs' }}> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
                             </span>)}
                     </div>
                 }
@@ -153,21 +153,20 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
     }
 
     const navModeName = NavigationMode[navData.navMode];
-    let prevButtonClasses = 'btn theme-colored border mx-2 ' + (navData.serial > 1 ? '' : 'disabled');
-    let nextButtonClasses = 'btn theme-colored border mx-2 ' + (navData.serial < maxSerial ? '' : 'disabled');
 
     return <article className="container">
         {contents}
 
         <div className="d-flex mt-3" style={{ justifyContent: 'center', marginBottom: '4rem' }}>
-            <button className={prevButtonClasses} type="button" onClick={handlePrevious}>&lt; Previous {navModeName}</button>
-            <button className={nextButtonClasses} type="button" onClick={handleNext}>Next {navModeName} &gt;</button>
+            <button className={'btn theme-colored border mx-2 ' + (navData.serial > 1 ? '' : 'disabled')} type="button"
+                onClick={handlePrevious}>&lt; Previous {navModeName}</button>
+            <button className={'btn theme-colored border mx-2 ' + (navData.serial < maxSerial ? '' : 'disabled')} type="button"
+                onClick={handleNext}>Next {navModeName} &gt;</button>
         </div>
 
         <AudioPlayer quranData={quranData} settingsData={settingsData} ayats={ayats} selectedAyat={selectedAyatSerial}
-            onPlayingAyatChanged={handlePlayingAyatChanged}
-        />
-    </article >;
+            onPlayingAyatChanged={handlePlayingAyatChanged} />
+    </article>;
 }
 
 export default QuranViewer
