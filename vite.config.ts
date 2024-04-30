@@ -23,7 +23,8 @@ export default defineConfig({
             name: 'Quran PWA',
             short_name: 'Quran',
             description: 'Quran PWA',
-            theme_color: '#000000',
+            theme_color: '#000',
+            background_color: '#000',
             display: 'standalone',
             icons: [
                 {
