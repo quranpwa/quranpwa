@@ -24,7 +24,7 @@ function App() {
             const navMode = NavigationMode[navModeStr as keyof typeof NavigationMode];
 
             const serialNumber = +(searchParams.get('serial') || storedNavData.serial);
-            let ayatNumber = +(searchParams.get('ayat') || storedNavData.ayat);
+            let ayatNumber = +(location.hash.match(/\d+/g)?.pop() || storedNavData.ayat);
 
             const { start, end } = quranData.getAyatRangeByNavSerial(navMode, serialNumber);
             if (ayatNumber < start || ayatNumber > end)
@@ -66,7 +66,7 @@ function App() {
         url.searchParams.set('serial', model.serial.toString());
 
         if (model.ayat)
-            url.searchParams.set('ayat', String(model.ayat));
+            url.hash = String(model.ayat);
 
         window.history.pushState({}, '', url.toString());
     }
@@ -85,11 +85,12 @@ function App() {
         window.scrollTo(0, 0);
     }
 
-    const onAyatSelection = (selectedAyat: number) => {
+    const onAyatSelection = (selectedAyat: number, isTranslation: boolean) => {
         navData.ayat = selectedAyat;
         setNavData(navData);
         localStorage.setItem('NavigationData', JSON.stringify(navData));
-        setNavDataToSearchParams(navData);
+        //setNavDataToSearchParams(navData);
+        location.hash = isTranslation ? 't' + selectedAyat : String(selectedAyat);
         forceUpdate();
     }
 
