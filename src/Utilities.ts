@@ -1,5 +1,7 @@
-import { ReadingMode, SettingsModel } from "./components/SettingsPanel"; import translationList from './assets/translation-list.json'
-import recitationList from './assets/recitation-list.json'
+import { Ayat } from "./QuranData";
+import recitationList from './assets/recitation-list.json';
+import translationList from './assets/translation-list.json';
+import { ReadingMode, SettingsModel } from "./components/SettingsPanel";
 
 export function groupBy<T>(arr: T[], fn: (item: T) => any) {
     return arr.reduce<Record<string, T[]>>((prev, curr) => {
@@ -12,6 +14,13 @@ export function groupBy<T>(arr: T[], fn: (item: T) => any) {
 
 export function padLeft(str: string, numChars = 3, char = '0') {
     return (Array.from({ length: numChars }).fill(char).join('') + str).slice(-1 * numChars)
+}
+
+export function getAyatId(ayat: Ayat) {
+    let suraSerial = padLeft((ayat.suraIdx + 1).toString(), 3);
+    let ayatSerialInSura = padLeft(ayat.serialInSura.toString(), 3);
+
+    return suraSerial + ayatSerialInSura;
 }
 
 export function getDefaultSettings(): SettingsModel {

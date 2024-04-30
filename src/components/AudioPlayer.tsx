@@ -1,6 +1,6 @@
 ﻿import { useReducer, useState } from 'react';
 import { Ayat, QuranData } from '../QuranData';
-import { padLeft } from '../Utilities';
+import { getAyatId, padLeft } from '../Utilities';
 import React from 'react';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 
@@ -21,10 +21,9 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             startingAyat = ayats[0];
 
         if (recitationMeta.byVerse) {
-            let suraSerial = padLeft((startingAyat.suraIdx + 1).toString(), 3);
-            let ayatSerialInSura = padLeft(startingAyat.serialInSura.toString(), 3);
+            let ayatId = getAyatId(startingAyat)
 
-            return `${recitationMeta.url}/${suraSerial}${ayatSerialInSura}.mp3`;
+            return `${recitationMeta.url}/${ayatId}.mp3`;
         }
         else if (recitationMeta.bySura) {
             let suraSerial = padLeft((startingAyat.suraIdx + 1).toString(), 3);
