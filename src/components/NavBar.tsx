@@ -51,36 +51,42 @@ function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
             <span className="d-none d-sm-inline ms-2"><b>Quran</b> PWA</span>
         </h1>
 
-        <div className="">
-            <select className="select me-1 me-md-2" value={NavigationMode[navData.navMode]} onChange={handleNavigationModeChange} title="Navigation Mode">
-                {Object.keys(NavigationMode).filter(f => isNaN(f as any)).map(item => <option key={item} value={item}>{item}</option>)}
+        <select className="nav-select me-1 me-md-2" value={NavigationMode[navData.navMode]} onChange={handleNavigationModeChange} title="Navigation Mode">
+            {Object.keys(NavigationMode).filter(f => isNaN(f as any)).map(item => <option key={item} value={item}>{item}</option>)}
+        </select>
+        {navData.navMode == NavigationMode.Sura &&
+            <select className="nav-select" value={navData?.serial} onChange={handleSuraChange} title="Sura">
+                {quranData.suras.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.tname}</option>)}
             </select>
-            {navData.navMode == NavigationMode.Sura &&
-                <select className="select" value={navData?.serial} onChange={handleSuraChange} title="Sura">
-                    {quranData.suras.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.tname}</option>)}
-                </select>
-            }
-            {navData.navMode == NavigationMode.Juz &&
-                <select className="select" value={navData?.serial} onChange={handleJuzChange} title="Juz">
-                    {quranData.juzs.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
-                </select>
-            }
-            {navData.navMode == NavigationMode.Hizb &&
-                <select className="select" value={navData?.serial} onChange={handleHizbChange} title="Hizb">
-                    {quranData.hizb_quarters.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
-                </select>
-            }
-            {navData.navMode == NavigationMode.Ruku &&
-                <select className="select" value={navData?.serial} onChange={handleRukuChange} title="Ruku">
-                    {quranData.rukus.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.displayText}</option>)}
-                </select>
-            }
-            {navData.navMode == NavigationMode.Page &&
-                <select className="select" value={navData?.serial} onChange={handlePageChange} title="Ruku">
-                    {quranData.pages.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
-                </select>
-            }
-        </div>
+        }
+        {navData.navMode == NavigationMode.Juz &&
+            <select className="nav-select" value={navData?.serial} onChange={handleJuzChange} title="Juz">
+                {quranData.juzs.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
+            </select>
+        }
+        {navData.navMode == NavigationMode.Hizb &&
+            <select className="nav-select" value={navData?.serial} onChange={handleHizbChange} title="Hizb">
+                {quranData.hizb_quarters.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
+            </select>
+        }
+        {navData.navMode == NavigationMode.Ruku &&
+            <select className="nav-select" value={navData?.serial} onChange={handleRukuChange} title="Ruku">
+                {quranData.rukus.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.displayText}</option>)}
+            </select>
+        }
+        {navData.navMode == NavigationMode.Page &&
+            <select className="nav-select" value={navData?.serial} onChange={handlePageChange} title="Ruku">
+                {quranData.pages.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
+            </select>
+        }
+
+        <button className="btn theme-colored border nav-btn ms-auto" type="button" style={{ alignSelf: 'flex-end' }}
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-sliders2" viewBox="0 0 16 16">
+                <path fillRule="evenodd" d="M10.5 1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4H1.5a.5.5 0 0 1 0-1H10V1.5a.5.5 0 0 1 .5-.5M12 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m-6.5 2A.5.5 0 0 1 6 6v1.5h8.5a.5.5 0 0 1 0 1H6V10a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5M1 8a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 1 8m9.5 2a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V13H1.5a.5.5 0 0 1 0-1H10v-1.5a.5.5 0 0 1 .5-.5m1.5 2.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+            </svg>
+            <span className="d-none d-md-inline ms-2">Settings</span>
+        </button>
 
         <div className="offcanvas offcanvas-start bg-dark text-white" id="offcanvasLeft" data-bs-scroll="true" aria-labelledby="offcanvasLeftLabel">
             <div className="offcanvas-header">
@@ -122,13 +128,6 @@ function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
                 }
             </div>
         </div>
-
-        <button className="btn theme-colored border nav-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-sliders2" viewBox="0 0 16 16">
-                <path fillRule="evenodd" d="M10.5 1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4H1.5a.5.5 0 0 1 0-1H10V1.5a.5.5 0 0 1 .5-.5M12 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m-6.5 2A.5.5 0 0 1 6 6v1.5h8.5a.5.5 0 0 1 0 1H6V10a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5M1 8a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 1 8m9.5 2a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V13H1.5a.5.5 0 0 1 0-1H10v-1.5a.5.5 0 0 1 .5-.5m1.5 2.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
-            </svg>
-            <span className="d-none d-md-inline ms-2">Settings</span>
-        </button>
     </nav>;
 }
 
