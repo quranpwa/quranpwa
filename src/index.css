@@ -53,6 +53,10 @@ body {
     color: var(--font-color);
 }
 
+.offcanvas-backdrop {
+    opacity: 0.25 !important;
+}
+
 .theme-colored {
     background-color: var(--bg-color);
     color: var(--font-color);

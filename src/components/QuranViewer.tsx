@@ -141,7 +141,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
     const navModeName = NavigationMode[navData.navMode];
 
-    return <article className="container">
+    return <article className="container quran-viewer">
         {contents}
 
         <div className="d-flex mt-3" style={{ justifyContent: 'center', marginBottom: '4rem' }}>

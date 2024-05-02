@@ -1,22 +1,15 @@
 ﻿import { useEffect, useReducer, useState } from 'react';
-import './App.css';
-import { NavigationMode, QuranData } from './QuranData';
-import { getDefaultSettings } from './Utilities';
-import NavBar, { NavigationModel } from './components/NavBar';
-import QuranViewer from './components/QuranViewer';
-import SettingsPanel, { SettingsModel } from './components/SettingsPanel';
+import { NavigationMode, QuranData } from '../QuranData';
+import { getDefaultSettings, getStoredNavData } from '../Utilities';
+import NavBar, { NavigationModel } from '../components/NavBar';
+import QuranViewer from '../components/QuranViewer';
+import SettingsPanel, { SettingsModel } from '../components/SettingsPanel';
 
-function App() {
+function Quran() {
     const [quranData] = useState<QuranData>(new QuranData());
 
     let getNavData = (): NavigationModel => {
-        const storedNavDataString = localStorage.getItem('NavigationData');
-        const storedNavData: NavigationModel = storedNavDataString ? JSON.parse(storedNavDataString)
-            : {
-                navMode: NavigationMode.Ruku,
-                serial: 1,
-                ayat: 1
-            }
+        const storedNavData: NavigationModel = getStoredNavData()
 
         let searchParams = new URLSearchParams(location.search);
         const navModeStr = searchParams.get('navMode');
@@ -120,4 +113,4 @@ function App() {
     )
 }
 
-export default App
+export default Quran

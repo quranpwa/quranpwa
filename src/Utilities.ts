@@ -1,6 +1,7 @@
-import { Ayat } from "./QuranData";
+import { Ayat, NavigationMode } from "./QuranData";
 import recitationList from './assets/recitation-list.json';
 import translationList from './assets/translation-list.json';
+import { NavigationModel } from "./components/NavBar";
 import { ReadingMode, SettingsModel } from "./components/SettingsPanel";
 
 export function groupBy<T>(arr: T[], fn: (item: T) => any) {
@@ -34,5 +35,17 @@ export function getDefaultSettings(): SettingsModel {
         tafsirs: [],
         recitaions: recitationList.filter(f => f.id == 'Alafasy_128kbps')
     }
+}
+
+export function getStoredNavData(): NavigationModel {
+    const storedNavDataString = localStorage.getItem('NavigationData');
+    const storedNavData: NavigationModel = storedNavDataString ? JSON.parse(storedNavDataString)
+        : {
+            navMode: NavigationMode.Ruku,
+            serial: 1,
+            ayat: 1
+        };
+
+    return storedNavData;
 }
 

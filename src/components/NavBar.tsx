@@ -1,4 +1,5 @@
 ﻿import { NavigationMode, QuranData } from '../QuranData';
+import './NavBar.css'
 
 function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
 
