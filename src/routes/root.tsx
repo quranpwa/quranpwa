@@ -86,23 +86,28 @@ function Root() {
         {navMode == NavigationMode.Sura &&
             <div className="row">
                 {quranData.suras.map(sura => {
-                    return <div className="col-md-6 col-lg-4">
-                        <Link className="card theme-colored mb-3 border text-decoration-none"
+                    return <div className="col-md-6 col-xl-4">
+                        <Link className="card theme-colored mb-3 border text-decoration-none hover-selection"
                             to={`quran?navMode=Sura&serial=${sura.serial}`} key={sura.serial}>
                             <div className="row g-0">
-                                <div className="col-5 ps-3" style={{
-                                    fontFamily: 'quran_karim_114',
-                                    fontSize: '7rem',
-                                    marginTop: '-1.75rem',
-                                    maxHeight: '5rem'
-                                }}>
-                                    {quran_karim_114_font_chars[sura.serial - 1]}
+                                <div className="col-5 ps-3">
+                                    <div style={{
+                                        fontFamily: 'quran_karim_114',
+                                        fontSize: '5rem',
+                                        marginTop: '-1.75rem',
+                                        maxHeight: '5rem'
+                                    }}>
+                                        {quran_karim_114_font_chars[sura.serial - 1]}
+                                    </div>
+                                    <p className="card-text mb-0 mt-1">
+                                        <span className="me-1" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white;' }}>{sura.type == 'Meccan' ? '🕋' : '🕌'}</span>
+                                        <small>{sura.ayas} Ayats</small>
+                                    </p>
                                 </div>
                                 <div className="col-7">
                                     <div className="card-body">
                                         <h5 className="card-title">{sura.serial}. {sura.tname}</h5>
-                                        <p className="card-text m-0">{sura.ename}</p>
-                                        <p className="card-text m-0"><small>{sura.type} | Ayats: {sura.ayas}</small></p>
+                                        <p className="card-text m-0 text-nowrap">{sura.ename}</p>
                                     </div>
                                 </div>
                             </div>
