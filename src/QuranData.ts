@@ -140,7 +140,7 @@ export class QuranData {
             const sura = this.suras[serial - 1];
             start = sura?.start;
             end = sura?.start + sura?.ayas;
-            displayText = serial + '. ' + sura?.tname;
+            displayText = sura?.tname;
 
         } else if (navMode == NavigationMode.Juz) {
             const jus = this.juzs[serial - 1];

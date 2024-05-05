@@ -57,10 +57,10 @@ export function getStoredRecentlyReads(): NavigationShortcutItem[] {
 }
 
 export function storeRecentlyReads(item: NavigationShortcutItem) {
-    const storedRecentlyReads: NavigationShortcutItem[] = getStoredRecentlyReads();
+    let storedRecentlyReads: NavigationShortcutItem[] = getStoredRecentlyReads();
+    storedRecentlyReads = storedRecentlyReads.filter(s => s.link != item.link);
 
-    if (!storedRecentlyReads.some(s => s.link == item.link))
-        storedRecentlyReads.unshift(item);
+    storedRecentlyReads.unshift(item);
 
     if (storedRecentlyReads.length > 10)
         storedRecentlyReads.shift();

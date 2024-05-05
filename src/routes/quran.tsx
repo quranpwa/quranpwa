@@ -24,9 +24,11 @@ function Quran() {
                 ayatNumber = start + 1;
 
             storeRecentlyReads({
-                displayText: navModeStr + ' - ' + displayText,
+                displayText: navModeStr + ' ' + serialNumber + ' (' + displayText + ')',
                 link: 'quran?' + searchParams.toString()
             });
+
+            window.scrollTo(0, 0);
 
             return {
                 navMode: navMode,
