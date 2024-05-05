@@ -67,6 +67,10 @@ body {
         color: var(--font-color) !important;
     }
 
+.text-color-theme{
+    color: var(--font-color) !important;
+}
+
 .hover-selection:hover {
     background-color: var(--selected-bg-color) !important;
     /*color: var(--selected-font-color) !important;*/

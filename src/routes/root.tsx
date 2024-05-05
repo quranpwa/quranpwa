@@ -12,8 +12,7 @@ function Root() {
     const [quranData] = useState<QuranData>(new QuranData());
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-    const handleNavModeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        let navMode = +event.target.value;
+    const setNavMode = (navMode: NavigationMode) => {
         navData.navMode = navMode;
         setNavData(navData);
         localStorage.setItem('NavigationData', JSON.stringify(navData));
@@ -54,31 +53,34 @@ function Root() {
 
     return (<div className="container">
 
+        <h1 className="text-center my-3">
+            <img className="me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" />
+            <b>Quran</b> PWA
+        </h1>
 
-        <h1 className="text-center my-3"><img className="me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" /><b>Quran</b> PWA</h1>
+        <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
+            <li className="nav-item">
+                <a className={"nav-link border " + (navMode == NavigationMode.Sura ? 'active' : 'text-color-theme')} href="#"
+                    onClick={() => setNavMode(NavigationMode.Sura)}>Sura</a>
+            </li>
+            <li className="nav-item">
+                <a className={"nav-link border " + (navMode == NavigationMode.Juz ? 'active' : 'text-color-theme')} href="#"
+                    onClick={() => setNavMode(NavigationMode.Juz)}>Juz/Para</a>
+            </li>
+            <li className="nav-item">
+                <a className={"nav-link border " + (navMode == NavigationMode.Hizb ? 'active' : 'text-color-theme')} href="#"
+                    onClick={() => setNavMode(NavigationMode.Hizb)}>Hizb Quarter</a>
+            </li>
+            <li className="nav-item">
+                <a className={"nav-link border " + (navMode == NavigationMode.Page ? 'active' : 'text-color-theme')} href="#"
+                    onClick={() => setNavMode(NavigationMode.Page)}>Page</a>
+            </li>
+            <li className="nav-item">
+                <a className={"nav-link border " + (navMode == NavigationMode.Ruku ? 'active' : 'text-color-theme')} href="#"
+                    onClick={() => setNavMode(NavigationMode.Ruku)}>Ruku</a>
+            </li>
+        </ul>
 
-        <div className="btn-group" style={{ zIndex: 9999 }} role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-sura" autoComplete="off"
-                value={NavigationMode.Sura} checked={navMode === NavigationMode.Sura} onChange={handleNavModeChange} />
-            <label className="btn btn-dark border" htmlFor="btn-nav-sura">Sura</label>
-
-            <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-juz" autoComplete="off"
-                value={NavigationMode.Juz} checked={navMode === NavigationMode.Juz} onChange={handleNavModeChange} />
-            <label className="btn btn-dark border" htmlFor="btn-nav-juz">Juz/Para</label>
-
-            <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-hizb" autoComplete="off"
-                value={NavigationMode.Hizb} checked={navMode === NavigationMode.Hizb} onChange={handleNavModeChange} />
-            <label className="btn btn-dark border" htmlFor="btn-nav-hizb">Hizb Quarter</label>
-
-            <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-page" autoComplete="off"
-                value={NavigationMode.Page} checked={navMode === NavigationMode.Page} onChange={handleNavModeChange} />
-            <label className="btn btn-dark border" htmlFor="btn-nav-page">Page</label>
-
-            <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-ruku" autoComplete="off"
-                value={NavigationMode.Ruku} checked={navMode === NavigationMode.Ruku} onChange={handleNavModeChange} />
-            <label className="btn btn-dark border" htmlFor="btn-nav-ruku">Ruku</label>
-        </div>
-        <hr />
         {navMode == NavigationMode.Sura &&
             <div className="row">
                 {quranData.suras.map(sura => {
