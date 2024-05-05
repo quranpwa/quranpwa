@@ -35,22 +35,14 @@ function Root() {
 
         return <div className="row">
             {items.map(item => {
-                return <div className="col-md-6 col-lg-4">
-                    <Link className="card theme-colored mb-3 border text-decoration-none"
-                        to={`quran?navMode=${NavigationMode[navMode]}&serial=${item.serial}`} key={item.serial}>
-                        <div className="row g-0">
-                            <div className="col-2 ps-2 mt-1" style={{
-                                fontSize: '2rem',
-                                textAlign: 'center',
-                                verticalAlign: 'middle'
-                            }}>
-                                <span className="badge bg-secondary text-dark rounded-pill">{item.serial}</span>
-                            </div>
-                            <div className="col-10">
-                                <div className="card-body">
-                                    <h5 className="card-title">{item.displayText}</h5>
-                                </div>
-                            </div>
+                return <div key={item.serial} className="col-md-6 col-lg-4">
+                    <Link className="card theme-colored mb-3 border text-decoration-none hover-selection"
+                        to={`quran?navMode=${NavigationMode[navMode]}&serial=${item.serial}`}>
+                        <div className="card-body">
+                            <h5 className="card-title">
+                                <span className="badge bg-secondary text-dark rounded-pill me-2" style={{ fontSize: '1.5rem' }}> {item.serial}</span>
+                                {item.displayText}
+                            </h5>
                         </div>
                     </Link>
                 </div>
