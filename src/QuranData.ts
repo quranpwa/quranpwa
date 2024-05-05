@@ -131,37 +131,43 @@ export class QuranData {
         return maxSerial;
     }
 
-    getAyatRangeByNavSerial(navMode: NavigationMode, serial: number): { start: number, end: number } {
+    getAyatRangeByNavSerial(navMode: NavigationMode, serial: number): { start: number, end: number, displayText: string } {
         let start = 0;
         let end = 7;
+        let displayText = '';
 
         if (navMode == NavigationMode.Sura) {
             const sura = this.suras[serial - 1];
             start = sura?.start;
             end = sura?.start + sura?.ayas;
+            displayText = serial + '. ' + sura?.tname;
 
         } else if (navMode == NavigationMode.Juz) {
             const jus = this.juzs[serial - 1];
             start = jus?.start;
             end = jus?.end;
+            displayText = jus?.displayText;
 
         } else if (navMode == NavigationMode.Hizb) {
             const hizb = this.hizb_quarters[serial - 1];
             start = hizb?.start;
             end = hizb?.end;
+            displayText = hizb?.displayText;
 
         } else if (navMode == NavigationMode.Ruku) {
             const ruku = this.rukus[serial - 1];
             start = ruku?.start;
             end = ruku?.end;
+            displayText = ruku?.displayText;
 
         } else if (navMode == NavigationMode.Page) {
             const page = this.pages[serial - 1];
             start = page?.start;
             end = page?.end;
+            displayText = page?.displayText;
         }
 
-        return { start: start, end: end };
+        return { start: start, end: end, displayText: displayText };
     }
 
     setAyats(quranTexts: string[]) {
@@ -347,4 +353,15 @@ export enum NavigationMode {
     Hizb,
     Ruku,
     Page,
+}
+
+export enum NavigationShortcutType {
+    Recents,
+    Bookmarks,
+    QuickLinks,
+}
+
+export interface NavigationShortcutItem {
+    displayText: string,
+    link: string,
 }

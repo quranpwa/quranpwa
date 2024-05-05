@@ -1,4 +1,4 @@
-import { Ayat, NavigationMode } from "./QuranData";
+import { Ayat, NavigationMode, NavigationShortcutItem } from "./QuranData";
 import recitationList from './assets/recitation-list.json';
 import translationList from './assets/translation-list.json';
 import { NavigationModel } from "./components/NavBar";
@@ -47,5 +47,24 @@ export function getStoredNavData(): NavigationModel {
         };
 
     return storedNavData;
+}
+
+export function getStoredRecentlyReads(): NavigationShortcutItem[] {
+    const storedRecentlyReadsString = localStorage.getItem('RecentlyReads');
+    const storedRecentlyReads: NavigationShortcutItem[] = storedRecentlyReadsString ? JSON.parse(storedRecentlyReadsString) : [];
+
+    return storedRecentlyReads;
+}
+
+export function storeRecentlyReads(item: NavigationShortcutItem) {
+    const storedRecentlyReads: NavigationShortcutItem[] = getStoredRecentlyReads();
+
+    if (!storedRecentlyReads.some(s => s.link == item.link))
+        storedRecentlyReads.unshift(item);
+
+    if (storedRecentlyReads.length > 10)
+        storedRecentlyReads.shift();
+
+    localStorage.setItem('RecentlyReads', JSON.stringify(storedRecentlyReads));
 }
 

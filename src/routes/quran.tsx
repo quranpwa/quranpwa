@@ -1,6 +1,6 @@
 ﻿import { useEffect, useReducer, useState } from 'react';
 import { NavigationMode, QuranData } from '../QuranData';
-import { getDefaultSettings, getStoredNavData } from '../Utilities';
+import { getDefaultSettings, getStoredNavData, storeRecentlyReads } from '../Utilities';
 import NavBar, { NavigationModel } from '../components/NavBar';
 import QuranViewer from '../components/QuranViewer';
 import SettingsPanel, { SettingsModel } from '../components/SettingsPanel';
@@ -19,9 +19,14 @@ function Quran() {
             const serialNumber = +(searchParams.get('serial') || storedNavData.serial);
             let ayatNumber = +(location.hash.match(/\d+/g)?.pop() || storedNavData.ayat);
 
-            const { start, end } = quranData.getAyatRangeByNavSerial(navMode, serialNumber);
+            const { start, end, displayText } = quranData.getAyatRangeByNavSerial(navMode, serialNumber);
             if (ayatNumber < start || ayatNumber > end)
                 ayatNumber = start + 1;
+
+            storeRecentlyReads({
+                displayText: navModeStr + ' - ' + displayText,
+                link: 'quran?' + searchParams.toString()
+            });
 
             return {
                 navMode: navMode,

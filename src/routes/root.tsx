@@ -1,7 +1,7 @@
-﻿import { Link } from "react-router-dom"
-import { getStoredNavData } from "../Utilities";
-import { AyatRange, NavigationMode, QuranData } from "../QuranData";
-import { useReducer, useState } from "react";
+﻿import { useReducer, useState } from "react";
+import { Link } from "react-router-dom";
+import { AyatRange, NavigationMode, NavigationShortcutType, QuranData } from "../QuranData";
+import { getStoredNavData, getStoredRecentlyReads } from "../Utilities";
 import { NavigationModel } from "../components/NavBar";
 import { quran_karim_114_font_chars } from "../components/SuraHeader";
 
@@ -10,6 +10,11 @@ function Root() {
 
     const [navData, setNavData] = useState<NavigationModel>(storedNavData);
     const [quranData] = useState<QuranData>(new QuranData());
+
+    const [navShortcutType, setNavShortcutType] = useState<NavigationShortcutType>(NavigationShortcutType.Recents);
+
+    const recentlyReads = getStoredRecentlyReads();
+
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     const setNavMode = (navMode: NavigationMode) => {
@@ -60,6 +65,28 @@ function Root() {
 
         <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
             <li className="nav-item">
+                <a className={"nav-link border " + (navShortcutType == NavigationShortcutType.Recents ? 'active' : 'text-color-theme')} href="#"
+                    onClick={() => setNavShortcutType(NavigationShortcutType.Recents)}>Recently Read</a>
+            </li>
+            <li className="nav-item">
+                <a className={"nav-link border " + (navShortcutType == NavigationShortcutType.Bookmarks ? 'active' : 'text-color-theme')} href="#"
+                    onClick={() => setNavShortcutType(NavigationShortcutType.Bookmarks)}>Bookmarks</a>
+            </li>
+            <li className="nav-item">
+                <a className={"nav-link border " + (navShortcutType == NavigationShortcutType.QuickLinks ? 'active' : 'text-color-theme')} href="#"
+                    onClick={() => setNavShortcutType(NavigationShortcutType.QuickLinks)}>Quick Links</a>
+            </li>
+        </ul>
+
+        {navShortcutType == NavigationShortcutType.Recents &&
+            <nav className="nav mb-3">
+                {recentlyReads.map(item =>
+                    <a key={item.displayText} className="nav-link" href={item.link}>{item.displayText}</a>)}
+            </nav>
+        }
+        <hr />
+        <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
+            <li className="nav-item">
                 <a className={"nav-link border " + (navMode == NavigationMode.Sura ? 'active' : 'text-color-theme')} href="#"
                     onClick={() => setNavMode(NavigationMode.Sura)}>Sura</a>
             </li>
@@ -84,9 +111,9 @@ function Root() {
         {navMode == NavigationMode.Sura &&
             <div className="row">
                 {quranData.suras.map(sura => {
-                    return <div className="col-md-6 col-xl-4">
+                    return <div key={sura.serial} className="col-md-6 col-xl-4">
                         <Link className="card theme-colored mb-3 border text-decoration-none hover-selection"
-                            to={`quran?navMode=Sura&serial=${sura.serial}`} key={sura.serial}>
+                            to={`quran?navMode=Sura&serial=${sura.serial}`}>
                             <div className="row g-0">
                                 <div className="col-5 ps-3">
                                     <div style={{
@@ -98,7 +125,7 @@ function Root() {
                                         {quran_karim_114_font_chars[sura.serial - 1]}
                                     </div>
                                     <p className="card-text mb-0 mt-1">
-                                        <span className="me-1" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white;' }}>{sura.type == 'Meccan' ? '🕋' : '🕌'}</span>
+                                        <span className="me-1" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white' }}>{sura.type == 'Meccan' ? '🕋' : '🕌'}</span>
                                         <small>{sura.ayas} Ayats</small>
                                     </p>
                                 </div>
@@ -119,4 +146,4 @@ function Root() {
     </div>)
 }
 
-export default Root
+export default Root;
