@@ -61,28 +61,32 @@ function Root() {
     const navMode = navData.navMode;
 
     return (<div className="container">
-        <div className="btn-group theme-colored" style={{ zIndex: 9999 }} role="group" aria-label="Basic radio toggle button group">
+
+
+        <h1 className="text-center my-3"><img className="me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" /><b>Quran</b> PWA</h1>
+
+        <div className="btn-group" style={{ zIndex: 9999 }} role="group" aria-label="Basic radio toggle button group">
             <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-sura" autoComplete="off"
                 value={NavigationMode.Sura} checked={navMode === NavigationMode.Sura} onChange={handleNavModeChange} />
-            <label className="btn btn-outline-primary" htmlFor="btn-nav-sura">Sura</label>
+            <label className="btn btn-dark border" htmlFor="btn-nav-sura">Sura</label>
 
             <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-juz" autoComplete="off"
                 value={NavigationMode.Juz} checked={navMode === NavigationMode.Juz} onChange={handleNavModeChange} />
-            <label className="btn btn-outline-primary" htmlFor="btn-nav-juz">Juz/Para</label>
+            <label className="btn btn-dark border" htmlFor="btn-nav-juz">Juz/Para</label>
 
             <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-hizb" autoComplete="off"
                 value={NavigationMode.Hizb} checked={navMode === NavigationMode.Hizb} onChange={handleNavModeChange} />
-            <label className="btn btn-outline-primary" htmlFor="btn-nav-hizb">Hizb Quarter</label>
+            <label className="btn btn-dark border" htmlFor="btn-nav-hizb">Hizb Quarter</label>
 
             <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-page" autoComplete="off"
                 value={NavigationMode.Page} checked={navMode === NavigationMode.Page} onChange={handleNavModeChange} />
-            <label className="btn btn-outline-primary" htmlFor="btn-nav-page">Page</label>
+            <label className="btn btn-dark border" htmlFor="btn-nav-page">Page</label>
 
             <input type="radio" className="btn-check" name="btn-nav-mode" id="btn-nav-ruku" autoComplete="off"
                 value={NavigationMode.Ruku} checked={navMode === NavigationMode.Ruku} onChange={handleNavModeChange} />
-            <label className="btn btn-outline-primary" htmlFor="btn-nav-ruku">Ruku</label>
+            <label className="btn btn-dark border" htmlFor="btn-nav-ruku">Ruku</label>
         </div>
-
+        <hr />
         {navMode == NavigationMode.Sura &&
             <div className="row">
                 {quranData.suras.map(sura => {
