@@ -35,14 +35,14 @@ export class QuranData {
             r.push({
                 serial: serial++,
                 start: +sura[0],
-                end: +sura[0] + +sura[1],
                 ayas: +sura[1],
                 order: +sura[2],
                 rukus: +sura[3],
                 name: sura[4].toString(),
                 tname: sura[5].toString(),
                 ename: sura[6].toString(),
-                type: sura[7].toString()
+                type: sura[7].toString(),
+                end: +sura[0] + +sura[1]
             });
         }
         return r;
@@ -64,11 +64,11 @@ export class QuranData {
     private getAyatRange(segments: number[][]): AyatRange[] {
         const r: AyatRange[] = [];
         for (let i = 0; i < segments.length; i++) {
-            const [suraNumber, segmentStartAyat] = segments[i];
+            const [startingSuraNumber, segmentStartAyat] = segments[i];
 
-            let sura = this.suras[suraNumber - 1];
+            let startingSura = this.suras[startingSuraNumber - 1];
 
-            let thisSegmentStart = sura.start + segmentStartAyat - 1;
+            let thisSegmentStart = startingSura.start + segmentStartAyat - 1;
             let thisSegmentEnd = 6236;
 
             if (i < segments.length - 1) {
@@ -76,14 +76,14 @@ export class QuranData {
                 let nextSegmentSura = this.suras[nextSegmentSuraNumber - 1];
                 let nextSegmentSuraStart = nextSegmentSura.start;
 
-                thisSegmentEnd = nextSegmentSuraStart + nextSegmentStartAyat - 1
+                thisSegmentEnd = nextSegmentSuraStart + nextSegmentStartAyat - 1;
             }
 
             r.push({
                 serial: i + 1,
                 start: thisSegmentStart,
                 end: thisSegmentEnd,
-                displayText: sura.tname + '[' + segmentStartAyat + '-' + (segmentStartAyat + (thisSegmentEnd - thisSegmentStart - 1)) + ']'
+                displayText: startingSura.tname + ':' + segmentStartAyat
             });
         }
         return r;
