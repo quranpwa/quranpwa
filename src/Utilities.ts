@@ -41,7 +41,7 @@ export function getStoredNavData(): NavigationModel {
     const storedNavDataString = localStorage.getItem('NavigationData');
     const storedNavData: NavigationModel = storedNavDataString ? JSON.parse(storedNavDataString)
         : {
-            navMode: NavigationMode.Ruku,
+            navMode: NavigationMode.Sura,
             serial: 1,
             ayat: 1
         };
