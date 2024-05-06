@@ -4,6 +4,7 @@ import { AyatRange, NavigationMode, NavigationShortcutType, QuranData } from "..
 import { getStoredNavData, getStoredRecentlyReads } from "../Utilities";
 import { NavigationModel } from "../components/NavBar";
 import { quran_karim_114_font_chars } from "../components/SuraHeader";
+import ThemeSwitch from "../components/ThemeSwitch";
 
 function Root() {
     const storedNavData = getStoredNavData();
@@ -143,6 +144,12 @@ function Root() {
         }
 
         {navMode != NavigationMode.Sura && getCardsForAyatRanges(navMode)}
+
+        <hr />
+        <ThemeSwitch />
+        <br />
+        <br />
+        <br />
     </div>)
 }
 
