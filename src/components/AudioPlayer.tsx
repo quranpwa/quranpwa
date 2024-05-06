@@ -16,9 +16,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             return '';
 
         let recitationMeta = recitation.recitaionMeta;
-        let startingAyat = ayats[selectedAyat - ayats[0].serial];
-        if (!startingAyat)
-            startingAyat = ayats[0];
+        let startingAyat = ayats[selectedAyat - ayats[0].serial] || ayats[0];
 
         if (recitationMeta.byVerse) {
             let ayatId = getAyatId(startingAyat)
