@@ -149,6 +149,7 @@ function Root() {
         <ThemeSwitch />
         <br />
         <br />
+        <p>Quran PWA is a open source project. <a href="https://github.com/quranpwa/quranpwa">link</a></p>
         <br />
     </div>)
 }
