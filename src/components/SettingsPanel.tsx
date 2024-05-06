@@ -65,9 +65,6 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
-            <h5>Themes</h5>
-            <ThemeSwitch />
-            <hr />
             <h5>Translations
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {translationList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(translationsGroupByLang).length}</small>
@@ -102,8 +99,8 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             <hr />
             <h5>Layout</h5>
             <div className="row">
-                <label className="col-sm-4 col-form-label" htmlFor="ReadingModeSelect">Reading Mode</label>
-                <div className="col-sm-8">
+                <label className="col-sm-5 col-form-label" htmlFor="ReadingModeSelect">Reading Mode</label>
+                <div className="col-sm-7">
                     <select id="ReadingModeSelect" className="form-select"
                         value={ReadingMode[settingsData.readingMode]}
                         onChange={handleReadingModeChange}>
@@ -120,12 +117,12 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             </div>
             <h5 className="mt-3">Quran Font</h5>
             <div className="row">
-                <label className="col-sm-4 col-form-label" htmlFor="QuranFontSelect">Quran Font</label>
-                <div className="col-sm-8">
+                <label className="col-sm-5 col-form-label" htmlFor="QuranFontSelect">Quran Font</label>
+                <div className="col-sm-7">
                     <select id="QuranFontSelect" className="form-select"
                         value={settingsData.quranFont}
                         onChange={handleQuranFontChange}>
-                        <option value="hafs">KFGQPC Uthmanic Script HAFS</option>
+                        <option value="hafs">KFGQPC HAFS</option>
                         <option value="me_quran">Me Quran</option>
                         <option value="amiri_quran">Amiri Quran</option>
                         <option value="kitab">Kitab</option>
@@ -135,6 +132,9 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     </select>
                 </div>
             </div>
+            <hr />
+            <h5>Themes</h5>
+            <ThemeSwitch />
             <hr />
             <button type="button"
                 className={hasSettingsChanged() ? "btn btn-danger border" : "btn btn-danger border disabled"}
