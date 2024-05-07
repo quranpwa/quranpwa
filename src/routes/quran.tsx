@@ -25,7 +25,7 @@ function Quran() {
 
             storeRecentlyReads({
                 displayText: navModeStr + ' ' + serialNumber + ' (' + displayText + ')',
-                link: 'quran?' + searchParams.toString()
+                link: location.pathname + location.search + location.hash
             });
 
             return {
