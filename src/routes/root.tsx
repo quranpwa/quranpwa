@@ -82,7 +82,7 @@ function Root() {
         {navShortcutType == NavigationShortcutType.Recents &&
             <nav className="nav mb-3">
                 {recentlyReads.map(item =>
-                    <a key={item.displayText} className="nav-link" href={item.link}>{item.displayText}</a>)}
+                    <a key={item.link} className="nav-link" href={item.link}>{item.displayText}</a>)}
             </nav>
         }
         <hr />
