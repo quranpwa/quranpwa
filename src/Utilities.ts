@@ -63,7 +63,7 @@ export function storeRecentlyReads(item: NavigationShortcutItem) {
     storedRecentlyReads.unshift(item);
 
     if (storedRecentlyReads.length > 10)
-        storedRecentlyReads.shift();
+        storedRecentlyReads.pop();
 
     localStorage.setItem('RecentlyReads', JSON.stringify(storedRecentlyReads));
 }
