@@ -28,8 +28,6 @@ function Quran() {
                 link: 'quran?' + searchParams.toString()
             });
 
-            window.scrollTo(0, 0);
-
             return {
                 navMode: navMode,
                 serial: serialNumber,
