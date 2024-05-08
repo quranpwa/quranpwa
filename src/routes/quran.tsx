@@ -1,6 +1,6 @@
 ﻿import { useEffect, useReducer, useState } from 'react';
 import { NavigationMode, QuranData } from '../QuranData';
-import { getDefaultSettings, getStoredNavData, storeRecentlyReads } from '../Utilities';
+import { getDefaultSettings, getStoredNavData, storeRecentlyRead } from '../Utilities';
 import NavBar, { NavigationModel } from '../components/NavBar';
 import QuranViewer from '../components/QuranViewer';
 import SettingsPanel, { SettingsModel } from '../components/SettingsPanel';
@@ -29,7 +29,7 @@ function Quran() {
                 ayat: ayatNumber,
             }
 
-            storeRecentlyReads({
+            storeRecentlyRead({
                 displayText: navModeStr + ' ' + serialNumber + ' (' + displayText + ')',
                 navData: result,
                 readingDate: new Date(),

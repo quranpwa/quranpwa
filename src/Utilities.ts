@@ -56,7 +56,7 @@ export function getStoredRecentlyReads(): NavigationShortcutItem[] {
     return storedRecentlyReads;
 }
 
-export function storeRecentlyReads(item: NavigationShortcutItem) {
+export function storeRecentlyRead(item: NavigationShortcutItem) {
     let storedRecentlyReads: NavigationShortcutItem[] = getStoredRecentlyReads();
 
     storedRecentlyReads = storedRecentlyReads.filter(s => s.navData?.navMode != item.navData?.navMode
