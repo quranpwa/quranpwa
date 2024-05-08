@@ -1,5 +1,5 @@
 ﻿import { Ayat, NavigationMode, QuranData } from '../QuranData';
-import { groupBy } from '../Utilities';
+import { groupBy, storeBookmark } from '../Utilities';
 import AudioPlayer from './AudioPlayer';
 import { NavigationModel } from './NavBar';
 import './QuranViewer.css';
@@ -31,7 +31,16 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
     const handleAyatDetailDialogClose = (/*event: React.MouseEvent<HTMLDialogElement>*/) => {
         if (dialog.returnValue == 'bookmark') {
-            alert('bookmark btn cliked!');
+            let selectedAyat = ayats.filter(f => f.serial == selectedAyatSerial)[0];
+
+            if (selectedAyat) {
+                storeBookmark({
+                    displayText: `${selectedAyat.sura.tname}[${selectedAyat.suraIdx + 1}:${selectedAyat.serialInSura}]`,
+                    navData: navData,
+                    date: new Date(),
+                    link: location.pathname + location.search + location.hash
+                });
+            }
         }
     };
 

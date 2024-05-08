@@ -32,7 +32,7 @@ function Quran() {
             storeRecentlyRead({
                 displayText: navModeStr + ' ' + serialNumber + ' (' + displayText + ')',
                 navData: result,
-                readingDate: new Date(),
+                date: new Date(),
                 link: location.pathname + location.search + location.hash
             });
 

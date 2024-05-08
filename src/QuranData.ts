@@ -366,5 +366,5 @@ export interface NavigationShortcutItem {
     displayText: string,
     navData: NavigationModel,
     link: string,
-    readingDate: Date
+    date: Date
 }

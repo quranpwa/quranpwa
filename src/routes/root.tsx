@@ -1,7 +1,7 @@
 ﻿import { useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import { AyatRange, NavigationMode, NavigationShortcutType, QuranData } from "../QuranData";
-import { getStoredNavData, getStoredRecentlyReads } from "../Utilities";
+import { getStoredBookmarks, getStoredNavData, getStoredRecentlyReads } from "../Utilities";
 import { NavigationModel } from "../components/NavBar";
 import { quran_karim_114_font_chars } from "../components/SuraHeader";
 import ThemeSwitch from "../components/ThemeSwitch";
@@ -15,6 +15,7 @@ function Root() {
     const [navShortcutType, setNavShortcutType] = useState<NavigationShortcutType>(NavigationShortcutType.Recents);
 
     const recentlyReads = getStoredRecentlyReads();
+    const bookmarks = getStoredBookmarks();
 
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
@@ -85,6 +86,14 @@ function Root() {
                     <a key={item.link} className="nav-link" href={item.link}>{item.displayText}</a>)}
             </nav>
         }
+
+        {navShortcutType == NavigationShortcutType.Bookmarks &&
+            <nav className="nav mb-3">
+                {bookmarks.map(item =>
+                    <a key={item.link} className="nav-link" href={item.link}>{item.displayText}</a>)}
+            </nav>
+        }
+
         <hr />
         <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
             <li className="nav-item">
