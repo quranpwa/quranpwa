@@ -13,9 +13,26 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
     let maxSerial = quranData.getMaxNavSerial(navData?.navMode);
 
     const selectedAyatSerial = navData.ayat;
+    const dialog = document.getElementById("ayatDetailDialog") as HTMLDialogElement;
 
     const handleAyatSelection = (selectedAyat: number, isTranslation = false) => {
         onAyatSelection(selectedAyat, isTranslation);
+    };
+
+    const handleAyatNumberClick = (/*event: React.MouseEvent<HTMLSpanElement>*/) => {
+        dialog.showModal();
+    };
+
+    const handleAyatDetailDialogClick = (event: React.MouseEvent<HTMLDialogElement>) => {
+        if (event.target === dialog) { // to support closing by backdrop click
+            dialog.close();
+        }
+    };
+
+    const handleAyatDetailDialogClose = (/*event: React.MouseEvent<HTMLDialogElement>*/) => {
+        if (dialog.returnValue == 'bookmark') {
+            alert('bookmark btn cliked!');
+        }
     };
 
     const handleNext = () => {
@@ -49,7 +66,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                     {!settingsData.hideQuranText &&
                         <div className="quran-text rtl">
                             <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
-                            <span style={{ fontFamily: 'hafs' }}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
+                            <span className="ayat-number" style={{ fontFamily: 'hafs' }}
+                                onClick={handleAyatNumberClick}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
                         </div>
                     }
                     {quranData.translations.map(translation => {
@@ -101,7 +119,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                                 onClick={() => handleAyatSelection(ayat.serial)}
                                 className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}>
                                 <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
-                                <span style={{ fontFamily: 'hafs' }}> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
+                                <span className="ayat-number" style={{ fontFamily: 'hafs' }}> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
                             </span>)}
                     </div>
                 }
@@ -143,6 +161,19 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
     return <article className="container quran-viewer">
         {contents}
+
+        <dialog id="ayatDetailDialog" onClick={handleAyatDetailDialogClick} onClose={handleAyatDetailDialogClose}>
+            <form method="dialog">
+                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div className="btn-group me-2" role="group" aria-label="First group">
+                        <button type="submit" className="btn btn-primary" value="bookmark">Bookmark this ayat</button>
+                    </div>
+                    <div className="btn-group" role="group" aria-label="Second group">
+                        <button type="submit" className="btn btn-secondary" value="close">X</button>
+                    </div>
+                </div>
+            </form>
+        </dialog>
 
         <div className="d-flex mt-3" style={{ justifyContent: 'center', marginBottom: '4rem' }}>
             <button className={'btn theme-colored border mx-2 ' + (navData.serial > 1 ? '' : 'disabled')} type="button"

@@ -57,10 +57,19 @@
     text-align: justify;
 }
 
+.ayat-number {
+    cursor: pointer;
+}
+
 .translation-ayat-number {
+    cursor: pointer;
     color: gray;
     border: 1px solid gray;
     border-radius: 25%;
     padding: 0 0.25rem;
     margin: 0 0.25rem;
 }
+
+    .ayat-number:hover, .translation-ayat-number:hover {
+        color: var(--selected-font-color);
+    }
