@@ -1,5 +1,6 @@
 ﻿import quranText from './assets/quran-texts/quran.json'
 import quranData from './assets/quran-data.json'
+import { NavigationModel } from './components/NavBar';
 
 export class QuranData {
 
@@ -363,5 +364,7 @@ export enum NavigationShortcutType {
 
 export interface NavigationShortcutItem {
     displayText: string,
+    navData: NavigationModel,
     link: string,
+    readingDate: Date
 }

@@ -23,16 +23,20 @@ function Quran() {
             if (ayatNumber < start || ayatNumber > end)
                 ayatNumber = start + 1;
 
-            storeRecentlyReads({
-                displayText: navModeStr + ' ' + serialNumber + ' (' + displayText + ')',
-                link: location.pathname + location.search + location.hash
-            });
-
-            return {
+            let result: NavigationModel = {
                 navMode: navMode,
                 serial: serialNumber,
                 ayat: ayatNumber,
             }
+
+            storeRecentlyReads({
+                displayText: navModeStr + ' ' + serialNumber + ' (' + displayText + ')',
+                navData: result,
+                readingDate: new Date(),
+                link: location.pathname + location.search + location.hash
+            });
+
+            return result;
         }
 
         return storedNavData;
