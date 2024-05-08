@@ -60,7 +60,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         contents.push(<div key={keyA++}> {
             ayats.map(ayat => <div key={ayat.serial} id={ayat.serial.toString()}>
                 {ayat.serialInSura == 1 && <SuraHeader quranData={quranData} suraIdx={ayat.suraIdx} />}
-
+                <hr />
                 <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}
                     onClick={() => handleAyatSelection(ayat.serial)}>
                     {!settingsData.hideQuranText &&
