@@ -1,6 +1,7 @@
 ﻿import quranText from './assets/quran-texts/quran.json'
 import quranData from './assets/quran-data.json'
 import { NavigationModel } from './components/NavBar';
+import { sum } from './Utilities';
 
 export class QuranData {
 
@@ -199,6 +200,7 @@ export class QuranData {
                 hizbIdx: hizb.serial - 1,
                 pageIdx: page.serial - 1,
                 rukuIdx: ruku.serial - 1,
+                length: quranText.length
             });
         }
     }
@@ -281,6 +283,16 @@ export class QuranData {
             }
         });
     }
+
+    getLengthInMinutes(ayatRange: Sura | AyatRange) {
+        let ayats: Ayat[] = this.ayats.slice(ayatRange.start, ayatRange.end);
+
+        let ayatLengths = sum(ayats.map(m => m.length));
+
+        const charPerMinutes = 384;
+
+        return Math.ceil(ayatLengths / charPerMinutes)
+    }
 }
 
 export interface Sura {
@@ -333,6 +345,7 @@ export interface Ayat {
     hizbIdx: number,
     pageIdx: number,
     rukuIdx: number,
+    length: number,
 }
 
 export interface Recitaion {

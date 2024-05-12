@@ -13,6 +13,10 @@ export function groupBy<T>(arr: T[], fn: (item: T) => any) {
     }, {});
 }
 
+export function sum(arr: number[]): number {
+    return arr.reduce((prev, curr) => prev + curr, 0);
+}
+
 export function padLeft(str: string, numChars = 3, char = '0') {
     return (Array.from({ length: numChars }).fill(char).join('') + str).slice(-1 * numChars)
 }

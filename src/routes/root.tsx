@@ -44,15 +44,15 @@ function Root() {
                 return <div key={item.serial} className="col-md-6 col-lg-4">
                     <Link className="card theme-colored mb-3 border text-decoration-none hover-selection"
                         to={`quran?navMode=${NavigationMode[navMode]}&serial=${item.serial}`}>
-                        <div className="card-body">
-                            <h5 className="card-title mb-0 d-flex align-items-center justify-content-between">
-                                <span className="badge border rounded-pill me-2 px-0">
-                                    <span className="badge ps-3" style={{ transform: 'rotate(270deg)' }}>{NavigationMode[navMode]}</span>
-                                    <span className="badge ps-0" style={{ fontSize: '1.5rem' }}> {item.serial}</span>
-                                </span>
-                                {item.displayText}
-                                <small className="text-nowrap text-secondary">{item.end - item.start} Ayats</small>
-                            </h5>
+                        <div className="card-body d-flex align-items-center">
+                            <div className="badge border rounded-pill me-2 px-0">
+                                <span className="badge ps-3" style={{ transform: 'rotate(270deg)' }}>{NavigationMode[navMode]}</span>
+                                <span className="badge ps-0" style={{ fontSize: '1.5rem' }}> {item.serial}</span>
+                            </div>
+                            <div>
+                                <div className="h5">{item.displayText}</div>
+                                <div className="text-nowrap text-secondary">{item.end - item.start} Ayats | {quranData.getLengthInMinutes(item)} minutes</div>
+                            </div>
                         </div>
                     </Link>
                 </div>
@@ -128,8 +128,8 @@ function Root() {
                     return <div key={sura.serial} className="col-md-6 col-xl-4">
                         <Link className="card theme-colored mb-3 border text-decoration-none hover-selection"
                             to={`quran?navMode=Sura&serial=${sura.serial}`}>
-                            <div className="row g-0">
-                                <div className="col-5 ps-3">
+                            <div className="d-flex pb-2">
+                                <div className="ps-3">
                                     <div style={{
                                         fontFamily: 'quran_karim_114',
                                         fontSize: '5rem',
@@ -141,13 +141,12 @@ function Root() {
                                     <p className="card-text mb-0 mt-1">
                                         <span className="me-1" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white' }}>{sura.type == 'Meccan' ? '🕋' : '🕌'}</span>
                                         <small>{sura.ayas} Ayats</small>
+                                        <small className="d-block" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white' }}>⏲️ {quranData.getLengthInMinutes(sura)} minutes</small>
                                     </p>
                                 </div>
-                                <div className="col-7">
-                                    <div className="card-body">
-                                        <h5 className="card-title">{sura.serial}. {sura.tname}</h5>
-                                        <p className="card-text m-0 text-nowrap">{sura.ename}</p>
-                                    </div>
+                                <div className="card-body">
+                                    <h5 className="card-title">{sura.serial}. {sura.tname}</h5>
+                                    <p className="card-text m-0 text-nowrap">{sura.ename}</p>
                                 </div>
                             </div>
                         </Link>
