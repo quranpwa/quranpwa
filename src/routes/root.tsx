@@ -45,9 +45,13 @@ function Root() {
                     <Link className="card theme-colored mb-3 border text-decoration-none hover-selection"
                         to={`quran?navMode=${NavigationMode[navMode]}&serial=${item.serial}`}>
                         <div className="card-body">
-                            <h5 className="card-title">
-                                <span className="badge bg-secondary text-dark rounded-pill me-2" style={{ fontSize: '1.5rem' }}> {item.serial}</span>
+                            <h5 className="card-title mb-0 d-flex align-items-center justify-content-between">
+                                <span className="badge border rounded-pill me-2 px-0">
+                                    <span className="badge ps-3" style={{ transform: 'rotate(270deg)' }}>{NavigationMode[navMode]}</span>
+                                    <span className="badge ps-0" style={{ fontSize: '1.5rem' }}> {item.serial}</span>
+                                </span>
                                 {item.displayText}
+                                <small className="text-nowrap text-secondary">{item.end - item.start} Ayats</small>
                             </h5>
                         </div>
                     </Link>

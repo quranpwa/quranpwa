@@ -34,8 +34,9 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
             let selectedAyat = ayats.filter(f => f.serial == selectedAyatSerial)[0];
 
             if (selectedAyat) {
+                let sura = quranData.suras[selectedAyat.suraIdx];
                 storeBookmark({
-                    displayText: `${selectedAyat.sura.tname}[${selectedAyat.suraIdx + 1}:${selectedAyat.serialInSura}]`,
+                    displayText: `${sura.tname}[${sura.serial}:${selectedAyat.serialInSura}]`,
                     navData: navData,
                     date: new Date(),
                     link: location.pathname + location.search + location.hash

@@ -180,10 +180,13 @@ export class QuranData {
 
         for (let quranText of quranTexts) {
             let sura = this.suras.filter(f => serial >= f.start && serial <= f.end)[0];
+            let juz = this.juzs.filter(f => serial >= f.start && serial <= f.end)[0];
+            let hizb = this.hizb_quarters.filter(f => serial >= f.start && serial <= f.end)[0];
+            let page = this.pages.filter(f => serial >= f.start && serial <= f.end)[0];
             let ruku = this.rukus.filter(f => serial >= f.start && serial <= f.end)[0];
 
             if (this.ayats.length > 0
-                && this.ayats[this.ayats.length - 1]?.sura?.serial != sura.serial) {
+                && this.ayats[this.ayats.length - 1]?.suraIdx != sura.serial - 1) {
                 serialInSura = 1;
             }
 
@@ -192,12 +195,10 @@ export class QuranData {
                 arabicText: quranText,
                 suraIdx: sura.serial - 1,
                 serialInSura: serialInSura++,
+                juzIdx: juz.serial - 1,
+                hizbIdx: hizb.serial - 1,
+                pageIdx: page.serial - 1,
                 rukuIdx: ruku.serial - 1,
-                sura: sura,
-                //    juz: juz,
-                //    hizb: hizb,
-                //    page: page,
-                //    ruku: ruku,
             });
         }
     }
@@ -325,11 +326,13 @@ export interface TranslationWithData {
 
 export interface Ayat {
     serial: number,
+    serialInSura: number,
     arabicText: string,
     suraIdx: number,
-    serialInSura: number,
+    juzIdx: number,
+    hizbIdx: number,
+    pageIdx: number,
     rukuIdx: number,
-    sura: Sura,
 }
 
 export interface Recitaion {
