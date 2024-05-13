@@ -71,16 +71,12 @@ function Root() {
 
         <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
             <li className="nav-item">
-                <a className={"nav-link border " + (navShortcutType == NavigationShortcutType.Recents ? 'active' : 'text-color-theme')} href="#"
+                <a className={"nav-link " + (navShortcutType == NavigationShortcutType.Recents ? 'active' : 'text-color-theme')} href="#"
                     onClick={() => setNavShortcutType(NavigationShortcutType.Recents)}>Recently Read</a>
             </li>
             <li className="nav-item">
-                <a className={"nav-link border " + (navShortcutType == NavigationShortcutType.Bookmarks ? 'active' : 'text-color-theme')} href="#"
+                <a className={"nav-link " + (navShortcutType == NavigationShortcutType.Bookmarks ? 'active' : 'text-color-theme')} href="#"
                     onClick={() => setNavShortcutType(NavigationShortcutType.Bookmarks)}>Bookmarks</a>
-            </li>
-            <li className="nav-item">
-                <a className={"nav-link border " + (navShortcutType == NavigationShortcutType.QuickLinks ? 'active' : 'text-color-theme')} href="#"
-                    onClick={() => setNavShortcutType(NavigationShortcutType.QuickLinks)}>Quick Links</a>
             </li>
         </ul>
 
@@ -101,23 +97,23 @@ function Root() {
         <hr />
         <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
             <li className="nav-item">
-                <a className={"nav-link border " + (navMode == NavigationMode.Sura ? 'active' : 'text-color-theme')} href="#"
+                <a className={"nav-link " + (navMode == NavigationMode.Sura ? 'active' : 'text-color-theme')} href="#"
                     onClick={() => setNavMode(NavigationMode.Sura)}>Sura</a>
             </li>
             <li className="nav-item">
-                <a className={"nav-link border " + (navMode == NavigationMode.Juz ? 'active' : 'text-color-theme')} href="#"
+                <a className={"nav-link " + (navMode == NavigationMode.Juz ? 'active' : 'text-color-theme')} href="#"
                     onClick={() => setNavMode(NavigationMode.Juz)}>Juz/Para</a>
             </li>
             <li className="nav-item">
-                <a className={"nav-link border " + (navMode == NavigationMode.Hizb ? 'active' : 'text-color-theme')} href="#"
+                <a className={"nav-link " + (navMode == NavigationMode.Hizb ? 'active' : 'text-color-theme')} href="#"
                     onClick={() => setNavMode(NavigationMode.Hizb)}>Hizb Quarter</a>
             </li>
             <li className="nav-item">
-                <a className={"nav-link border " + (navMode == NavigationMode.Page ? 'active' : 'text-color-theme')} href="#"
+                <a className={"nav-link " + (navMode == NavigationMode.Page ? 'active' : 'text-color-theme')} href="#"
                     onClick={() => setNavMode(NavigationMode.Page)}>Page</a>
             </li>
             <li className="nav-item">
-                <a className={"nav-link border " + (navMode == NavigationMode.Ruku ? 'active' : 'text-color-theme')} href="#"
+                <a className={"nav-link " + (navMode == NavigationMode.Ruku ? 'active' : 'text-color-theme')} href="#"
                     onClick={() => setNavMode(NavigationMode.Ruku)}>Ruku</a>
             </li>
         </ul>
