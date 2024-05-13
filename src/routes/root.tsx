@@ -46,8 +46,8 @@ function Root() {
                         to={`quran?navMode=${NavigationMode[navMode]}&serial=${item.serial}`}>
                         <div className="card-body d-flex align-items-center">
                             <div className="badge border rounded-pill me-2 px-0">
-                                <span className="badge ps-3" style={{ transform: 'rotate(270deg)' }}>{NavigationMode[navMode]}</span>
-                                <span className="badge ps-0" style={{ fontSize: '1.5rem' }}> {item.serial}</span>
+                                <span className="badge text-color-theme ps-3" style={{ transform: 'rotate(270deg)', fontSize: '0.75rem' }}>{NavigationMode[navMode]}</span>
+                                <span className="badge text-color-theme ps-0" style={{ fontSize: '1.5rem' }}> {item.serial}</span>
                             </div>
                             <div>
                                 <div className="h5">{item.displayText}</div>
