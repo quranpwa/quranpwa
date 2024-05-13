@@ -71,12 +71,12 @@ function Root() {
 
         <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
             <li className="nav-item">
-                <a className={"nav-link " + (navShortcutType == NavigationShortcutType.Recents ? 'active' : 'text-color-theme')}
-                    onClick={() => setNavShortcutType(NavigationShortcutType.Recents)}>Recently Read</a>
+                <button className={"nav-link " + (navShortcutType == NavigationShortcutType.Recents ? 'active' : 'text-color-theme')}
+                    onClick={() => setNavShortcutType(NavigationShortcutType.Recents)}>Recently Read</button>
             </li>
             <li className="nav-item">
-                <a className={"nav-link " + (navShortcutType == NavigationShortcutType.Bookmarks ? 'active' : 'text-color-theme')}
-                    onClick={() => setNavShortcutType(NavigationShortcutType.Bookmarks)}>Bookmarks</a>
+                <button className={"nav-link " + (navShortcutType == NavigationShortcutType.Bookmarks ? 'active' : 'text-color-theme')}
+                    onClick={() => setNavShortcutType(NavigationShortcutType.Bookmarks)}>Bookmarks</button>
             </li>
         </ul>
 
@@ -97,24 +97,24 @@ function Root() {
         <hr />
         <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
             <li className="nav-item">
-                <a className={"nav-link " + (navMode == NavigationMode.Sura ? 'active' : 'text-color-theme')}
-                    onClick={() => setNavMode(NavigationMode.Sura)}>Sura</a>
+                <button className={"nav-link " + (navMode == NavigationMode.Sura ? 'active' : 'text-color-theme')}
+                    onClick={() => setNavMode(NavigationMode.Sura)}>Sura</button>
             </li>
             <li className="nav-item">
-                <a className={"nav-link " + (navMode == NavigationMode.Juz ? 'active' : 'text-color-theme')}
-                    onClick={() => setNavMode(NavigationMode.Juz)}>Juz/Para</a>
+                <button className={"nav-link " + (navMode == NavigationMode.Juz ? 'active' : 'text-color-theme')}
+                    onClick={() => setNavMode(NavigationMode.Juz)}>Juz/Para</button>
             </li>
             <li className="nav-item">
-                <a className={"nav-link " + (navMode == NavigationMode.Hizb ? 'active' : 'text-color-theme')}
-                    onClick={() => setNavMode(NavigationMode.Hizb)}>Hizb Quarter</a>
+                <button className={"nav-link " + (navMode == NavigationMode.Hizb ? 'active' : 'text-color-theme')}
+                    onClick={() => setNavMode(NavigationMode.Hizb)}>Hizb Quarter</button>
             </li>
             <li className="nav-item">
-                <a className={"nav-link " + (navMode == NavigationMode.Page ? 'active' : 'text-color-theme')}
-                    onClick={() => setNavMode(NavigationMode.Page)}>Page</a>
+                <button className={"nav-link " + (navMode == NavigationMode.Page ? 'active' : 'text-color-theme')}
+                    onClick={() => setNavMode(NavigationMode.Page)}>Page</button>
             </li>
             <li className="nav-item">
-                <a className={"nav-link " + (navMode == NavigationMode.Ruku ? 'active' : 'text-color-theme')}
-                    onClick={() => setNavMode(NavigationMode.Ruku)}>Ruku</a>
+                <button className={"nav-link " + (navMode == NavigationMode.Ruku ? 'active' : 'text-color-theme')}
+                    onClick={() => setNavMode(NavigationMode.Ruku)}>Ruku</button>
             </li>
         </ul>
 
