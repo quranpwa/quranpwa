@@ -1,4 +1,4 @@
-﻿import { useReducer, useState } from 'react';
+﻿import { SyntheticEvent, useReducer, useState } from 'react';
 import { Ayat, QuranData } from '../QuranData';
 import { getAyatId, padLeft } from '../Utilities';
 import React from 'react';
@@ -64,8 +64,12 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         }
     };
 
-    const handleOnPause = () => {
-        //setIsPlaying(false);
+    const handleOnPause = (e: SyntheticEvent<HTMLAudioElement>) => {
+        let target = e.target as HTMLAudioElement;
+
+        if (target.currentTime != target.duration) { //manual pause
+            setIsPlaying(false);
+        }
     };
 
     const handleOnEnded = () => {
