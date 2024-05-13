@@ -124,7 +124,7 @@ function Root() {
                     return <div key={sura.serial} className="col-md-6 col-xl-4">
                         <Link className="card theme-colored mb-3 border text-decoration-none hover-selection"
                             to={`quran?navMode=Sura&serial=${sura.serial}`}>
-                            <div className="d-flex pb-2">
+                            <div className="d-flex align-items-center">
                                 <div className="ps-3">
                                     <div style={{
                                         fontFamily: 'quran_karim_114',
@@ -134,15 +134,20 @@ function Root() {
                                     }}>
                                         {quran_karim_114_font_chars[sura.serial - 1]}
                                     </div>
-                                    <p className="card-text mb-0 mt-1">
-                                        <span className="me-1" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white' }}>{sura.type == 'Meccan' ? '🕋' : '🕌'}</span>
-                                        <small>{sura.ayas} Ayats</small>
-                                        <small className="d-block" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white' }}>⏲️ {quranData.getLengthInMinutes(sura)} minutes</small>
-                                    </p>
                                 </div>
-                                <div className="card-body">
+                                <div className="card-body pb-0">
                                     <h5 className="card-title">{sura.serial}. {sura.tname}</h5>
                                     <p className="card-text m-0 text-nowrap">{sura.ename}</p>
+                                </div>
+                            </div>
+                            <div className="d-flex justify-content-between px-2 pb-2">
+                                <div className="small text-secondary">
+                                    <span className="me-1" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white' }}>{sura.type == 'Meccan' ? '🕋' : '🕌'}</span>
+                                    {sura.ayas} Ayats
+                                </div>
+                                <div className="small text-secondary">
+                                    <span className="me-1" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white' }}>⏲️</span>
+                                    {quranData.getLengthInMinutes(sura)} minutes
                                 </div>
                             </div>
                         </Link>
