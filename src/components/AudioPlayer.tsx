@@ -64,10 +64,8 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         }
     };
 
-    const handleOnPause = (e: SyntheticEvent<HTMLAudioElement>) => {
-        let target = e.target as HTMLAudioElement;
-
-        if (target.currentTime != target.duration) { //manual pause
+    const handleOnPause = (e: React.SyntheticEvent<HTMLAudioElement>) => {
+        if (e.currentTarget.currentTime != e.currentTarget.duration) { //manual pause
             setIsPlaying(false);
         }
     };
