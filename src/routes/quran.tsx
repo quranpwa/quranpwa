@@ -6,7 +6,7 @@ import QuranViewer from '../components/QuranViewer';
 import SettingsPanel, { SettingsModel } from '../components/SettingsPanel';
 
 function Quran() {
-    const [quranData] = useState<QuranData>(new QuranData());
+    const [quranData] = useState<QuranData>(QuranData.instance);
 
     let getNavData = (): NavigationModel => {
         const storedNavData: NavigationModel = getStoredNavData()

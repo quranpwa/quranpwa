@@ -10,7 +10,7 @@ function Root() {
     const storedNavData = getStoredNavData();
 
     const [navData, setNavData] = useState<NavigationModel>(storedNavData);
-    const [quranData] = useState<QuranData>(new QuranData());
+    const [quranData] = useState<QuranData>(QuranData.instance);
 
     const [navShortcutType, setNavShortcutType] = useState<NavigationShortcutType>(NavigationShortcutType.Recents);
 

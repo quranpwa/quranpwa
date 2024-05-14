@@ -27,7 +27,7 @@ export class QuranData {
         this.sajdas = this.getSajdas();
         this.juzs = this.getJuzs();
 
-        this.setAyats(quranText)
+        this.setAyats(quranText);
     }
 
     private getSuras(): Sura[] {
@@ -295,6 +295,15 @@ export class QuranData {
         }
 
         return Math.ceil(ayatRange.readingTimeInSecond / 60);
+    }
+
+    static get instance() {
+        const globalQuranData = "globalQuranData";
+
+        if (!(window as any)[globalQuranData])
+            (window as any)[globalQuranData] = new QuranData();
+
+        return (window as any)[globalQuranData]
     }
 }
 
