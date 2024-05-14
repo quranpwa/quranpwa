@@ -20,12 +20,14 @@ export class QuranData {
 
     constructor() {
         this.suras = this.getSuras();
-        this.hizb_quarters = this.getHizbQuarters();
-        this.manzils = this.getManzils();
-        this.rukus = this.getRukus();
-        this.pages = this.getPages();
+
+        this.hizb_quarters = this.getAyatRange(quranData.hizb_quarters);
+        this.manzils = [];// this.getAyatRange(quranData.manzils);
+        this.rukus = this.getAyatRange(quranData.rukus);
+        this.pages = this.getAyatRange(quranData.pages);
+        this.juzs = this.getAyatRange(quranData.juzs);
+
         this.sajdas = this.getSajdas();
-        this.juzs = this.getJuzs();
 
         this.setAyats(quranText);
     }
@@ -89,26 +91,6 @@ export class QuranData {
             });
         }
         return r;
-    }
-
-    private getRukus(): AyatRange[] {
-        return this.getAyatRange(quranData.rukus);
-    }
-
-    private getManzils() {
-        return this.getAyatRange(quranData.manzils);
-    }
-
-    private getPages() {
-        return this.getAyatRange(quranData.pages);
-    }
-
-    private getHizbQuarters() {
-        return this.getAyatRange(quranData.hizb_quarters);
-    }
-
-    private getJuzs() {
-        return this.getAyatRange(quranData.juzs);
     }
 
     getMaxNavSerial(navMode: NavigationMode) {
