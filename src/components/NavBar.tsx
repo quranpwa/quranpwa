@@ -1,4 +1,5 @@
-﻿import { NavigationMode, QuranData } from '../QuranData';
+﻿import { Link } from 'react-router-dom';
+import { NavigationMode, QuranData } from '../QuranData';
 import './NavBar.css'
 
 function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
@@ -48,7 +49,9 @@ function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
         </button>
 
         <h1 className="nav-title">
-            <a href="/"><img src="/images/quran-rehal.svg" alt="Quran Rehal" height="30" /></a>
+            <Link to="/">
+                <img src="/images/quran-rehal.svg" alt="Quran Rehal" height="30" />
+            </Link>
             <span className="d-none d-sm-inline ms-2"><b>Quran</b> PWA</span>
         </h1>
 
