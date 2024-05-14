@@ -1,7 +1,6 @@
-﻿import { SyntheticEvent, useReducer, useState } from 'react';
+﻿import React, { useReducer, useState } from 'react';
 import { Ayat, QuranData } from '../QuranData';
 import { getAyatId, padLeft } from '../Utilities';
-import React from 'react';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 
 function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAyatChanged }: AudioPlayerProps) {
