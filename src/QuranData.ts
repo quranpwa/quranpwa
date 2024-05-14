@@ -8,6 +8,7 @@ export class QuranData {
     suras: Sura[];
     manzils: AyatRange[];
     juzs: AyatRange[];
+    hizb: AyatRange[];
     hizb_quarters: AyatRange[];
     rukus: AyatRange[];
     pages: AyatRange[];
@@ -24,6 +25,7 @@ export class QuranData {
 
         this.manzils = [];// this.getAyatRange(quranData.manzils);
         this.juzs = this.getAyatRange(quranData.juzs);
+        this.hizb = this.getAyatRange(this.transformHizbQuarterToHizb(quranData.hizb_quarters));
         this.hizb_quarters = this.getAyatRange(quranData.hizb_quarters);
         this.rukus = this.getAyatRange(quranData.rukus);
         this.pages = this.getAyatRange(quranData.pages);
@@ -94,6 +96,16 @@ export class QuranData {
         return r;
     }
 
+    private transformHizbQuarterToHizb(hizbQuarters: number[][]): number[][] {
+        let hizb: number[][] = []
+
+        for (let i = 0; i < hizbQuarters.length; i += 4) {
+            hizb.push(hizbQuarters[i])
+        }
+
+        return hizb;
+    }
+
     getMaxNavSerial(navMode: NavigationMode) {
         let maxSerial = 0;
 
@@ -104,6 +116,9 @@ export class QuranData {
             maxSerial = this.juzs.length;
 
         } else if (navMode == NavigationMode.Hizb) {
+            maxSerial = this.hizb.length;
+
+        } else if (navMode == NavigationMode.Rub) {
             maxSerial = this.hizb_quarters.length;
 
         } else if (navMode == NavigationMode.Ruku) {
@@ -134,6 +149,12 @@ export class QuranData {
             displayText = jus?.displayText;
 
         } else if (navMode == NavigationMode.Hizb) {
+            const hizb = this.hizb[serial - 1];
+            start = hizb?.start;
+            end = hizb?.end;
+            displayText = hizb?.displayText;
+
+        } else if (navMode == NavigationMode.Rub) {
             const hizb = this.hizb_quarters[serial - 1];
             start = hizb?.start;
             end = hizb?.end;
@@ -367,6 +388,7 @@ export enum NavigationMode {
     Sura,
     Juz,
     Hizb,
+    Rub,
     Ruku,
     Page,
 }

@@ -70,6 +70,11 @@ function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
         }
         {navData.navMode == NavigationMode.Hizb &&
             <select className="nav-select" value={navData?.serial} onChange={handleHizbChange} title="Hizb">
+                {quranData.hizb.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
+            </select>
+        }
+        {navData.navMode == NavigationMode.Rub &&
+            <select className="nav-select" value={navData?.serial} onChange={handleHizbChange} title="Rub">
                 {quranData.hizb_quarters.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
             </select>
         }
@@ -117,6 +122,11 @@ function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
                 }
                 {navData.navMode == NavigationMode.Hizb &&
                     <select className='select w-100 m-0' value={navData?.serial} onChange={handleHizbChange} title="Hizb">
+                        {quranData.hizb.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
+                    </select>
+                }
+                {navData.navMode == NavigationMode.Rub &&
+                    <select className='select w-100 m-0' value={navData?.serial} onChange={handleHizbChange} title="Rub">
                         {quranData.hizb_quarters.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
                     </select>
                 }

@@ -32,6 +32,8 @@ function Root() {
         if (navMode == NavigationMode.Juz) {
             items = quranData.juzs;
         } else if (navMode == NavigationMode.Hizb) {
+            items = quranData.hizb;
+        } else if (navMode == NavigationMode.Rub) {
             items = quranData.hizb_quarters;
         } else if (navMode == NavigationMode.Page) {
             items = quranData.pages;
@@ -106,7 +108,11 @@ function Root() {
             </li>
             <li className="nav-item">
                 <button className={"nav-link " + (navMode == NavigationMode.Hizb ? 'active' : 'text-color-theme')}
-                    onClick={() => setNavMode(NavigationMode.Hizb)}>Hizb Quarter</button>
+                    onClick={() => setNavMode(NavigationMode.Hizb)}>Hizb</button>
+            </li>
+            <li className="nav-item">
+                <button className={"nav-link " + (navMode == NavigationMode.Rub ? 'active' : 'text-color-theme')}
+                    onClick={() => setNavMode(NavigationMode.Rub)}>Rub</button>
             </li>
             <li className="nav-item">
                 <button className={"nav-link " + (navMode == NavigationMode.Page ? 'active' : 'text-color-theme')}
