@@ -200,7 +200,7 @@ export class QuranData {
                 hizbIdx: hizb.serial - 1,
                 pageIdx: page.serial - 1,
                 rukuIdx: ruku.serial - 1,
-                length: quranText.length
+                charLength: quranText.length
             });
         }
     }
@@ -285,13 +285,16 @@ export class QuranData {
     }
 
     getLengthInMinutes(ayatRange: Sura | AyatRange) {
-        let ayats: Ayat[] = this.ayats.slice(ayatRange.start, ayatRange.end);
+        if (!ayatRange.readingTimeInSecond) {
+            let ayats: Ayat[] = this.ayats.slice(ayatRange.start, ayatRange.end);
 
-        let ayatLengths = sum(ayats.map(m => m.length));
+            ayatRange.charLength = sum(ayats.map(m => m.charLength));
 
-        const charPerMinutes = 384;
+            const charPerSecond = 6.4;
+            ayatRange.readingTimeInSecond = ayatRange.charLength / charPerSecond;
+        }
 
-        return Math.ceil(ayatLengths / charPerMinutes)
+        return Math.ceil(ayatRange.readingTimeInSecond / 60);
     }
 }
 
@@ -305,14 +308,18 @@ export interface Sura {
     name: string,
     tname: string,
     ename: string,
-    type: string
+    type: string,
+    charLength?: number,
+    readingTimeInSecond?: number
 }
 
 export interface AyatRange {
     serial: number,
     start: number,
     end: number,
-    displayText: string
+    displayText: string,
+    charLength?: number
+    readingTimeInSecond?: number
 }
 
 interface Sajdah {
@@ -345,7 +352,7 @@ export interface Ayat {
     hizbIdx: number,
     pageIdx: number,
     rukuIdx: number,
-    length: number,
+    charLength: number,
 }
 
 export interface Recitaion {
