@@ -6,12 +6,13 @@ import { sum } from './Utilities';
 export class QuranData {
 
     suras: Sura[];
-    hizb_quarters: AyatRange[];
     manzils: AyatRange[];
+    juzs: AyatRange[];
+    hizb_quarters: AyatRange[];
     rukus: AyatRange[];
     pages: AyatRange[];
+
     sajdas: Sajdah[];
-    juzs: AyatRange[];
 
     ayats: Ayat[] = [];
     translations: TranslationWithData[] = [];
@@ -21,11 +22,11 @@ export class QuranData {
     constructor() {
         this.suras = this.getSuras();
 
-        this.hizb_quarters = this.getAyatRange(quranData.hizb_quarters);
         this.manzils = [];// this.getAyatRange(quranData.manzils);
+        this.juzs = this.getAyatRange(quranData.juzs);
+        this.hizb_quarters = this.getAyatRange(quranData.hizb_quarters);
         this.rukus = this.getAyatRange(quranData.rukus);
         this.pages = this.getAyatRange(quranData.pages);
-        this.juzs = this.getAyatRange(quranData.juzs);
 
         this.sajdas = this.getSajdas();
 
