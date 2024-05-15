@@ -137,37 +137,37 @@ export class QuranData {
         let displayText = '';
 
         if (navMode == NavigationMode.Sura) {
-            const sura = this.suras[serial - 1];
+            const sura = serial > this.suras.length ? this.suras[0] : this.suras[serial - 1];
             start = sura?.start;
             end = sura?.start + sura?.ayas;
             displayText = sura?.tname;
 
         } else if (navMode == NavigationMode.Juz) {
-            const jus = this.juzs[serial - 1];
+            const jus = serial > this.juzs.length ? this.juzs[0] : this.juzs[serial - 1];
             start = jus?.start;
             end = jus?.end;
             displayText = jus?.displayText;
 
         } else if (navMode == NavigationMode.Hizb) {
-            const hizb = this.hizb[serial - 1];
+            const hizb = serial > this.hizb.length ? this.hizb[0] : this.hizb[serial - 1];
             start = hizb?.start;
             end = hizb?.end;
             displayText = hizb?.displayText;
 
         } else if (navMode == NavigationMode.Rub) {
-            const hizb = this.hizb_quarters[serial - 1];
+            const hizb = serial > this.hizb_quarters.length ? this.hizb_quarters[0] : this.hizb_quarters[serial - 1];
             start = hizb?.start;
             end = hizb?.end;
             displayText = hizb?.displayText;
 
         } else if (navMode == NavigationMode.Ruku) {
-            const ruku = this.rukus[serial - 1];
+            const ruku = serial > this.rukus.length ? this.rukus[0] : this.rukus[serial - 1];
             start = ruku?.start;
             end = ruku?.end;
             displayText = ruku?.displayText;
 
         } else if (navMode == NavigationMode.Page) {
-            const page = this.pages[serial - 1];
+            const page = serial > this.pages.length ? this.pages[0] : this.pages[serial - 1];
             start = page?.start;
             end = page?.end;
             displayText = page?.displayText;
