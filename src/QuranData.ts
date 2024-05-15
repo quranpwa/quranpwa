@@ -90,7 +90,7 @@ export class QuranData {
                 serial: i + 1,
                 start: thisSegmentStart,
                 end: thisSegmentEnd,
-                displayText: startingSura.tname + ' : ' + segmentStartAyat
+                displayText: `${startingSura.tname} [${startingSura.serial}:${segmentStartAyat}]`
             });
         }
         return r;
