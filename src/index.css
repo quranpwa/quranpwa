@@ -67,7 +67,15 @@ body {
         color: var(--font-color) !important;
     }
 
-.text-color-theme{
+.bg-theme {
+    background-color: var(--bg-color) !important;
+}
+
+.bg-theme-text {
+    background-color: var(--font-color) !important;
+}
+
+.text-color-theme {
     color: var(--font-color) !important;
 }
 

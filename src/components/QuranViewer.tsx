@@ -19,7 +19,18 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         onAyatSelection(selectedAyat, isTranslation);
     };
 
-    const handleAyatNumberClick = (/*event: React.MouseEvent<HTMLSpanElement>*/) => {
+    const handleAyatNumberClick = (selectedAyatSerial: number) => {
+        let ayatDetailDialogTitleElement = dialog.querySelector('#ayatDetailDialogTitle');
+        if (ayatDetailDialogTitleElement) {
+            let selectedAyat = ayats.filter(f => f.serial == selectedAyatSerial)[0];
+
+            if (selectedAyat) {
+                let sura = quranData.suras[selectedAyat.suraIdx];
+
+                ayatDetailDialogTitleElement.textContent = `${sura.tname} [${sura.serial}:${selectedAyat.serialInSura}]`;
+            }
+        }
+
         dialog.showModal();
     };
 
@@ -36,7 +47,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
             if (selectedAyat) {
                 let sura = quranData.suras[selectedAyat.suraIdx];
                 storeBookmark({
-                    displayText: `${sura.tname}[${sura.serial}:${selectedAyat.serialInSura}]`,
+                    displayText: `${sura.tname} [${sura.serial}:${selectedAyat.serialInSura}]`,
                     navData: navData,
                     date: new Date(),
                     link: location.pathname + location.search + location.hash
@@ -77,7 +88,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                         <div className="quran-text rtl">
                             <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
                             <span className="ayat-number" style={{ fontFamily: 'hafs' }}
-                                onClick={handleAyatNumberClick}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
+                                onClick={() => handleAyatNumberClick(ayat.serial)}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
                         </div>
                     }
                     {quranData.translations.map(translation => {
@@ -86,7 +97,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                             const translationMeta = translation.translationMeta;
                             return <div className="quran-translation ltr" key={translationMeta.fileName + ayat.serial}>
                                 <div className="text-secondary small mt-3">{translationMeta.languageName + ' - ' + translationMeta.translator}</div>
-                                <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
+                                <span className="translation-ayat-number"
+                                    onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
                                 {ayatTranslationText}
                             </div>
                         }
@@ -128,7 +140,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                             <span id={ayat.serial.toString()} key={ayat.serial}
                                 onClick={() => handleAyatSelection(ayat.serial)}
                                 className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}>
-                                <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
+                                <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}
+                                    onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.arabicText}</span>
                                 <span className="ayat-number" style={{ fontFamily: 'hafs' }}> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
                             </span>)}
                     </div>
@@ -141,7 +154,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                                 <span id={'t' + ayat.serial} key={ayat.serial}
                                     onClick={() => handleAyatSelection(ayat.serial, true)}
                                     className={selectedAyatSerial == ayat.serial ? 'selected-ayat quran-translation' : 'quran-translation'}>
-                                    <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(firstTranslation.translationMeta.locale ?? undefined)}</span>
+                                    <span className="translation-ayat-number"
+                                        onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString(firstTranslation.translationMeta.locale ?? undefined)}</span>
                                     {firstTranslation.texts[ayat.serial - 1]}
                                 </span>)
                         }
@@ -174,12 +188,16 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
         <dialog id="ayatDetailDialog" onClick={handleAyatDetailDialogClick} onClose={handleAyatDetailDialogClose}>
             <form method="dialog">
+                <div className="d-flex justify-content-between">
+                    <span id="ayatDetailDialogTitle" className="h5"></span>
+                    <button type="submit" className="btn-close bg-theme-text" value="close"></button>
+                </div>
                 <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div className="btn-group me-2" role="group" aria-label="First group">
                         <button type="submit" className="btn btn-primary" value="bookmark">Bookmark this ayat</button>
                     </div>
                     <div className="btn-group" role="group" aria-label="Second group">
-                        <button type="submit" className="btn btn-secondary" value="close">X</button>
+
                     </div>
                 </div>
             </form>
