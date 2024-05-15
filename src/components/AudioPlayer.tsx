@@ -11,7 +11,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     const getAudioUrl = (): string => {
 
         let recitation = quranData.recitations[recitationIdx];
-        if (!recitation)
+        if (!recitation || !ayats?.length)
             return '';
 
         let recitationMeta = recitation.recitaionMeta;
@@ -70,7 +70,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     };
 
     const handleOnEnded = () => {
-        if (!isPlaying)
+        if (!isPlaying || !ayats.length)
             return;
 
         let currentAyatIdx = (selectedAyat || ayats[0].serial) - ayats[0].serial;
