@@ -48,8 +48,8 @@ function Root() {
                         to={`quran?navMode=${NavigationMode[navMode]}&serial=${item.serial}`}>
                         <div className="card-body d-flex align-items-center">
                             <div className="badge border rounded-pill me-2 px-0">
-                                <span className="badge text-color-theme ps-3" style={{ transform: 'rotate(270deg)', fontSize: '0.75rem' }}>{NavigationMode[navMode]}</span>
-                                <span className="badge text-color-theme ps-0" style={{ fontSize: '1.5rem' }}> {item.serial}</span>
+                                <span className="badge text-theme ps-3" style={{ transform: 'rotate(270deg)', fontSize: '0.75rem' }}>{NavigationMode[navMode]}</span>
+                                <span className="badge text-theme ps-0" style={{ fontSize: '1.5rem' }}> {item.serial}</span>
                             </div>
                             <div>
                                 <div className="h5">{item.displayText}</div>
@@ -73,11 +73,11 @@ function Root() {
 
         <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
             <li className="nav-item">
-                <button className={"nav-link " + (navShortcutType == NavigationShortcutType.Recents ? 'active' : 'text-color-theme')}
+                <button className={"nav-link " + (navShortcutType == NavigationShortcutType.Recents ? 'active' : 'text-theme')}
                     onClick={() => setNavShortcutType(NavigationShortcutType.Recents)}>Recently Read</button>
             </li>
             <li className="nav-item">
-                <button className={"nav-link " + (navShortcutType == NavigationShortcutType.Bookmarks ? 'active' : 'text-color-theme')}
+                <button className={"nav-link " + (navShortcutType == NavigationShortcutType.Bookmarks ? 'active' : 'text-theme')}
                     onClick={() => setNavShortcutType(NavigationShortcutType.Bookmarks)}>Bookmarks</button>
             </li>
         </ul>
@@ -99,27 +99,27 @@ function Root() {
         <hr />
         <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
             <li className="nav-item">
-                <button className={"nav-link " + (navMode == NavigationMode.Sura ? 'active' : 'text-color-theme')}
+                <button className={"nav-link " + (navMode == NavigationMode.Sura ? 'active' : 'text-theme')}
                     onClick={() => setNavMode(NavigationMode.Sura)}>Sura</button>
             </li>
             <li className="nav-item">
-                <button className={"nav-link " + (navMode == NavigationMode.Juz ? 'active' : 'text-color-theme')}
+                <button className={"nav-link " + (navMode == NavigationMode.Juz ? 'active' : 'text-theme')}
                     onClick={() => setNavMode(NavigationMode.Juz)}>Juz/Para</button>
             </li>
             <li className="nav-item">
-                <button className={"nav-link " + (navMode == NavigationMode.Hizb ? 'active' : 'text-color-theme')}
+                <button className={"nav-link " + (navMode == NavigationMode.Hizb ? 'active' : 'text-theme')}
                     onClick={() => setNavMode(NavigationMode.Hizb)}>Hizb</button>
             </li>
             <li className="nav-item">
-                <button className={"nav-link " + (navMode == NavigationMode.Rub ? 'active' : 'text-color-theme')}
+                <button className={"nav-link " + (navMode == NavigationMode.Rub ? 'active' : 'text-theme')}
                     onClick={() => setNavMode(NavigationMode.Rub)}>Rub</button>
             </li>
             <li className="nav-item">
-                <button className={"nav-link " + (navMode == NavigationMode.Page ? 'active' : 'text-color-theme')}
+                <button className={"nav-link " + (navMode == NavigationMode.Page ? 'active' : 'text-theme')}
                     onClick={() => setNavMode(NavigationMode.Page)}>Page</button>
             </li>
             <li className="nav-item">
-                <button className={"nav-link " + (navMode == NavigationMode.Ruku ? 'active' : 'text-color-theme')}
+                <button className={"nav-link " + (navMode == NavigationMode.Ruku ? 'active' : 'text-theme')}
                     onClick={() => setNavMode(NavigationMode.Ruku)}>Ruku</button>
             </li>
         </ul>
