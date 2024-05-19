@@ -30,10 +30,10 @@
     "style": "Translation"
   },
   {
-    "id": "mahmudur_rahman_quran.gov.bd",
-    "name": "Mahmudur Rahman (Bangla, quran.gov.bd)",
+    "id": "mahbub_subhan_quran.gov.bd",
+    "name": "Mahbub Subhan (Bangla, quran.gov.bd)",
     "language": "bn",
-    "url": "https://raw.githubusercontent.com/islam-apps/quran-audio/main/mahmudur_rahman_quran.gov.bd",
+    "url": "https://raw.githubusercontent.com/islam-apps/quran-audio/main/mahbub_subhan_quran.gov.bd",
     "byWord": false,
     "byVerse": true,
     "bySura": false,
