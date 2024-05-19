@@ -40,14 +40,65 @@ function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
         triggerOnNavigate();
     };
 
-    return <nav className='navbar fixed-top px-2'>
-        <button className="btn theme-colored border nav-btn" type="button" title="Menu"
-            data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
-                <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-            </svg>
-        </button>
+    const showMenuNavButton = false;
 
+    return <nav className='navbar fixed-top px-2'>
+        {showMenuNavButton &&
+            <>
+                <button className="btn theme-colored border nav-btn" type="button" title="Menu"
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-list" viewBox="0 0 16 16">
+                        <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                    </svg>
+                </button>
+
+                <div className="offcanvas offcanvas-start bg-dark text-white" id="offcanvasLeft" data-bs-scroll="true" aria-labelledby="offcanvasLeftLabel">
+                    <div className="offcanvas-header">
+                        <h4 id="offcanvasLeftLabel">
+                            Menu
+                        </h4>
+                        <button type="button" className="btn-close bg-secondary text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div className="offcanvas-body">
+                        <h5>Navigation Mode</h5>
+                        <select className='select w-100 m-0' value={NavigationMode[navData.navMode]} onChange={handleNavigationModeChange} title="Navigation Mode">
+                            {Object.keys(NavigationMode).filter(f => isNaN(f as any)).map(item => <option key={item} value={item}>{item}</option>)}
+                        </select>
+                        <hr />
+                        {navData.navMode == NavigationMode.Sura &&
+                            <select className='select w-100 m-0' value={navData?.serial} onChange={handleSuraChange} title="Sura">
+                                {quranData.suras.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.tname}</option>)}
+                            </select>
+                        }
+                        {navData.navMode == NavigationMode.Juz &&
+                            <select className='select w-100 m-0' value={navData?.serial} onChange={handleJuzChange} title="Juz">
+                                {quranData.juzs.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
+                            </select>
+                        }
+                        {navData.navMode == NavigationMode.Hizb &&
+                            <select className='select w-100 m-0' value={navData?.serial} onChange={handleHizbChange} title="Hizb">
+                                {quranData.hizb.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
+                            </select>
+                        }
+                        {navData.navMode == NavigationMode.Rub &&
+                            <select className='select w-100 m-0' value={navData?.serial} onChange={handleHizbChange} title="Rub">
+                                {quranData.hizb_quarters.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
+                            </select>
+                        }
+                        {navData.navMode == NavigationMode.Ruku &&
+                            <select className='select w-100 m-0' value={navData?.serial} onChange={handleRukuChange} title="Ruku">
+                                {quranData.rukus.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.displayText}</option>)}
+                            </select>
+                        }
+                        {navData.navMode == NavigationMode.Page &&
+                            <select className='select w-100 m-0' value={navData?.serial} onChange={handlePageChange} title="Ruku">
+                                {quranData.pages.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
+                            </select>
+                        }
+                    </div>
+                </div>
+            </>
+        }
         <h1 className="nav-title">
             <Link to="/">
                 <img src="/images/quran-rehal.svg" alt="Quran Rehal" height="30" />
@@ -97,51 +148,6 @@ function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
             <span className="d-none d-md-inline ms-2">Settings</span>
         </button>
 
-        <div className="offcanvas offcanvas-start bg-dark text-white" id="offcanvasLeft" data-bs-scroll="true" aria-labelledby="offcanvasLeftLabel">
-            <div className="offcanvas-header">
-                <h4 id="offcanvasLeftLabel">
-                    Menu
-                </h4>
-                <button type="button" className="btn-close bg-secondary text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div className="offcanvas-body">
-                <h5>Navigation Mode</h5>
-                <select className='select w-100 m-0' value={NavigationMode[navData.navMode]} onChange={handleNavigationModeChange} title="Navigation Mode">
-                    {Object.keys(NavigationMode).filter(f => isNaN(f as any)).map(item => <option key={item} value={item}>{item}</option>)}
-                </select>
-                <hr />
-                {navData.navMode == NavigationMode.Sura &&
-                    <select className='select w-100 m-0' value={navData?.serial} onChange={handleSuraChange} title="Sura">
-                        {quranData.suras.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.tname}</option>)}
-                    </select>
-                }
-                {navData.navMode == NavigationMode.Juz &&
-                    <select className='select w-100 m-0' value={navData?.serial} onChange={handleJuzChange} title="Juz">
-                        {quranData.juzs.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
-                    </select>
-                }
-                {navData.navMode == NavigationMode.Hizb &&
-                    <select className='select w-100 m-0' value={navData?.serial} onChange={handleHizbChange} title="Hizb">
-                        {quranData.hizb.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
-                    </select>
-                }
-                {navData.navMode == NavigationMode.Rub &&
-                    <select className='select w-100 m-0' value={navData?.serial} onChange={handleHizbChange} title="Rub">
-                        {quranData.hizb_quarters.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
-                    </select>
-                }
-                {navData.navMode == NavigationMode.Ruku &&
-                    <select className='select w-100 m-0' value={navData?.serial} onChange={handleRukuChange} title="Ruku">
-                        {quranData.rukus.map(item => <option key={item.serial} value={item.serial}>{item.serial}. {item.displayText}</option>)}
-                    </select>
-                }
-                {navData.navMode == NavigationMode.Page &&
-                    <select className='select w-100 m-0' value={navData?.serial} onChange={handlePageChange} title="Ruku">
-                        {quranData.pages.map(item => <option key={item.serial} value={item.serial}>{item.serial}</option>)}
-                    </select>
-                }
-            </div>
-        </div>
     </nav>;
 }
 
