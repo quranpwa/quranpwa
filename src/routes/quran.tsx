@@ -1,4 +1,4 @@
-﻿import { useEffect, useReducer, useState } from 'react';
+﻿import { useEffect, useReducer } from 'react';
 import { NavigationMode, QuranData } from '../QuranData';
 import { getDefaultSettings, getStoredNavData, storeRecentlyRead } from '../Utilities';
 import NavBar, { NavigationModel } from '../components/NavBar';
@@ -6,7 +6,7 @@ import QuranViewer from '../components/QuranViewer';
 import SettingsPanel, { SettingsModel } from '../components/SettingsPanel';
 
 function Quran() {
-    const [quranData] = useState<QuranData>(QuranData.instance);
+    const quranData = QuranData.instance;
 
     let getNavData = (): NavigationModel => {
         const storedNavData: NavigationModel = getStoredNavData()
@@ -43,11 +43,10 @@ function Quran() {
     };
 
     const storedSettingsDataString = localStorage.getItem('SettingsData');
-    const storedSettingsData: SettingsModel = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
+    const settingsData: SettingsModel = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
         : getDefaultSettings()
 
-    const [navData, setNavData] = useState<NavigationModel>(getNavData());
-    const [settingsData, setSettingsData] = useState<SettingsModel>(storedSettingsData);
+    const navData = getNavData();
 
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
@@ -80,7 +79,6 @@ function Quran() {
         if ((model.ayat ?? 0) < start || (model.ayat ?? 0) > end)
             model.ayat = start + 1;
 
-        setNavData(model);
         localStorage.setItem('NavigationData', JSON.stringify(model));
         setNavDataToSearchParams(model);
         forceUpdate();
@@ -89,14 +87,13 @@ function Quran() {
 
     const onAyatSelection = (selectedAyat: number, isTranslation?: boolean) => {
         navData.ayat = selectedAyat;
-        setNavData(navData);
+
         localStorage.setItem('NavigationData', JSON.stringify(navData));
         forceUpdate();
         location.hash = isTranslation ? 't' + selectedAyat : String(selectedAyat);
     }
 
     const onSettingsChanged = (model: SettingsModel) => {
-        setSettingsData(model);
         localStorage.setItem('SettingsData', JSON.stringify(model));
 
         quranData.setTranslations(model.translations, forceUpdate);

@@ -2,15 +2,13 @@
 import { Link } from "react-router-dom";
 import { AyatRange, NavigationMode, NavigationShortcutType, QuranData } from "../QuranData";
 import { getStoredBookmarks, getStoredNavData, getStoredRecentlyReads } from "../Utilities";
-import { NavigationModel } from "../components/NavBar";
 import { quran_karim_114_font_chars } from "../components/SuraHeader";
 import ThemeSwitch from "../components/ThemeSwitch";
 
 function Root() {
-    const storedNavData = getStoredNavData();
+    const navData = getStoredNavData();
 
-    const [navData, setNavData] = useState<NavigationModel>(storedNavData);
-    const [quranData] = useState<QuranData>(QuranData.instance);
+    const quranData = QuranData.instance;
 
     const [navShortcutType, setNavShortcutType] = useState<NavigationShortcutType>(NavigationShortcutType.Recents);
 
@@ -21,7 +19,6 @@ function Root() {
 
     const setNavMode = (navMode: NavigationMode) => {
         navData.navMode = navMode;
-        setNavData(navData);
         localStorage.setItem('NavigationData', JSON.stringify(navData));
         forceUpdate();
     };
