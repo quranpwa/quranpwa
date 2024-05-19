@@ -301,7 +301,7 @@ export class QuranData {
         return Math.ceil(ayatRange.readingTimeInSecond / 60);
     }
 
-    static get instance() {
+    static get instance(): QuranData {
         const globalQuranData = "globalQuranData";
 
         if (!(window as any)[globalQuranData])
