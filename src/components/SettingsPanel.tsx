@@ -5,6 +5,7 @@ import recitationList from '../assets/recitation-list.json';
 import tafsirList from '../assets/tafsir-list.json';
 import translationList from '../assets/translation-list.json';
 import ThemeSwitch from './ThemeSwitch';
+import { Link } from 'react-router-dom';
 
 function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
 
@@ -141,6 +142,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 onClick={handleResetSettings}>
                 Reset Settings
             </button>
+            <Link to="/about" className="btn btn-info border">About Quran PWA</Link>
         </div>
     </div>;
 }

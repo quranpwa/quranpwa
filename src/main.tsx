@@ -6,6 +6,7 @@ import '../node_modules/bootstrap/dist/js/bootstrap.bundle.js'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Root from './routes/root.tsx'
+import About from './routes/about.tsx'
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     {
         path: "/quran",
         element: <Quran />
+    },
+    {
+        path: "/about",
+        element: <About />
     }
 ]);
 
