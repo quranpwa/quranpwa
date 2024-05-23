@@ -11,6 +11,7 @@ function Root() {
     const quranData = QuranData.instance;
 
     const [navShortcutType, setNavShortcutType] = useState<NavigationShortcutType>(NavigationShortcutType.Recents);
+    const [showMoreRecentlyReads, setShowMoreRecentlyReads] = useState<boolean>(false);
 
     const recentlyReads = getStoredRecentlyReads();
     const bookmarks = getStoredBookmarks();
@@ -81,8 +82,12 @@ function Root() {
 
         {navShortcutType == NavigationShortcutType.Recents &&
             <nav className="nav mb-3">
-                {recentlyReads.map(item =>
+                {recentlyReads.slice(0, showMoreRecentlyReads ? undefined : 3).map(item =>
                     <a key={item.link} className="nav-link" href={item.link}>{item.displayText}</a>)}
+
+                <button className="nav-link" onClick={() => setShowMoreRecentlyReads(!showMoreRecentlyReads)}>
+                    {showMoreRecentlyReads ? 'Show less' : 'Show more'}
+                </button>
             </nav>
         }
 
