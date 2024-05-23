@@ -31,7 +31,7 @@ export function getDefaultSettings(): SettingsModel {
     let navLang = navigator.languages[navigator.languages.length - 1] ?? 'en';
 
     return {
-        readingMode: ReadingMode.Ruku_By_Ruku,
+        readingMode: ReadingMode.Ayat_By_Ayat,
         quranFont: 'hafs',
         hideQuranText: false,
         translations: [translationList.filter(f => f.language == navLang)[0]],
