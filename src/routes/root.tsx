@@ -12,6 +12,7 @@ function Root() {
 
     const [navShortcutType, setNavShortcutType] = useState<NavigationShortcutType>(NavigationShortcutType.Recents);
     const [showMoreRecentlyReads, setShowMoreRecentlyReads] = useState<boolean>(false);
+    const [showMoreBookmarks, setShowMoreBookmarks] = useState<boolean>(false);
 
     const recentlyReads = getStoredRecentlyReads();
     const bookmarks = getStoredBookmarks();
@@ -83,18 +84,28 @@ function Root() {
         {navShortcutType == NavigationShortcutType.Recents &&
             <nav className="nav mb-3">
                 {recentlyReads.slice(0, showMoreRecentlyReads ? undefined : 3).map(item =>
-                    <a key={item.link} className="nav-link" href={item.link}>{item.displayText}</a>)}
+                    <a key={item.link} className="nav-link" href={item.link}>{item.displayText}</a>)
+                }
 
-                <button className="nav-link" onClick={() => setShowMoreRecentlyReads(!showMoreRecentlyReads)}>
-                    {showMoreRecentlyReads ? 'Show less' : 'Show more'}
-                </button>
+                {recentlyReads.length > 3 &&
+                    <button className="nav-link" onClick={() => setShowMoreRecentlyReads(!showMoreRecentlyReads)}>
+                        {showMoreRecentlyReads ? 'Show less' : 'Show more'}
+                    </button>
+                }
             </nav>
         }
 
         {navShortcutType == NavigationShortcutType.Bookmarks &&
             <nav className="nav mb-3">
-                {bookmarks.map(item =>
-                    <a key={item.link} className="nav-link" href={item.link}>{item.displayText}</a>)}
+                {bookmarks.slice(0, showMoreBookmarks ? undefined : 3).map(item =>
+                    <a key={item.link} className="nav-link" href={item.link}>{item.displayText}</a>)
+                }
+
+                {bookmarks.length > 3 &&
+                    <button className="nav-link" onClick={() => setShowMoreBookmarks(!showMoreBookmarks)}>
+                        {showMoreBookmarks ? 'Show less' : 'Show more'}
+                    </button>
+                }
             </nav>
         }
 
@@ -170,7 +181,7 @@ function Root() {
         <br />
         <Link to="/about" className="btn btn-outline-info">About Quran PWA</Link>
         <br />
-    </div>)
+    </div >)
 }
 
 export default Root;
