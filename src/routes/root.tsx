@@ -176,12 +176,13 @@ function Root() {
         {navMode != NavigationMode.Sura && getCardsForAyatRanges(navMode)}
 
         <hr />
-        <ThemeSwitch />
-        <br />
-        <br />
-        <Link to="/about" className="btn btn-outline-info">About Quran PWA</Link>
-        <br />
-    </div >)
+        <footer className="mb-5">
+            <ThemeSwitch />
+            <br />
+            <br />
+            <Link to="/about" className="btn btn-outline-info">About Quran PWA</Link>
+        </footer>
+    </div>)
 }
 
 export default Root;
