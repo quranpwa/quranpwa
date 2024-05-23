@@ -1,5 +1,6 @@
 ﻿import { Ayat, NavigationMode, QuranData } from '../QuranData';
-import { groupBy, storeBookmark } from '../Utilities';
+import { groupBy } from '../Utilities';
+import { storeBookmark } from '../StoredData';
 import AudioPlayer from './AudioPlayer';
 import { NavigationModel } from './NavBar';
 import './QuranViewer.css';

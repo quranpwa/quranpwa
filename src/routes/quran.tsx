@@ -1,6 +1,7 @@
 ﻿import { useEffect, useReducer } from 'react';
 import { NavigationMode, QuranData } from '../QuranData';
-import { getDefaultSettings, getStoredNavData, storeRecentlyRead } from '../Utilities';
+import { getDefaultSettings } from '../Utilities';
+import { getStoredNavData, storeRecentlyRead } from '../StoredData';
 import NavBar, { NavigationModel } from '../components/NavBar';
 import QuranViewer from '../components/QuranViewer';
 import SettingsPanel, { SettingsModel } from '../components/SettingsPanel';

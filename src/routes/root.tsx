@@ -1,7 +1,7 @@
 ﻿import { useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import { AyatRange, NavigationMode, NavigationShortcutType, QuranData } from "../QuranData";
-import { getStoredBookmarks, getStoredNavData, getStoredRecentlyReads } from "../Utilities";
+import { getStoredBookmarks, getStoredNavData, getStoredRecentlyReads } from "../StoredData";
 import { quran_karim_114_font_chars } from "../components/SuraHeader";
 import ThemeSwitch from "../components/ThemeSwitch";
 
