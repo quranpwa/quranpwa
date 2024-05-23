@@ -159,11 +159,11 @@ function Root() {
                             </div>
                             <div className="d-flex justify-content-between px-3 py-2">
                                 <div className="small text-secondary">
-                                    <span className="me-1" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white' }}>{sura.type == 'Meccan' ? '🕋' : '🕌'}</span>
+                                    <span className="emoji-icon me-1">{sura.type == 'Meccan' ? '🕋' : '🕌'}</span>
                                     {sura.ayas} Ayats
                                 </div>
                                 <div className="small text-secondary">
-                                    <span className="me-1" style={{ filter: 'invert(0) sepia(1) saturate(0)', textShadow: 'text-shadow: 0 0 0 white' }}>⏲️</span>
+                                    <span className="emoji-icon me-1">⏲️</span>
                                     {quranData.getLengthInMinutes(sura)} minutes
                                 </div>
                             </div>

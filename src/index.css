@@ -83,3 +83,8 @@ body {
     background-color: var(--selected-bg-color) !important;
     /*color: var(--selected-font-color) !important;*/
 }
+
+.emoji-icon {
+    filter: invert(0) sepia(0) saturate(0);
+    text-shadow: 0 0 0 var(--font-color)
+}
