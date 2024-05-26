@@ -29,7 +29,7 @@ export default defineConfig({
             icons: [
                 {
                     src: '/images/quran-rehal.svg',
-                    sizes: "32x32 48x48 72x72 96x96 128x128 144x144 256x256",
+                    sizes: "32x32 48x48 72x72 96x96 128x128 144x144 256x256 512x512",
                     type: "image/svg+xml",
                     purpose: "any"
                 }
