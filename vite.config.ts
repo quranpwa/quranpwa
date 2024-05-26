@@ -20,12 +20,14 @@ export default defineConfig({
             }]
         },
         manifest: {
+            id: 'Quran-PWA',
             name: 'Quran PWA',
             short_name: 'Quran',
             description: 'Quran PWA',
             theme_color: '#000',
             background_color: '#000',
-            display: 'standalone',
+            display: 'fullscreen',
+            orientation: 'any',
             icons: [
                 {
                     src: '/images/quran-rehal.svg',
