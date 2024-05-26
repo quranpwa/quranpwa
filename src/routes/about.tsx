@@ -4,7 +4,7 @@ function About() {
     return (<div className="container">
 
         <h1 className="text-center my-3">
-            <img className="me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" />
+            <img className="rounded me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" />
             <b>Quran</b> PWA
             <small className="fs-6 ms-2">Version: 1.0</small>
         </h1>

@@ -101,7 +101,7 @@ function NavBar({ quranData, navData, onNavigate }: NavBarProps) {
         }
         <h1 className="nav-title">
             <Link to="/">
-                <img src="/images/quran-rehal.svg" alt="Quran Rehal" height="30" />
+                <img className="rounded" src="/images/quran-rehal.svg" alt="Quran Rehal" height="30" />
             </Link>
             <span className="d-none d-sm-inline ms-2"><b>Quran</b> PWA</span>
         </h1>

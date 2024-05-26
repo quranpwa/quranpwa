@@ -69,7 +69,7 @@ function Root() {
     return (<div className="container">
 
         <h1 className="text-center my-3">
-            <img className="me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" />
+            <img className="rounded me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" />
             <b>Quran</b> PWA
         </h1>
 
