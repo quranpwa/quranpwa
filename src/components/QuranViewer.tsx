@@ -134,7 +134,13 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 {rukuAyats[0].serialInSura == 1 &&
                     <SuraHeader quranData={quranData} suraIdx={rukuAyats[0].suraIdx} />}
 
-                <h3 className="ruku-header text-secondary mt-2">Ruku-{ruku.serial}: {ruku.displayText}</h3>
+                <h3 className="ruku-header text-secondary mt-2">Ruku-{ruku.serial}: {ruku.displayText}
+                    <small className="text-nowrap">
+                        <span className="emoji-icon mx-2">💎</span>{ruku.end - ruku.start} Ayats
+                        <span className="emoji-icon ms-2 me-1">⏱️</span>{quranData.getLengthInMinutes(ruku)} minutes
+                    </small>
+                </h3>
+
                 {!settingsData.hideQuranText &&
                     <div className={colClass + "ps-md-4 pt-md-4 quran-text mt-2"}>
                         {rukuAyats.map(ayat =>
