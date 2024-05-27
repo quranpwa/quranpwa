@@ -26,11 +26,9 @@
     text-align: center;
 }
 
-.bismillah-arabic {
-    font-family: hafs;
-    font-size: 2rem;
-    text-align: center;
-    padding: 1rem;
+.bismillah-calligraphy {
+    height: 7rem;
+    filter: invert(var(--is-dark))
 }
 
 .selected-ayat {

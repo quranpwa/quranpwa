@@ -16,7 +16,9 @@ function SuraHeader({ quranData, suraIdx }: SuraHeaderProps) {
         </div>
 
         {suraIdx != 0 && suraIdx != 8 &&
-            <p className="bismillah-arabic">{quranData.ayats[0].arabicText}</p>}
+            <div className="text-center">
+                <img className="bismillah-calligraphy" alt="Bismillahir Rahmanir Rahim" src="/images/bismillah.png" />
+            </div>}
     </>
 }
 
