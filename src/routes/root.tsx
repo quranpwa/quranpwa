@@ -54,7 +54,7 @@ function Root() {
                                 <div className="h5">{item.displayText}</div>
                                 <div className="text-nowrap text-secondary">
                                     <span className="emoji-icon me-1">💎</span>{item.end - item.start} Ayats
-                                    <span className="emoji-icon ms-3 me-1">⏱️</span>{quranData.getLengthInMinutes(item)} minutes
+                                    <span className="emoji-icon ms-3 me-1">⏱️</span>{quranData.getReadingTime(item)}
                                 </div>
                             </div>
                         </div>
@@ -167,7 +167,7 @@ function Root() {
                                 </div>
                                 <div className="small text-secondary">
                                     <span className="emoji-icon me-1">⏱️</span>
-                                    {quranData.getLengthInMinutes(sura)} minutes
+                                    {quranData.getReadingTime(sura)}
                                 </div>
                             </div>
                         </Link>

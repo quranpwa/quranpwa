@@ -288,7 +288,7 @@ export class QuranData {
         });
     }
 
-    getLengthInMinutes(ayatRange: Sura | AyatRange) {
+    getReadingTimeInSecond(ayatRange: Sura | AyatRange) {
         if (!ayatRange.readingTimeInSecond) {
             let ayats: Ayat[] = this.ayats.slice(ayatRange.start, ayatRange.end);
 
@@ -298,7 +298,21 @@ export class QuranData {
             ayatRange.readingTimeInSecond = ayatRange.charLength / charPerSecond;
         }
 
-        return Math.ceil(ayatRange.readingTimeInSecond / 60);
+        return ayatRange.readingTimeInSecond;
+    }
+
+    getReadingTime(ayatRange: Sura | AyatRange) {
+        let readingTimeInSecond = this.getReadingTimeInSecond(ayatRange);
+
+        if (readingTimeInSecond < 60) {
+            let timeunit = readingTimeInSecond > 1 ? ' seconds' : ' second';
+            return Math.ceil(readingTimeInSecond) + timeunit;
+        }
+        else {
+            let readingTimeInMinute = readingTimeInSecond / 60
+            let timeunit = readingTimeInMinute > 1 ? ' minutes' : ' minute';
+            return Math.ceil(readingTimeInMinute) + timeunit;
+        }
     }
 
     static get instance(): QuranData {

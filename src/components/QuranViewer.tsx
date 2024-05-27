@@ -136,8 +136,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
                 <h3 className="ruku-header text-secondary mt-2">Ruku-{ruku.serial}: {ruku.displayText}
                     <small className="text-nowrap">
-                        <span className="emoji-icon mx-2">💎</span>{ruku.end - ruku.start} Ayats
-                        <span className="emoji-icon ms-2 me-1">⏱️</span>{quranData.getLengthInMinutes(ruku)} minutes
+                        <span className="emoji-icon ms-2 me-1">💎</span>{ruku.end - ruku.start} Ayats
+                        <span className="emoji-icon ms-2 me-1">⏱️</span>{quranData.getReadingTime(ruku)}
                     </small>
                 </h3>
 
