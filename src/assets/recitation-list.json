@@ -7,17 +7,77 @@
     "byWord": false,
     "byVerse": true,
     "bySura": false,
-    "style": ""
+    "style": "Murattal"
   },
   {
     "id": "Abdul_Basit_Mujawwad_128kbps",
-    "name": "Abd Al-Basit Mujawwad",
+    "name": "Abdul Basit",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/everyayah/Abdul_Basit_Mujawwad_128kbps",
     "byWord": false,
     "byVerse": true,
     "bySura": false,
     "style": "Mujawwad"
+  },
+  {
+    "id": "Ghamadi_40kbps",
+    "name": "Saad Al-Ghamdi",
+    "language": "ar",
+    "url": "https://mirrors.quranicaudio.com/everyayah/Ghamadi_40kbps",
+    "byWord": false,
+    "byVerse": true,
+    "bySura": false,
+    "style": "Murattal"
+  },
+  {
+    "id": "MaherAlMuaiqly128kbps",
+    "name": "Maher Al-Muaiqly",
+    "language": "ar",
+    "url": "https://everyayah.com/data/MaherAlMuaiqly128kbps",
+    "byWord": false,
+    "byVerse": true,
+    "bySura": false,
+    "style": "Murattal"
+  },
+  {
+    "id": "Saood_ash-Shuraym_128kbps",
+    "name": "Saood Ash-Shuraym",
+    "language": "ar",
+    "url": "https://mirrors.quranicaudio.com/everyayah/Saood_ash-Shuraym_128kbps",
+    "byWord": false,
+    "byVerse": true,
+    "bySura": false,
+    "style": "Murattal"
+  },
+  {
+    "id": "Abdurrahmaan_As-Sudais_192kbps",
+    "name": "Abdur-Rahman as-Sudais",
+    "language": "ar",
+    "url": "https://mirrors.quranicaudio.com/everyayah/Abdurrahmaan_As-Sudais_192kbps",
+    "byWord": false,
+    "byVerse": true,
+    "bySura": false,
+    "style": "Murattal"
+  },
+  {
+    "id": "khalifah_taniji",
+    "name": "Khalifa al Tanaiji",
+    "language": "ar",
+    "url": "https://mirrors.quranicaudio.com/mp3quran/khalifah_taniji",
+    "byWord": false,
+    "byVerse": false,
+    "bySura": true,
+    "style": "Murattal"
+  },
+  {
+    "id": "Abu_Bakr_Ash-Shaatree_128kbps",
+    "name": "Abu-Bakr Ash-Shaatree",
+    "language": "ar",
+    "url": "https://mirrors.quranicaudio.com/everyayah/Abu_Bakr_Ash-Shaatree_128kbps",
+    "byWord": false,
+    "byVerse": true,
+    "bySura": false,
+    "style": "Murattal"
   },
   {
     "id": "sharif_bayzid_gtaf",
@@ -34,6 +94,26 @@
     "name": "Mahbub Subhan (Bangla, quran.gov.bd)",
     "language": "bn",
     "url": "https://raw.githubusercontent.com/islam-apps/quran-audio/main/mahbub_subhan_quran.gov.bd",
+    "byWord": false,
+    "byVerse": true,
+    "bySura": false,
+    "style": "Translation"
+  },
+  {
+    "id": "IbrahimWalk_192kbps",
+    "name": "Ibrahim Walk (English, Sahih International)",
+    "language": "en",
+    "url": "https://www.everyayah.com/data/English/Sahih_Intnl_Ibrahim_Walk_192kbps",
+    "byWord": false,
+    "byVerse": true,
+    "bySura": false,
+    "style": "Translation"
+  },
+  {
+    "id": "urdu_shamshad_ali_khan_46kbps",
+    "name": "Shamshad Ali Khan (Urdu)",
+    "language": "ur",
+    "url": "https://www.everyayah.com/data/translations/urdu_shamshad_ali_khan_46kbps",
     "byWord": false,
     "byVerse": true,
     "bySura": false,
