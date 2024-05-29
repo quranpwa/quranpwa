@@ -10,9 +10,10 @@ function SuraHeader({ quranData, suraIdx }: SuraHeaderProps) {
         <h2 className="sura-name-calligraphy">{quran_karim_114_font_chars[suraIdx]}</h2>
         <h2 className="sura-name-en ltr">{suraIdx + 1}. {sura.tname}</h2>
         <div className="text-nowrap text-center text-secondary ltr">
-            <span className="emoji-icon me-1">{sura.type == 'Meccan' ? '🕋' : '🕌'}</span>
-            {sura.ayas} Ayats
-            <span className="emoji-icon ms-3 me-1">⏱️</span>{quranData.getReadingTime(sura)}
+            <span className="emoji-icon">{sura.type == 'Meccan' ? '🕋' : '🕌'}</span> {sura.type}
+            <span className="emoji-icon ms-3" style={{ fontFamily: 'arial' }}>۝</span> {sura.ayas} Ayats
+            <span className="emoji-icon ms-3">🔃</span> {sura.rukus} Ruku{sura.rukus > 1 ? 's' : ''}
+            <span className="emoji-icon ms-3">⏱️</span> {quranData.getReadingTime(sura)}
         </div>
 
         {suraIdx != 0 && suraIdx != 8 &&
