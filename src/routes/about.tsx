@@ -6,8 +6,12 @@ function About() {
         <h1 className="text-center my-3">
             <img className="rounded me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" />
             <b>Quran</b> PWA
-            <small className="fs-6 ms-2">Version: 1.0</small>
         </h1>
+
+        <p className="text-center">
+            <span className="badge bg-secondary"> Version: 1.0.1 </span>
+            <span className="badge bg-secondary ms-2">Release Date: 2024-05-29</span>
+        </p>
 
         <p>Quran PWA is a open source project. <a href="https://github.com/quranpwa/quranpwa" target="_blank">link</a></p>
         <p>The data used in this project is collected from the various sources. Following are the notable mentions.</p>
