@@ -63,7 +63,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 </svg>
                 Settings
             </h4>
-            <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" className="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
             <h5>Translations
