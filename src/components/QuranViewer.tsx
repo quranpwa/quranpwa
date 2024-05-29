@@ -212,9 +212,9 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
         <div className="d-flex mt-3" style={{ justifyContent: 'center', marginBottom: '4rem' }}>
             <button className={'btn theme-colored border mx-2 ' + (navData.serial > 1 ? '' : 'disabled')} type="button"
-                onClick={handlePrevious}>&lt; Previous {navModeName}</button>
+                onClick={handlePrevious}>← Previous {navModeName}</button>
             <button className={'btn theme-colored border mx-2 ' + (navData.serial < maxSerial ? '' : 'disabled')} type="button"
-                onClick={handleNext}>Next {navModeName} &gt;</button>
+                onClick={handleNext}>Next {navModeName} →</button>
         </div>
 
         <AudioPlayer quranData={quranData} settingsData={settingsData} ayats={ayats} selectedAyat={selectedAyatSerial}
