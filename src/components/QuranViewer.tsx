@@ -196,7 +196,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         <dialog id="ayatDetailDialog" onClick={handleAyatDetailDialogClick} onClose={handleAyatDetailDialogClose}>
             <form method="dialog">
                 <div className="d-flex justify-content-between">
-                    <span id="ayatDetailDialogTitle" className="h5"></span>
+                    <span id="ayatDetailDialogTitle" className="h5 pe-4 pb-3"></span>
                     <button type="submit" className="btn-close bg-theme-text" value="close"></button>
                 </div>
                 <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
