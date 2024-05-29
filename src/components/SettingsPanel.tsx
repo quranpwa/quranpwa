@@ -70,7 +70,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {translationList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(translationsGroupByLang).length}</small>
             </h5>
-            <Select isMulti
+            <Select isMulti blurInputOnSelect
                 options={translationItemsMapToSelectOption(translationList)}
                 value={translationItemsMapToSelectOption(settingsData.translations)}
                 onChange={selectedOptions => {
@@ -81,7 +81,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {tafsirList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(tafsirsGroupByLang).length}</small>
             </h5>
-            <Select isMulti
+            <Select isMulti blurInputOnSelect
                 options={translationItemsMapToSelectOption(tafsirList)}
                 value={translationItemsMapToSelectOption(settingsData.tafsirs)}
                 onChange={selectedOptions => {
@@ -90,7 +90,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 }} />
             <hr />
             <h5 className="mt-3">Recitaions</h5>
-            <Select isMulti
+            <Select isMulti blurInputOnSelect
                 options={recitaionsMapToSelectOption(recitationList)}
                 value={recitaionsMapToSelectOption(settingsData.recitaions || recitationList.filter(f => f.id == 'Alafasy_128kbps'))}
                 onChange={selectedOptions => {
