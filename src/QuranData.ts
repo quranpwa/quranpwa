@@ -1,5 +1,4 @@
-﻿import quranText from './assets/quran-texts/quran.json'
-import quranData from './assets/quran-data.json'
+﻿import quranData from './assets/quran-data.json'
 import { NavigationModel } from './components/NavBar';
 import { sum } from './Utilities';
 
@@ -32,7 +31,7 @@ export class QuranData {
 
         this.sajdas = this.getSajdas();
 
-        this.setAyats(quranText);
+        this.setAyats();
     }
 
     private getSuras(): Sura[] {
@@ -176,9 +175,13 @@ export class QuranData {
         return { start: start, end: end, displayText: displayText };
     }
 
-    setAyats(quranTexts: string[]) {
+    async setAyats() {
+
         if (this.ayats.length >= 6236)
             return;
+
+        let response = await fetch(`./quran-texts/quran.json`);
+        let quranTexts = await response.json();
 
         let serial = 1;
         let serialInSura = 1;
