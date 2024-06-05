@@ -4,6 +4,7 @@ import { getDefaultSettings, groupBy } from '../Utilities';
 import recitationList from '../assets/recitation-list.json';
 import tafsirList from '../assets/tafsir-list.json';
 import translationList from '../assets/translation-list.json';
+import wbwTranslationList from '../assets/wbw-translation-list.json';
 import ThemeSwitch from './ThemeSwitch';
 import { Link } from 'react-router-dom';
 
@@ -45,6 +46,15 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         })
     }
 
+    const wbwTranslationItemsMapToSelectOption = (translationItems: Translation[]) => {
+        return translationItems.map(t => {
+            return {
+                label: t.Name,
+                value: t
+            }
+        })
+    }
+
     const recitaionsMapToSelectOption = (recitaions: Recitaion[]) => {
         return recitaions.filter(f => f.byVerse)
             .map(t => {
@@ -77,6 +87,18 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     settingsData.translations = selectedOptions.map(m => m.value)
                     onChange(settingsData)
                 }} />
+
+            <h5 className="mt-3">Word-by-word
+                <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {wbwTranslationList.length}</small>
+            </h5>
+            <Select blurInputOnSelect
+                options={wbwTranslationItemsMapToSelectOption(wbwTranslationList)}
+                value={settingsData.wbwTranslation}
+                onChange={selectedOption => {
+                    settingsData.wbwTranslation = selectedOption.value
+                    onChange(settingsData)
+                }} />
+
             <h5 className="mt-3">Tafsirs
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {tafsirList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(tafsirsGroupByLang).length}</small>
@@ -89,6 +111,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     onChange(settingsData)
                 }} />
             <hr />
+
             <h5 className="mt-3">Recitaions</h5>
             <Select isMulti blurInputOnSelect
                 options={recitaionsMapToSelectOption(recitationList)}
@@ -98,6 +121,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     onChange(settingsData)
                 }} />
             <hr />
+
             <h5>Layout</h5>
             <div className="row">
                 <label className="col-sm-5 col-form-label" htmlFor="ReadingModeSelect">Reading Mode</label>
@@ -116,6 +140,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     <label className="form-check-label" htmlFor="HideQuranTextInput">Hide Quran Text</label>
                 </div>
             </div>
+
             <h5 className="mt-3">Quran Font</h5>
             <div className="row">
                 <label className="col-sm-5 col-form-label" htmlFor="QuranFontSelect">Quran Font</label>
@@ -134,6 +159,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 </div>
             </div>
             <hr />
+
             <h5>Themes</h5>
             <ThemeSwitch />
             <hr />
@@ -159,6 +185,7 @@ export interface SettingsModel {
     readingMode: ReadingMode,
     hideQuranText: boolean,
     quranFont: string,
+    wbwTranslation: Translation
     translations: Translation[]
     tafsirs: Translation[]
     recitaions: Recitaion[]

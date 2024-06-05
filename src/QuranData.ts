@@ -15,6 +15,8 @@ export class QuranData {
     sajdas: Sajdah[];
 
     ayats: Ayat[] = [];
+    corpus: Corpus[] = [];
+    wbwTranslation?: TranslationWithData;
     translations: TranslationWithData[] = [];
     tafsirs: TranslationWithData[] = [];
     recitations: RecitaionWithData[] = [];
@@ -30,8 +32,6 @@ export class QuranData {
         this.pages = this.getAyatRange(quranData.pages);
 
         this.sajdas = this.getSajdas();
-
-        this.setAyats();
     }
 
     private getSuras(): Sura[] {
@@ -212,6 +212,63 @@ export class QuranData {
         }
     }
 
+    async setCorpus() {
+
+        if (this.corpus.length >= 77439)
+            return;
+
+        let response = await fetch(`./corpus/corpus.csv`);
+        let corpusCsv = await response.text();
+
+        const corpusTextLines = corpusCsv.split(/\r\n|\n/);
+        const [, ...lines] = corpusTextLines;
+        let idx = 0;
+
+        lines.map((line: string) => {
+            const values = line.split(',')
+            this.corpus.push({
+                idx: idx++,
+                surah: +values[0],
+                ayah: +values[1],
+                word: +values[2],
+                ar1: values[3],
+                ar2: values[4],
+                ar3: values[5],
+                ar4: values[6],
+                ar5: values[7],
+                pos1: values[8],
+                pos2: values[9],
+                pos3: values[10],
+                pos4: values[11],
+                pos5: values[12],
+                count: +values[13],
+                root_ar: values[14],
+                lemma: values[15],
+                verb_type: values[16],
+                verb_form: values[17]
+            });
+        })
+    }
+
+    setWbwTranslation(wbwTranslation: Translation, updateUI: () => void) {
+        if (this.wbwTranslation?.translationMeta?.fileName === wbwTranslation.fileName)
+            return;
+
+        fetch(`./corpus/${wbwTranslation.fileName}.txt`)
+            .then<string>(response => response.text())
+            .then(text => {
+                const texts = text.split(/\r\n|\n/);
+
+                this.wbwTranslation = {
+                    translationMeta: wbwTranslation,
+                    texts: texts
+                };
+
+                updateUI();
+            })
+            .catch(error => console.error(error));
+    }
+
     setTranslations(translations: Translation[], updateUI: () => void) {
         this.translations = this.translations.filter(f =>
             translations.some(s => s.fileName === f.translationMeta.fileName));
@@ -383,6 +440,28 @@ export interface Ayat {
     pageIdx: number,
     rukuIdx: number,
     charLength: number,
+}
+
+export interface Corpus {
+    idx: number
+    surah: number,
+    ayah: number,
+    word: number,
+    ar1: string,
+    ar2: string,
+    ar3: string,
+    ar4: string,
+    ar5: string,
+    pos1: string,
+    pos2: string,
+    pos3: string,
+    pos4: string,
+    pos5: string,
+    count: number,
+    root_ar: string,
+    lemma: string,
+    verb_type: string,
+    verb_form: string
 }
 
 export interface Recitaion {

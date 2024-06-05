@@ -98,6 +98,7 @@ function Quran() {
         localStorage.setItem('SettingsData', JSON.stringify(model));
 
         quranData.setTranslations(model.translations, forceUpdate);
+        quranData.setWbwTranslation(model.wbwTranslation, forceUpdate);
         quranData.setTafsirs(model.tafsirs, forceUpdate);
         quranData.setRecitations(model.recitaions);
     }

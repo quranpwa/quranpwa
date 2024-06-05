@@ -11,6 +11,10 @@ import Root from './routes/root.tsx'
 
 QuranData.instance.setAyats().then(() => {
 
+    QuranData.instance.setCorpus().then(() => {
+
+    });
+
     const router = createBrowserRouter([
         {
             path: "/",

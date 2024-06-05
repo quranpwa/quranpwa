@@ -1,6 +1,7 @@
 import { Ayat } from "./QuranData";
 import recitationList from './assets/recitation-list.json';
 import translationList from './assets/translation-list.json';
+import wbwTranslationList from './assets/wbw-translation-list.json';
 import { ReadingMode, SettingsModel } from "./components/SettingsPanel";
 
 export function groupBy<T>(arr: T[], fn: (item: T) => any) {
@@ -35,6 +36,7 @@ export function getDefaultSettings(): SettingsModel {
         quranFont: 'hafs',
         hideQuranText: false,
         translations: [translationList.filter(f => f.language == navLang)[0]],
+        wbwTranslation: wbwTranslationList.filter(f => f.language == navLang)[0],
         tafsirs: [],
         recitaions: recitationList.filter(f => f.id == 'Alafasy_128kbps')
     }

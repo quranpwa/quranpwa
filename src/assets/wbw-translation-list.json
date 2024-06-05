@@ -1,0 +1,18 @@
+[
+  {
+    "Name": "English",
+    "languageName": "English",
+    "translator": "English",
+    "fileName": "words_en",
+    "language": "en",
+    "locale": "en-US"
+  },
+  {
+    "Name": "Bangla",
+    "languageName": "Bangla",
+    "translator": "Bangla",
+    "fileName": "words_bn",
+    "language": "bn",
+    "locale": "bn-BD"
+  }
+]

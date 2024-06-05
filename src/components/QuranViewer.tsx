@@ -1,6 +1,7 @@
-﻿import { Ayat, NavigationMode, QuranData } from '../QuranData';
-import { groupBy } from '../Utilities';
+﻿import { useState } from 'react';
+import { Ayat, Corpus, NavigationMode, QuranData } from '../QuranData';
 import { storeBookmark } from '../StoredData';
+import { groupBy } from '../Utilities';
 import AudioPlayer from './AudioPlayer';
 import { NavigationModel } from './NavBar';
 import './QuranViewer.css';
@@ -8,6 +9,8 @@ import { ReadingMode, SettingsModel } from './SettingsPanel';
 import SuraHeader from './SuraHeader';
 
 function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelection }: QuranViewerProps) {
+
+    const [selectedAyatCorpus, setSelectedAyatCorpus] = useState<Corpus[]>([]);
 
     const { start, end } = quranData.getAyatRangeByNavSerial(navData?.navMode, navData?.serial);
     let ayats: Ayat[] = quranData.ayats.slice(start, end);;
@@ -29,6 +32,9 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 let sura = quranData.suras[selectedAyat.suraIdx];
 
                 ayatDetailDialogTitleElement.textContent = `${sura.tname} [${sura.serial}:${selectedAyat.serialInSura}]`;
+
+                setSelectedAyatCorpus(quranData.corpus.filter(f => f.surah == sura.serial
+                    && f.ayah == selectedAyat.serialInSura));
             }
         }
 
@@ -75,6 +81,13 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         onAyatSelection(ayat?.serial);
     };
 
+    const getWbwAyatText = (ayatCorpus: Corpus[]) => {
+        return ayatCorpus.map(c => <span className="text-center" key={c.surah + '_' + c.ayah + '_' + c.word}>
+            <span className="quran-text">{c.ar1 + c.ar2 + c.ar3 + c.ar4 + c.ar5 + ' '}</span>
+            <span className="d-block px-1" style={{ borderRight: 'solid 1px gray' }}>{quranData.wbwTranslation?.texts[c.idx]}</span>
+        </span>);
+    }
+
     let contents: JSX.Element[] = [];
 
     if (settingsData?.readingMode == ReadingMode.Ayat_By_Ayat) {
@@ -91,6 +104,10 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                             <span className="ayat-number" style={{ fontFamily: 'hafs' }}
                                 onClick={() => handleAyatNumberClick(ayat.serial)}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
                         </div>
+                        //<div className="d-flex rtl">
+                        //    {getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
+                        //        && f.ayah == ayat.serialInSura))}
+                        //</div>
                     }
                     {quranData.translations.map(translation => {
                         if (translation.texts) {
@@ -199,6 +216,11 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                     <span id="ayatDetailDialogTitle" className="h5 pe-4 pb-3"></span>
                     <button type="submit" className="btn-close bg-theme-text" value="close"></button>
                 </div>
+                {selectedAyatCorpus.length > 0 &&
+                    <div className="d-flex rtl pb-3">
+                        {getWbwAyatText(selectedAyatCorpus)}
+                    </div>
+                }
                 <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div className="btn-group me-2" role="group" aria-label="First group">
                         <button type="submit" className="btn btn-primary" value="bookmark">Bookmark this ayat</button>
