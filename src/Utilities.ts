@@ -36,7 +36,7 @@ export function getDefaultSettings(): SettingsModel {
         quranFont: 'hafs',
         hideQuranText: false,
         translations: [translationList.filter(f => f.language == navLang)[0]],
-        wbwTranslation: wbwTranslationList.filter(f => f.language == navLang)[0],
+        wbwTranslations: [wbwTranslationList.filter(f => f.language == navLang)[0]],
         tafsirs: [],
         recitaions: recitationList.filter(f => f.id == 'Alafasy_128kbps')
     }

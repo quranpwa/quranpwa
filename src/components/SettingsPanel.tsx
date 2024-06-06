@@ -91,11 +91,11 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             <h5 className="mt-3">Word-by-word
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {wbwTranslationList.length}</small>
             </h5>
-            <Select blurInputOnSelect
+            <Select isMulti blurInputOnSelect
                 options={wbwTranslationItemsMapToSelectOption(wbwTranslationList)}
-                value={settingsData.wbwTranslation}
-                onChange={selectedOption => {
-                    settingsData.wbwTranslation = selectedOption.value
+                value={wbwTranslationItemsMapToSelectOption(settingsData.wbwTranslations)}
+                onChange={selectedOptions => {
+                    settingsData.wbwTranslations = selectedOptions.map(m => m.value)
                     onChange(settingsData)
                 }} />
 
@@ -185,7 +185,7 @@ export interface SettingsModel {
     readingMode: ReadingMode,
     hideQuranText: boolean,
     quranFont: string,
-    wbwTranslation: Translation
+    wbwTranslations: Translation[]
     translations: Translation[]
     tafsirs: Translation[]
     recitaions: Recitaion[]

@@ -84,7 +84,15 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
     const getWbwAyatText = (ayatCorpus: Corpus[]) => {
         return ayatCorpus.map(c => <span className="text-center" key={c.surah + '_' + c.ayah + '_' + c.word}>
             <span className="quran-text">{c.ar1 + c.ar2 + c.ar3 + c.ar4 + c.ar5 + ' '}</span>
-            <span className="d-block px-1" style={{ borderRight: 'solid 1px gray' }}>{quranData.wbwTranslation?.texts[c.idx]}</span>
+            {quranData.wbwTranslations.length > 0 &&
+                <span className="d-block px-1" style={{ borderRight: 'solid 1px gray' }}>
+                    {quranData.wbwTranslations.map(translation =>
+                        <span key={c.surah + '_' + c.ayah + '_' + c.word + translation.translationMeta.language} className="d-block">
+                            {translation.texts[c.idx]}
+                        </span>
+                    )}
+                </span>
+            }
         </span>);
     }
 

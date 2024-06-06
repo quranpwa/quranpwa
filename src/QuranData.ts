@@ -16,7 +16,7 @@ export class QuranData {
 
     ayats: Ayat[] = [];
     corpus: Corpus[] = [];
-    wbwTranslation?: TranslationWithData;
+    wbwTranslations: TranslationWithData[] = [];
     translations: TranslationWithData[] = [];
     tafsirs: TranslationWithData[] = [];
     recitations: RecitaionWithData[] = [];
@@ -250,23 +250,34 @@ export class QuranData {
         })
     }
 
-    setWbwTranslation(wbwTranslation: Translation, updateUI: () => void) {
-        if (this.wbwTranslation?.translationMeta?.fileName === wbwTranslation.fileName)
-            return;
+    setWbwTranslations(translations: Translation[], updateUI: () => void) {
+        this.wbwTranslations = this.wbwTranslations.filter(f =>
+            translations.some(s => s.fileName === f.translationMeta.fileName));
 
-        fetch(`./corpus/${wbwTranslation.fileName}.txt`)
-            .then<string>(response => response.text())
-            .then(text => {
-                const texts = text.split(/\r\n|\n/);
+        let notFetchedTranslations = translations.filter(f =>
+            !this.wbwTranslations.some(s => s.translationMeta.fileName === f.fileName));
 
-                this.wbwTranslation = {
-                    translationMeta: wbwTranslation,
-                    texts: texts
-                };
+        notFetchedTranslations.forEach(translation => {
+            fetch(`./corpus/${translation.fileName}.txt`)
+                .then<string>(response => response.text())
+                .then(text => {
+                    if (!this.wbwTranslations.some(s => s.translationMeta.fileName === translation.fileName)) {
 
-                updateUI();
-            })
-            .catch(error => console.error(error));
+                        const texts = text.split(/\r\n|\n/);
+
+                        this.wbwTranslations.push({ translationMeta: translation, texts: texts });
+
+                        const isLastTranslationToFetch = notFetchedTranslations.indexOf(translation) == notFetchedTranslations.length - 1;
+                        if (isLastTranslationToFetch)
+                            updateUI();
+                    }
+                })
+                .catch(error => console.error(error));
+        });
+
+        if (notFetchedTranslations.length == 0)
+            updateUI();
+
     }
 
     setTranslations(translations: Translation[], updateUI: () => void) {
