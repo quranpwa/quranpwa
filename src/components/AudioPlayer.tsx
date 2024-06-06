@@ -61,15 +61,15 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         let recitation = quranData.recitations[recitationIdx];
         if (recitation?.recitaionMeta?.isFilePerSura) {
 
-            let nextTiming: RecitaionTiming;
+            let nextAyatTiming: RecitaionTiming;
             if (recitation.recitaionMeta.byWBW) {
-                nextTiming = recitation.timings[selectedAyat];
+                nextAyatTiming = recitation.timings[selectedAyat];
             } else {
                 let suraIdx = ayats[0].suraIdx;
-                nextTiming = recitation.timings[selectedAyat + suraIdx];
+                nextAyatTiming = recitation.timings[selectedAyat + suraIdx];
             }
 
-            if (nextTiming && event.currentTarget.currentTime >= nextTiming.time / 1000) {
+            if (nextAyatTiming && event.currentTarget.currentTime >= nextAyatTiming.time / 1000) {
                 let currentAyatIdx = selectedAyat - ayats[0].serial;
                 let nextAyat = ayats[currentAyatIdx + 1];
 
@@ -81,6 +81,9 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                     }
 
                     onPlayingAyatChanged(nextAyat);
+                } else {
+                    setIsPlaying(false);
+                    event.currentTarget.pause();
                 }
                 return;
             }
