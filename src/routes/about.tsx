@@ -20,6 +20,7 @@ function About() {
             <li><a href="https://gtaf.org/" target="_blank">Greentech Apps Foundation (gtaf.org)</a></li>
             <li><a href="https://quranenc.com/" target="_blank">The Noble Qur'an Encyclopedia (QuranEnc.com)</a></li>
             <li><a href="https://quran.com/" target="_blank">Quran.com</a></li>
+            <li><a href="https://quranwbw.com/" target="_blank">QuranWBW.com</a></li>
             <li><a href="https://everyayah.com/" target="_blank">EveryAyah.com</a></li>
             <li><a href="https://www.quranicaudio.com/" target="_blank">QuranicAudio.com</a></li>
             <li><a href="https://quran.gov.bd/" target="_blank">Quran.gov.bd</a></li>
