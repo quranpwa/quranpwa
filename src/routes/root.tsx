@@ -4,7 +4,8 @@ import { AyatRange, NavigationMode, NavigationShortcutType, QuranData } from "..
 import { getStoredBookmarks, getStoredNavData, getStoredRecentlyReads } from "../StoredData";
 import { quran_karim_114_font_chars } from "../components/SuraHeader";
 import ThemeSwitch from "../components/ThemeSwitch";
-import SettingsPanel from "../components/SettingsPanel";
+import SettingsPanel, { SettingsModel } from "../components/SettingsPanel";
+import { getDefaultSettings } from "../Utilities";
 
 function Root() {
     const navData = getStoredNavData();
