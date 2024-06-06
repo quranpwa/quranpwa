@@ -345,7 +345,7 @@ export class QuranData {
         notFetchedRecitationTimings.forEach(recitation => {
             if (recitation.isFilePerSura) {
                 fetch(`./recitaion-timings/${recitation.id}.json`)
-                    .then<[[]]>(response => response.json())
+                    .then(response => response.json())
                     .then(fullTimingArray => {
                         if (!this.recitations.some(s => s.recitaionMeta.id === recitation.id)) {
                             let timings: RecitaionTiming[] = [];

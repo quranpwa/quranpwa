@@ -74,14 +74,16 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                     t[1] /*startTime*/ <= currentTimeInMS && t[2] /*endTime*/ >= currentTimeInMS)[0]
 
                 if (currentWordTiming) {
-                    let [wordNumber, startTime, endTime] = currentWordTiming;
+                    let wordNumber = currentWordTiming[0];
                     let thisWordId = 'word_' + thisAyatTiming.sura + '_' + thisAyatTiming.ayat + '_' + wordNumber;
 
                     if (currentWordId != thisWordId) {
-                        if (currentWordId)
-                            document.getElementById(currentWordId).style.color = 'white';
+                        //if (currentWordId)
+                        //    document.getElementById(currentWordId).style.color = 'white';
 
-                        document.getElementById(thisWordId).style.color = 'purple';
+                        let thisWordElement = document.getElementById(thisWordId);
+                        if (thisWordElement)
+                            thisWordElement.style.color = 'purple';
 
                         currentWordId = thisWordId;
                     }
