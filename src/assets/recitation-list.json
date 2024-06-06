@@ -1,12 +1,22 @@
 [
   {
+    "id": "mishari_alafasy",
+    "name": "Mishary Al-Afasy (WBW)",
+    "language": "ar",
+    "url": "https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee",
+    "byWBW": true,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
+    "style": "Murattal"
+  },
+  {
     "id": "Alafasy_128kbps",
     "name": "Mishary Al-Afasy",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/everyayah/Alafasy_128kbps",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Murattal"
   },
   {
@@ -14,9 +24,9 @@
     "name": "Abdul Basit",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/everyayah/Abdul_Basit_Mujawwad_128kbps",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Mujawwad"
   },
   {
@@ -24,9 +34,9 @@
     "name": "Saad Al-Ghamdi",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/everyayah/Ghamadi_40kbps",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Murattal"
   },
   {
@@ -34,9 +44,9 @@
     "name": "Maher Al-Muaiqly",
     "language": "ar",
     "url": "https://everyayah.com/data/MaherAlMuaiqly128kbps",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Murattal"
   },
   {
@@ -44,9 +54,9 @@
     "name": "Saood Ash-Shuraym",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/everyayah/Saood_ash-Shuraym_128kbps",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Murattal"
   },
   {
@@ -54,9 +64,9 @@
     "name": "Abdur-Rahman as-Sudais",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/everyayah/Abdurrahmaan_As-Sudais_192kbps",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Murattal"
   },
   {
@@ -64,9 +74,9 @@
     "name": "Khalifa al Tanaiji",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/mp3quran/khalifah_taniji",
-    "byWord": false,
-    "byVerse": false,
-    "bySura": true,
+    "byWBW": false,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
     "style": "Murattal"
   },
   {
@@ -74,9 +84,9 @@
     "name": "Abu-Bakr Ash-Shaatree",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/everyayah/Abu_Bakr_Ash-Shaatree_128kbps",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Murattal"
   },
   {
@@ -84,9 +94,9 @@
     "name": "Sharif Bayzid (Bangla, Mohiuddin Khan)",
     "language": "bn",
     "url": "https://static.gtaf.org/files/v1/audio/quran/sharif_bayzid_gtaf",
-    "byWord": false,
-    "byVerse": false,
-    "bySura": true,
+    "byWBW": false,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
     "style": "Translation"
   },
   {
@@ -94,9 +104,9 @@
     "name": "Mahbub Subhan (Bangla, quran.gov.bd)",
     "language": "bn",
     "url": "https://raw.githubusercontent.com/islam-apps/quran-audio/main/mahbub_subhan_quran.gov.bd",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Translation"
   },
   {
@@ -104,9 +114,9 @@
     "name": "Ibrahim Walk (English, Sahih International)",
     "language": "en",
     "url": "https://www.everyayah.com/data/English/Sahih_Intnl_Ibrahim_Walk_192kbps",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Translation"
   },
   {
@@ -114,9 +124,9 @@
     "name": "Shamshad Ali Khan (Urdu)",
     "language": "ur",
     "url": "https://www.everyayah.com/data/translations/urdu_shamshad_ali_khan_46kbps",
-    "byWord": false,
-    "byVerse": true,
-    "bySura": false,
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
     "style": "Translation"
   }
 ]

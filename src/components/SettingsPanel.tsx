@@ -56,7 +56,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     }
 
     const recitaionsMapToSelectOption = (recitaions: Recitaion[]) => {
-        return recitaions.filter(f => f.byVerse)
+        return recitaions
             .map(t => {
                 return { label: t.name, value: t }
             })

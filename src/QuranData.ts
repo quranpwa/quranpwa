@@ -343,11 +343,18 @@ export class QuranData {
             !this.recitations.some(s => s.recitaionMeta.id === f.id));
 
         notFetchedRecitationTimings.forEach(recitation => {
-            if (recitation.bySura) {
+            if (recitation.isFilePerSura) {
                 fetch(`./recitaion-timings/${recitation.id}.json`)
-                    .then<[]>(response => response.json())
-                    .then(timings => {
+                    .then<[[]]>(response => response.json())
+                    .then(fullTimingArray => {
                         if (!this.recitations.some(s => s.recitaionMeta.id === recitation.id)) {
+                            let timings: RecitaionTiming[] = [];
+
+                            for (var i = 0; i < fullTimingArray.length; i++) {
+                                let [sura, ayat, time, wordTimings] = fullTimingArray[i];
+
+                                timings.push({ sura: sura, ayat: ayat, time: time, wordTimings: wordTimings });
+                            }
 
                             this.recitations.push({ recitaionMeta: recitation, timings: timings });
                         }
@@ -491,15 +498,22 @@ export interface Recitaion {
     name: string,
     language: string,
     url: string,
-    byWord: boolean,
-    byVerse: boolean,
-    bySura: boolean,
+    byWBW: boolean,
+    isFilePerVerse: boolean,
+    isFilePerSura: boolean,
     style: string
+}
+
+export interface RecitaionTiming {
+    sura: number,
+    ayat: number,
+    time: number,
+    wordTimings: [number[]]
 }
 
 export interface RecitaionWithData {
     recitaionMeta: Recitaion,
-    timings: Array<[number, number, number]>
+    timings: RecitaionTiming[]
 }
 
 export enum NavigationMode {
