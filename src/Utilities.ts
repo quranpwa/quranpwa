@@ -34,7 +34,8 @@ export function getDefaultSettings(): SettingsModel {
     return {
         readingMode: ReadingMode.Ayat_By_Ayat,
         quranFont: 'hafs',
-        hideQuranText: false,
+        showQuranText: true,
+        showWbw: false,
         translations: [translationList.filter(f => f.language == navLang)[0]],
         wbwTranslations: [wbwTranslationList.filter(f => f.language == navLang)[0]],
         tafsirs: [],

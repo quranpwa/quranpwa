@@ -56,20 +56,42 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         audio.pause();
     };
 
+    let currentWordId: string;
+
     const handleOnTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>) => {
 
         let recitation = quranData.recitations[recitationIdx];
         if (recitation?.recitaionMeta?.isFilePerSura) {
+            let currentTimeInMS = event.currentTarget.currentTime * 1000;
 
             let nextAyatTiming: RecitaionTiming;
             if (recitation.recitaionMeta.byWBW) {
                 nextAyatTiming = recitation.timings[selectedAyat];
+
+                let thisAyatTiming = recitation.timings[selectedAyat - 1];
+
+                let currentWordTiming = thisAyatTiming.wordTimings.filter(t =>
+                    t[1] /*startTime*/ <= currentTimeInMS && t[2] /*endTime*/ >= currentTimeInMS)[0]
+
+                if (currentWordTiming) {
+                    let [wordNumber, startTime, endTime] = currentWordTiming;
+                    let thisWordId = 'word_' + thisAyatTiming.sura + '_' + thisAyatTiming.ayat + '_' + wordNumber;
+
+                    if (currentWordId != thisWordId) {
+                        if (currentWordId)
+                            document.getElementById(currentWordId).style.color = 'white';
+
+                        document.getElementById(thisWordId).style.color = 'purple';
+
+                        currentWordId = thisWordId;
+                    }
+                }
             } else {
                 let suraIdx = ayats[0].suraIdx;
                 nextAyatTiming = recitation.timings[selectedAyat + suraIdx];
             }
 
-            if (nextAyatTiming && event.currentTarget.currentTime >= nextAyatTiming.time / 1000) {
+            if (nextAyatTiming && currentTimeInMS >= nextAyatTiming.time) {
                 let currentAyatIdx = selectedAyat - ayats[0].serial;
                 let nextAyat = ayats[currentAyatIdx + 1];
 

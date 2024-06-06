@@ -82,8 +82,10 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
     };
 
     const getWbwAyatText = (ayatCorpus: Corpus[]) => {
-        return ayatCorpus.map(c => <span className="text-center" key={c.surah + '_' + c.ayah + '_' + c.word}>
-            <span className="quran-text">{c.ar1 + c.ar2 + c.ar3 + c.ar4 + c.ar5 + ' '}</span>
+        return ayatCorpus.map(c => <span className="text-center my-3"
+            key={c.surah + '_' + c.ayah + '_' + c.word}
+            id={'word_' + c.surah + '_' + c.ayah + '_' + c.word}>
+            <span className="quran-text px-1">{c.ar1 + c.ar2 + c.ar3 + c.ar4 + c.ar5 + ' '}</span>
             {quranData.wbwTranslations.length > 0 &&
                 <span className="d-block px-1" style={{ borderRight: 'solid 1px gray' }}>
                     {quranData.wbwTranslations.map(translation =>
@@ -106,16 +108,19 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 <hr />
                 <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}
                     onClick={() => handleAyatSelection(ayat.serial)}>
-                    {!settingsData.hideQuranText &&
+                    {settingsData.showQuranText && !settingsData.showWbw &&
                         <div className="quran-text rtl">
                             <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
                             <span className="ayat-number" style={{ fontFamily: 'hafs' }}
                                 onClick={() => handleAyatNumberClick(ayat.serial)}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
                         </div>
-                        //<div className="d-flex rtl">
-                        //    {getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
-                        //        && f.ayah == ayat.serialInSura))}
-                        //</div>
+
+                    }
+                    {settingsData.showQuranText && settingsData.showWbw &&
+                        <div className="d-flex rtl" style={{ flexWrap: 'wrap' }}>
+                            {getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
+                                && f.ayah == ayat.serialInSura))}
+                        </div>
                     }
                     {quranData.translations.map(translation => {
                         if (translation.texts) {
@@ -149,7 +154,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
         let ayatsGroupByRuku = groupBy(ayats, x => x.rukuIdx);
         let firstTranslation = quranData.translations[0];
-        let colClass = !settingsData.hideQuranText && firstTranslation ? "col-md-6 " : "col-md-12 ";
+        let colClass = settingsData.showQuranText && firstTranslation ? "col-md-6 " : "col-md-12 ";
 
         for (let rukuIdx in ayatsGroupByRuku) {
             let ruku = quranData.rukus[+rukuIdx];
@@ -166,7 +171,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                     </small>
                 </h3>
 
-                {!settingsData.hideQuranText &&
+                {settingsData.showQuranText &&
                     <div className={colClass + "ps-md-4 pt-md-4 quran-text mt-2"}>
                         {rukuAyats.map(ayat =>
                             <span id={ayat.serial.toString()} key={ayat.serial}

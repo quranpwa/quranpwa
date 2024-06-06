@@ -23,8 +23,13 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         onChange(settingsData);
     };
 
-    const handleHideQuranTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        settingsData.hideQuranText = event.target.checked;
+    const handleShowQuranTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        settingsData.showQuranText = event.target.checked;
+        onChange(settingsData);
+    };
+
+    const handleShowWbwChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        settingsData.showWbw = event.target.checked;
         onChange(settingsData);
     };
 
@@ -133,11 +138,19 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                             <option key={item} value={item}>{item}</option>)}
                     </select>
                 </div>
+
+                <h6>Contents</h6>
                 <div className="form-check ms-2">
-                    <input className="form-check-input" type="checkbox" id="HideQuranTextInput"
-                        checked={settingsData.hideQuranText}
-                        onChange={handleHideQuranTextChange} />
-                    <label className="form-check-label" htmlFor="HideQuranTextInput">Hide Quran Text</label>
+                    <input className="form-check-input" type="checkbox" id="ShowQuranTextInput"
+                        checked={settingsData.showQuranText}
+                        onChange={handleShowQuranTextChange} />
+                    <label className="form-check-label" htmlFor="ShowQuranTextInput">Show Quran Text</label>
+                </div>
+                <div className="form-check ms-2">
+                    <input className="form-check-input" type="checkbox" id="ShowWbwInput"
+                        checked={settingsData.showWbw}
+                        onChange={handleShowWbwChange} />
+                    <label className="form-check-label" htmlFor="ShowWbwInput">Show Word By Word</label>
                 </div>
             </div>
 
@@ -183,7 +196,8 @@ export enum ReadingMode {
 
 export interface SettingsModel {
     readingMode: ReadingMode,
-    hideQuranText: boolean,
+    showQuranText: boolean,
+    showWbw: boolean,
     quranFont: string,
     wbwTranslations: WbwTranslation[]
     translations: Translation[]
