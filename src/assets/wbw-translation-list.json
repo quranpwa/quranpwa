@@ -1,18 +1,62 @@
 [
   {
-    "Name": "English",
-    "languageName": "English",
-    "translator": "English",
-    "fileName": "words_en",
-    "language": "en",
-    "locale": "en-US"
+    "name": "Bangla",
+    "fileName": "words-bn",
+    "language": "bn"
   },
   {
-    "Name": "Bangla",
-    "languageName": "Bangla",
-    "translator": "Bangla",
-    "fileName": "words_bn",
-    "language": "bn",
-    "locale": "bn-BD"
+    "name": "Divehi - Bakurube",
+    "fileName": "words-dv",
+    "language": "dv"
+  },
+  {
+    "name": "English",
+    "fileName": "words-en",
+    "language": "en"
+  },
+  {
+    "name": "English - Transliteration",
+    "fileName": "words-en-trans",
+    "language": "en_trans"
+  },
+  {
+    "name": "German",
+    "fileName": "words-de",
+    "language": "de"
+  },
+  {
+    "name": "Hindi",
+    "fileName": "words-hi",
+    "language": "hi"
+  },
+  {
+    "name": "Indonesian/Malay",
+    "fileName": "words-in",
+    "language": "in"
+  },
+  {
+    "name": "Ingush",
+    "fileName": "words-inh",
+    "language": "inh"
+  },
+  {
+    "name": "Russian",
+    "fileName": "words-ru",
+    "language": "ru"
+  },
+  {
+    "name": "Tamil - Darul Huda",
+    "fileName": "words-ta",
+    "language": "ta"
+  },
+  {
+    "name": "Turkish",
+    "fileName": "words-tr",
+    "language": "tr"
+  },
+  {
+    "name": "Urdu",
+    "fileName": "words-ur",
+    "language": "ur"
   }
 ]

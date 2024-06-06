@@ -1,5 +1,5 @@
 ﻿import Select from 'react-select';
-import { Recitaion, Translation } from '../QuranData';
+import { Recitaion, Translation, WbwTranslation } from '../QuranData';
 import { getDefaultSettings, groupBy } from '../Utilities';
 import recitationList from '../assets/recitation-list.json';
 import tafsirList from '../assets/tafsir-list.json';
@@ -46,10 +46,10 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         })
     }
 
-    const wbwTranslationItemsMapToSelectOption = (translationItems: Translation[]) => {
+    const wbwTranslationItemsMapToSelectOption = (translationItems: WbwTranslation[]) => {
         return translationItems.map(t => {
             return {
-                label: t.Name,
+                label: t.name,
                 value: t
             }
         })
@@ -185,7 +185,7 @@ export interface SettingsModel {
     readingMode: ReadingMode,
     hideQuranText: boolean,
     quranFont: string,
-    wbwTranslations: Translation[]
+    wbwTranslations: WbwTranslation[]
     translations: Translation[]
     tafsirs: Translation[]
     recitaions: Recitaion[]
