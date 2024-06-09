@@ -31,7 +31,6 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     };
 
     const handlePlayClick = (/*event: React.MouseEvent<HTMLButtonElement>*/) => {
-        setIsPlaying(true);
         let audio = document.getElementsByTagName('audio').item(0) as HTMLAudioElement;
 
         let recitation = quranData.recitations[recitationIdx];
@@ -48,12 +47,13 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         }
 
         audio.play();
+        setIsPlaying(true);
     };
 
     const handlePauseClick = (/*event: React.MouseEvent<HTMLButtonElement>*/) => {
-        setIsPlaying(false);
         let audio = document.getElementsByTagName('audio').item(0) as HTMLAudioElement;
         audio.pause();
+        setIsPlaying(false);
     };
 
     let previousWordId: string;
@@ -61,13 +61,11 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     const handleOnTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>) => {
 
         let recitation = quranData.recitations[recitationIdx];
+
         if (recitation?.recitaionMeta?.isFilePerSura) {
             let currentTimeInMS = event.currentTarget.currentTime * 1000;
 
-            let nextAyatTiming: RecitaionTiming;
             if (recitation.recitaionMeta.byWBW) {
-                nextAyatTiming = recitation.timings[selectedAyat];
-
                 let thisAyatTiming = recitation.timings[selectedAyat - 1];
 
                 let currentWordTiming = thisAyatTiming.wordTimings.filter(t =>
@@ -89,28 +87,31 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                         previousWordId = currentWordId;
                     }
                 }
-            } else {
-                let suraIdx = ayats[0].suraIdx;
-                nextAyatTiming = recitation.timings[selectedAyat + suraIdx];
             }
 
-            if (nextAyatTiming && currentTimeInMS >= nextAyatTiming.time) {
-                let currentAyatIdx = selectedAyat - ayats[0].serial;
-                let nextAyat = ayats[currentAyatIdx + 1];
+            let currentAyatIdx = selectedAyat - ayats[0].serial;
+            let nextAyat = ayats[currentAyatIdx + 1];
+            let nextAyatTiming = recitation.recitaionMeta.byWBW
+                ? recitation.timings[selectedAyat]
+                : recitation.timings[selectedAyat + ayats[0].suraIdx];
 
-                if (nextAyat) {
+            if (nextAyat) {
+                if (nextAyatTiming && currentTimeInMS >= nextAyatTiming.time) {
                     if (nextAyat.serial > ayats[ayats.length - 1].serial) {
-                        setIsPlaying(false);
                         event.currentTarget.pause();
-                        return;
+                        setIsPlaying(false);
+                    } else {
+                        onPlayingAyatChanged(nextAyat);
                     }
-
-                    onPlayingAyatChanged(nextAyat);
-                } else {
-                    setIsPlaying(false);
-                    event.currentTarget.pause();
                 }
-                return;
+            } else {
+                let currentAyat = ayats[currentAyatIdx];
+                if (nextAyatTiming
+                    && nextAyatTiming.sura == currentAyat.suraIdx + 1
+                    && currentTimeInMS >= nextAyatTiming.time) {
+                    event.currentTarget.pause();
+                    setIsPlaying(false);
+                }
             }
         }
     };
