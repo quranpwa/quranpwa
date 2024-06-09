@@ -56,7 +56,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         audio.pause();
     };
 
-    let currentWordId: string;
+    let previousWordId: string;
 
     const handleOnTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>) => {
 
@@ -75,17 +75,18 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
 
                 if (currentWordTiming) {
                     let wordNumber = currentWordTiming[0];
-                    let thisWordId = 'word_' + thisAyatTiming.sura + '_' + thisAyatTiming.ayat + '_' + wordNumber;
+                    let currentWordId = 'word_' + thisAyatTiming.sura + '_' + thisAyatTiming.ayat + '_' + wordNumber;
 
-                    if (currentWordId != thisWordId) {
-                        //if (currentWordId)
-                        //    document.getElementById(currentWordId).style.color = 'white';
+                    if (previousWordId != currentWordId) {
+                        //let previousWordElement = document.getElementById(previousWordId);
+                        //if (previousWordElement)
+                        //    previousWordElement.style.color = 'gray';
 
-                        let thisWordElement = document.getElementById(thisWordId);
-                        if (thisWordElement)
-                            thisWordElement.style.color = 'purple';
+                        let currentWordElement = document.getElementById(currentWordId);
+                        if (currentWordElement)
+                            currentWordElement.style.color = 'lightgreen';
 
-                        currentWordId = thisWordId;
+                        previousWordId = currentWordId;
                     }
                 }
             } else {
