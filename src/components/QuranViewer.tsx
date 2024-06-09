@@ -118,7 +118,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
                     }
                     {settingsData.showQuranText && settingsData.showWbw &&
-                        <div className="d-flex rtl" style={{ flexWrap: 'wrap' }}>
+                        <div className="d-flex flex-wrap rtl">
                             {getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
                                 && f.ayah == ayat.serialInSura))}
                             <span className="ayat-number quran-text my-3 px-1" style={{ fontFamily: 'hafs' }}
@@ -233,7 +233,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                     <button type="submit" className="btn-close bg-theme-text" value="close"></button>
                 </div>
                 {selectedAyatCorpus.length > 0 &&
-                    <div className="d-flex rtl pb-3">
+                    <div className="d-flex flex-wrap rtl pb-3">
                         {getWbwAyatText(selectedAyatCorpus)}
                     </div>
                 }
