@@ -43,28 +43,27 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     };
 
     const translationItemsMapToSelectOption = (translationItems: Translation[]) => {
-        return translationItems.map(t => {
+        return translationItems?.map(t => {
             return {
                 label: t.languageName + ' - ' + t.Name,
                 value: t
             }
-        })
+        }) ?? []
     }
 
     const wbwTranslationItemsMapToSelectOption = (translationItems: WbwTranslation[]) => {
-        return translationItems.map(t => {
+        return translationItems?.map(t => {
             return {
                 label: t.name,
                 value: t
             }
-        })
+        }) ?? []
     }
 
     const recitaionsMapToSelectOption = (recitaions: Recitaion[]) => {
-        return recitaions
-            .map(t => {
-                return { label: t.name, value: t }
-            })
+        return recitaions?.map(t => {
+            return { label: t.name, value: t }
+        }) ?? []
     }
 
     const translationsGroupByLang = groupBy(translationList, x => x.language);
