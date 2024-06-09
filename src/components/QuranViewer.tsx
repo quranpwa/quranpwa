@@ -103,10 +103,11 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
     if (settingsData?.readingMode == ReadingMode.Ayat_By_Ayat) {
         let keyA = 0;
         contents.push(<div key={keyA++}> {
-            ayats.map(ayat => <div key={ayat.serial} id={ayat.serial.toString()}>
+            ayats.map(ayat => <div key={ayat.serial}>
                 {ayat.serialInSura == 1 && <SuraHeader quranData={quranData} suraIdx={ayat.suraIdx} />}
                 <hr />
-                <div className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}
+                <div id={ayat.serial.toString()} 
+                    className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}
                     onClick={() => handleAyatSelection(ayat.serial)}>
                     {settingsData.showQuranText && !settingsData.showWbw &&
                         <div className="quran-text rtl">
