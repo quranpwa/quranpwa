@@ -250,11 +250,16 @@ export class QuranData {
         })
     }
 
-    setWbwTranslations(translations: WbwTranslation[], updateUI: () => void) {
-        this.wbwTranslations = this.wbwTranslations.filter(f =>
-            translations.some(s => s.fileName === f.translationMeta.fileName));
+    setWbwTranslations(wbwTranslations: WbwTranslation[], updateUI: () => void) {
+        if (!wbwTranslations) {
+            this.wbwTranslations = [];
+            return;
+        }
 
-        let notFetchedTranslations = translations.filter(f =>
+        this.wbwTranslations = this.wbwTranslations.filter(f =>
+            wbwTranslations.some(s => s.fileName === f.translationMeta.fileName));
+
+        let notFetchedTranslations = wbwTranslations.filter(f =>
             !this.wbwTranslations.some(s => s.translationMeta.fileName === f.fileName));
 
         notFetchedTranslations.forEach(translation => {
@@ -281,6 +286,11 @@ export class QuranData {
     }
 
     setTranslations(translations: Translation[], updateUI: () => void) {
+        if (!translations) {
+            this.translations = [];
+            return;
+        }
+
         this.translations = this.translations.filter(f =>
             translations.some(s => s.fileName === f.translationMeta.fileName));
 
@@ -309,6 +319,11 @@ export class QuranData {
     }
 
     setTafsirs(tafsirs: Translation[], updateUI: () => void) {
+        if (!tafsirs) {
+            this.tafsirs = [];
+            return;
+        }
+
         this.tafsirs = this.tafsirs.filter(f =>
             tafsirs.some(s => s.fileName === f.translationMeta.fileName));
 
@@ -336,6 +351,11 @@ export class QuranData {
     }
 
     setRecitations(recitations: Recitaion[]) {
+        if (!recitations) {
+            this.recitations = [];
+            return;
+        }
+        
         this.recitations = this.recitations.filter(f =>
             recitations.some(s => s.id === f.recitaionMeta.id));
 
