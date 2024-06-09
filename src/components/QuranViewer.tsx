@@ -106,7 +106,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
             ayats.map(ayat => <div key={ayat.serial}>
                 {ayat.serialInSura == 1 && <SuraHeader quranData={quranData} suraIdx={ayat.suraIdx} />}
                 <hr />
-                <div id={ayat.serial.toString()} 
+                <div id={ayat.serial.toString()}
                     className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}
                     onClick={() => handleAyatSelection(ayat.serial)}>
                     {settingsData.showQuranText && !settingsData.showWbw &&
@@ -121,6 +121,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                         <div className="d-flex rtl" style={{ flexWrap: 'wrap' }}>
                             {getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
                                 && f.ayah == ayat.serialInSura))}
+                            <span className="ayat-number quran-text my-3 px-1" style={{ fontFamily: 'hafs' }}
+                                onClick={() => handleAyatNumberClick(ayat.serial)}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
                         </div>
                     }
                     {quranData.translations.map(translation => {
