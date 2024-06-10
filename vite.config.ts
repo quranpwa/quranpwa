@@ -11,8 +11,8 @@ export default defineConfig({
             globPatterns: ['**/*.{html,css,js,ico,png,svg,ttf}'],
             runtimeCaching: [{
                 handler: 'CacheFirst',
-                urlPattern: /.*\.json$/,
-                options: { cacheName: 'jsonData' }
+                urlPattern: /.*\.(json|csv|txt)$/,
+                options: { cacheName: 'textData' }
             }, {
                 handler: 'CacheFirst',
                 urlPattern: /.*\.mp3$/,
