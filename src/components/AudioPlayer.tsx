@@ -34,15 +34,10 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         let audio = document.getElementsByTagName('audio').item(0) as HTMLAudioElement;
 
         let recitation = quranData.recitations[recitationIdx];
-        if (recitation?.recitaionMeta?.isFilePerSura) {
-            let timing: RecitaionTiming;
-            if (recitation.recitaionMeta.byWBW) {
-                timing = recitation.timings[selectedAyat - 1];
-            } else {
-                let suraIdx = ayats[0].suraIdx
-                timing = recitation.timings[selectedAyat - 1 + suraIdx];
-            }
 
+        if (recitation?.recitaionMeta?.isFilePerSura) {
+            let timing: RecitaionTiming = recitation.timings[selectedAyat - 1];
+            
             audio.currentTime = (timing.time || 0) / 1000;
         }
 
@@ -91,9 +86,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
 
             let currentAyatIdx = selectedAyat - ayats[0].serial;
             let nextAyat = ayats[currentAyatIdx + 1];
-            let nextAyatTiming = recitation.recitaionMeta.byWBW
-                ? recitation.timings[selectedAyat]
-                : recitation.timings[selectedAyat + ayats[0].suraIdx];
+            let nextAyatTiming = recitation.timings[selectedAyat];
 
             if (nextAyat) {
                 if (nextAyatTiming && currentTimeInMS >= nextAyatTiming.time) {
@@ -181,7 +174,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             </div>
         </div>
 
-        <audio src={getAudioUrl()} crossOrigin="anonymous" autoPlay={isPlaying}
+        <audio src={getAudioUrl()} autoPlay={isPlaying}
             onTimeUpdate={handleOnTimeUpdate}
             onEnded={handleOnEnded}></audio>
     </div>;
