@@ -9,7 +9,7 @@ function About() {
         </h1>
 
         <p className="text-center">
-            <span className="badge bg-secondary"> Version: 1.0.1 </span>
+            <span className="badge bg-secondary"> Version: 1.1.0 </span>
             <span className="badge bg-secondary ms-2">Release Date: 2024-05-29</span>
         </p>
 
