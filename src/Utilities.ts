@@ -39,6 +39,6 @@ export function getDefaultSettings(): SettingsModel {
         translations: [translationList.filter(f => f.language == navLang)[0]],
         wbwTranslations: [wbwTranslationList.filter(f => f.language == navLang)[0]],
         tafsirs: [],
-        recitaions: recitationList.filter(f => f.id == 'Alafasy_128kbps')
+        recitaions: recitationList.filter(f => f.id == 'mishari_alafasy')
     }
 }

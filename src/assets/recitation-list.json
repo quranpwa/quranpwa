@@ -1,7 +1,7 @@
 [
   {
     "id": "mishari_alafasy",
-    "name": "Mishary Al-Afasy (WBW)",
+    "name": "Mishary Rashid Al-Afasy (WBW)",
     "language": "ar",
     "url": "https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee",
     "byWBW": true,
@@ -11,7 +11,7 @@
   },
   {
     "id": "Alafasy_128kbps",
-    "name": "Mishary Al-Afasy",
+    "name": "Mishary Rashid Al-Afasy",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/everyayah/Alafasy_128kbps",
     "byWBW": false,
