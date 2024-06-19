@@ -62,7 +62,17 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
 
     const recitaionsMapToSelectOption = (recitaions: Recitaion[]) => {
         return recitaions?.map(t => {
-            return { label: t.name, value: t }
+            let tags = [];
+            
+            if(t.byWBW) 
+                tags.push('WBW');
+
+            if(t.isFilePerVerse) 
+                tags.push('With Gap');
+
+            let label = tags.length > 0 ? t.name + ' (' + tags.join(', ') + ')' : t.name;
+
+            return { label: label, value: t }
         }) ?? []
     }
 
