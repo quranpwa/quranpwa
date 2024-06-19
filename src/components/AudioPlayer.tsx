@@ -1,5 +1,5 @@
 ﻿import React, { useReducer, useState } from 'react';
-import { Ayat, QuranData, RecitaionTiming } from '../QuranData';
+import { Ayat, QuranData, RecitaionTiming, RecitaionWithData } from '../QuranData';
 import { getAyatId, padLeft } from '../Utilities';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 
@@ -8,9 +8,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     const [recitationIdx, setRecitationIdx] = useState<number>(0)
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-    const getAudioUrl = (): string => {
-
-        let recitation = quranData.recitations[recitationIdx];
+    const getAudioUrl = (recitation: RecitaionWithData): string => {
         if (!recitation || !ayats?.length)
             return '';
 
@@ -23,8 +21,8 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             return `${recitationMeta.url}/${ayatId}.mp3`;
         }
         else if (recitationMeta.isFilePerSura) {
-            let suraSerial = recitationMeta.hasFileNameLeadingZeros === false 
-                ? startingAyat.suraIdx + 1 
+            let suraSerial = recitationMeta.hasFileNameLeadingZeros === false
+                ? startingAyat.suraIdx + 1
                 : padLeft((startingAyat.suraIdx + 1).toString(), 3);
 
             return `${recitationMeta.url}/${suraSerial}.mp3`;
@@ -32,24 +30,50 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         else return ''
     };
 
-    const handlePlayClick = (/*event: React.MouseEvent<HTMLButtonElement>*/) => {
-        let audio = document.getElementsByTagName('audio').item(0) as HTMLAudioElement;
+    const handlePlay = (p_recitationIdx?: number) => {
+        let recitation = quranData.recitations[p_recitationIdx ?? recitationIdx];
 
-        let recitation = quranData.recitations[recitationIdx];
+        let audioElements = document.getElementsByTagName('audio')
 
-        if (recitation?.recitaionMeta?.isFilePerSura) {
-            let timing: RecitaionTiming = recitation.timings[selectedAyat - 1];
-            
-            audio.currentTime = (timing.time || 0) / 1000;
+        for (let audioElement of audioElements) {
+            if (audioElement.id == recitation.recitaionMeta.id) {
+                if (recitation?.recitaionMeta?.isFilePerSura) {
+                    let currentAyatTiming: RecitaionTiming = recitation.timings[selectedAyat - 1];
+                    let nextAyatTiming: RecitaionTiming = recitation.timings[selectedAyat];
+                    let currentAyatStartTime = (currentAyatTiming.time || 0) / 1000;
+                    let nextAyatStartTime = nextAyatTiming.sura == currentAyatTiming.sura ? (nextAyatTiming.time || 0) / 1000 : Number.MAX_VALUE - 1;
+
+                    if (audioElement.currentTime < currentAyatStartTime
+                        || audioElement.currentTime > nextAyatStartTime + 1) {
+                        audioElement.currentTime = (currentAyatTiming.time || 0) / 1000;
+                    }
+                }
+
+                audioElement.play();
+            }
+            else {
+                audioElement.pause();
+            }
         }
+    };
 
-        audio.play();
+    const pauseAll = () => {
+        let audioElements = document.getElementsByTagName('audio')
+
+        for (let audioElement of audioElements) {
+            audioElement.pause();
+        }
+    };
+
+    const handlePlayClick = (/*event: React.MouseEvent<HTMLButtonElement>*/) => {
+        handlePlay();
+
         setIsPlaying(true);
     };
 
     const handlePauseClick = (/*event: React.MouseEvent<HTMLButtonElement>*/) => {
-        let audio = document.getElementsByTagName('audio').item(0) as HTMLAudioElement;
-        audio.pause();
+        pauseAll();
+
         setIsPlaying(false);
     };
 
@@ -58,6 +82,11 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     const handleOnTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>) => {
 
         let recitation = quranData.recitations[recitationIdx];
+
+        // if (event.currentTarget.id != recitation.recitaionMeta.id) {
+        //     event.currentTarget.pause();
+        //     return;
+        // }
 
         if (recitation?.recitaionMeta?.isFilePerSura) {
             let currentTimeInMS = event.currentTarget.currentTime * 1000;
@@ -87,28 +116,54 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             }
 
             let currentAyatIdx = selectedAyat - ayats[0].serial;
+            let currentAyat = ayats[currentAyatIdx];
             let nextAyat = ayats[currentAyatIdx + 1];
             let nextAyatTiming = recitation.timings[selectedAyat];
 
             if (nextAyat) {
-                if (nextAyatTiming && currentTimeInMS >= nextAyatTiming.time) {
-                    if (nextAyat.serial > ayats[ayats.length - 1].serial) {
-                        event.currentTarget.pause();
-                        setIsPlaying(false);
-                    } else {
-                        onPlayingAyatChanged(nextAyat);
-                    }
+                if (currentTimeInMS >= nextAyatTiming?.time) {
+                    setTimeout(() => {
+                        ayatEnded(currentAyatIdx, nextAyat);
+                    });
                 }
             } else {
-                let currentAyat = ayats[currentAyatIdx];
                 if (nextAyatTiming
                     && nextAyatTiming.sura == currentAyat.suraIdx + 1
                     && currentTimeInMS >= nextAyatTiming.time) {
-                    event.currentTarget.pause();
-                    setIsPlaying(false);
+
+                    ayatEnded(currentAyatIdx, nextAyat);
                 }
             }
         }
+    };
+
+    const ayatEnded = (currentAyatIdx: number, nextAyat: Ayat) => {
+
+        if (quranData.recitations.length == 1) {
+            if (nextAyat)
+                onPlayingAyatChanged(nextAyat);
+            return;
+        }
+
+        pauseAll();
+
+        let isLastAyat = currentAyatIdx >= ayats.length - 1;
+        let isLastRecitaion = recitationIdx >= quranData.recitations.length - 1;
+
+        if (isLastAyat && isLastRecitaion) {
+            setIsPlaying(false);
+            return;
+        }
+
+        let nextRecitationId = isLastRecitaion ? 0 : recitationIdx + 1;
+        setRecitationIdx(nextRecitationId);
+
+        if (settingsData.readingMode == ReadingMode.Ayat_By_Ayat) {
+            handlePlay(nextRecitationId);
+        }
+
+        if (isLastRecitaion && nextAyat)
+            onPlayingAyatChanged(nextAyat);
     };
 
     const handleOnEnded = () => {
@@ -118,33 +173,36 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         let currentAyatIdx = (selectedAyat || ayats[0].serial) - ayats[0].serial;
         let isLastAyat = currentAyatIdx >= ayats.length - 1;
         let isLastRecitaion = recitationIdx >= quranData.recitations.length - 1;
+        let nextRecitationId = isLastRecitaion ? 0 : recitationIdx + 1;
 
         if (isLastAyat) {
             if (isLastRecitaion) {
                 setIsPlaying(false);
-                setRecitationIdx(0);
             } else {
-                setRecitationIdx(recitationIdx + 1);
                 if (settingsData.readingMode == ReadingMode.Ayat_By_Ayat)
                     forceUpdate();
                 else
                     onPlayingAyatChanged(ayats[0]);
             }
+            setRecitationIdx(nextRecitationId);
             return;
         }
 
         if (settingsData.readingMode == ReadingMode.Ayat_By_Ayat) {
-            if (isLastRecitaion) {
-                setRecitationIdx(0);
-            } else {
-                setRecitationIdx(recitationIdx + 1);
-                forceUpdate();
-                return;
-            }
+            setRecitationIdx(nextRecitationId);
+
+            // if (!isLastRecitaion) {
+            //     forceUpdate();
+            //     return;
+            // }
         }
 
         let nextAyat = ayats[currentAyatIdx + 1];
-        onPlayingAyatChanged(nextAyat)
+        onPlayingAyatChanged(nextAyat);
+
+        if (quranData.recitations.length > 1) {
+            handlePlay(nextRecitationId);
+        }
     };
 
     return <div className='fixed-bottom d-flex p-2' style={{ justifyContent: 'center' }}>
@@ -175,10 +233,13 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                 </ul>
             </div>
         </div>
+        {quranData.recitations.map(r =>
+            <audio key={r.recitaionMeta.id} id={r.recitaionMeta.id}
+                src={getAudioUrl(r)} autoPlay={isPlaying}
+                onTimeUpdate={handleOnTimeUpdate}
+                onEnded={handleOnEnded} controls title={r.recitaionMeta.id}></audio>
+        )}
 
-        <audio src={getAudioUrl()} autoPlay={isPlaying}
-            onTimeUpdate={handleOnTimeUpdate}
-            onEnded={handleOnEnded}></audio>
     </div>;
 }
 
