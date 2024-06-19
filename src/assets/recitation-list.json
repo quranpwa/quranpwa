@@ -73,11 +73,12 @@
     "id": "khalifah_taniji",
     "name": "Khalifah al-Taniji",
     "language": "ar",
-    "url": "https://mirrors.quranicaudio.com/mp3quran/khalifah_taniji",
-    "byWBW": false,
+    "url": "https://download.quranicaudio.com/qdc/khalifah_taniji/murattal",
+    "byWBW": true,
     "isFilePerVerse": false,
     "isFilePerSura": true,
-    "style": "Murattal"
+    "style": "Murattal",
+    "hasFileNameLeadingZeros": false
   },
   {
     "id": "Abu_Bakr_Ash-Shaatree_128kbps",

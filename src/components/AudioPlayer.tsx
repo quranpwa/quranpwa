@@ -23,7 +23,9 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             return `${recitationMeta.url}/${ayatId}.mp3`;
         }
         else if (recitationMeta.isFilePerSura) {
-            let suraSerial = padLeft((startingAyat.suraIdx + 1).toString(), 3);
+            let suraSerial = recitationMeta.hasFileNameLeadingZeros === false 
+                ? startingAyat.suraIdx + 1 
+                : padLeft((startingAyat.suraIdx + 1).toString(), 3);
 
             return `${recitationMeta.url}/${suraSerial}.mp3`;
         }

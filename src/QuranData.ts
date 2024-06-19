@@ -521,7 +521,8 @@ export interface Recitaion {
     byWBW: boolean,
     isFilePerVerse: boolean,
     isFilePerSura: boolean,
-    style: string
+    style: string,
+    hasFileNameLeadingZeros?:boolean
 }
 
 export interface RecitaionTiming {
