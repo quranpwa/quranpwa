@@ -45,7 +45,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     const translationItemsMapToSelectOption = (translationItems: Translation[]) => {
         return translationItems?.map(t => {
             return {
-                label: t.languageName + ' - ' + t.Name,
+                label: t?.languageName + ' - ' + t?.Name,
                 value: t
             }
         }) ?? []
@@ -54,7 +54,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     const wbwTranslationItemsMapToSelectOption = (translationItems: WbwTranslation[]) => {
         return translationItems?.map(t => {
             return {
-                label: t.name,
+                label: t?.name,
                 value: t
             }
         }) ?? []
@@ -70,7 +70,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             if(t.isFilePerVerse) 
                 tags.push('With Gap');
 
-            let label = tags.length > 0 ? t.name + ' (' + tags.join(', ') + ')' : t.name;
+            let label = tags.length > 0 ? t?.name + ' (' + tags.join(', ') + ')' : t?.name;
 
             return { label: label, value: t }
         }) ?? []
