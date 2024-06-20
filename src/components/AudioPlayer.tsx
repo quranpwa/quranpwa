@@ -281,7 +281,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             <audio key={r.recitaionMeta.id} id={r.recitaionMeta.id}
                 src={getAudioUrl(r)}
                 onTimeUpdate={handleOnTimeUpdate}
-                onEnded={handleOnEnded} controls title={r.recitaionMeta.id}></audio>
+                onEnded={handleOnEnded}></audio>
         )}
 
     </div>;

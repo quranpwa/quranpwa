@@ -20,8 +20,19 @@
     "style": "Murattal"
   },
   {
+    "id": "abdul_baset_mujawwad",
+    "name": "Abdul Basit, Mujawwad",
+    "language": "ar",
+    "url": "https://download.quranicaudio.com/qdc/abdul_baset/mujawwad",
+    "byWBW": true,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
+    "style": "Mujawwad",
+    "hasFileNameLeadingZeros": false
+  },
+  {
     "id": "Abdul_Basit_Mujawwad_128kbps",
-    "name": "Abdul Basit",
+    "name": "Abdul Basit, Mujawwad",
     "language": "ar",
     "url": "https://mirrors.quranicaudio.com/everyayah/Abdul_Basit_Mujawwad_128kbps",
     "byWBW": false,
