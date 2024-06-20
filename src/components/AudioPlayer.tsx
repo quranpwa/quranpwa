@@ -203,13 +203,14 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                     </svg>
                 </button>
             }
-            {isPlaying &&
+            {isPlaying && <>
                 <button className="btn theme-colored border" type="button" onClick={handlePauseClick} title="Pause">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-pause-fill" viewBox="0 0 16 16">
                         <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5" />
                     </svg>
                 </button>
-            }
+                <span className="btn theme-colored border">{quranData.recitations[recitationIdx]?.recitaionMeta?.name}</span>
+            </>}
             <div className="btn-group">
                 <button type="button" className="btn theme-colored border dropdown-toggle" data-bs-toggle="dropdown">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -223,11 +224,11 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         </div>
         {quranData.recitations.sort((a, b) => a?.recitaionMeta?.language > b?.recitaionMeta?.language ? 1 : -1)
             .map(r =>
-            <audio key={r.recitaionMeta.id} id={r.recitaionMeta.id}
-                src={getAudioUrl(r)} autoPlay={isPlaying && quranData.recitations.length == 1}
-                onTimeUpdate={handleOnTimeUpdate}
-                onEnded={handleOnEnded}></audio>
-        )}
+                <audio key={r.recitaionMeta.id} id={r.recitaionMeta.id}
+                    src={getAudioUrl(r)} autoPlay={isPlaying && quranData.recitations.length == 1}
+                    onTimeUpdate={handleOnTimeUpdate}
+                    onEnded={handleOnEnded}></audio>
+            )}
 
     </div>;
 }
