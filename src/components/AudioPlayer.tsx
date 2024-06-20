@@ -1,4 +1,4 @@
-﻿import React, { useReducer, useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Ayat, QuranData, RecitaionTiming, RecitaionWithData } from '../QuranData';
 import { getAyatId, padLeft } from '../Utilities';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
@@ -6,7 +6,6 @@ import { ReadingMode, SettingsModel } from './SettingsPanel';
 function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAyatChanged }: AudioPlayerProps) {
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
     const [recitationIdx, setRecitationIdx] = useState<number>(0)
-    const [, forceUpdate] = useReducer(x => x + 1, 0);
     const recitations = quranData.recitations.sort((a, b) => a?.recitaionMeta?.language > b?.recitaionMeta?.language ? 1 : -1);
 
     const getAudioUrl = (recitation: RecitaionWithData): string => {
