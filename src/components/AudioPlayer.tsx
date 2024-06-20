@@ -237,7 +237,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                     let firstAyatInThisRuku = ayats.find(a => a.rukuIdx == currentAyat.rukuIdx);
                     if (firstAyatInThisRuku) {
                         onPlayingAyatChanged(firstAyatInThisRuku);
-                        setTimeout(() => { handlePlay(nextRecitationId, firstAyatInThisRuku.serial) });
+                        setTimeout(() => { handlePlay(nextRecitationId, firstAyatInThisRuku?.serial ?? selectedAyat) });
                     }
                 }
 
