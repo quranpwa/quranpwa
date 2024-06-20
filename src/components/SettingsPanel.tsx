@@ -33,6 +33,21 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         onChange(settingsData);
     };
 
+    const handleShowWbwTranslationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        settingsData.showWbwTranslation = event.target.checked;
+        onChange(settingsData);
+    };
+
+    const handleShowTranslationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        settingsData.showTranslation = event.target.checked;
+        onChange(settingsData);
+    };
+
+    const handleShowTafsirChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        settingsData.showTafsir = event.target.checked;
+        onChange(settingsData);
+    };
+
     const hasSettingsChanged = () => {
         return JSON.stringify(settingsData) != JSON.stringify(getDefaultSettings())
     };
@@ -161,6 +176,24 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                         onChange={handleShowWbwChange} />
                     <label className="form-check-label" htmlFor="ShowWbwInput">Show Word By Word</label>
                 </div>
+                <div className="form-check ms-2">
+                    <input className="form-check-input" type="checkbox" id="showWbwTranslationInput"
+                        checked={settingsData.showWbwTranslation}
+                        onChange={handleShowWbwTranslationChange} />
+                    <label className="form-check-label" htmlFor="showWbwTranslationInput">Show Word By Word Translation</label>
+                </div>
+                <div className="form-check ms-2">
+                    <input className="form-check-input" type="checkbox" id="showTranslationInput"
+                        checked={settingsData.showTranslation}
+                        onChange={handleShowTranslationChange} />
+                    <label className="form-check-label" htmlFor="showTranslationInput">Show Translation</label>
+                </div>
+                <div className="form-check ms-2">
+                    <input className="form-check-input" type="checkbox" id="showTafsirInput"
+                        checked={settingsData.showTafsir}
+                        onChange={handleShowTafsirChange} />
+                    <label className="form-check-label" htmlFor="showTafsirInput">Show Tafsir</label>
+                </div>
             </div>
 
             <h5 className="mt-3">Quran Font</h5>
@@ -207,6 +240,9 @@ export interface SettingsModel {
     readingMode: ReadingMode,
     showQuranText: boolean,
     showWbw: boolean,
+    showWbwTranslation: boolean,
+    showTranslation: boolean,
+    showTafsir: boolean,
     quranFont: string,
     wbwTranslations: WbwTranslation[]
     translations: Translation[]

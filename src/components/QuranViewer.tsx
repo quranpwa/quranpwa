@@ -81,12 +81,12 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         onAyatSelection(ayat?.serial);
     };
 
-    const getWbwAyatText = (ayatCorpus: Corpus[]) => {
+    const getWbwAyatText = (ayatCorpus: Corpus[], showWbwTranslation: boolean) => {
         return ayatCorpus.map(c => <span className="text-center my-3"
             key={c.surah + '_' + c.ayah + '_' + c.word}
             id={'word_' + c.surah + '_' + c.ayah + '_' + c.word}>
             <span className="quran-text px-1">{c.ar1 + c.ar2 + c.ar3 + c.ar4 + c.ar5 + ' '}</span>
-            {quranData.wbwTranslations.length > 0 &&
+            {showWbwTranslation && quranData.wbwTranslations.length > 0 &&
                 <span className="d-block px-1" style={{ borderRight: 'solid 1px gray' }}>
                     {quranData.wbwTranslations.map(translation =>
                         <span key={c.surah + '_' + c.ayah + '_' + c.word + translation.translationMeta.language} className="d-block">
@@ -120,12 +120,12 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                     {settingsData.showQuranText && settingsData.showWbw &&
                         <div className="d-flex flex-wrap rtl">
                             {getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
-                                && f.ayah == ayat.serialInSura))}
+                                && f.ayah == ayat.serialInSura), settingsData.showWbwTranslation)}
                             <span className="ayat-number quran-text my-3 px-1" style={{ fontFamily: 'hafs' }}
                                 onClick={() => handleAyatNumberClick(ayat.serial)}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
                         </div>
                     }
-                    {quranData.translations.map(translation => {
+                    {settingsData.showTranslation && quranData.translations.map(translation => {
                         if (translation.texts) {
                             const ayatTranslationText = translation.texts[ayat.serial - 1];
                             const translationMeta = translation.translationMeta;
@@ -139,7 +139,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                     })}
                 </div>
 
-                {quranData.tafsirs.map(tafsirs => {
+                {settingsData.showTafsir && quranData.tafsirs.map(tafsirs => {
                     if (tafsirs.texts) {
                         const ayatTafsirText = tafsirs.texts[ayat.serial - 1];
                         const translationMeta = tafsirs.translationMeta;
@@ -186,7 +186,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                             </span>)}
                     </div>
                 }
-                {firstTranslation &&
+                {settingsData.showTranslation && firstTranslation &&
                     <div className={colClass + "pe-md-4 quran-translation ltr"}>
                         <div className="text-secondary small">{firstTranslation.translationMeta.languageName + ' - ' + firstTranslation.translationMeta.translator}</div>
                         {
@@ -201,22 +201,23 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                         }
                     </div>
                 }
+                {settingsData.showTafsir &&
+                    <div className="col-md-12 quran-translation ltr"> {rukuAyats.map(ayat =>
+                        <div key={ayat.serial}>
+                            {quranData.tafsirs.map(tafsir => {
+                                if (tafsir.texts) {
+                                    const ayatTafsirText = tafsir.texts[ayat.serial - 1];
+                                    const translationMeta = tafsir.translationMeta;
 
-                <div className="col-md-12 quran-translation ltr"> {rukuAyats.map(ayat =>
-                    <div key={ayat.serial}>
-                        {quranData.tafsirs.map(tafsir => {
-                            if (tafsir.texts) {
-                                const ayatTafsirText = tafsir.texts[ayat.serial - 1];
-                                const translationMeta = tafsir.translationMeta;
-
-                                return <div className="quran-translation" key={translationMeta.fileName + ayat.serial}>
-                                    <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
-                                    <pre style={{ textWrap: 'wrap' }} dangerouslySetInnerHTML={{ __html: ayatTafsirText }}></pre>
-                                </div>
-                            }
-                        })}
-                    </div>)}
-                </div>
+                                    return <div className="quran-translation" key={translationMeta.fileName + ayat.serial}>
+                                        <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
+                                        <pre style={{ textWrap: 'wrap' }} dangerouslySetInnerHTML={{ __html: ayatTafsirText }}></pre>
+                                    </div>
+                                }
+                            })}
+                        </div>)}
+                    </div>
+                }
             </div>);
         }
     }
@@ -234,7 +235,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 </div>
                 {selectedAyatCorpus.length > 0 &&
                     <div className="d-flex flex-wrap rtl pb-3">
-                        {getWbwAyatText(selectedAyatCorpus)}
+                        {getWbwAyatText(selectedAyatCorpus, true)}
                     </div>
                 }
                 <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
