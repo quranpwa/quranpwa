@@ -355,7 +355,7 @@ export class QuranData {
             this.recitations = [];
             return;
         }
-        
+
         this.recitations = this.recitations.filter(f =>
             recitations.some(s => s.id === f.recitaionMeta.id));
 
@@ -522,7 +522,7 @@ export interface Recitaion {
     isFilePerVerse: boolean,
     isFilePerSura: boolean,
     style: string,
-    hasFileNameLeadingZeros?:boolean
+    hasFileNameLeadingZeros?: boolean
 }
 
 export interface RecitaionTiming {

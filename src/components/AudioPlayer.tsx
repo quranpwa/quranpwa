@@ -233,11 +233,12 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                 </ul>
             </div>
         </div>
-        {quranData.recitations.map(r =>
+        {quranData.recitations.sort((a, b) => a?.recitaionMeta?.language > b?.recitaionMeta?.language ? 1 : -1)
+            .map(r =>
             <audio key={r.recitaionMeta.id} id={r.recitaionMeta.id}
-                src={getAudioUrl(r)} autoPlay={isPlaying}
+                src={getAudioUrl(r)} autoPlay={isPlaying && quranData.recitations.length == 1}
                 onTimeUpdate={handleOnTimeUpdate}
-                onEnded={handleOnEnded} controls title={r.recitaionMeta.id}></audio>
+                onEnded={handleOnEnded}></audio>
         )}
 
     </div>;
