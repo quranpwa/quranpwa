@@ -240,10 +240,10 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 }
                 <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div className="btn-group me-2" role="group" aria-label="First group">
-                        <button type="submit" className="btn btn-primary" value="bookmark">Bookmark this ayat</button>
+                        <button type="submit" className="btn btn-primary" value="bookmark">Bookmark</button>
                     </div>
                     <div className="btn-group" role="group" aria-label="Second group">
-
+                        <button type="submit" className="btn btn-secondary" value="close">Close</button>
                     </div>
                 </div>
             </form>
