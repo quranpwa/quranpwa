@@ -145,25 +145,22 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         let isLastRecitaion = recitationIdx >= recitations.length - 1;
         let nextRecitationId = isLastRecitaion ? 0 : recitationIdx + 1;
 
-        if (isLastAyat) {
-            pauseAll();
-            setRecitationIdx(nextRecitationId);
-            if (isLastRecitaion) {
-                setIsPlaying(false);
-            } else {
-                handlePlay(nextRecitationId, selectedAyat);
-            }
-            return;
-        }
-
         if (settingsData.readingMode == ReadingMode.Ayat_By_Ayat) {
             pauseAll();
             setRecitationIdx(nextRecitationId);
 
-            if (isLastRecitaion && nextAyat)
-                onPlayingAyatChanged(nextAyat);
+            if (isLastAyat) {
+                if (isLastRecitaion) {
+                    setIsPlaying(false);
+                } else {
+                    handlePlay(nextRecitationId, selectedAyat);
+                }
+            } else {
+                if (isLastRecitaion && nextAyat)
+                    onPlayingAyatChanged(nextAyat);
 
-            handlePlay(nextRecitationId, selectedAyat);
+                handlePlay(nextRecitationId, selectedAyat);
+            }
         } else if (settingsData.readingMode == ReadingMode.Ruku_By_Ruku) {
             let currentAyat = ayats[currentAyatIdx];
             let isLastAyatInThisRuku = currentAyat.rukuIdx != nextAyat?.rukuIdx;
@@ -173,9 +170,11 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                 setRecitationIdx(nextRecitationId);
 
                 if (isLastRecitaion) {
-                    if (nextAyat) {
+                    if (!isLastAyat && nextAyat) {
                         onPlayingAyatChanged(nextAyat);
                         handlePlay(nextRecitationId, nextAyat.serial);
+                    } else {
+                        setIsPlaying(false);
                     }
                 } else {
                     let firstAyatInThisRuku = ayats.find(a => a.rukuIdx == currentAyat.rukuIdx);
@@ -194,39 +193,58 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     const handleOnEnded = () => {
         if (!isPlaying || !ayats.length)
             return;
-        
+
         let currentAyatIdx = selectedAyat - ayats[0].serial;
         let isLastAyat = currentAyatIdx >= ayats.length - 1;
         let isLastRecitaion = recitationIdx >= recitations.length - 1;
         let nextRecitationId = isLastRecitaion ? 0 : recitationIdx + 1;
 
-        if (isLastAyat) {
-            setRecitationIdx(nextRecitationId);
-            if (isLastRecitaion) {
-                setIsPlaying(false);
-            } else {
-                if (settingsData.readingMode == ReadingMode.Ayat_By_Ayat)
-                    handlePlay(nextRecitationId, selectedAyat);
-                else
-                    onPlayingAyatChanged(ayats[0]);
-            }
-            return;
-        }
-
         if (settingsData.readingMode == ReadingMode.Ayat_By_Ayat) {
             setRecitationIdx(nextRecitationId);
-            handlePlay(nextRecitationId, selectedAyat);
 
-            if (!isLastRecitaion) {
-                return;
+            if (isLastAyat) {
+                if (isLastRecitaion) {
+                    setIsPlaying(false);
+                } else {
+                    handlePlay(nextRecitationId, selectedAyat);
+                }
+            } else {
+                if (isLastRecitaion) {
+                    let nextAyat = ayats[currentAyatIdx + 1];
+                    if (nextAyat) {
+                        onPlayingAyatChanged(nextAyat);
+                    }
+                }
+
+                setTimeout(() => { handlePlay(nextRecitationId, selectedAyat) });
             }
-        }
+        } else if (settingsData.readingMode == ReadingMode.Ruku_By_Ruku) {
+            let currentAyat = ayats[currentAyatIdx];
+            let nextAyat = ayats[currentAyatIdx + 1];
+            let isLastAyatInThisRuku = currentAyat.rukuIdx != nextAyat?.rukuIdx;
 
-        let nextAyat = ayats[currentAyatIdx + 1];
+            if (isLastAyatInThisRuku) {
+                setRecitationIdx(nextRecitationId);
 
-        if (nextAyat) {
-            onPlayingAyatChanged(nextAyat);
-            setTimeout(() => { handlePlay(nextRecitationId, selectedAyat) });
+                if (isLastRecitaion) {
+                    if (!isLastAyat && nextAyat) {
+                        onPlayingAyatChanged(nextAyat);
+                        setTimeout(() => { handlePlay(nextRecitationId, nextAyat.serial) });
+                    } else {
+                        setIsPlaying(false);
+                    }
+                } else {
+                    let firstAyatInThisRuku = ayats.find(a => a.rukuIdx == currentAyat.rukuIdx);
+                    if (firstAyatInThisRuku) {
+                        onPlayingAyatChanged(firstAyatInThisRuku);
+                        setTimeout(() => { handlePlay(nextRecitationId, firstAyatInThisRuku.serial) });
+                    }
+                }
+
+            } else if (nextAyat) {
+                onPlayingAyatChanged(nextAyat);
+                setTimeout(() => { handlePlay(recitationIdx, selectedAyat) });
+            }
         }
     };
 
