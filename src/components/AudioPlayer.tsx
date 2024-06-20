@@ -48,7 +48,6 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                         audioElement.currentTime = (currentAyatTiming.time || 0) / 1000;
                     }
                 }
-
                 audioElement.play();
             }
             else {
@@ -80,13 +79,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     let previousWordId: string;
 
     const handleOnTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>) => {
-
         let recitation = quranData.recitations[recitationIdx];
-
-        // if (event.currentTarget.id != recitation.recitaionMeta.id) {
-        //     event.currentTarget.pause();
-        //     return;
-        // }
 
         if (recitation?.recitaionMeta?.isFilePerSura) {
             let currentTimeInMS = event.currentTarget.currentTime * 1000;
@@ -190,11 +183,6 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
 
         if (settingsData.readingMode == ReadingMode.Ayat_By_Ayat) {
             setRecitationIdx(nextRecitationId);
-
-            // if (!isLastRecitaion) {
-            //     forceUpdate();
-            //     return;
-            // }
         }
 
         let nextAyat = ayats[currentAyatIdx + 1];
