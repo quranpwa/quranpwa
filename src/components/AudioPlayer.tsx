@@ -113,22 +113,16 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             let nextAyat = ayats[currentAyatIdx + 1];
             let nextAyatTiming = recitation.timings[selectedAyat];
 
-            if (nextAyat) {
-                if (currentTimeInMS >= nextAyatTiming?.time) {
-                    setTimeout(() => {
-                        ayatEnded(currentAyatIdx, nextAyat);
-                    });
-                }
-            } else {
-                let isCurrentTimeExceedingNextAyatStartTime = nextAyatTiming
-                    && nextAyatTiming.sura == currentAyat.suraIdx + 1
-                    && currentTimeInMS >= nextAyatTiming.time;
+            let isCurrentTimeExceedingNextAyatStartTime = nextAyatTiming
+                && nextAyatTiming.sura == currentAyat.suraIdx + 1
+                && currentTimeInMS >= nextAyatTiming.time;
 
-                let isCurrentTimeExceedingDuration = event.currentTarget.currentTime >= event.currentTarget.duration;
+            let isCurrentTimeExceedingDuration = event.currentTarget.currentTime >= event.currentTarget.duration;
 
-                if (isCurrentTimeExceedingNextAyatStartTime || isCurrentTimeExceedingDuration) {
+            if (isCurrentTimeExceedingNextAyatStartTime || isCurrentTimeExceedingDuration) {
+                setTimeout(() => {
                     ayatEnded(currentAyatIdx, nextAyat);
-                }
+                });
             }
         }
     };
