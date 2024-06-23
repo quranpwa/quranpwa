@@ -276,9 +276,9 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                 </button>
                 <ul className="dropdown-menu">
                     {recitations.map(r =>
-                        <li className="dropdown-item">
+                        <li key={r.recitaionMeta.id} className="dropdown-item">
                             <p>{r.recitaionMeta.name}</p>
-                            <audio key={r.recitaionMeta.id} id={r.recitaionMeta.id}
+                            <audio id={r.recitaionMeta.id}
                                 src={getAudioUrl(r)}
                                 onTimeUpdate={handleOnTimeUpdate}
                                 onEnded={handleOnEnded}
