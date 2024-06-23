@@ -107,7 +107,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 {ayat.serialInSura == 1 && <SuraHeader quranData={quranData} suraIdx={ayat.suraIdx} />}
                 <hr />
                 <div id={ayat.serial.toString()}
-                    className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}
+                    className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : 'ayat'}
                     onClick={() => handleAyatSelection(ayat.serial)}>
                     {settingsData.showQuranText && !settingsData.showWbw &&
                         <div className="quran-text rtl">
@@ -179,7 +179,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                         {rukuAyats.map(ayat =>
                             <span id={ayat.serial.toString()} key={ayat.serial}
                                 onClick={() => handleAyatSelection(ayat.serial)}
-                                className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}>
+                                className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : 'ayat'}>
                                 <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
                                 <span className="ayat-number" style={{ fontFamily: 'hafs' }}
                                     onClick={() => handleAyatNumberClick(ayat.serial)}> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
@@ -193,7 +193,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                             rukuAyats.map(ayat =>
                                 <span id={'t' + ayat.serial} key={ayat.serial}
                                     onClick={() => handleAyatSelection(ayat.serial, true)}
-                                    className={selectedAyatSerial == ayat.serial ? 'selected-ayat quran-translation' : 'quran-translation'}>
+                                    className={selectedAyatSerial == ayat.serial ? 'selected-ayat quran-translation' : 'ayat quran-translation'}>
                                     <span className="translation-ayat-number"
                                         onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString(firstTranslation.translationMeta.locale ?? undefined)}</span>
                                     {firstTranslation.texts[ayat.serial - 1]}

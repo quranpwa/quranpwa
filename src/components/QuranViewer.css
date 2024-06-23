@@ -31,9 +31,13 @@
     filter: invert(var(--is-dark))
 }
 
+.ayat {
+    scroll-margin-top: 5rem;
+}
+
 .selected-ayat {
     color: var(--selected-font-color);
-    scroll-margin-top: 5rem !important; 
+    scroll-margin-top: 5rem; 
 }
 
 .ruku-header {
