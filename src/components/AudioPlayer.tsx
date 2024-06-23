@@ -162,10 +162,12 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             if (isLastAyatInThisRuku) {
                 pauseAll();
                 setRecitationIdx(nextRecitationId);
+                let nextRecitation = recitations[nextRecitationId];
+                let isTranslation = nextRecitation.recitaionMeta.language != 'ar';
 
                 if (isLastRecitaion) {
                     if (!isLastAyat && nextAyat) {
-                        onPlayingAyatChanged(nextAyat);
+                        onPlayingAyatChanged(nextAyat, isTranslation);
                         handlePlay(nextRecitationId, nextAyat.serial);
                     } else {
                         setIsPlaying(false);
@@ -173,13 +175,15 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                 } else {
                     let firstAyatInThisRuku = ayats.find(a => a.rukuIdx == currentAyat.rukuIdx);
                     if (firstAyatInThisRuku) {
-                        onPlayingAyatChanged(firstAyatInThisRuku);
+                        onPlayingAyatChanged(firstAyatInThisRuku, isTranslation);
                         handlePlay(nextRecitationId, firstAyatInThisRuku.serial);
                     }
                 }
 
             } else if (nextAyat) {
-                onPlayingAyatChanged(nextAyat);
+                let recitation = recitations[recitationIdx];
+                let isTranslation = recitation.recitaionMeta.language != 'ar';
+                onPlayingAyatChanged(nextAyat, isTranslation);
             }
         }
     };
@@ -216,13 +220,15 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             let currentAyat = ayats[currentAyatIdx];
             let nextAyat = ayats[currentAyatIdx + 1];
             let isLastAyatInThisRuku = currentAyat.rukuIdx != nextAyat?.rukuIdx;
+            let nextRecitation = recitations[nextRecitationId];
+            let isTranslation = nextRecitation.recitaionMeta.language != 'ar';
 
             if (isLastAyatInThisRuku) {
                 setRecitationIdx(nextRecitationId);
 
                 if (isLastRecitaion) {
                     if (!isLastAyat && nextAyat) {
-                        onPlayingAyatChanged(nextAyat);
+                        onPlayingAyatChanged(nextAyat, isTranslation);
                         setTimeout(() => { handlePlay(nextRecitationId, nextAyat.serial) });
                     } else {
                         setIsPlaying(false);
@@ -230,13 +236,15 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                 } else {
                     let firstAyatInThisRuku = ayats.find(a => a.rukuIdx == currentAyat.rukuIdx);
                     if (firstAyatInThisRuku) {
-                        onPlayingAyatChanged(firstAyatInThisRuku);
+                        onPlayingAyatChanged(firstAyatInThisRuku, isTranslation);
                         setTimeout(() => { handlePlay(nextRecitationId, firstAyatInThisRuku?.serial ?? selectedAyat) });
                     }
                 }
 
             } else if (nextAyat) {
-                onPlayingAyatChanged(nextAyat);
+                let recitation = recitations[recitationIdx];
+                let isTranslation = recitation.recitaionMeta.language != 'ar';
+                onPlayingAyatChanged(nextAyat, isTranslation);
                 setTimeout(() => { handlePlay(recitationIdx, selectedAyat) });
             }
         }
@@ -288,5 +296,5 @@ interface AudioPlayerProps {
     settingsData: SettingsModel,
     ayats: Ayat[],
     selectedAyat: number,
-    onPlayingAyatChanged: (ayat: Ayat) => void,
+    onPlayingAyatChanged: (ayat: Ayat, isTranslation?: boolean) => void,
 }

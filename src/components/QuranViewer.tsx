@@ -77,8 +77,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         }
     };
 
-    const handlePlayingAyatChanged = (ayat: Ayat) => {
-        onAyatSelection(ayat?.serial);
+    const handlePlayingAyatChanged = (ayat: Ayat, isTranslation?: boolean) => {
+        onAyatSelection(ayat?.serial, isTranslation);
     };
 
     const getWbwAyatText = (ayatCorpus: Corpus[], showWbwTranslation: boolean) => {
