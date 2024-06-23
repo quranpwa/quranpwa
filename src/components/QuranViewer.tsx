@@ -267,6 +267,6 @@ interface QuranViewerProps {
     quranData: QuranData,
     navData: NavigationModel,
     settingsData: SettingsModel,
-    onNavigate: (model: NavigationModel) => void,
+    onNavigate: (navData: NavigationModel) => void,
     onAyatSelection: (ayat: number, isTranslation?: boolean) => void
 }

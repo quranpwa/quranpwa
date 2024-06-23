@@ -24,7 +24,7 @@ function Quran() {
             if (ayatNumber < start || ayatNumber > end)
                 ayatNumber = start + 1;
 
-            let result: NavigationModel = {
+            let navData: NavigationModel = {
                 navMode: navMode,
                 serial: serialNumber,
                 ayat: ayatNumber,
@@ -32,12 +32,12 @@ function Quran() {
 
             storeRecentlyRead({
                 displayText: navModeStr + ' ' + serialNumber + ' (' + displayText + ')',
-                navData: result,
+                navData: navData,
                 date: new Date(),
                 link: location.pathname + location.search + location.hash
             });
 
-            return result;
+            return navData;
         }
 
         return storedNavData;
@@ -55,33 +55,33 @@ function Quran() {
         onSettingsChanged(settingsData);
     }, []);
 
-    function setNavDataToSearchParams(model: NavigationModel) {
+    function setNavDataToSearchParams(navData: NavigationModel) {
         const url = new URL(window.location.href);
 
-        for (let prop in model) {
+        for (let prop in navData) {
             url.searchParams.delete(prop);
         }
 
-        let navModeString = NavigationMode[model.navMode];
+        let navModeString = NavigationMode[navData.navMode];
         url.searchParams.set('navMode', navModeString);
 
-        url.searchParams.set('serial', model.serial.toString());
+        url.searchParams.set('serial', navData.serial.toString());
 
-        if (model.ayat)
-            url.hash = String(model.ayat);
+        if (navData.ayat)
+            url.hash = String(navData.ayat);
 
         window.history.pushState({}, '', url.toString());
     }
 
-    const onNavigate = (model: NavigationModel) => {
-        const { start, end } = quranData.getAyatRangeByNavSerial(model?.navMode, model?.serial);
-        model.ayat ??= start + 1;
+    const onNavigate = (navData: NavigationModel) => {
+        const { start, end } = quranData.getAyatRangeByNavSerial(navData?.navMode, navData?.serial);
+        navData.ayat ??= start + 1;
 
-        if ((model.ayat ?? 0) < start || (model.ayat ?? 0) > end)
-            model.ayat = start + 1;
+        if ((navData.ayat ?? 0) < start || (navData.ayat ?? 0) > end)
+            navData.ayat = start + 1;
 
-        localStorage.setItem('NavigationData', JSON.stringify(model));
-        setNavDataToSearchParams(model);
+        localStorage.setItem('NavigationData', JSON.stringify(navData));
+        setNavDataToSearchParams(navData);
         forceUpdate();
         window.scrollTo(0, 0);
     }
@@ -94,13 +94,13 @@ function Quran() {
         location.hash = isTranslation ? 't' + selectedAyat : String(selectedAyat);
     }
 
-    const onSettingsChanged = (model: SettingsModel) => {
-        localStorage.setItem('SettingsData', JSON.stringify(model));
+    const onSettingsChanged = (settingsData: SettingsModel) => {
+        localStorage.setItem('SettingsData', JSON.stringify(settingsData));
 
-        quranData.setTranslations(model.translations, forceUpdate);
-        quranData.setWbwTranslations(model.wbwTranslations, forceUpdate);
-        quranData.setTafsirs(model.tafsirs, forceUpdate);
-        quranData.setRecitations(model.recitaions);
+        quranData.setTranslations(settingsData.translations, forceUpdate);
+        quranData.setWbwTranslations(settingsData.wbwTranslations, forceUpdate);
+        quranData.setTafsirs(settingsData.tafsirs, forceUpdate);
+        quranData.setRecitations(settingsData.recitaions);
     }
 
     return (

@@ -70,13 +70,13 @@ function Root() {
     const settingsData: SettingsModel = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
         : getDefaultSettings();
 
-    const onSettingsChanged = (model: SettingsModel) => {
-        localStorage.setItem('SettingsData', JSON.stringify(model));
+    const onSettingsChanged = (settingsData: SettingsModel) => {
+        localStorage.setItem('SettingsData', JSON.stringify(settingsData));
 
-        quranData.setTranslations(model.translations, forceUpdate);
-        quranData.setWbwTranslations(model.wbwTranslations, forceUpdate);
-        quranData.setTafsirs(model.tafsirs, forceUpdate);
-        quranData.setRecitations(model.recitaions);
+        quranData.setTranslations(settingsData.translations, forceUpdate);
+        quranData.setWbwTranslations(settingsData.wbwTranslations, forceUpdate);
+        quranData.setTafsirs(settingsData.tafsirs, forceUpdate);
+        quranData.setRecitations(settingsData.recitaions);
     }
 
     const navMode = navData.navMode;
