@@ -1,11 +1,10 @@
 ﻿import { useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 import { AyatRange, NavigationMode, NavigationShortcutType, QuranData } from "../QuranData";
-import { getStoredBookmarks, getStoredNavData, getStoredRecentlyReads } from "../StoredData";
+import { getStoredBookmarks, getStoredNavData, getStoredRecentlyReads, getStoredSettingsData, storeNavData, storeSettingsData } from "../StoredData";
 import { quran_karim_114_font_chars } from "../components/SuraHeader";
 import ThemeSwitch from "../components/ThemeSwitch";
 import SettingsPanel, { SettingsModel } from "../components/SettingsPanel";
-import { getDefaultSettings } from "../Utilities";
 
 function Root() {
     const navData = getStoredNavData();
@@ -23,7 +22,7 @@ function Root() {
 
     const setNavMode = (navMode: NavigationMode) => {
         navData.navMode = navMode;
-        localStorage.setItem('NavigationData', JSON.stringify(navData));
+        storeNavData(navData);
         forceUpdate();
     };
 
@@ -66,12 +65,10 @@ function Root() {
         </div>;
     }
 
-    const storedSettingsDataString = localStorage.getItem('SettingsData');
-    const settingsData: SettingsModel = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
-        : getDefaultSettings();
+    const settingsData = getStoredSettingsData();
 
     const onSettingsChanged = (settingsData: SettingsModel) => {
-        localStorage.setItem('SettingsData', JSON.stringify(settingsData));
+        storeSettingsData(settingsData);
 
         quranData.setTranslations(settingsData.translations, forceUpdate);
         quranData.setWbwTranslations(settingsData.wbwTranslations, forceUpdate);

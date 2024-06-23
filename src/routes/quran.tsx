@@ -1,7 +1,6 @@
 ﻿import { useEffect, useReducer } from 'react';
 import { NavigationMode, QuranData } from '../QuranData';
-import { getDefaultSettings } from '../Utilities';
-import { getStoredNavData, storeRecentlyRead, storedNavData } from '../StoredData';
+import { getStoredNavData, getStoredSettingsData, storeRecentlyRead, storeNavData, storeSettingsData } from '../StoredData';
 import NavBar, { NavigationModel } from '../components/NavBar';
 import QuranViewer from '../components/QuranViewer';
 import SettingsPanel, { SettingsModel } from '../components/SettingsPanel';
@@ -43,9 +42,7 @@ function Quran() {
         return storedNavData;
     };
 
-    const storedSettingsDataString = localStorage.getItem('SettingsData');
-    const settingsData: SettingsModel = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
-        : getDefaultSettings()
+    const settingsData = getStoredSettingsData();
 
     const navData = getNavData();
 
@@ -85,7 +82,7 @@ function Quran() {
         if ((navData.ayat ?? 0) < start || (navData.ayat ?? 0) > end)
             navData.ayat = start + 1;
 
-        storedNavData(navData);
+        storeNavData(navData);
         setNavDataToSearchParams(navData);
         forceUpdate();
     }
@@ -93,13 +90,13 @@ function Quran() {
     const onAyatSelection = (selectedAyat: number, isTranslation?: boolean) => {
         navData.ayat = selectedAyat;
 
-        storedNavData(navData);
+        storeNavData(navData);
         forceUpdate();
         location.hash = isTranslation ? 't' + selectedAyat : String(selectedAyat);
     }
 
     const onSettingsChanged = (settingsData: SettingsModel) => {
-        localStorage.setItem('SettingsData', JSON.stringify(settingsData));
+        storeSettingsData(settingsData);
 
         quranData.setTranslations(settingsData.translations, forceUpdate);
         quranData.setWbwTranslations(settingsData.wbwTranslations, forceUpdate);

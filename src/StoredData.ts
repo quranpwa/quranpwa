@@ -1,5 +1,9 @@
 import { NavigationMode, NavigationShortcutItem } from "./QuranData";
 import { NavigationModel } from "./components/NavBar";
+import recitationList from './assets/recitation-list.json';
+import translationList from './assets/translation-list.json';
+import wbwTranslationList from './assets/wbw-translation-list.json';
+import { ReadingMode, SettingsModel } from "./components/SettingsPanel";
 
 const navDataStorageKey = 'NavigationData';
 
@@ -15,8 +19,44 @@ export function getStoredNavData(): NavigationModel {
     return storedNavData;
 }
 
-export function storedNavData(navData: NavigationModel) {
+export function storeNavData(navData: NavigationModel) {
     localStorage.setItem(navDataStorageKey, JSON.stringify(navData));
+}
+
+export function getDefaultSettings(): SettingsModel {
+    let navLang = navigator.languages[navigator.languages.length - 1] ?? 'en';
+    navLang = navLang.substring(0, 2);
+    
+    let translation = translationList.filter(f => f.language == navLang)[0];
+    let wbwTranslation = wbwTranslationList.filter(f => f.language == navLang)[0];
+
+    return {
+        readingMode: ReadingMode.Ayat_By_Ayat,
+        quranFont: 'hafs',
+        showQuranText: true,
+        showWbw: false,
+        showWbwTranslation: false,
+        showTranslation: true,
+        showTafsir: false,
+        translations: translation ? [translation] : [],
+        wbwTranslations: wbwTranslation ? [wbwTranslation] : [],
+        tafsirs: [],
+        recitaions: recitationList.filter(f => f.id == 'mishari_alafasy')
+    }
+}
+
+const settingsDataStorageKey = 'SettingsData';
+
+export function getStoredSettingsData(): SettingsModel {
+    const storedSettingsDataString = localStorage.getItem(settingsDataStorageKey);
+    const settingsData: SettingsModel = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
+        : getDefaultSettings()
+
+    return settingsData;
+}
+
+export function storeSettingsData(settingsData: SettingsModel) {
+    localStorage.setItem(settingsDataStorageKey, JSON.stringify(settingsData));
 }
 
 const recentlyReadsStorageKey = 'RecentlyReads';

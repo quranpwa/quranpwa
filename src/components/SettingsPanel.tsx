@@ -1,12 +1,13 @@
 ﻿import Select from 'react-select';
 import { Recitaion, Translation, WbwTranslation } from '../QuranData';
-import { getDefaultSettings, groupBy } from '../Utilities';
+import { groupBy } from '../Utilities';
 import recitationList from '../assets/recitation-list.json';
 import tafsirList from '../assets/tafsir-list.json';
 import translationList from '../assets/translation-list.json';
 import wbwTranslationList from '../assets/wbw-translation-list.json';
 import ThemeSwitch from './ThemeSwitch';
 import { Link } from 'react-router-dom';
+import { getDefaultSettings } from '../StoredData';
 
 function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
 
@@ -78,11 +79,11 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     const recitaionsMapToSelectOption = (recitaions: Recitaion[]) => {
         return recitaions?.map(t => {
             let tags = [];
-            
-            if(t.byWBW) 
+
+            if (t.byWBW)
                 tags.push('WBW');
 
-            if(t.isFilePerVerse) 
+            if (t.isFilePerVerse)
                 tags.push('With Gap');
 
             let label = tags.length > 0 ? t?.name + ' (' + tags.join(', ') + ')' : t?.name;
