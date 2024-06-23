@@ -180,9 +180,9 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                             <span id={ayat.serial.toString()} key={ayat.serial}
                                 onClick={() => handleAyatSelection(ayat.serial)}
                                 className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : ''}>
-                                <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}
-                                    onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.arabicText}</span>
-                                <span className="ayat-number" style={{ fontFamily: 'hafs' }}> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
+                                <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
+                                <span className="ayat-number" style={{ fontFamily: 'hafs' }}
+                                    onClick={() => handleAyatNumberClick(ayat.serial)}> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
                             </span>)}
                     </div>
                 }
