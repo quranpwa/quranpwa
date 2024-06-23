@@ -89,6 +89,7 @@ export class QuranData {
                 serial: i + 1,
                 start: thisSegmentStart,
                 end: thisSegmentEnd,
+                startingSuraNumber: startingSuraNumber,
                 displayText: `${startingSura.tname} [${startingSura.serial}:${segmentStartAyat}]`
             });
         }
@@ -130,49 +131,50 @@ export class QuranData {
         return maxSerial;
     }
 
-    getAyatRangeByNavSerial(navMode: NavigationMode, serial: number): { start: number, end: number, displayText: string } {
+    getAyatRangeByNavSerial(navMode: NavigationMode, serial: number)
+        : { start: number, end: number, startingSuraNumber: number } {
         let start = 0;
         let end = 7;
-        let displayText = '';
+        let startingSuraNumber = 0;
 
         if (navMode == NavigationMode.Sura) {
             const sura = serial > this.suras.length ? this.suras[0] : this.suras[serial - 1];
             start = sura?.start;
             end = sura?.start + sura?.ayas;
-            displayText = sura?.tname;
+            startingSuraNumber = sura?.serial;
 
         } else if (navMode == NavigationMode.Juz) {
             const jus = serial > this.juzs.length ? this.juzs[0] : this.juzs[serial - 1];
             start = jus?.start;
             end = jus?.end;
-            displayText = jus?.displayText;
+            startingSuraNumber = jus?.startingSuraNumber;
 
         } else if (navMode == NavigationMode.Hizb) {
             const hizb = serial > this.hizb.length ? this.hizb[0] : this.hizb[serial - 1];
             start = hizb?.start;
             end = hizb?.end;
-            displayText = hizb?.displayText;
+            startingSuraNumber = hizb?.startingSuraNumber;
 
         } else if (navMode == NavigationMode.Rub) {
             const hizb = serial > this.hizb_quarters.length ? this.hizb_quarters[0] : this.hizb_quarters[serial - 1];
             start = hizb?.start;
             end = hizb?.end;
-            displayText = hizb?.displayText;
+            startingSuraNumber = hizb?.startingSuraNumber;
 
         } else if (navMode == NavigationMode.Ruku) {
             const ruku = serial > this.rukus.length ? this.rukus[0] : this.rukus[serial - 1];
             start = ruku?.start;
             end = ruku?.end;
-            displayText = ruku?.displayText;
+            startingSuraNumber = ruku?.startingSuraNumber;
 
         } else if (navMode == NavigationMode.Page) {
             const page = serial > this.pages.length ? this.pages[0] : this.pages[serial - 1];
             start = page?.start;
             end = page?.end;
-            displayText = page?.displayText;
+            startingSuraNumber = page?.startingSuraNumber;
         }
 
-        return { start: start, end: end, displayText: displayText };
+        return { start: start, end: end, startingSuraNumber: startingSuraNumber };
     }
 
     async setAyats() {
@@ -442,6 +444,7 @@ export interface AyatRange {
     serial: number,
     start: number,
     end: number,
+    startingSuraNumber: number,
     displayText: string,
     charLength?: number
     readingTimeInSecond?: number

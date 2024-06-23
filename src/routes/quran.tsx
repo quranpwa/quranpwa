@@ -19,7 +19,7 @@ function Quran() {
             const serialNumber = +(searchParams.get('serial') || storedNavData.serial);
             let ayatNumber = +(location.hash.match(/\d+/g)?.pop() || storedNavData.ayat);
 
-            const { start, end, displayText } = quranData.getAyatRangeByNavSerial(navMode, serialNumber);
+            const { start, end, startingSuraNumber } = quranData.getAyatRangeByNavSerial(navMode, serialNumber);
             if (ayatNumber < start || ayatNumber > end)
                 ayatNumber = start + 1;
 
@@ -29,8 +29,18 @@ function Quran() {
                 ayat: ayatNumber,
             }
 
+            let sura = quranData.suras[startingSuraNumber - 1];
+            let displayText = navModeStr + ' ' + serialNumber;
+
+            let ayat = quranData.ayats.find(f => f.serial == ayatNumber);
+            if (ayat) {
+                displayText += ` (${sura.tname} [${sura.serial}:${ayat.serialInSura}])`;
+            } else {
+                displayText += ` (${sura.tname})`;
+            }
+
             storeRecentlyRead({
-                displayText: navModeStr + ' ' + serialNumber + ' (' + displayText + ')',
+                displayText: displayText,
                 navData: navData,
                 date: new Date(),
                 link: location.pathname + location.search + location.hash
