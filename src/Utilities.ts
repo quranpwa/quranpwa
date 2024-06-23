@@ -30,6 +30,10 @@ export function getAyatId(ayat: Ayat) {
 
 export function getDefaultSettings(): SettingsModel {
     let navLang = navigator.languages[navigator.languages.length - 1] ?? 'en';
+    navLang = navLang.substring(0, 2);
+    
+    let translation = translationList.filter(f => f.language == navLang)[0];
+    let wbwTranslation = wbwTranslationList.filter(f => f.language == navLang)[0];
 
     return {
         readingMode: ReadingMode.Ayat_By_Ayat,
@@ -39,8 +43,8 @@ export function getDefaultSettings(): SettingsModel {
         showWbwTranslation: false,
         showTranslation: true,
         showTafsir: false,
-        translations: [translationList.filter(f => f.language == navLang)[0]],
-        wbwTranslations: [wbwTranslationList.filter(f => f.language == navLang)[0]],
+        translations: translation ? [translation] : [],
+        wbwTranslations: wbwTranslation ? [wbwTranslation] : [],
         tafsirs: [],
         recitaions: recitationList.filter(f => f.id == 'mishari_alafasy')
     }
