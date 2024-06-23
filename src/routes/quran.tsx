@@ -53,6 +53,11 @@ function Quran() {
 
     useEffect(() => {
         onSettingsChanged(settingsData);
+
+        let selectedAyateElement = document.getElementById(location.hash.substring(1));
+        if (selectedAyateElement) {
+            selectedAyateElement.scrollIntoView();
+        }
     }, []);
 
     function setNavDataToSearchParams(navData: NavigationModel) {
@@ -83,7 +88,6 @@ function Quran() {
         localStorage.setItem('NavigationData', JSON.stringify(navData));
         setNavDataToSearchParams(navData);
         forceUpdate();
-        window.scrollTo(0, 0);
     }
 
     const onAyatSelection = (selectedAyat: number, isTranslation?: boolean) => {
