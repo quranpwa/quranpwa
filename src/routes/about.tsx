@@ -10,7 +10,7 @@ function About() {
 
         <p className="text-center">
             <span className="badge bg-secondary"> Version: {APP_VERSION} </span>
-            <span className="badge bg-secondary ms-2">Release Date: 2024-06-19</span>
+            <span className="badge bg-secondary ms-2">Release Date: {APP_BUILD_DATE}</span>
         </p>
 
         <p>Quran PWA is a open source project. <a href="https://github.com/quranpwa/quranpwa" target="_blank">link</a></p>
