@@ -5,6 +5,7 @@ import { getStoredBookmarks, getStoredNavData, getStoredRecentlyReads, getStored
 import { quran_karim_114_font_chars } from "../components/SuraHeader";
 import ThemeSwitch from "../components/ThemeSwitch";
 import SettingsPanel, { SettingsModel } from "../components/SettingsPanel";
+import InstallPWA from "../components/InstallPWA";
 
 function Root() {
     const navData = getStoredNavData();
@@ -206,8 +207,8 @@ function Root() {
 
             <SettingsPanel settingsData={settingsData}
                 onChange={onSettingsChanged} />
-
-            <Link to="/about" className="btn btn-outline-info">About Quran PWA</Link>
+            <InstallPWA />
+            <Link to="/about" className="btn btn-outline-info ms-2">About Quran PWA</Link>
         </footer>
     </div>)
 }
