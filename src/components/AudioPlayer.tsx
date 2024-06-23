@@ -275,16 +275,20 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                     </svg>
                 </button>
                 <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="#">...</a></li>
+                    {recitations.map(r =>
+                        <li className="dropdown-item">
+                            <p>{r.recitaionMeta.name}</p>
+                            <audio key={r.recitaionMeta.id} id={r.recitaionMeta.id}
+                                src={getAudioUrl(r)}
+                                onTimeUpdate={handleOnTimeUpdate}
+                                onEnded={handleOnEnded}
+                                controls></audio>
+                        </li>
+                    )}
                 </ul>
             </div>
         </div>
-        {recitations.map(r =>
-            <audio key={r.recitaionMeta.id} id={r.recitaionMeta.id}
-                src={getAudioUrl(r)}
-                onTimeUpdate={handleOnTimeUpdate}
-                onEnded={handleOnEnded}></audio>
-        )}
+
 
     </div>;
 }
