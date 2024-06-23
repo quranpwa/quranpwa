@@ -1,8 +1,10 @@
 import { NavigationMode, NavigationShortcutItem } from "./QuranData";
 import { NavigationModel } from "./components/NavBar";
 
+const navDataStorageKey = 'NavigationData';
+
 export function getStoredNavData(): NavigationModel {
-    const storedNavDataString = localStorage.getItem('NavigationData');
+    const storedNavDataString = localStorage.getItem(navDataStorageKey);
     const storedNavData: NavigationModel = storedNavDataString ? JSON.parse(storedNavDataString)
         : {
             navMode: NavigationMode.Sura,
@@ -11,6 +13,10 @@ export function getStoredNavData(): NavigationModel {
         };
 
     return storedNavData;
+}
+
+export function storedNavData(navData: NavigationModel) {
+    localStorage.setItem(navDataStorageKey, JSON.stringify(navData));
 }
 
 const recentlyReadsStorageKey = 'RecentlyReads';

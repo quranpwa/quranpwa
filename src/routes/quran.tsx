@@ -1,7 +1,7 @@
 ﻿import { useEffect, useReducer } from 'react';
 import { NavigationMode, QuranData } from '../QuranData';
 import { getDefaultSettings } from '../Utilities';
-import { getStoredNavData, storeRecentlyRead } from '../StoredData';
+import { getStoredNavData, storeRecentlyRead, storedNavData } from '../StoredData';
 import NavBar, { NavigationModel } from '../components/NavBar';
 import QuranViewer from '../components/QuranViewer';
 import SettingsPanel, { SettingsModel } from '../components/SettingsPanel';
@@ -85,7 +85,7 @@ function Quran() {
         if ((navData.ayat ?? 0) < start || (navData.ayat ?? 0) > end)
             navData.ayat = start + 1;
 
-        localStorage.setItem('NavigationData', JSON.stringify(navData));
+        storedNavData(navData);
         setNavDataToSearchParams(navData);
         forceUpdate();
     }
@@ -93,7 +93,7 @@ function Quran() {
     const onAyatSelection = (selectedAyat: number, isTranslation?: boolean) => {
         navData.ayat = selectedAyat;
 
-        localStorage.setItem('NavigationData', JSON.stringify(navData));
+        storedNavData(navData);
         forceUpdate();
         location.hash = isTranslation ? 't' + selectedAyat : String(selectedAyat);
     }
