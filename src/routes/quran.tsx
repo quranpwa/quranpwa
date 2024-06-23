@@ -29,13 +29,14 @@ function Quran() {
                 ayat: ayatNumber,
             }
 
-            let sura = quranData.suras[startingSuraNumber - 1];
             let displayText = navModeStr + ' ' + serialNumber;
 
             let ayat = quranData.ayats.find(f => f.serial == ayatNumber);
             if (ayat) {
+                let sura = quranData.suras[ayat.suraIdx];
                 displayText += ` (${sura.tname} [${sura.serial}:${ayat.serialInSura}])`;
             } else {
+                let sura = quranData.suras[startingSuraNumber - 1];
                 displayText += ` (${sura.tname})`;
             }
 
