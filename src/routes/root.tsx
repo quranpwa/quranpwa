@@ -84,6 +84,7 @@ function Root() {
         <h1 className="text-center my-3">
             <img className="rounded me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" />
             <b>Quran</b> PWA
+            <InstallPWA />
         </h1>
 
         <ul className="nav nav-tabs mb-3" style={{ zIndex: 9999 }}>
@@ -207,7 +208,7 @@ function Root() {
 
             <SettingsPanel settingsData={settingsData}
                 onChange={onSettingsChanged} />
-            <InstallPWA />
+
             <Link to="/about" className="btn btn-outline-info ms-2">About Quran PWA</Link>
         </footer>
     </div>)
