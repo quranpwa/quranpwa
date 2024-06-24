@@ -49,8 +49,15 @@ const settingsDataStorageKey = 'SettingsData';
 
 export function getStoredSettingsData(): SettingsModel {
     const storedSettingsDataString = localStorage.getItem(settingsDataStorageKey);
-    const settingsData: SettingsModel = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
-        : getDefaultSettings()
+    const defaultSettings = getDefaultSettings() as any;
+    let settingsData = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
+        : defaultSettings;
+
+    for(let prop in defaultSettings){
+        if (settingsData[prop] == null || settingsData[prop] == undefined){
+            settingsData[prop] = defaultSettings[prop];
+        }
+    }
 
     return settingsData;
 }
