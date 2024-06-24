@@ -251,7 +251,6 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     };
 
     return <div className='fixed-bottom d-flex p-2' style={{ justifyContent: 'center' }}>
-
         <div className="btn-group">
             {!isPlaying &&
                 <button className="btn theme-colored border" type="button" onClick={handlePlayClick} title="Recite">
@@ -275,9 +274,12 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                     </svg>
                 </button>
                 <ul className="dropdown-menu">
-                    {recitations.map(r =>
+                    {recitations.map((r, i) =>
                         <li key={r.recitaionMeta.id} className="dropdown-item">
-                            <p>{r.recitaionMeta.name}</p>
+                            <p style={{ cursor: 'pointer' }}
+                                onClick={() => { setRecitationIdx(i); handlePlay(i, selectedAyat); }}>
+                                {recitationIdx == i ? '●' : ''} {r.recitaionMeta.name}
+                            </p>
                             <audio id={r.recitaionMeta.id}
                                 src={getAudioUrl(r)}
                                 onTimeUpdate={handleOnTimeUpdate}
@@ -288,8 +290,6 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                 </ul>
             </div>
         </div>
-
-
     </div>;
 }
 
