@@ -21,6 +21,17 @@
     "hasFileNameLeadingZeros": false
   },
   {
+    "id": "abdul_baset_murattal",
+    "name": "Abdul Basit, Murattal",
+    "language": "ar",
+    "url": "https://download.quranicaudio.com/qdc/abdul_baset/murattal",
+    "byWBW": true,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
+    "style": "Murattal",
+    "hasFileNameLeadingZeros": false
+  },
+  {
     "id": "saad_al_ghamidi",
     "name": "Saad Al-Ghamidi",
     "language": "ar",
