@@ -52,13 +52,13 @@
     "style": "Murattal"
   },
   {
-    "id": "Saood_ash-Shuraym_128kbps",
-    "name": "Saood Ash-Shuraym",
+    "id": "saud_ash-shuraym",
+    "name": "Saud Ash-Shuraym",
     "language": "ar",
-    "url": "https://mirrors.quranicaudio.com/everyayah/Saood_ash-Shuraym_128kbps",
-    "byWBW": false,
-    "isFilePerVerse": true,
-    "isFilePerSura": false,
+    "url": "https://download.quranicaudio.com/qdc/saud_ash-shuraym/murattal",
+    "byWBW": true,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
     "style": "Murattal"
   },
   {
