@@ -84,14 +84,15 @@
     "hasFileNameLeadingZeros": false
   },
   {
-    "id": "Abu_Bakr_Ash-Shaatree_128kbps",
-    "name": "Abu-Bakr Ash-Shaatree",
+    "id": "abu_bakr_shatri",
+    "name": "Abu-Bakr Ash-Shatri",
     "language": "ar",
-    "url": "https://mirrors.quranicaudio.com/everyayah/Abu_Bakr_Ash-Shaatree_128kbps",
-    "byWBW": false,
-    "isFilePerVerse": true,
-    "isFilePerSura": false,
-    "style": "Murattal"
+    "url": "https://download.quranicaudio.com/qdc/abu_bakr_shatri/murattal",
+    "byWBW": true,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
+    "style": "Murattal",
+    "hasFileNameLeadingZeros": false
   },
   {
     "id": "sharif_bayzid_gtaf",
