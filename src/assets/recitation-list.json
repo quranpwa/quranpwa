@@ -21,13 +21,13 @@
     "hasFileNameLeadingZeros": false
   },
   {
-    "id": "Ghamadi_40kbps",
-    "name": "Saad Al-Ghamdi",
+    "id": "saad_al_ghamidi",
+    "name": "Saad Al-Ghamidi",
     "language": "ar",
-    "url": "https://mirrors.quranicaudio.com/everyayah/Ghamadi_40kbps",
+    "url": "https://download.quranicaudio.com/quran/sa3d_al-ghaamidi/complete",
     "byWBW": false,
-    "isFilePerVerse": true,
-    "isFilePerSura": false,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
     "style": "Murattal"
   },
   {
