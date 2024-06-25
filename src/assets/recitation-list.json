@@ -62,14 +62,15 @@
     "style": "Murattal"
   },
   {
-    "id": "Abdurrahmaan_As-Sudais_192kbps",
+    "id": "abdur-rahman_as-sudais",
     "name": "Abdur-Rahman as-Sudais",
     "language": "ar",
-    "url": "https://mirrors.quranicaudio.com/everyayah/Abdurrahmaan_As-Sudais_192kbps",
-    "byWBW": false,
-    "isFilePerVerse": true,
-    "isFilePerSura": false,
-    "style": "Murattal"
+    "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal",
+    "byWBW": true,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
+    "style": "Murattal",
+    "hasFileNameLeadingZeros": false
   },
   {
     "id": "khalifah_taniji",
