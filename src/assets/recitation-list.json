@@ -32,6 +32,28 @@
     "hasFileNameLeadingZeros": false
   },
   {
+    "id": "siddiq_al-minshawi_mujawwad",
+    "name": "Siddiq al-Minshawi, Mujawwad",
+    "language": "ar",
+    "url": "https://download.quranicaudio.com/qdc/siddiq_al-minshawi/mujawwad",
+    "byWBW": true,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
+    "style": "Mujawwad",
+    "timeAdjustment": 
+  },
+  {
+    "id": "siddiq_al-minshawi_murattal",
+    "name": "Siddiq al-Minshawi, Murattal",
+    "language": "ar",
+    "url": "https://download.quranicaudio.com/qdc/siddiq_minshawi/murattal",
+    "byWBW": true,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
+    "style": "Murattal",
+    "hasFileNameLeadingZeros": false
+  },  
+  {
     "id": "saad_al-ghamidi",
     "name": "Saad Al-Ghamidi",
     "language": "ar",
