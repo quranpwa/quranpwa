@@ -51,13 +51,13 @@
     "style": "Murattal"
   },
   {
-    "id": "MaherAlMuaiqly128kbps",
+    "id": "maher_muaiqly",
     "name": "Maher Al-Muaiqly",
     "language": "ar",
-    "url": "https://everyayah.com/data/MaherAlMuaiqly128kbps",
+    "url": "https://mirrors.quranicaudio.com/qurancomplex/maher_muaiqly",
     "byWBW": false,
-    "isFilePerVerse": true,
-    "isFilePerSura": false,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
     "style": "Murattal"
   },
   {
