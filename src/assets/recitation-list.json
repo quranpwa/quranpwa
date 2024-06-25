@@ -10,16 +10,6 @@
     "style": "Murattal"
   },
   {
-    "id": "Alafasy_128kbps",
-    "name": "Mishary Rashid Al-Afasy",
-    "language": "ar",
-    "url": "https://mirrors.quranicaudio.com/everyayah/Alafasy_128kbps",
-    "byWBW": false,
-    "isFilePerVerse": true,
-    "isFilePerSura": false,
-    "style": "Murattal"
-  },
-  {
     "id": "abdul_baset_mujawwad",
     "name": "Abdul Basit, Mujawwad",
     "language": "ar",
@@ -29,16 +19,6 @@
     "isFilePerSura": true,
     "style": "Mujawwad",
     "hasFileNameLeadingZeros": false
-  },
-  {
-    "id": "Abdul_Basit_Mujawwad_128kbps",
-    "name": "Abdul Basit, Mujawwad",
-    "language": "ar",
-    "url": "https://mirrors.quranicaudio.com/everyayah/Abdul_Basit_Mujawwad_128kbps",
-    "byWBW": false,
-    "isFilePerVerse": true,
-    "isFilePerSura": false,
-    "style": "Mujawwad"
   },
   {
     "id": "Ghamadi_40kbps",
