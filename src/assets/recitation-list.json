@@ -10,6 +10,16 @@
     "style": "Murattal"
   },
   {
+    "id": "mishari_alafasy_california",
+    "name": "Mishary Al-Afasy, California",
+    "language": "ar",
+    "url": "https://download.quranicaudio.com/quran/mishaari_california",
+    "byWBW": false,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
+    "style": "Murattal"
+  },
+  {
     "id": "abdul_baset_mujawwad",
     "name": "Abdul Basit, Mujawwad",
     "language": "ar",
@@ -39,8 +49,7 @@
     "byWBW": true,
     "isFilePerVerse": false,
     "isFilePerSura": true,
-    "style": "Mujawwad",
-    "timeAdjustment": 
+    "style": "Mujawwad"
   },
   {
     "id": "siddiq_al-minshawi_murattal",
