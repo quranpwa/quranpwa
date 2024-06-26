@@ -48,6 +48,14 @@
     "locale": "az-Cyrl-AZ"
   },
   {
+    "Name": "Ministry of Religious Affairs, Bangladesh",
+    "languageName": "Bengali",
+    "translator": "Commitee",
+    "fileName": "bn-bd-ministry",
+    "language": "bn",
+    "locale": "bn-BD"
+  },
+  {
     "Name": "Bayaan Foundation",
     "languageName": "Bengali",
     "translator": "Bayaan Foundation",
