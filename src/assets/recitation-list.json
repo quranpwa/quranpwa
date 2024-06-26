@@ -146,6 +146,16 @@
     "style": "Translation"
   },
   {
+    "id": "mahmudur_rahman_english_quran.gov.bd",
+    "name": "Mahmudur Rahman (English)",
+    "language": "en",
+    "url": "https://raw.githubusercontent.com/islam-apps/quran-audio/main/mahmudur_rahman_english_quran.gov.bd",
+    "byWBW": false,
+    "isFilePerVerse": true,
+    "isFilePerSura": false,
+    "style": "Translation"
+  },
+  {
     "id": "IbrahimWalk_192kbps",
     "name": "Ibrahim Walk (English, Sahih International)",
     "language": "en",
