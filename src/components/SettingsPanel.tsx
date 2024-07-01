@@ -8,6 +8,7 @@ import wbwTranslationList from '../assets/wbw-translation-list.json';
 import ThemeSwitch from './ThemeSwitch';
 import { Link } from 'react-router-dom';
 import { getDefaultSettings } from '../StoredData';
+import TranslationList from './TranslationList';
 
 function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
 
@@ -58,15 +59,6 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         onChange(settingsData);
     };
 
-    const translationItemsMapToSelectOption = (translationItems: Translation[]) => {
-        return translationItems?.map(t => {
-            return {
-                label: t?.languageName + ' - ' + t?.Name,
-                value: t
-            }
-        }) ?? []
-    }
-
     const wbwTranslationItemsMapToSelectOption = (translationItems: WbwTranslation[]) => {
         return translationItems?.map(t => {
             return {
@@ -110,14 +102,12 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {translationList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(translationsGroupByLang).length}</small>
             </h5>
-            <Select isMulti blurInputOnSelect
-                options={translationItemsMapToSelectOption(translationList)}
-                value={translationItemsMapToSelectOption(settingsData.translations)}
-                onChange={selectedOptions => {
-                    settingsData.translations = selectedOptions.map(m => m.value)
+            <TranslationList translationList={translationList}
+                selectedTranslations={settingsData.translations}
+                onChange={checkedTranslations => {
+                    settingsData.translations = checkedTranslations;
                     onChange(settingsData)
                 }} />
-
             <h5 className="mt-3">Word-by-word
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {wbwTranslationList.length}</small>
             </h5>
@@ -133,11 +123,10 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {tafsirList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(tafsirsGroupByLang).length}</small>
             </h5>
-            <Select isMulti blurInputOnSelect
-                options={translationItemsMapToSelectOption(tafsirList)}
-                value={translationItemsMapToSelectOption(settingsData.tafsirs)}
-                onChange={selectedOptions => {
-                    settingsData.tafsirs = selectedOptions.map(m => m.value)
+            <TranslationList translationList={tafsirList}
+                selectedTranslations={settingsData.tafsirs}
+                onChange={checkedTafsirs => {
+                    settingsData.tafsirs = checkedTafsirs;
                     onChange(settingsData)
                 }} />
             <hr />
