@@ -62,9 +62,9 @@ function Quran() {
     useEffect(() => {
         onSettingsChanged(settingsData);
 
-        let selectedAyateElement = document.getElementById(location.hash.substring(1));
-        if (selectedAyateElement) {
-            selectedAyateElement.scrollIntoView();
+        let selectedAyatElement = document.getElementById(location.hash.substring(1));
+        if (selectedAyatElement) {
+            selectedAyatElement.scrollIntoView();
         }
     }, []);
 
