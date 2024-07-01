@@ -7,12 +7,14 @@ function TranslationCheckList({ translationList, checkedTranslations, onChange }
         let isChecked = event.target.checked;
         let translationFileName = event.target.id;
 
-        let _checkedTranslations = [];
+        let _checkedTranslations = checkedTranslations;
 
         if (isChecked) {
-            let translation = translationList.filter(f => f.fileName == translationFileName)[0];
-            if (translation) {
-                _checkedTranslations.push(translation);
+            if (!_checkedTranslations.some(s => s.fileName == translationFileName)) {
+                let translation = translationList.find(f => f.fileName == translationFileName);
+                if (translation) {
+                    _checkedTranslations.push(translation);
+                }
             }
         } else {
             _checkedTranslations = checkedTranslations.filter(f => f.fileName != translationFileName);
