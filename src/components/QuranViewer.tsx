@@ -73,8 +73,12 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
     const handlePrevious = () => {
         if (navData.serial > 1) {
             navData.serial--;
-            onNavigate(navData)
+            onNavigate(navData);
         }
+    };
+
+    const handleScrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handlePlayingAyatChanged = (ayat: Ayat, isTranslation?: boolean) => {
@@ -252,6 +256,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         <div className="d-flex mt-3" style={{ justifyContent: 'center', marginBottom: '4rem' }}>
             <button className={'btn theme-colored border mx-2 ' + (navData.serial > 1 ? '' : 'disabled')} type="button"
                 onClick={handlePrevious}>← Previous {navModeName}</button>
+            <button className='btn theme-colored border' type="button"
+                onClick={handleScrollToTop}>↑</button>
             <button className={'btn theme-colored border mx-2 ' + (navData.serial < maxSerial ? '' : 'disabled')} type="button"
                 onClick={handleNext}>Next {navModeName} →</button>
         </div>
