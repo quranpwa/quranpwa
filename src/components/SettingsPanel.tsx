@@ -69,22 +69,6 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         }) ?? []
     }
 
-    const recitaionsMapToSelectOption = (recitaions: Recitation[]) => {
-        return recitaions?.map(t => {
-            let tags = [];
-
-            if (t.byWBW)
-                tags.push('WBW');
-
-            if (t.isFilePerVerse)
-                tags.push('With Gap');
-
-            let label = tags.length > 0 ? t?.name + ' (' + tags.join(', ') + ')' : t?.name;
-
-            return { label: label, value: t }
-        }) ?? []
-    }
-
     const translationsGroupByLang = groupBy(translationList, x => x.language);
     const tafsirsGroupByLang = groupBy(tafsirList, x => x.language);
 

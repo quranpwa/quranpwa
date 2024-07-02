@@ -1,31 +1,30 @@
 ﻿import React, { useState } from 'react';
-import { Ayat, QuranData, RecitationTiming, RecitationWithData } from '../QuranData';
+import { Ayat, QuranData, Recitation, RecitationTiming } from '../QuranData';
 import { getAyatId, padLeft } from '../Utilities';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 
 function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAyatChanged }: AudioPlayerProps) {
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
     const [recitationIdx, setRecitationIdx] = useState<number>(0)
-    const recitations = quranData.recitations.sort((a, b) => a?.recitaionMeta?.language > b?.recitaionMeta?.language ? 1 : -1);
+    const recitations = settingsData.recitaions;
 
-    const getAudioUrl = (recitation: RecitationWithData): string => {
+    const getAudioUrl = (recitation: Recitation): string => {
         if (!recitation || !ayats?.length)
             return '';
 
-        let recitationMeta = recitation.recitaionMeta;
         let startingAyat = ayats[selectedAyat - ayats[0].serial] || ayats[0];
 
-        if (recitationMeta.isFilePerVerse) {
+        if (recitation.isFilePerVerse) {
             let ayatId = getAyatId(startingAyat)
 
-            return `${recitationMeta.url}/${ayatId}.mp3`;
+            return `${recitation.url}/${ayatId}.mp3`;
         }
-        else if (recitationMeta.isFilePerSura) {
-            let suraSerial = recitationMeta.hasFileNameLeadingZeros === false
+        else if (recitation.isFilePerSura) {
+            let suraSerial = recitation.hasFileNameLeadingZeros === false
                 ? startingAyat.suraIdx + 1
                 : padLeft((startingAyat.suraIdx + 1).toString(), 3);
 
-            return `${recitationMeta.url}/${suraSerial}.mp3`;
+            return `${recitation.url}/${suraSerial}.mp3`;
         }
         else return ''
     };
@@ -36,10 +35,11 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         let audioElements = document.getElementsByTagName('audio')
 
         for (let audioElement of audioElements) {
-            if (audioElement.id == recitation.recitaionMeta.id) {
-                if (recitation?.recitaionMeta?.isFilePerSura) {
-                    let currentAyatTiming: RecitationTiming = recitation.timings[p_ayatSerial - 1];
-                    let nextAyatTiming: RecitationTiming = recitation.timings[p_ayatSerial];
+            if (audioElement.id == recitation.id) {
+                if (recitation?.isFilePerSura) {
+                    let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
+                    let currentAyatTiming: RecitationTiming = recitationTimings[p_ayatSerial - 1];
+                    let nextAyatTiming: RecitationTiming = recitationTimings[p_ayatSerial];
                     let currentAyatStartTime = (currentAyatTiming.time || 0) / 1000;
                     let nextAyatStartTime = nextAyatTiming.sura == currentAyatTiming.sura ? (nextAyatTiming.time || 0) / 1000 : Number.MAX_VALUE - 1;
 
@@ -81,11 +81,13 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     const handleOnTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>) => {
         let recitation = recitations[recitationIdx];
 
-        if (recitation?.recitaionMeta?.isFilePerSura) {
+        if (recitation?.isFilePerSura) {
             let currentTimeInMS = event.currentTarget.currentTime * 1000;
+            let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
 
-            if (recitation.recitaionMeta.byWBW) {
-                let thisAyatTiming = recitation.timings[selectedAyat - 1];
+            if (recitation.byWBW) {
+
+                let thisAyatTiming = recitationTimings[selectedAyat - 1];
 
                 let currentWordTiming = thisAyatTiming.wordTimings.filter(t =>
                     t[1] /*startTime*/ <= currentTimeInMS && t[2] /*endTime*/ >= currentTimeInMS)[0]
@@ -111,7 +113,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             let currentAyatIdx = selectedAyat - ayats[0].serial;
             let currentAyat = ayats[currentAyatIdx];
             let nextAyat = ayats[currentAyatIdx + 1];
-            let nextAyatTiming = recitation.timings[selectedAyat];
+            let nextAyatTiming = recitationTimings[selectedAyat];
 
             let isCurrentTimeExceedingNextAyatStartTime = nextAyatTiming
                 && nextAyatTiming.sura == currentAyat.suraIdx + 1
@@ -163,7 +165,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                 pauseAll();
                 setRecitationIdx(nextRecitationId);
                 let nextRecitation = recitations[nextRecitationId];
-                let isTranslation = nextRecitation.recitaionMeta.language != 'ar';
+                let isTranslation = nextRecitation.language != 'ar';
 
                 if (isLastRecitaion) {
                     if (!isLastAyat && nextAyat) {
@@ -182,7 +184,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
 
             } else if (nextAyat) {
                 let recitation = recitations[recitationIdx];
-                let isTranslation = recitation.recitaionMeta.language != 'ar';
+                let isTranslation = recitation.language != 'ar';
                 onPlayingAyatChanged(nextAyat, isTranslation);
             }
         }
@@ -221,7 +223,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
             let nextAyat = ayats[currentAyatIdx + 1];
             let isLastAyatInThisRuku = currentAyat.rukuIdx != nextAyat?.rukuIdx;
             let nextRecitation = recitations[nextRecitationId];
-            let isTranslation = nextRecitation.recitaionMeta.language != 'ar';
+            let isTranslation = nextRecitation.language != 'ar';
 
             if (isLastAyatInThisRuku) {
                 setRecitationIdx(nextRecitationId);
@@ -243,7 +245,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
 
             } else if (nextAyat) {
                 let recitation = recitations[recitationIdx];
-                let isTranslation = recitation.recitaionMeta.language != 'ar';
+                let isTranslation = recitation.language != 'ar';
                 onPlayingAyatChanged(nextAyat, isTranslation);
                 setTimeout(() => { handlePlay(recitationIdx, selectedAyat) });
             }
@@ -265,7 +267,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                         <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5" />
                     </svg>
                 </button>
-                <span className="btn theme-colored border">{recitations[recitationIdx]?.recitaionMeta?.name}</span>
+                <span className="btn theme-colored border">{recitations[recitationIdx]?.name}</span>
             </>}
             <div className="btn-group">
                 <button type="button" className="btn theme-colored border dropdown-toggle" data-bs-toggle="dropdown">
@@ -275,12 +277,12 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                 </button>
                 <ul className="dropdown-menu">
                     {recitations.map((r, i) =>
-                        <li key={r.recitaionMeta.id} className="dropdown-item">
+                        <li key={r.id} className="dropdown-item">
                             <p style={{ cursor: 'pointer' }}
                                 onClick={() => { setRecitationIdx(i); handlePlay(i, selectedAyat); }}>
-                                {recitationIdx == i ? '●' : ''} {r.recitaionMeta.name}
+                                {recitationIdx == i ? '●' : ''} {r.name}
                             </p>
-                            <audio id={r.recitaionMeta.id}
+                            <audio id={r.id}
                                 src={getAudioUrl(r)}
                                 onTimeUpdate={handleOnTimeUpdate}
                                 onEnded={handleOnEnded}

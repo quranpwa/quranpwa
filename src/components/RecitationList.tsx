@@ -1,26 +1,29 @@
-﻿import { Recitation } from '../QuranData';
+﻿import { useState } from 'react';
+import { Recitation } from '../QuranData';
 import { groupBy } from '../Utilities';
 
 function RecitationList({ recitationList, selectedRecitations, onChange }: RecitationListProps) {
+    const [draggingItem, setDraggingItem] = useState<Recitation>();
+    const [items, setItems] = useState(selectedRecitations);
 
     const handleRecitationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let isChecked = event.target.checked;
         let recitationId = event.target.id;
 
-        let _selectedRecitations = selectedRecitations;
+        let _items = items;
 
         if (isChecked) {
-            if (!_selectedRecitations.some(s => s.id == recitationId)) {
+            if (!_items.some(s => s.id == recitationId)) {
                 let recitation = recitationList.find(f => f.id == recitationId);
                 if (recitation) {
-                    _selectedRecitations.push(recitation);
+                    _items.push(recitation);
                 }
             }
         } else {
-            _selectedRecitations = selectedRecitations.filter(f => f.id != recitationId);
+            _items = selectedRecitations.filter(f => f.id != recitationId);
         }
-
-        onChange(_selectedRecitations);
+        setItems(_items);
+        onChange(_items);
     }
 
     let recitationGroupByStyle = groupBy(recitationList, x => x.style);
@@ -57,11 +60,46 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
         }
     };
 
+    const handleDragStart = (e, item) => {
+        setDraggingItem(item);
+        e.dataTransfer.setData('text/plain', '');
+    };
+
+    const handleDragEnd = () => {
+        setDraggingItem(undefined);
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleDrop = (e, targetItem) => {
+        if (!draggingItem) return;
+
+        const currentIndex = items.indexOf(draggingItem);
+        const targetIndex = items.indexOf(targetItem);
+
+        if (currentIndex !== -1 && targetIndex !== -1) {
+            items.splice(currentIndex, 1);
+            items.splice(targetIndex, 0, draggingItem);
+            setItems(items);
+            onChange(items);
+        }
+    };
+
     return <div>
         <ul className="list-group">
-            {selectedRecitations.map(recitation =>
-                <li key={recitation.id} className="list-group-item">
-                    {recitation.name} - {recitation.style}
+            {items.map(item =>
+                <li key={item.id}
+                    className={"list-group-item " +
+                        (item.id == draggingItem?.id ? 'opacity-50' : '')}
+                    style={{ cursor: 'move' }}
+                    draggable="true"
+                    onDragStart={(e) => handleDragStart(e, item)}
+                    onDragEnd={handleDragEnd}
+                    onDragOver={handleDragOver}
+                    onDrop={(e) => handleDrop(e, item)}>
+                    {item.name} - {item.style}
                 </li>)
             }
         </ul>
