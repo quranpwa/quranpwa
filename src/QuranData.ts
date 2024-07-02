@@ -19,7 +19,7 @@ export class QuranData {
     wbwTranslations: WbwTranslationWithData[] = [];
     translations: TranslationWithData[] = [];
     tafsirs: TranslationWithData[] = [];
-    recitations: RecitaionWithData[] = [];
+    recitations: RecitationWithData[] = [];
 
     constructor() {
         this.suras = this.getSuras();
@@ -352,7 +352,7 @@ export class QuranData {
             updateUI();
     }
 
-    setRecitations(recitations: Recitaion[]) {
+    setRecitations(recitations: Recitation[]) {
         if (!recitations) {
             this.recitations = [];
             return;
@@ -370,7 +370,7 @@ export class QuranData {
                     .then(response => response.json())
                     .then(fullTimingArray => {
                         if (!this.recitations.some(s => s.recitaionMeta.id === recitation.id)) {
-                            let timings: RecitaionTiming[] = [];
+                            let timings: RecitationTiming[] = [];
 
                             for (var i = 0; i < fullTimingArray.length; i++) {
                                 let [sura, ayat, time, wordTimings] = fullTimingArray[i];
@@ -516,7 +516,7 @@ export interface Corpus {
     verb_form: string
 }
 
-export interface Recitaion {
+export interface Recitation {
     id: string,
     name: string,
     language: string,
@@ -528,16 +528,16 @@ export interface Recitaion {
     hasFileNameLeadingZeros?: boolean
 }
 
-export interface RecitaionTiming {
+export interface RecitationTiming {
     sura: number,
     ayat: number,
     time: number,
     wordTimings: [number[]]
 }
 
-export interface RecitaionWithData {
-    recitaionMeta: Recitaion,
-    timings: RecitaionTiming[]
+export interface RecitationWithData {
+    recitaionMeta: Recitation,
+    timings: RecitationTiming[]
 }
 
 export enum NavigationMode {

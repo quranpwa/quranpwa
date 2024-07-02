@@ -1,5 +1,5 @@
 ﻿import Select from 'react-select';
-import { Recitaion, Translation, WbwTranslation } from '../QuranData';
+import { Recitation, Translation, WbwTranslation } from '../QuranData';
 import { groupBy } from '../Utilities';
 import recitationList from '../assets/recitation-list.json';
 import tafsirList from '../assets/tafsir-list.json';
@@ -68,7 +68,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         }) ?? []
     }
 
-    const recitaionsMapToSelectOption = (recitaions: Recitaion[]) => {
+    const recitaionsMapToSelectOption = (recitaions: Recitation[]) => {
         return recitaions?.map(t => {
             let tags = [];
 
@@ -134,7 +134,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             <h5 className="mt-3">Recitaions</h5>
             <Select isMulti blurInputOnSelect
                 options={recitaionsMapToSelectOption(recitationList)}
-                value={recitaionsMapToSelectOption(settingsData.recitaions || recitationList.filter(f => f.id == 'Alafasy_128kbps'))}
+                value={recitaionsMapToSelectOption(settingsData.recitaions)}
                 onChange={selectedOptions => {
                     settingsData.recitaions = selectedOptions.map(m => m.value)
                     onChange(settingsData)
@@ -237,7 +237,7 @@ export interface SettingsModel {
     wbwTranslations: WbwTranslation[]
     translations: Translation[]
     tafsirs: Translation[]
-    recitaions: Recitaion[]
+    recitaions: Recitation[]
 }
 
 interface SettingsPanelProps {

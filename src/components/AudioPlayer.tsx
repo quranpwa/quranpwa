@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { Ayat, QuranData, RecitaionTiming, RecitaionWithData } from '../QuranData';
+import { Ayat, QuranData, RecitationTiming, RecitationWithData } from '../QuranData';
 import { getAyatId, padLeft } from '../Utilities';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 
@@ -8,7 +8,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
     const [recitationIdx, setRecitationIdx] = useState<number>(0)
     const recitations = quranData.recitations.sort((a, b) => a?.recitaionMeta?.language > b?.recitaionMeta?.language ? 1 : -1);
 
-    const getAudioUrl = (recitation: RecitaionWithData): string => {
+    const getAudioUrl = (recitation: RecitationWithData): string => {
         if (!recitation || !ayats?.length)
             return '';
 
@@ -38,8 +38,8 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         for (let audioElement of audioElements) {
             if (audioElement.id == recitation.recitaionMeta.id) {
                 if (recitation?.recitaionMeta?.isFilePerSura) {
-                    let currentAyatTiming: RecitaionTiming = recitation.timings[p_ayatSerial - 1];
-                    let nextAyatTiming: RecitaionTiming = recitation.timings[p_ayatSerial];
+                    let currentAyatTiming: RecitationTiming = recitation.timings[p_ayatSerial - 1];
+                    let nextAyatTiming: RecitationTiming = recitation.timings[p_ayatSerial];
                     let currentAyatStartTime = (currentAyatTiming.time || 0) / 1000;
                     let nextAyatStartTime = nextAyatTiming.sura == currentAyatTiming.sura ? (nextAyatTiming.time || 0) / 1000 : Number.MAX_VALUE - 1;
 
