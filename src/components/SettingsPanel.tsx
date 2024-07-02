@@ -9,6 +9,7 @@ import ThemeSwitch from './ThemeSwitch';
 import { Link } from 'react-router-dom';
 import { getDefaultSettings } from '../StoredData';
 import TranslationList from './TranslationList';
+import RecitationList from './RecitationList';
 
 function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
 
@@ -132,11 +133,10 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             <hr />
 
             <h5 className="mt-3">Recitaions</h5>
-            <Select isMulti blurInputOnSelect
-                options={recitaionsMapToSelectOption(recitationList)}
-                value={recitaionsMapToSelectOption(settingsData.recitaions)}
-                onChange={selectedOptions => {
-                    settingsData.recitaions = selectedOptions.map(m => m.value)
+            <RecitationList recitationList={recitationList}
+                selectedRecitations={settingsData.recitaions}
+                onChange={checkedRecitations => {
+                    settingsData.recitaions = checkedRecitations;
                     onChange(settingsData)
                 }} />
             <hr />
