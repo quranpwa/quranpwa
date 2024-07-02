@@ -37,12 +37,11 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
                     <input className="form-check-input" type="checkbox" id={recitation.id}
                         checked={selectedRecitations?.some(s => s.id === recitation.id)}
                         onChange={handleRecitationChange} />
-                    <label className="form-check-label" htmlFor={recitation.id}>
-                        {recitation.name} - {recitation.style}
-                    </label>
+                    <label className="form-check-label" htmlFor={recitation.id}>{recitation.name}</label>
+                    <small className='badge bg-secondary ms-2'>{recitation.byWBW ? 'WBW' : ''}</small>
+                    <small className='badge bg-secondary ms-2'>{recitation.isFilePerVerse ? 'With Gap' : ''}</small>
                 </div>
             ))
-
     }
 
     const dialog = document.getElementById("recitationSelectionDialog") as HTMLDialogElement;
@@ -77,11 +76,11 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
             onClose={handleDialogClose}>
             <form method="dialog">
                 <div className="d-flex justify-content-between">
-                    <span id="ayatDetailDialogTitle" className="h5 pe-4 pb-3"></span>
+                    <span id="ayatDetailDialogTitle" className="h5 pe-4">Reciters</span>
                     <button type="submit" className="btn-close bg-theme-text" value="close"></button>
                 </div>
                 {recitationCheckItems}
-                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div className="btn-toolbar mt-4" role="toolbar" aria-label="Toolbar with button groups">
                     <div className="btn-group me-2" role="group" aria-label="First group">
                         <button type="submit" className="btn btn-primary" value="ok">OK</button>
                     </div>
@@ -101,4 +100,3 @@ interface RecitationListProps {
     selectedRecitations: Recitation[],
     onChange: (selectedRecitations: Recitation[]) => void
 }
-
