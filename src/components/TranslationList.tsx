@@ -67,7 +67,7 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
             }
         </ul>
 
-        <button className='btn btn-outline-primary w-100 mt-2'
+        <button className='btn btn-outline-secondary w-100 mt-2'
             onClick={() => dialog.showModal()}>
             Select More
         </button>
@@ -77,11 +77,11 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
             onClose={handleDialogClose}>
             <form method="dialog">
                 <div className="d-flex justify-content-between">
-                    <span id="ayatDetailDialogTitle" className="h5 pe-4 pb-3"></span>
+                    <span id="ayatDetailDialogTitle" className="h5 pe-4"></span>
                     <button type="submit" className="btn-close bg-theme-text" value="close"></button>
                 </div>
                 {translationCheckItems}
-                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div className="btn-toolbar mt-4" role="toolbar" aria-label="Toolbar with button groups">
                     <div className="btn-group me-2" role="group" aria-label="First group">
                         <button type="submit" className="btn btn-primary" value="ok">OK</button>
                     </div>

@@ -70,7 +70,7 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
                 </li>
             ))}
         </ReactSortable>
-        <button className='btn btn-outline-primary w-100 mt-2'
+        <button className='btn btn-outline-secondary w-100 mt-2'
             onClick={() => dialog.showModal()}>
             Select More
         </button>
