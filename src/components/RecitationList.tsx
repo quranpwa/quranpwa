@@ -1,9 +1,9 @@
 ﻿import { useState } from 'react';
 import { Recitation } from '../QuranData';
 import { groupBy } from '../Utilities';
+import { ReactSortable } from 'react-sortablejs';
 
 function RecitationList({ recitationList, selectedRecitations, onChange }: RecitationListProps) {
-    const [draggingItem, setDraggingItem] = useState<Recitation>();
     const [items, setItems] = useState(selectedRecitations);
 
     const handleRecitationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,50 +60,16 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
         }
     };
 
-    const handleDragStart = (e, item) => {
-        setDraggingItem(item);
-        e.dataTransfer.setData('text/plain', '');
-    };
-
-    const handleDragEnd = () => {
-        setDraggingItem(undefined);
-    };
-
-    const handleDragOver = (e) => {
-        e.preventDefault();
-    };
-
-    const handleDrop = (e, targetItem) => {
-        if (!draggingItem) return;
-
-        const currentIndex = items.indexOf(draggingItem);
-        const targetIndex = items.indexOf(targetItem);
-
-        if (currentIndex !== -1 && targetIndex !== -1) {
-            items.splice(currentIndex, 1);
-            items.splice(targetIndex, 0, draggingItem);
-            setItems(items);
-            onChange(items);
-        }
-    };
-
-    return <div>
-        <ul className="list-group">
-            {items.map(item =>
-                <li key={item.id}
-                    className={"list-group-item " +
-                        (item.id == draggingItem?.id ? 'opacity-50' : '')}
-                    style={{ cursor: 'move' }}
-                    draggable="true"
-                    onDragStart={(e) => handleDragStart(e, item)}
-                    onDragEnd={handleDragEnd}
-                    onDragOver={handleDragOver}
-                    onDrop={(e) => handleDrop(e, item)}>
+    return <div>        
+        <ReactSortable list={items} setList={setItems}
+            tag="ul" className="list-group">
+            {items.map((item) => (
+                <li key={item.id} className="list-group-item"
+                    style={{ cursor: 'move' }}>
                     {item.name} - {item.style}
-                </li>)
-            }
-        </ul>
-
+                </li>
+            ))}
+        </ReactSortable>
         <button className='btn btn-outline-primary w-100 mt-2'
             onClick={() => dialog.showModal()}>
             Select More
