@@ -10,14 +10,14 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
         let _selectedTranslations = selectedTranslations;
 
         if (isChecked) {
-            if (!_selectedTranslations.some(s => s.fileName == translationFileName)) {
-                let translation = translationList.find(f => f.fileName == translationFileName);
+            if (!_selectedTranslations.some(s => s.id == translationFileName)) {
+                let translation = translationList.find(f => f.id == translationFileName);
                 if (translation) {
                     _selectedTranslations.push(translation);
                 }
             }
         } else {
-            _selectedTranslations = selectedTranslations.filter(f => f.fileName != translationFileName);
+            _selectedTranslations = selectedTranslations.filter(f => f.id != translationFileName);
         }
 
         onChange(_selectedTranslations);
@@ -33,12 +33,12 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
 
         translations.forEach(translation =>
             translationCheckItems.push(
-                <div key={translation.fileName} className="form-check">
-                    <input className="form-check-input" type="checkbox" id={translation.fileName}
-                        checked={selectedTranslations?.some(s => s.fileName === translation.fileName)}
+                <div key={translation.id} className="form-check">
+                    <input className="form-check-input" type="checkbox" id={translation.id}
+                        checked={selectedTranslations?.some(s => s.id === translation.id)}
                         onChange={handleTranslationChange} />
-                    <label className="form-check-label" htmlFor={translation.fileName}>
-                        {translation.languageName} - {translation.Name}
+                    <label className="form-check-label" htmlFor={translation.id}>
+                        {translation.languageName} - {translation.name}
                     </label>
                 </div>
             ))
@@ -61,8 +61,8 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
     return <div>
         <ul className="list-group">
             {selectedTranslations.map(translation =>
-                <li key={translation.fileName} className="list-group-item">
-                    {translation.languageName} - {translation.Name}
+                <li key={translation.id} className="list-group-item">
+                    {translation.languageName} - {translation.name}
                 </li>)
             }
         </ul>

@@ -10,14 +10,14 @@ function TranslationCheckList({ translationList, checkedTranslations, onChange }
         let _checkedTranslations = checkedTranslations;
 
         if (isChecked) {
-            if (!_checkedTranslations.some(s => s.fileName == translationFileName)) {
-                let translation = translationList.find(f => f.fileName == translationFileName);
+            if (!_checkedTranslations.some(s => s.id == translationFileName)) {
+                let translation = translationList.find(f => f.id == translationFileName);
                 if (translation) {
                     _checkedTranslations.push(translation);
                 }
             }
         } else {
-            _checkedTranslations = checkedTranslations.filter(f => f.fileName != translationFileName);
+            _checkedTranslations = checkedTranslations.filter(f => f.id != translationFileName);
         }
 
         onChange(_checkedTranslations);
@@ -33,12 +33,12 @@ function TranslationCheckList({ translationList, checkedTranslations, onChange }
 
         translations.forEach(translation =>
             translationCheckItems.push(
-                <div key={translation.fileName} className="form-check">
-                    <input className="form-check-input" type="checkbox" id={translation.fileName}
-                        checked={checkedTranslations?.some(s => s.fileName === translation.fileName)}
+                <div key={translation.id} className="form-check">
+                    <input className="form-check-input" type="checkbox" id={translation.id}
+                        checked={checkedTranslations?.some(s => s.id === translation.id)}
                         onChange={handleTranslationChange} />
-                    <label className="form-check-label" htmlFor={translation.fileName}>
-                        {translation.languageName} - {translation.Name}
+                    <label className="form-check-label" htmlFor={translation.id}>
+                        {translation.languageName} - {translation.name}
                     </label>
                 </div>
             ))

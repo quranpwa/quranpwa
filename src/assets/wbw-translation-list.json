@@ -1,62 +1,62 @@
 [
   {
+    "id": "words-bn",
     "name": "Bangla",
-    "fileName": "words-bn",
     "language": "bn"
   },
   {
+    "id": "words-dv",
     "name": "Divehi - Bakurube",
-    "fileName": "words-dv",
     "language": "dv"
   },
   {
+    "id": "words-en",
     "name": "English",
-    "fileName": "words-en",
     "language": "en"
   },
   {
+    "id": "words-en_trans",
     "name": "English - Transliteration",
-    "fileName": "words-en-trans",
     "language": "en_trans"
   },
   {
+    "id": "words-de",
     "name": "German",
-    "fileName": "words-de",
     "language": "de"
   },
   {
+    "id": "words-hi",
     "name": "Hindi",
-    "fileName": "words-hi",
     "language": "hi"
   },
   {
+    "id": "words-in",
     "name": "Indonesian/Malay",
-    "fileName": "words-in",
     "language": "in"
   },
   {
+    "id": "words-inh",
     "name": "Ingush",
-    "fileName": "words-inh",
     "language": "inh"
   },
   {
+    "id": "words-ru",
     "name": "Russian",
-    "fileName": "words-ru",
     "language": "ru"
   },
   {
+    "id": "words-ta",
     "name": "Tamil - Darul Huda",
-    "fileName": "words-ta",
     "language": "ta"
   },
   {
+    "id": "words-tr",
     "name": "Turkish",
-    "fileName": "words-tr",
     "language": "tr"
   },
   {
+    "id": "words-ur",
     "name": "Urdu",
-    "fileName": "words-ur",
     "language": "ur"
   }
 ]

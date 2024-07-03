@@ -259,16 +259,16 @@ export class QuranData {
         }
 
         this.wbwTranslations = this.wbwTranslations.filter(f =>
-            wbwTranslations.some(s => s.fileName === f.translationMeta.fileName));
+            wbwTranslations.some(s => s.id === f.translationMeta.id));
 
         let notFetchedTranslations = wbwTranslations.filter(f =>
-            !this.wbwTranslations.some(s => s.translationMeta.fileName === f.fileName));
+            !this.wbwTranslations.some(s => s.translationMeta.id === f.id));
 
         notFetchedTranslations.forEach(translation => {
-            fetch(`./corpus/${translation.fileName}.txt`)
+            fetch(`./corpus/${translation.id}.txt`)
                 .then<string>(response => response.text())
                 .then(text => {
-                    if (!this.wbwTranslations.some(s => s.translationMeta.fileName === translation.fileName)) {
+                    if (!this.wbwTranslations.some(s => s.translationMeta.id === translation.id)) {
 
                         const texts = text.split(/\r\n|\n/);
 
@@ -294,16 +294,16 @@ export class QuranData {
         }
 
         this.translations = this.translations.filter(f =>
-            translations.some(s => s.fileName === f.translationMeta.fileName));
+            translations.some(s => s.id === f.translationMeta.id));
 
         let notFetchedTranslations = translations.filter(f =>
-            !this.translations.some(s => s.translationMeta.fileName === f.fileName));
+            !this.translations.some(s => s.translationMeta.id === f.id));
 
         notFetchedTranslations.forEach(translation => {
-            fetch(`./translations/${translation.fileName}.json`)
+            fetch(`./translations/${translation.id}.json`)
                 .then<string[]>(response => response.json())
                 .then(texts => {
-                    if (!this.translations.some(s => s.translationMeta.fileName === translation.fileName)) {
+                    if (!this.translations.some(s => s.translationMeta.id === translation.id)) {
 
                         this.translations.push({ translationMeta: translation, texts: texts });
 
@@ -327,16 +327,16 @@ export class QuranData {
         }
 
         this.tafsirs = this.tafsirs.filter(f =>
-            tafsirs.some(s => s.fileName === f.translationMeta.fileName));
+            tafsirs.some(s => s.id === f.translationMeta.id));
 
         let notFetchedTafsirs = tafsirs.filter(f =>
-            !this.tafsirs.some(s => s.translationMeta.fileName === f.fileName));
+            !this.tafsirs.some(s => s.translationMeta.id === f.id));
 
         notFetchedTafsirs.forEach(translation => {
-            fetch(`./tafsirs/${translation.fileName}.json`)
+            fetch(`./tafsirs/${translation.id}.json`)
                 .then<string[]>(response => response.json())
                 .then(texts => {
-                    if (!this.tafsirs.some(s => s.translationMeta.fileName === translation.fileName)) {
+                    if (!this.tafsirs.some(s => s.translationMeta.id === translation.id)) {
 
                         this.tafsirs.push({ translationMeta: translation, texts: texts });
 
@@ -458,10 +458,10 @@ interface Sajdah {
 }
 
 export interface Translation {
-    Name: string,
+    id: string,
+    name: string,
     languageName: string,
     translator: string,
-    fileName: string,
     language: string,
     locale: string | null,
 }
@@ -472,8 +472,8 @@ export interface TranslationWithData {
 }
 
 export interface WbwTranslation {
+    id: string,
     name: string,
-    fileName: string,
     language: string,
 }
 
