@@ -77,7 +77,8 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {translationList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(translationsGroupByLang).length}</small>
             </h5>
-            <TranslationList translationList={translationList}
+            <TranslationList title='Translations' 
+                translationList={translationList}
                 selectedTranslations={settingsData.translations}
                 onChange={checkedTranslations => {
                     settingsData.translations = checkedTranslations;
@@ -86,7 +87,8 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             <h5 className="mt-3">Word-by-Word
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {wbwTranslationList.length}</small>
             </h5>
-            <TranslationList translationList={wbwTranslationList}
+            <TranslationList title='Word-by-Word Translations' 
+                translationList={wbwTranslationList}
                 selectedTranslations={settingsData.wbwTranslations}
                 onChange={checkedWbwTranslations => {
                     settingsData.wbwTranslations = checkedWbwTranslations;
@@ -97,7 +99,8 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {tafsirList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(tafsirsGroupByLang).length}</small>
             </h5>
-            <TranslationList translationList={tafsirList}
+            <TranslationList title='Tafsirs' 
+                translationList={tafsirList}
                 selectedTranslations={settingsData.tafsirs}
                 onChange={checkedTafsirs => {
                     settingsData.tafsirs = checkedTafsirs;

@@ -3,7 +3,7 @@ import { Translation } from '../QuranData';
 import { getLanguageName, groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
 
-function TranslationList({ translationList, selectedTranslations, onChange }: TranslationListProps) {
+function TranslationList({ title, translationList, selectedTranslations, onChange }: TranslationListProps) {
     const dialogRef = useRef<any>();
     ``
     const handleSelectionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,7 +77,7 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
             onClose={handleDialogClose}>
             <form method="dialog">
                 <div className="d-flex justify-content-between">
-                    <span id="ayatDetailDialogTitle" className="h5 pe-4"></span>
+                    <span className="h5 pe-4">{title}</span>
                     <button type="submit" className="btn-close bg-theme-text" value="close"></button>
                 </div>
                 {translationCheckItems}
@@ -97,6 +97,7 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
 export default TranslationList
 
 interface TranslationListProps {
+    title: string
     translationList: Translation[],
     selectedTranslations: Translation[],
     onChange: (selectedTranslations: Translation[]) => void
