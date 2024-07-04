@@ -1,26 +1,34 @@
-﻿import { Translation } from '../QuranData';
+﻿import { useState } from 'react';
+import { Translation } from '../QuranData';
 import { groupBy } from '../Utilities';
+import { ReactSortable } from 'react-sortablejs';
 
 function TranslationList({ translationList, selectedTranslations, onChange }: TranslationListProps) {
+    const [items, setItems] = useState(selectedTranslations);
+
+    const onSetList = (list: Translation[]) => {
+        setItems(list);
+        onChange(list);
+    }
 
     const handleTranslationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let isChecked = event.target.checked;
-        let translationFileName = event.target.id;
+        let _id = event.target.id;
 
-        let _selectedTranslations = selectedTranslations;
+        let _items = items;
 
         if (isChecked) {
-            if (!_selectedTranslations.some(s => s.id == translationFileName)) {
-                let translation = translationList.find(f => f.id == translationFileName);
-                if (translation) {
-                    _selectedTranslations.push(translation);
+            if (!_items.some(s => s.id == _id)) {
+                let item = translationList.find(f => f.id == _id);
+                if (item) {
+                    _items.push(item);
                 }
             }
         } else {
-            _selectedTranslations = selectedTranslations.filter(f => f.id != translationFileName);
+            _items = selectedTranslations.filter(f => f.id != _id);
         }
 
-        onChange(_selectedTranslations);
+        onSetList(_items);
     }
 
     let translationGroupByLanguage = groupBy(translationList, x => x.languageName);
@@ -59,13 +67,15 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
     };
 
     return <div>
-        <ul className="list-group">
-            {selectedTranslations.map(translation =>
-                <li key={translation.id} className="list-group-item">
-                    {translation.languageName} - {translation.name}
-                </li>)
-            }
-        </ul>
+        <ReactSortable list={items} setList={onSetList}
+            tag="ul" className="list-group">
+            {items.map((item) => (
+                <li key={item.id} className="list-group-item"
+                    style={{ cursor: 'move' }}>
+                    {item.languageName} - {item.name}
+                </li>
+            ))}
+        </ReactSortable>
 
         <button className='btn btn-outline-secondary w-100 mt-2'
             onClick={() => dialog.showModal()}>
@@ -101,4 +111,3 @@ interface TranslationListProps {
     selectedTranslations: Translation[],
     onChange: (selectedTranslations: Translation[]) => void
 }
-
