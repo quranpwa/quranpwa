@@ -1,8 +1,10 @@
-﻿import { Recitation } from '../QuranData';
+﻿import { useRef } from 'react';
+import { Recitation } from '../QuranData';
 import { groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
 
 function RecitationList({ recitationList, selectedRecitations, onChange }: RecitationListProps) {
+    const dialogRef = useRef<any>();
 
     const handleSelectionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let isChecked = event.target.checked;
@@ -43,15 +45,13 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
             ))
     }
 
-    const dialog = document.getElementById("recitationSelectionDialog") as HTMLDialogElement;
-
     const handleDialogClick = (event: React.MouseEvent<HTMLDialogElement>) => {
-        if (event.target === dialog) { // to support closing by backdrop click
-            dialog.close();
+        if (event.target === dialogRef.current) { // to support closing by backdrop click
+            dialogRef.current.close();
         }
     };
     const handleDialogClose = (/*event: React.MouseEvent<HTMLDialogElement>*/) => {
-        if (dialog.returnValue == 'ok') {
+        if (dialogRef.current?.returnValue == 'ok') {
             //onChange(checkedRecitations)
         }
     };
@@ -68,11 +68,11 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
         </ReactSortable>
 
         <button className='btn btn-outline-secondary w-100 mt-2'
-            onClick={() => dialog.showModal()}>
+            onClick={() => dialogRef.current?.showModal()}>
             Select More
         </button>
 
-        <dialog id="recitationSelectionDialog"
+        <dialog ref={dialogRef}
             onClick={handleDialogClick}
             onClose={handleDialogClose}>
             <form method="dialog">

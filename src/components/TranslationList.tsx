@@ -1,9 +1,11 @@
-﻿import { Translation } from '../QuranData';
+﻿import { useRef } from 'react';
+import { Translation } from '../QuranData';
 import { getLanguageName, groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
 
 function TranslationList({ translationList, selectedTranslations, onChange }: TranslationListProps) {
-
+    const dialogRef = useRef<any>();
+    ``
     const handleSelectionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let isChecked = event.target.checked;
         let _id = event.target.id;
@@ -43,15 +45,13 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
             ))
     }
 
-    const dialog = document.getElementById("translationSelectionDialog") as HTMLDialogElement;
-
     const handleDialogClick = (event: React.MouseEvent<HTMLDialogElement>) => {
-        if (event.target === dialog) { // to support closing by backdrop click
-            dialog.close();
+        if (event.target === dialogRef.current) { // to support closing by backdrop click
+            dialogRef.current?.close();
         }
     };
     const handleDialogClose = (/*event: React.MouseEvent<HTMLDialogElement>*/) => {
-        if (dialog.returnValue == 'ok') {
+        if (dialogRef.current.returnValue == 'ok') {
             //onChange(checkedTranslations)
         }
     };
@@ -68,11 +68,11 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
         </ReactSortable>
 
         <button className='btn btn-outline-secondary w-100 mt-2'
-            onClick={() => dialog.showModal()}>
+            onClick={() => dialogRef.current?.showModal()}>
             Select More
         </button>
 
-        <dialog id="translationSelectionDialog"
+        <dialog ref={dialogRef}
             onClick={handleDialogClick}
             onClose={handleDialogClose}>
             <form method="dialog">
