@@ -56,7 +56,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     };
 
     const handleResetSettings = () => {
-        settingsData = getDefaultSettings()
+        settingsData = getDefaultSettings();        
         onChange(settingsData);
     };
 

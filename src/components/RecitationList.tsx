@@ -4,18 +4,12 @@ import { groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
 
 function RecitationList({ recitationList, selectedRecitations, onChange }: RecitationListProps) {
-    const [items, setItems] = useState(selectedRecitations);
-
-    const onSetList = (list: Recitation[]) => {
-        setItems(list);
-        onChange(list);
-    }
 
     const handleSelectionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let isChecked = event.target.checked;
         let _id = event.target.id;
 
-        let _items = items;
+        let _items = selectedRecitations;
 
         if (isChecked) {
             let item = recitationList.find(f => f.id == _id);
@@ -26,7 +20,7 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
             _items = selectedRecitations.filter(f => f.id != _id);
         }
 
-        onSetList(_items);
+        onChange(_items);
     }
 
     let recitationGroupByStyle = groupBy(recitationList, x => x.style);
@@ -64,9 +58,9 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
     };
 
     return <div>
-        <ReactSortable list={items} setList={onSetList}
+        <ReactSortable list={selectedRecitations} setList={onChange}
             tag="ul" className="list-group">
-            {items.map((item) => (
+            {selectedRecitations.map((item) => (
                 <li key={item.id} className="list-group-item"
                     style={{ cursor: 'move' }}>
                     {item.name} - {item.style}
