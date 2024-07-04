@@ -1,5 +1,4 @@
-﻿import { useState } from 'react';
-import { Recitation } from '../QuranData';
+﻿import { Recitation } from '../QuranData';
 import { groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
 

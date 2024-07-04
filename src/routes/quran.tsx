@@ -53,14 +53,14 @@ function Quran() {
         return storedNavData;
     };
 
-    const settingsData = getStoredSettingsData();
+    const storedSettingsData = getStoredSettingsData();
 
     const navData = getNavData();
 
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     useEffect(() => {
-        onSettingsChanged(settingsData);
+        onSettingsChanged(storedSettingsData);
 
         let selectedAyatElement = document.getElementById(location.hash.substring(1));
         if (selectedAyatElement) {
@@ -123,11 +123,11 @@ function Quran() {
 
             <QuranViewer quranData={quranData}
                 navData={navData}
-                settingsData={settingsData}
+                settingsData={storedSettingsData}
                 onNavigate={onNavigate}
                 onAyatSelection={onAyatSelection} />
 
-            <SettingsPanel settingsData={settingsData}
+            <SettingsPanel settingsData={storedSettingsData}
                 onChange={onSettingsChanged} />
         </>
     )
