@@ -18,11 +18,9 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
         let _items = items;
 
         if (isChecked) {
-            if (!_items.some(s => s.id == _id)) {
-                let item = translationList.find(f => f.id == _id);
-                if (item) {
-                    _items.push(item);
-                }
+            let item = translationList.find(f => f.id == _id);
+            if (item) {
+                _items.push(item);
             }
         } else {
             _items = selectedTranslations.filter(f => f.id != _id);
