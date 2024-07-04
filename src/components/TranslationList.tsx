@@ -11,7 +11,7 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
         onChange(list);
     }
 
-    const handleTranslationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSelectionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let isChecked = event.target.checked;
         let _id = event.target.id;
 
@@ -42,13 +42,12 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
                 <div key={translation.id} className="form-check">
                     <input className="form-check-input" type="checkbox" id={translation.id}
                         checked={selectedTranslations?.some(s => s.id === translation.id)}
-                        onChange={handleTranslationChange} />
+                        onChange={handleSelectionChange} />
                     <label className="form-check-label" htmlFor={translation.id}>
                         {translation.languageName} - {translation.name}
                     </label>
                 </div>
             ))
-
     }
 
     const dialog = document.getElementById("translationSelectionDialog") as HTMLDialogElement;

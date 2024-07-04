@@ -11,22 +11,21 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
         onChange(list);
     }
 
-    const handleRecitationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSelectionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let isChecked = event.target.checked;
-        let recitationId = event.target.id;
+        let _id = event.target.id;
 
         let _items = items;
 
         if (isChecked) {
-            if (!_items.some(s => s.id == recitationId)) {
-                let recitation = recitationList.find(f => f.id == recitationId);
-                if (recitation) {
-                    _items.push(recitation);
-                }
+            let item = recitationList.find(f => f.id == _id);
+            if (item) {
+                _items.push(item);
             }
         } else {
-            _items = selectedRecitations.filter(f => f.id != recitationId);
+            _items = selectedRecitations.filter(f => f.id != _id);
         }
+
         onSetList(_items);
     }
 
@@ -43,7 +42,7 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
                 <div key={recitation.id} className="form-check">
                     <input className="form-check-input" type="checkbox" id={recitation.id}
                         checked={selectedRecitations?.some(s => s.id === recitation.id)}
-                        onChange={handleRecitationChange} />
+                        onChange={handleSelectionChange} />
                     <label className="form-check-label" htmlFor={recitation.id}>{recitation.name}</label>
                     <small className='badge bg-secondary ms-2'>{recitation.byWBW ? 'WBW' : ''}</small>
                     <small className='badge bg-secondary ms-2'>{recitation.isFilePerVerse ? 'With Gap' : ''}</small>
@@ -74,6 +73,7 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
                 </li>
             ))}
         </ReactSortable>
+
         <button className='btn btn-outline-secondary w-100 mt-2'
             onClick={() => dialog.showModal()}>
             Select More
