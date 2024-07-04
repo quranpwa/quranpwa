@@ -1,5 +1,4 @@
-﻿import Select from 'react-select';
-import { Recitation, Translation, WbwTranslation } from '../QuranData';
+﻿import { Recitation, Translation } from '../QuranData';
 import { groupBy } from '../Utilities';
 import recitationList from '../assets/recitation-list.json';
 import tafsirList from '../assets/tafsir-list.json';
@@ -60,15 +59,6 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
         onChange(settingsData);
     };
 
-    const wbwTranslationItemsMapToSelectOption = (translationItems: WbwTranslation[]) => {
-        return translationItems?.map(t => {
-            return {
-                label: t?.name,
-                value: t
-            }
-        }) ?? []
-    }
-
     const translationsGroupByLang = groupBy(translationList, x => x.language);
     const tafsirsGroupByLang = groupBy(tafsirList, x => x.language);
 
@@ -93,14 +83,13 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     settingsData.translations = checkedTranslations;
                     onChange(settingsData)
                 }} />
-            <h5 className="mt-3">Word-by-word
+            <h5 className="mt-3">Word-by-Word
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {wbwTranslationList.length}</small>
             </h5>
-            <Select isMulti blurInputOnSelect
-                options={wbwTranslationItemsMapToSelectOption(wbwTranslationList)}
-                value={wbwTranslationItemsMapToSelectOption(settingsData.wbwTranslations)}
-                onChange={selectedOptions => {
-                    settingsData.wbwTranslations = selectedOptions.map(m => m.value)
+            <TranslationList translationList={wbwTranslationList}
+                selectedTranslations={settingsData.wbwTranslations}
+                onChange={checkedWbwTranslations => {
+                    settingsData.wbwTranslations = checkedWbwTranslations;
                     onChange(settingsData)
                 }} />
 
@@ -218,7 +207,7 @@ export interface SettingsModel {
     showTranslation: boolean,
     showTafsir: boolean,
     quranFont: string,
-    wbwTranslations: WbwTranslation[]
+    wbwTranslations: Translation[]
     translations: Translation[]
     tafsirs: Translation[]
     recitaions: Recitation[]

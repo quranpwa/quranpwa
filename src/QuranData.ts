@@ -16,7 +16,7 @@ export class QuranData {
 
     ayats: Ayat[] = [];
     corpus: Corpus[] = [];
-    wbwTranslations: WbwTranslationWithData[] = [];
+    wbwTranslations: TranslationWithData[] = [];
     translations: TranslationWithData[] = [];
     tafsirs: TranslationWithData[] = [];
     recitations: RecitationWithData[] = [];
@@ -252,7 +252,7 @@ export class QuranData {
         })
     }
 
-    setWbwTranslations(wbwTranslations: WbwTranslation[], updateUI: () => void) {
+    setWbwTranslations(wbwTranslations: Translation[], updateUI: () => void) {
         if (!wbwTranslations) {
             this.wbwTranslations = [];
             return;
@@ -461,22 +461,11 @@ export interface Translation {
     id: string,
     name: string,
     language: string,
-    translator: string,
+    translator?: string,
 }
 
 export interface TranslationWithData {
     translationMeta: Translation,
-    texts: string[]
-}
-
-export interface WbwTranslation {
-    id: string,
-    name: string,
-    language: string,
-}
-
-export interface WbwTranslationWithData {
-    translationMeta: WbwTranslation,
     texts: string[]
 }
 
