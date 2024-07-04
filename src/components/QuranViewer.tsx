@@ -134,9 +134,9 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                             const ayatTranslationText = translation.texts[ayat.serial - 1];
                             const translationMeta = translation.translationMeta;
                             return <div className="quran-translation ltr" key={translationMeta.id + ayat.serial}>
-                                <div className="text-secondary small mt-3">{translationMeta.languageName + ' - ' + translationMeta.translator}</div>
+                                <div className="text-secondary small mt-3">{translationMeta.name}</div>
                                 <span className="translation-ayat-number"
-                                    onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
+                                    onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString(translationMeta.language ?? undefined)}</span>
                                 {ayatTranslationText}
                             </div>
                         }
@@ -148,8 +148,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                         const ayatTafsirText = tafsirs.texts[ayat.serial - 1];
                         const translationMeta = tafsirs.translationMeta;
                         return <div className="quran-translation ltr" key={translationMeta.id + ayat.serial}>
-                            <div className="text-secondary small mt-3">{translationMeta.languageName + ' - ' + translationMeta.translator}</div>
-                            <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
+                            <div className="text-secondary small mt-3">{translationMeta.name}</div>
+                            <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.language ?? undefined)}</span>
                             <pre style={{ textWrap: 'wrap' }} dangerouslySetInnerHTML={{ __html: ayatTafsirText }}></pre>
                         </div>
                     }
@@ -192,14 +192,14 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 }
                 {settingsData.showTranslation && firstTranslation &&
                     <div className={colClass + "pe-md-4 quran-translation ltr"}>
-                        <div className="text-secondary small">{firstTranslation.translationMeta.languageName + ' - ' + firstTranslation.translationMeta.translator}</div>
+                        <div className="text-secondary small">{firstTranslation.translationMeta.name}</div>
                         {
                             rukuAyats.map(ayat =>
                                 <span id={'t' + ayat.serial} key={ayat.serial}
                                     onClick={() => handleAyatSelection(ayat.serial, true)}
                                     className={selectedAyatSerial == ayat.serial ? 'selected-ayat quran-translation' : 'ayat quran-translation'}>
                                     <span className="translation-ayat-number"
-                                        onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString(firstTranslation.translationMeta.locale ?? undefined)}</span>
+                                        onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString(firstTranslation.translationMeta.language ?? undefined)}</span>
                                     {firstTranslation.texts[ayat.serial - 1]}
                                 </span>)
                         }
@@ -214,7 +214,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                                     const translationMeta = tafsir.translationMeta;
 
                                     return <div className="quran-translation" key={translationMeta.id + ayat.serial}>
-                                        <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.locale ?? undefined)}</span>
+                                        <span className="translation-ayat-number">{ayat.serialInSura.toLocaleString(translationMeta.language ?? undefined)}</span>
                                         <pre style={{ textWrap: 'wrap' }} dangerouslySetInnerHTML={{ __html: ayatTafsirText }}></pre>
                                     </div>
                                 }

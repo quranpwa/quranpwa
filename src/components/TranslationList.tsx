@@ -1,6 +1,6 @@
 ﻿import { useState } from 'react';
 import { Translation } from '../QuranData';
-import { groupBy } from '../Utilities';
+import { getLanguageName, groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
 
 function TranslationList({ translationList, selectedTranslations, onChange }: TranslationListProps) {
@@ -29,13 +29,13 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
         onSetList(_items);
     }
 
-    let translationGroupByLanguage = groupBy(translationList, x => x.languageName);
+    let translationGroupByLanguage = groupBy(translationList, x => x.language);
     let translationCheckItems: JSX.Element[] = [];
 
-    for (let languageName in translationGroupByLanguage) {
-        let translations = translationGroupByLanguage[languageName] as Translation[];
+    for (let language in translationGroupByLanguage) {
+        let translations = translationGroupByLanguage[language] as Translation[];
 
-        translationCheckItems.push(<h6 className="mt-3" key={languageName}>{languageName}</h6>);
+        translationCheckItems.push(<h6 className="mt-3" key={language}>{getLanguageName(language)}</h6>);
 
         translations.forEach(translation =>
             translationCheckItems.push(
@@ -44,7 +44,7 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
                         checked={selectedTranslations?.some(s => s.id === translation.id)}
                         onChange={handleSelectionChange} />
                     <label className="form-check-label" htmlFor={translation.id}>
-                        {translation.languageName} - {translation.name}
+                        {translation.name}
                     </label>
                 </div>
             ))
@@ -69,7 +69,7 @@ function TranslationList({ translationList, selectedTranslations, onChange }: Tr
             {items.map((item) => (
                 <li key={item.id} className="list-group-item"
                     style={{ cursor: 'move' }}>
-                    {item.languageName} - {item.name}
+                    {item.name}
                 </li>
             ))}
         </ReactSortable>

@@ -1,370 +1,278 @@
 [
   {
     "id": "ar-mukhtasar",
-    "name": "Al Mukhtasar Fi Tafsir",
-    "languageName": "Arabic",
-    "translator": "A group of Muslim Scholars",
+    "name": "Arabic - Al Mukhtasar Fi Tafsir",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "A group of Muslim Scholars"
   },
   {
     "id": "ar-wordmeanings",
-    "name": "Arabic Word Meanings",
-    "languageName": "Arabic",
-    "translator": "Dr Muhammad Bin Abdul Aziz Al Khuderi",
+    "name": "Arabic - Arabic Word Meanings",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Dr Muhammad Bin Abdul Aziz Al Khuderi"
   },
   {
     "id": "ar-asbabnuzul",
-    "name": "Asbabun Nuzul",
-    "languageName": "Arabic",
-    "translator": "Abul Hasan Ali Ibn Ahammad",
+    "name": "Arabic - Asbabun Nuzul",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Abul Hasan Ali Ibn Ahammad"
   },
   {
     "id": "ar-betaqat",
-    "name": "Betaqat Suwar al Quran",
-    "languageName": "Arabic",
-    "translator": "Dr Muhammad Bin Abdul Aziz Bin Umar Nasif",
+    "name": "Arabic - Betaqat Suwar al Quran",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Dr Muhammad Bin Abdul Aziz Bin Umar Nasif"
   },
   {
     "id": "ar-e3rab",
-    "name": "E3rab",
-    "languageName": "Arabic",
-    "translator": "Qasim Hamidan Da\u0027s",
+    "name": "Arabic - E3rab - Qasim Hamidan Da\u0027s",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Qasim Hamidan Da\u0027s"
   },
   {
     "id": "ar-hidayatqurankarim",
-    "name": "Hidayat Quran Karim",
-    "languageName": "Arabic",
-    "translator": "Dr. Badar Uddin Naser Al Badar",
+    "name": "Arabic - Hidayat Quran Karim",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Dr. Badar Uddin Naser Al Badar"
   },
   {
     "id": "ar-baghawy",
-    "name": "Tafsir Baghawy",
-    "languageName": "Arabic",
-    "translator": "Baghawy",
+    "name": "Arabic - Tafsir Baghawy",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Baghawy"
   },
   {
     "id": "ar-ibnkathir",
-    "name": "Tafsir Ibn Kathir",
-    "languageName": "Arabic",
-    "translator": "Ibn Kathir",
+    "name": "Arabic - Tafsir Ibn Kathir",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Ibn Kathir"
   },
   {
     "id": "ar-jalalayn",
-    "name": "Tafsir Jalalayn",
-    "languageName": "Arabic",
-    "translator": "Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti",
+    "name": "Arabic - Tafsir Jalalayn",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti"
   },
   {
     "id": "ar-muyassar",
-    "name": "Tafsir Muyassar",
-    "languageName": "Arabic",
-    "translator": "Muyassar",
+    "name": "Arabic - Tafsir Muyassar",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Muyassar"
   },
   {
     "id": "ar-qurtubi",
-    "name": "Tafsir Qurtubi",
-    "languageName": "Arabic",
-    "translator": "Qurtubi",
+    "name": "Arabic - Tafsir Qurtubi",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Qurtubi"
   },
   {
     "id": "ar-sa3dy",
-    "name": "Tafsir Sa3di",
-    "languageName": "Arabic",
-    "translator": "Tafsir Sa3di",
+    "name": "Arabic - Tafsir Sa3di",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Tafsir Sa3di"
   },
   {
     "id": "ar-tabari",
-    "name": "Tafsir Tabari",
-    "languageName": "Arabic",
-    "translator": "Tabari",
+    "name": "Arabic - Tafsir Tabari",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Tabari"
   },
   {
     "id": "ar-tanweer",
-    "name": "Tafsir Tanweer",
-    "languageName": "Arabic",
-    "translator": "Tanweer",
+    "name": "Arabic - Tafsir Tanweer",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Tanweer"
   },
   {
     "id": "ar-waseet",
-    "name": "Tafsir Waseet",
-    "languageName": "Arabic",
-    "translator": "Waseet",
+    "name": "Arabic - Tafsir Waseet",
     "language": "ar",
-    "locale": "ar-001"
+    "translator": "Waseet"
   },
   {
     "id": "as-mokhtasar",
-    "name": "Mokhtasar Assamese",
-    "languageName": "Assamese",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Assamese - Mokhtasar Assamese",
     "language": "as",
-    "locale": "as-IN"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "bn-mokhtasar",
-    "name": "Mokhtasar Bangla",
-    "languageName": "Bengali",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Bengali - Mokhtasar Bangla",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "bn-tafsirzakaria",
-    "name": "Tafsir Abu Bakr Zakaria",
-    "languageName": "Bengali",
-    "translator": "Abu Bakr Zakaria",
+    "name": "Bengali - Tafsir Abu Bakr Zakaria",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Abu Bakr Zakaria"
   },
   {
     "id": "bn-tafsirbayaan",
-    "name": "Tafsir Ahsanul Bayaan",
-    "languageName": "Bengali",
-    "translator": "Hafiz Salahuddin Yousuf",
+    "name": "Bengali - Tafsir Ahsanul Bayaan",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Hafiz Salahuddin Yousuf"
   },
   {
     "id": "bn-fmazid",
-    "name": "Tafsir Fathul Mazid",
-    "languageName": "Bengali",
-    "translator": "Sahidullah Khan Madani",
+    "name": "Bengali - Tafsir Fathul Mazid",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Sahidullah Khan Madani"
   },
   {
     "id": "bn-tafsir-kathir",
-    "name": "Tafsir Ibn Kathir",
-    "languageName": "Bengali",
-    "translator": "Dr. Mujibur Rahman",
+    "name": "Bengali - Tafsir Ibn Kathir",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Dr. Mujibur Rahman"
   },
   {
     "id": "bs-mokhtasar",
-    "name": "Mokhtasar Bosnian",
-    "languageName": "Bosnian",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Bosnian - Mokhtasar Bosnian",
     "language": "bs",
-    "locale": "bs-Cyrl-BA"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "zh-mokhtasar",
-    "name": "Mokhtasar Chinese",
-    "languageName": "Chinese",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Chinese - Mokhtasar Chinese",
     "language": "zh",
-    "locale": "zh-Hans-CN"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "kathir",
-    "name": "Tafsir Ibn Kathir",
-    "languageName": "English",
-    "translator": "Ibn Kathir",
+    "name": "English - Tafsir Ibn Kathir",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Ibn Kathir"
   },
   {
     "id": "en-jalalayn",
-    "name": "Tafsir Jalalayn",
-    "languageName": "English",
-    "translator": "Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti",
+    "name": "English - Tafsir Jalalayn",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti"
   },
   {
     "id": "fa-mokhtasar",
-    "name": "Mokhtasar Farsi (Persian)",
-    "languageName": "Farsi",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Farsi - Mokhtasar Farsi (Persian)",
     "language": "fa",
-    "locale": "fa-AF"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "fr-mokhtasar",
-    "name": "Mokhtasar French",
-    "languageName": "French",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "French - Mokhtasar French",
     "language": "fr",
-    "locale": "fr-029"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "in-mokhtasar",
-    "name": "Mokhtasar Indonesian / Malay",
-    "languageName": "Indonesian",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Indonesian - Mokhtasar Indonesian / Malay",
     "language": "id",
-    "locale": "id-ID"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "in-tafsiribnkathir",
-    "name": "Tafsir Ibn Kathir",
-    "languageName": "Indonesian",
-    "translator": "Tafsir Ibn Kathir",
+    "name": "Indonesian - Tafsir Ibn Kathir",
     "language": "in",
-    "locale": null
+    "translator": "Tafsir Ibn Kathir"
   },
   {
     "id": "in-jalalayn",
-    "name": "Tafsir Jalalayn",
-    "languageName": "Indonesian",
-    "translator": "Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti",
+    "name": "Indonesian - Tafsir Jalalayn",
     "language": "in",
-    "locale": null
+    "translator": "Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti"
   },
   {
     "id": "in-tafisrdepagri",
-    "name": "Tafsir Kemenag RI",
-    "languageName": "Indonesian",
-    "translator": "Official Malaysian Tafsir",
+    "name": "Indonesian - Tafsir Kemenag RI",
     "language": "in",
-    "locale": null
+    "translator": "Official Malaysian Tafsir"
   },
   {
     "id": "it-mokhtasar",
-    "name": "Mokhtasar Italian",
-    "languageName": "Italian",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Italian - Mokhtasar Italian",
     "language": "it",
-    "locale": "it-CH"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "ja-mokhtasar",
-    "name": "Mokhtasar Japanese",
-    "languageName": "Japanese",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Japanese - Mokhtasar Japanese",
     "language": "ja",
-    "locale": "ja-JP"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "km-mokhtasar",
-    "name": "Mokhtasar Khmer",
-    "languageName": "Khmer",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Khmer - Mokhtasar Khmer",
     "language": "km",
-    "locale": "km-KH"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "ku-rebar",
-    "name": "Tafsir Rebar",
-    "languageName": "Kurdish",
-    "translator": "ku_bamoki.db",
+    "name": "Kurdish - Tafsir Rebar",
     "language": "ku",
-    "locale": null
+    "translator": "ku_bamoki.db"
   },
   {
     "id": "ml-mokhtasar",
-    "name": "Mokhtasar Malayalam",
-    "languageName": "Malayalam",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Malayalam - Mokhtasar Malayalam",
     "language": "ml",
-    "locale": "ml-IN"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "ru-sa3dy",
-    "name": "Tafsir as-Saadi\u0027s",
-    "languageName": "Russian",
-    "translator": "as-Saadi\u0027s",
+    "name": "Russian - Tafsir as-Saadi\u0027s",
     "language": "ru",
-    "locale": "ru-BY"
+    "translator": "as-Saadi\u0027s"
   },
   {
     "id": "es-mokhtasar",
-    "name": "Mokhtasar Spanish",
-    "languageName": "Spanish",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Spanish - Mokhtasar Spanish",
     "language": "es",
-    "locale": "es-419"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "tl-icdo",
-    "name": "Al Quran Al Kareem (ICDO-KSA)",
-    "languageName": "Tagalog",
-    "translator": "ICDO-KSA",
+    "name": "Tagalog - Al Quran Al Kareem (ICDO-KSA)",
     "language": "tl",
-    "locale": null
+    "translator": "ICDO-KSA"
   },
   {
     "id": "tl-mokhtasar",
-    "name": "Mokhtasar Tagalog (Filipino)",
-    "languageName": "Tagalog",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Tagalog - Mokhtasar Tagalog (Filipino)",
     "language": "tl",
-    "locale": null
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "tr-mokhtasar",
-    "name": "Mokhtasar Turkish",
-    "languageName": "Turkish",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Turkish - Mokhtasar Turkish",
     "language": "tr",
-    "locale": "tr-CY"
+    "translator": "Tafsir Center of Quranic Studies"
   },
   {
     "id": "ur-maududi",
-    "name": "Abul A\u0027ala Maududi",
-    "languageName": "Urdu",
-    "translator": "Abul A\u0027ala Maududi",
+    "name": "Urdu - Abul A\u0027ala Maududi",
     "language": "ur",
-    "locale": "ur-IN"
+    "translator": "Abul A\u0027ala Maududi"
   },
   {
     "id": "ur-ahsanulbayan",
-    "name": "Tafsir Ahsanul Bayaan",
-    "languageName": "Urdu",
-    "translator": "Hafiz Salahuddin Yusuf",
+    "name": "Urdu - Tafsir Ahsanul Bayaan",
     "language": "ur",
-    "locale": "ur-IN"
+    "translator": "Hafiz Salahuddin Yusuf"
   },
   {
     "id": "ur-tafsiribnkathir",
-    "name": "Tafsir Ibn Kathir",
-    "languageName": "Urdu",
-    "translator": "Ibn Kahtir",
+    "name": "Urdu - Tafsir Ibn Kathir",
     "language": "ur",
-    "locale": "ur-IN"
+    "translator": "Ibn Kahtir"
   },
   {
     "id": "ur-jalalayn",
-    "name": "Tafsir Jalalayn",
-    "languageName": "Urdu",
-    "translator": "Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti",
+    "name": "Urdu - Tafsir Jalalayn",
     "language": "ur",
-    "locale": "ur-IN"
+    "translator": "Jalal ad-Din al-Mahalli and Jalal ad-Din as-Suyuti"
   },
   {
     "id": "vi-mokhtasar",
-    "name": "Mokhtasar Vietnamese",
-    "languageName": "Vietnamese",
-    "translator": "Tafsir Center of Quranic Studies",
+    "name": "Vietnamese - Mokhtasar Vietnamese",
     "language": "vi",
-    "locale": "vi-VN"
+    "translator": "Tafsir Center of Quranic Studies"
   }
 ]

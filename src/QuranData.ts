@@ -271,7 +271,7 @@ export class QuranData {
                     if (!this.wbwTranslations.some(s => s.translationMeta.id === translation.id)) {
 
                         const texts = text.split(/\r\n|\n/);
-
+                        
                         this.wbwTranslations.push({ translationMeta: translation, texts: texts });
 
                         const isLastTranslationToFetch = notFetchedTranslations.indexOf(translation) == notFetchedTranslations.length - 1;
@@ -460,10 +460,8 @@ interface Sajdah {
 export interface Translation {
     id: string,
     name: string,
-    languageName: string,
-    translator: string,
     language: string,
-    locale: string | null,
+    translator: string,
 }
 
 export interface TranslationWithData {

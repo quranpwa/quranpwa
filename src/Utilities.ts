@@ -1,4 +1,5 @@
 import { Ayat } from "./QuranData";
+import languageDictionary from "./assets/language-dictionary.json"
 
 export function groupBy<T>(arr: T[], fn: (item: T) => any) {
     return arr.reduce<Record<string, T[]>>((prev, curr) => {
@@ -22,4 +23,11 @@ export function getAyatId(ayat: Ayat) {
     let ayatSerialInSura = padLeft(ayat.serialInSura.toString(), 3);
 
     return suraSerial + ayatSerialInSura;
+}
+
+export function getLanguageName(languageCode: string) {
+    //let languageNames = new Intl.DisplayNames(['en'], {type: 'language'});
+    //return languageNames.of(languageCode);
+
+    return languageDictionary[languageCode]?.name ?? languageCode;
 }

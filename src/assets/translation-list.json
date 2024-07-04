@@ -1,794 +1,596 @@
 [
   {
     "id": "aa-hamza",
-    "name": "Shaikh Muhammad Adbulkader Hamza",
-    "languageName": "Afar",
-    "translator": "Shaikh Muhammad Adbulkader Hamza",
+    "name": "Afar - Shaikh Muhammad Adbulkader Hamza",
     "language": "aa",
-    "locale": "aa-DJ"
+    "translator": "Shaikh Muhammad Adbulkader Hamza"
   },
   {
     "id": "sq-nahi",
-    "name": "Hassan Efendi Nahi",
-    "languageName": "Albanian",
-    "translator": "Hassan Efendi Nahi",
+    "name": "Albanian - Hassan Efendi Nahi",
     "language": "sq",
-    "locale": "sq-AL"
+    "translator": "Hassan Efendi Nahi"
   },
   {
     "id": "sq-ahmeti",
-    "name": "Sherif Ahmeti",
-    "languageName": "Albanian",
-    "translator": "Sherif Ahmeti",
+    "name": "Albanian - Sherif Ahmeti",
     "language": "sq",
-    "locale": "sq-AL"
+    "translator": "Sherif Ahmeti"
   },
   {
     "id": "am-sadiq",
-    "name": "Sadiq/Sani Habib",
-    "languageName": "Amharic",
-    "translator": "Muhammed Sadiq and Muhammed Sani Habib",
+    "name": "Amharic - Sadiq/Sani Habib",
     "language": "am",
-    "locale": "am-ET"
+    "translator": "Muhammed Sadiq and Muhammed Sani Habib"
   },
   {
     "id": "as-rafeeq",
-    "name": "Rafeequl Islam Habibur",
-    "languageName": "Assamese",
-    "translator": "Rafeequl Islam Habibur",
+    "name": "Assamese - Rafeequl Islam Habibur",
     "language": "as",
-    "locale": "as-IN"
+    "translator": "Rafeequl Islam Habibur"
   },
   {
     "id": "az-musayev",
-    "name": "Alikhan Musayev",
-    "languageName": "Azerbaijani",
-    "translator": "Alikhan Musayev",
+    "name": "Azerbaijani - Alikhan Musayev",
     "language": "az",
-    "locale": "az-Cyrl-AZ"
+    "translator": "Alikhan Musayev"
   },
   {
     "id": "bn-bayaan",
-    "name": "Bayaan Foundation",
-    "languageName": "Bengali",
-    "translator": "Bayaan Foundation",
+    "name": "Bengali - Bayaan Foundation",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Bayaan Foundation"
   },
   {
     "id": "bn-fozlur",
-    "name": "Fozlur Rahman",
-    "languageName": "Bengali",
-    "translator": "ড. মুহাম্মদ ফজলুর রহমান",
+    "name": "Bengali - Fozlur Rahman",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "ড. মুহাম্মদ ফজলুর রহমান"
   },
   {
     "id": "bn-taqi",
-    "name": "Mufti Taqi Usmani",
-    "languageName": "Bengali",
-    "translator": "Mufti Taqi Usmani",
+    "name": "Bengali - Mufti Taqi Usmani",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Mufti Taqi Usmani"
   },
   {
     "id": "bn-mkhan",
-    "name": "Muhiuddin Khan",
-    "languageName": "Bengali",
-    "translator": "Muhiuddin Khan",
+    "name": "Bengali - Muhiuddin Khan",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Muhiuddin Khan"
   },
   {
     "id": "bn-mujibur",
-    "name": "Mujibur Rahman",
-    "languageName": "Bengali",
-    "translator": "Mujibur Rahman",
+    "name": "Bengali - Mujibur Rahman",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Mujibur Rahman"
   },
   {
     "id": "bn-taisirul",
-    "name": "Taisirul Quran",
-    "languageName": "Bengali",
-    "translator": "Taisirul Quran",
+    "name": "Bengali - Taisirul Quran",
     "language": "bn",
-    "locale": "bn-BD"
+    "translator": "Taisirul Quran"
   },
   {
     "id": "bs-korkut",
-    "name": "Besim Korkut",
-    "languageName": "Bosnian",
-    "translator": "Besim Korkut",
+    "name": "Bosnian - Besim Korkut",
     "language": "bs",
-    "locale": "bs-Cyrl-BA"
+    "translator": "Besim Korkut"
   },
   {
     "id": "bs-mihanovich",
-    "name": "Muhamed Mehanović",
-    "languageName": "Bosnian",
-    "translator": "Mihanovich",
+    "name": "Bosnian - Muhamed Mehanović",
     "language": "bs",
-    "locale": "bs-Cyrl-BA"
+    "translator": "Mihanovich"
   },
   {
     "id": "bg-translation",
-    "name": "Noble Qur\u0027an into the Bulgarian language",
-    "languageName": "Bulgarian",
-    "translator": "Noble Qur\u0027an into the Bulgarian language",
+    "name": "Bulgarian - Noble Qur\u0027an into the Bulgarian language",
     "language": "bg",
-    "locale": "bg-BG"
+    "translator": "Noble Qur\u0027an into the Bulgarian language"
   },
   {
     "id": "ny-Khaled",
-    "name": "Khaled Ibrahim Betala",
-    "languageName": "Chewa",
-    "translator": "Khaled Ibrahim Betala",
+    "name": "Chewa - Khaled Ibrahim Betala",
     "language": "ny",
-    "locale": null
+    "translator": "Khaled Ibrahim Betala"
   },
   {
     "id": "zh-jian",
-    "name": "Ma Jian (Simplified)",
-    "languageName": "Chinese",
-    "translator": "Ma Jian (Simplified)",
+    "name": "Chinese - Ma Jian (Simplified)",
     "language": "zh",
-    "locale": "zh-Hans-CN"
+    "translator": "Ma Jian (Simplified)"
   },
   {
     "id": "dari-anwar",
-    "name": "Mawlawi Muhammad Anwar Badkhashani",
-    "languageName": "Dari",
-    "translator": "Mawlawi Muhammad Anwar Badkhashani",
+    "name": "Dari - Mawlawi Muhammad Anwar Badkhashani",
     "language": "dari",
-    "locale": null
+    "translator": "Mawlawi Muhammad Anwar Badkhashani"
   },
   {
     "id": "dv-bakurube",
-    "name": "Abu Bakr Ibrahim Ali (Bakurube)",
-    "languageName": "Divehi",
-    "translator": "Abu Bakr Ibrahim Ali (Bakurube)",
+    "name": "Divehi - Abu Bakr Ibrahim Ali (Bakurube)",
     "language": "dv",
-    "locale": "dv-MV"
+    "translator": "Abu Bakr Ibrahim Ali (Bakurube)"
   },
   {
     "id": "dv-maldives",
-    "name": "Office of the President of Maldives",
-    "languageName": "Divehi",
-    "translator": "Office of the President of Maldives",
+    "name": "Divehi - Office of the President of Maldives",
     "language": "dv",
-    "locale": "dv-MV"
+    "translator": "Office of the President of Maldives"
   },
   {
     "id": "nl-abdalsalaam",
-    "name": "Malak Faris Abdalsalaam",
-    "languageName": "Dutch",
-    "translator": "Malak Faris Abdalsalaam",
+    "name": "Dutch - Malak Faris Abdalsalaam",
     "language": "nl",
-    "locale": "nl-AW"
+    "translator": "Malak Faris Abdalsalaam"
   },
   {
     "id": "nl-siregar",
-    "name": "Sofjan Siregar",
-    "languageName": "Dutch",
-    "translator": "Dr. Sofjan Siregar",
+    "name": "Dutch - Sofjan Siregar",
     "language": "nl",
-    "locale": "nl-AW"
+    "translator": "Dr. Sofjan Siregar"
   },
   {
     "id": "en-haleem",
-    "name": "Abdul Haleem",
-    "languageName": "English",
-    "translator": "Abdul Haleem",
+    "name": "English - Abdul Haleem",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Abdul Haleem"
   },
   {
     "id": "en-clear-quran",
-    "name": "Dr. Mustafa Khattab, the Clear Quran",
-    "languageName": "English",
-    "translator": "Dr. Mustafa Khattab",
+    "name": "English - Dr. Mustafa Khattab, the Clear Quran",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Dr. Mustafa Khattab"
   },
   {
     "id": "en-khanhilali",
-    "name": "Mohsin Khan/Taqi-ud-Din al-Hilali",
-    "languageName": "English",
-    "translator": "Muhsin Khan and Taqi-ud-Din al-Hilali",
+    "name": "English - Mohsin Khan/Taqi-ud-Din al-Hilali",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Muhsin Khan and Taqi-ud-Din al-Hilali"
   },
   {
     "id": "en-muftitaqi",
-    "name": "Mufti Taqi Usmani",
-    "languageName": "English",
-    "translator": "Mufti Taqi Usmani",
+    "name": "English - Mufti Taqi Usmani",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Mufti Taqi Usmani"
   },
   {
     "id": "en-pickthall",
-    "name": "Pickthall",
-    "languageName": "English",
-    "translator": "Mohammed Marmaduke William Pickthall",
+    "name": "English - Pickthall",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Mohammed Marmaduke William Pickthall"
   },
   {
     "id": "en-rwwad",
-    "name": "Rowwad Translation Center",
-    "languageName": "English",
-    "translator": "Rowwad Translation Center",
+    "name": "English - Rowwad Translation Center",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Rowwad Translation Center"
   },
   {
     "id": "en-sahih",
-    "name": "Sahih International",
-    "languageName": "English",
-    "translator": "Sahih International",
+    "name": "English - Sahih International",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Sahih International"
   },
   {
     "id": "en-transliteration",
-    "name": "Transliteration",
-    "languageName": "English",
-    "translator": "",
+    "name": "English - Transliteration",
     "language": "en",
-    "locale": "en-001"
+    "translator": ""
   },
   {
     "id": "en-yusufali",
-    "name": "Yusuf Ali",
-    "languageName": "English",
-    "translator": "Yusuf Ali",
+    "name": "English - Yusuf Ali",
     "language": "en",
-    "locale": "en-001"
+    "translator": "Yusuf Ali"
   },
   {
     "id": "fa-husseintaji",
-    "name": "Hussein Taji Kal Dari",
-    "languageName": "Farsi",
-    "translator": "Hussein Taji Kal Dari",
+    "name": "Farsi - Hussein Taji Kal Dari",
     "language": "fa",
-    "locale": "fa-AF"
+    "translator": "Hussein Taji Kal Dari"
   },
   {
     "id": "fa-islamhouse",
-    "name": "Islamhouse",
-    "languageName": "Farsi",
-    "translator": "Persian - Islamhouse",
+    "name": "Farsi - Islamhouse",
     "language": "fa",
-    "locale": "fa-AF"
+    "translator": "Persian - Islamhouse"
   },
   {
     "id": "fr-hamid",
-    "name": "Muhammad Hamidullah",
-    "languageName": "French",
-    "translator": "Muhammad Hamidullah",
+    "name": "French - Muhammad Hamidullah",
     "language": "fr",
-    "locale": "fr-029"
+    "translator": "Muhammad Hamidullah"
   },
   {
     "id": "ff-rowad",
-    "name": "Rowwad Translation Center",
-    "languageName": "Fulani",
-    "translator": "Rowwad Translation Center",
+    "name": "Fulani - Rowwad Translation Center",
     "language": "ff",
-    "locale": "ff-Adlm-BF"
+    "translator": "Rowwad Translation Center"
   },
   {
     "id": "de-denfer",
-    "name": "Ahmed Von Denffer",
-    "languageName": "German",
-    "translator": "Ahmed Von Denfer",
+    "name": "German - Ahmed Von Denffer",
     "language": "de",
-    "locale": "de-AT"
+    "translator": "Ahmed Von Denfer"
   },
   {
     "id": "de-bubenheim",
-    "name": "Bubenheim/Elyas",
-    "languageName": "German",
-    "translator": "A. S. F. Bubenheim and N. Elyas",
+    "name": "German - Bubenheim/Elyas",
     "language": "de",
-    "locale": "de-AT"
+    "translator": "A. S. F. Bubenheim and N. Elyas"
   },
   {
     "id": "gu-omari",
-    "name": "Rabila Al-Umry",
-    "languageName": "Gujrati",
-    "translator": "Rabila Al-Umry",
+    "name": "Gujrati - Rabila Al-Umry",
     "language": "gu",
-    "locale": "gu-IN"
+    "translator": "Rabila Al-Umry"
   },
   {
     "id": "ha-mahmoud",
-    "name": "Abubakar Mahmoud Gumi",
-    "languageName": "Hausa",
-    "translator": "Abubakar Mahmoud Gumi",
+    "name": "Hausa - Abubakar Mahmoud Gumi",
     "language": "ha",
-    "locale": "ha-GH"
+    "translator": "Abubakar Mahmoud Gumi"
   },
   {
     "id": "he-darussalam",
-    "name": "Darusalam House in Jerusalem",
-    "languageName": "Hebrew",
-    "translator": "Darusalam House in Jerusalem",
+    "name": "Hebrew - Darusalam House in Jerusalem",
     "language": "he",
-    "locale": "he-IL"
+    "translator": "Darusalam House in Jerusalem"
   },
   {
     "id": "hi-omari",
-    "name": "Azizul-Haqq Al-Umary",
-    "languageName": "Hindi",
-    "translator": "Azizul-Haqq Al-Umary",
+    "name": "Hindi - Azizul-Haqq Al-Umary",
     "language": "hi",
-    "locale": "hi-IN"
+    "translator": "Azizul-Haqq Al-Umary"
   },
   {
     "id": "hi-farooq",
-    "name": "Muhammad Farooq Khan/Muhammad Ahmed",
-    "languageName": "Hindi",
-    "translator": "Muhammad Farooq Khan and Muhammad Ahmed",
+    "name": "Hindi - Muhammad Farooq Khan/Muhammad Ahmed",
     "language": "hi",
-    "locale": "hi-IN"
+    "translator": "Muhammad Farooq Khan and Muhammad Ahmed"
   },
   {
     "id": "hi-nadwi",
-    "name": "Suhel Farooq Khan/Saifur Rahman Nadwi",
-    "languageName": "Hindi",
-    "translator": "Suhel Farooq Khan and Saifur Rahman Nadwi",
+    "name": "Hindi - Suhel Farooq Khan/Saifur Rahman Nadwi",
     "language": "hi",
-    "locale": "hi-IN"
+    "translator": "Suhel Farooq Khan and Saifur Rahman Nadwi"
   },
   {
     "id": "in-bahasa",
-    "name": "Bahasa",
-    "languageName": "Indonesian",
-    "translator": "Bahasa Indonesia",
+    "name": "Indonesian - Bahasa",
     "language": "in",
-    "locale": null
+    "translator": "Bahasa Indonesia"
   },
   {
     "id": "it-piccardo",
-    "name": "Hamza Roberto Piccardo",
-    "languageName": "Italian",
-    "translator": "Hamza Roberto Piccardo",
+    "name": "Italian - Hamza Roberto Piccardo",
     "language": "it",
-    "locale": "it-CH"
+    "translator": "Hamza Roberto Piccardo"
   },
   {
     "id": "ja-meta",
-    "name": "Ryoichi Mita",
-    "languageName": "Japanese",
-    "translator": "Ryoichi Meta",
+    "name": "Japanese - Ryoichi Mita",
     "language": "ja",
-    "locale": "ja-JP"
+    "translator": "Ryoichi Meta"
   },
   {
     "id": "ja-sato",
-    "name": "Saeed Sato",
-    "languageName": "Japanese",
-    "translator": "Saeed Sato",
+    "name": "Japanese - Saeed Sato",
     "language": "ja",
-    "locale": "ja-JP"
+    "translator": "Saeed Sato"
   },
   {
     "id": "kk-altai",
-    "name": "Khalifah Altai",
-    "languageName": "Kazakh",
-    "translator": "Khalifa Altai",
+    "name": "Kazakh - Khalifah Altai",
     "language": "kk",
-    "locale": "kk-KZ"
+    "translator": "Khalifa Altai"
   },
   {
     "id": "kk-altai-assoc",
-    "name": "Khalifah Altai Charity Foundation",
-    "languageName": "Kazakh",
-    "translator": "Khalifah Altai Charity Foundation",
+    "name": "Kazakh - Khalifah Altai Charity Foundation",
     "language": "kk",
-    "locale": "kk-KZ"
+    "translator": "Khalifah Altai Charity Foundation"
   },
   {
     "id": "km-cambodia",
-    "name": "Cambodian Muslim Community Development",
-    "languageName": "Khmer",
-    "translator": "Cambodian Muslim Community Development",
+    "name": "Khmer - Cambodian Muslim Community Development",
     "language": "km",
-    "locale": "km-KH"
+    "translator": "Cambodian Muslim Community Development"
   },
   {
     "id": "rw-association",
-    "name": "Rwanda Muslims Association",
-    "languageName": "Kinyarwanda",
-    "translator": "The Rwanda Muslims Association team",
+    "name": "Kinyarwanda - Rwanda Muslims Association",
     "language": "rw",
-    "locale": "rw-RW"
+    "translator": "The Rwanda Muslims Association team"
   },
   {
     "id": "ko-korean",
-    "name": "Hamid Choi",
-    "languageName": "Korean",
-    "translator": "Hamid Choi",
+    "name": "Korean - Hamid Choi",
     "language": "ko",
-    "locale": "ko-KP"
+    "translator": "Hamid Choi"
   },
   {
     "id": "ku-asan",
-    "name": "Burhan Muhammad-Amin",
-    "languageName": "Kurdish",
-    "translator": "Burhan Muhammad-Amin",
+    "name": "Kurdish - Burhan Muhammad-Amin",
     "language": "ku",
-    "locale": null
+    "translator": "Burhan Muhammad-Amin"
   },
   {
     "id": "ku-bamoki",
-    "name": "Muhammad Saleh Bamoki",
-    "languageName": "Kurdish",
-    "translator": "Kurdish Bamoki",
+    "name": "Kurdish - Muhammad Saleh Bamoki",
     "language": "ku",
-    "locale": null
+    "translator": "Kurdish Bamoki"
   },
   {
     "id": "ln-zakaria",
-    "name": "Zakariya Muhammed Balingongo",
-    "languageName": "Lingala",
-    "translator": "Zakariya Muhammed Balingongo",
+    "name": "Lingala - Zakariya Muhammed Balingongo",
     "language": "ln",
-    "locale": "ln-AO"
+    "translator": "Zakariya Muhammed Balingongo"
   },
   {
     "id": "lg-Africaninstitution",
-    "name": "African Institution",
-    "languageName": "Luganda",
-    "translator": "African Institution",
+    "name": "Luganda - African Institution",
     "language": "lg",
-    "locale": "lg-UG"
+    "translator": "African Institution"
   },
   {
     "id": "mk-Macedonianscholars",
-    "name": "A group of the Macedonian scholars",
-    "languageName": "Macedonian",
-    "translator": "A group of the Macedonian scholars",
+    "name": "Macedonian - A group of the Macedonian scholars",
     "language": "mk",
-    "locale": "mk-MK"
+    "translator": "A group of the Macedonian scholars"
   },
   {
     "id": "ms-basmeih",
-    "name": "Abdullah Muhammad Basmeih",
-    "languageName": "Malay",
-    "translator": "Abdullah Muhammad Basmeih",
+    "name": "Malay - Abdullah Muhammad Basmeih",
     "language": "ms",
-    "locale": "ms-BN"
+    "translator": "Abdullah Muhammad Basmeih"
   },
   {
     "id": "ml-abdulhameed",
-    "name": "Abdul Hameed/Parappoor",
-    "languageName": "Malayalam",
-    "translator": "Cheriyamundam Abdul Hameed and Kunhi Mohammed Parappoor",
+    "name": "Malayalam - Abdul Hameed/Parappoor",
     "language": "ml",
-    "locale": "ml-IN"
+    "translator": "Cheriyamundam Abdul Hameed and Kunhi Mohammed Parappoor"
   },
   {
     "id": "ml-karakunnu",
-    "name": "Karakunnu/Elayavoor",
-    "languageName": "Malayalam",
-    "translator": "Muhammad Karakunnu and Vanidas Elayavoor",
+    "name": "Malayalam - Karakunnu/Elayavoor",
     "language": "ml",
-    "locale": "ml-IN"
+    "translator": "Muhammad Karakunnu and Vanidas Elayavoor"
   },
   {
     "id": "mrw-soquran",
-    "name": "So Quran al karim",
-    "languageName": "Maranao",
-    "translator": "Sheik ’Abdul-Aziz Guroalim Saromantang",
+    "name": "Maranao - So Quran al karim",
     "language": "mrw",
-    "locale": null
+    "translator": "Sheik ’Abdul-Aziz Guroalim Saromantang"
   },
   {
     "id": "nqo-Karamomamadi",
-    "name": "Karamo Baba Mamadi Jani",
-    "languageName": "N’ko/ankobambara",
-    "translator": "Karamo Baba Mamadi Jani",
+    "name": "N’ko/ankobambara - Karamo Baba Mamadi Jani",
     "language": "N’ko",
-    "locale": null
+    "translator": "Karamo Baba Mamadi Jani"
   },
   {
     "id": "ne-islamicsangh",
-    "name": "Islami Sangh Nepal",
-    "languageName": "Nepali",
-    "translator": "Islami Sangh Nepal",
+    "name": "Nepali - Islami Sangh Nepal",
     "language": "ne",
-    "locale": "ne-IN"
+    "translator": "Islami Sangh Nepal"
   },
   {
     "id": "om-ababor",
-    "name": "Ghali Apapur Apaghuna",
-    "languageName": "Oromo",
-    "translator": "Oromo - Ghali Apapur Apaghuna",
+    "name": "Oromo - Ghali Apapur Apaghuna",
     "language": "om",
-    "locale": "om-ET"
+    "translator": "Oromo - Ghali Apapur Apaghuna"
   },
   {
     "id": "ps-abdulwali",
-    "name": "Abdulwali Khan",
-    "languageName": "Pashto",
-    "translator": "Abdulwali Khan",
+    "name": "Pashto - Abdulwali Khan",
     "language": "ps",
-    "locale": "ps-AF"
+    "translator": "Abdulwali Khan"
   },
   {
     "id": "ps-zakaria",
-    "name": "Zakaria AbulSalam",
-    "languageName": "Pashto",
-    "translator": "Pashto - Zakaria AbulSalam",
+    "name": "Pashto - Zakaria AbulSalam",
     "language": "ps",
-    "locale": "ps-AF"
+    "translator": "Pashto - Zakaria AbulSalam"
   },
   {
     "id": "pt-hayek",
-    "name": "Samir El Hayek",
-    "languageName": "Portuguese",
-    "translator": "Samir El Hayek",
+    "name": "Portuguese - Samir El Hayek",
     "language": "pt",
-    "locale": "pt-AO"
+    "translator": "Samir El Hayek"
   },
   {
     "id": "ro-Islamiccultrual",
-    "name": "Islamic and Cultrual League in Romania",
-    "languageName": "Romania",
-    "translator": "Islamic and Cultrual League in Romania",
+    "name": "Romania - Islamic and Cultrual League in Romania",
     "language": "ro",
-    "locale": "ro-MD"
+    "translator": "Islamic and Cultrual League in Romania"
   },
   {
     "id": "ru-abuadel",
-    "name": "Abu Adel",
-    "languageName": "Russian",
-    "translator": "Abu Adel",
+    "name": "Russian - Abu Adel",
     "language": "ru",
-    "locale": "ru-BY"
+    "translator": "Abu Adel"
   },
   {
     "id": "ru-kuliev",
-    "name": "Elmir Kuliev",
-    "languageName": "Russian",
-    "translator": "Elmir Kuliev",
+    "name": "Russian - Elmir Kuliev",
     "language": "ru",
-    "locale": "ru-BY"
+    "translator": "Elmir Kuliev"
   },
   {
     "id": "sr-rowwad",
-    "name": "Rowwad Translation Center",
-    "languageName": "Serbian",
-    "translator": "Rowwad Translation Center",
+    "name": "Serbian - Rowwad Translation Center",
     "language": "sr",
-    "locale": "sr-Cyrl-BA"
+    "translator": "Rowwad Translation Center"
   },
   {
     "id": "sd-amroti",
-    "name": "Taj Mehmood Amroti",
-    "languageName": "Sindhi",
-    "translator": "Taj Mehmood Amroti",
+    "name": "Sindhi - Taj Mehmood Amroti",
     "language": "sd",
-    "locale": "sd-Arab-PK"
+    "translator": "Taj Mehmood Amroti"
   },
   {
     "id": "si-mahir",
-    "name": "Rowwad Translation Center",
-    "languageName": "Sinhala",
-    "translator": "Rowwad Translation Center with cooperation with Islamhouse.com",
+    "name": "Sinhala - Rowwad Translation Center",
     "language": "si",
-    "locale": "si-LK"
+    "translator": "Rowwad Translation Center with cooperation with Islamhouse.com"
   },
   {
     "id": "so-abduh",
-    "name": "Mahmud Muhammad Abduh",
-    "languageName": "Somali",
-    "translator": "Mahmud Muhammad Abduh",
+    "name": "Somali - Mahmud Muhammad Abduh",
     "language": "so",
-    "locale": "so-DJ"
+    "translator": "Mahmud Muhammad Abduh"
   },
   {
     "id": "es-cortes",
-    "name": "Julio Cortes",
-    "languageName": "Spanish",
-    "translator": "Julio Cortes",
+    "name": "Spanish - Julio Cortes",
     "language": "es",
-    "locale": "es-419"
+    "translator": "Julio Cortes"
   },
   {
     "id": "es-garcia",
-    "name": "Sheikh Isa Garcia",
-    "languageName": "Spanish",
-    "translator": "Sheikh Isa Garcia",
+    "name": "Spanish - Sheikh Isa Garcia",
     "language": "es",
-    "locale": "es-419"
+    "translator": "Sheikh Isa Garcia"
   },
   {
     "id": "sw-barwani",
-    "name": "Ali Muhsin Al-Barwani",
-    "languageName": "Swahili",
-    "translator": "Ali Muhsin Al-Barwani",
+    "name": "Swahili - Ali Muhsin Al-Barwani",
     "language": "sw",
-    "locale": "sw-CD"
+    "translator": "Ali Muhsin Al-Barwani"
   },
   {
     "id": "sv-bernstrom",
-    "name": "Mohammed Knut Bernström",
-    "languageName": "Swedish",
-    "translator": "Mohammed Knut Bernström",
+    "name": "Swedish - Mohammed Knut Bernström",
     "language": "sv",
-    "locale": "sv-AX"
+    "translator": "Mohammed Knut Bernström"
   },
   {
     "id": "tl-salas-taron",
-    "name": "The Quran Translation (Salas \u0026 Taron)",
-    "languageName": "Tagalog",
-    "translator": "Ahmed Jibreel Salas, Omar Taron",
+    "name": "Tagalog - The Quran Translation (Salas \u0026 Taron)",
     "language": "tl",
-    "locale": null
+    "translator": "Ahmed Jibreel Salas, Omar Taron"
   },
   {
     "id": "tg-arifi",
-    "name": "Arifi",
-    "languageName": "Tajik",
-    "translator": "Arifi",
+    "name": "Tajik - Arifi",
     "language": "tg",
-    "locale": "tg-TJ"
+    "translator": "Arifi"
   },
   {
     "id": "ta-baqavi",
-    "name": "Abdul Hameed Baqavi",
-    "languageName": "Tamil",
-    "translator": "Abdul Hameed Baqavi",
+    "name": "Tamil - Abdul Hameed Baqavi",
     "language": "ta",
-    "locale": "ta-IN"
+    "translator": "Abdul Hameed Baqavi"
   },
   {
     "id": "ta-jantrust",
-    "name": "Jan Trust Foundation",
-    "languageName": "Tamil",
-    "translator": "Jan Trust Foundation",
+    "name": "Tamil - Jan Trust Foundation",
     "language": "ta",
-    "locale": "ta-IN"
+    "translator": "Jan Trust Foundation"
   },
   {
     "id": "ta-omar-sheriff",
-    "name": "Mufti Omar Sheriff Qasimi, Darul Huda",
-    "languageName": "Tamil",
-    "translator": "Mufti Omar Sheriff Qasimi",
+    "name": "Tamil - Mufti Omar Sheriff Qasimi, Darul Huda",
     "language": "ta",
-    "locale": "ta-IN"
+    "translator": "Mufti Omar Sheriff Qasimi"
   },
   {
     "id": "te-bayan",
-    "name": "Ahsanul Bayaan",
-    "languageName": "Telegu",
-    "translator": "Ahsanul Bayaan",
+    "name": "Telegu - Ahsanul Bayaan",
     "language": "te",
-    "locale": "te-IN"
+    "translator": "Ahsanul Bayaan"
   },
   {
     "id": "te-divya",
-    "name": "Divya Quran Sandesham",
-    "languageName": "Telegu",
-    "translator": "Dr. Abdul-Raheem Moulana",
+    "name": "Telegu - Divya Quran Sandesham",
     "language": "te",
-    "locale": "te-IN"
+    "translator": "Dr. Abdul-Raheem Moulana"
   },
   {
     "id": "th-fahad",
-    "name": "King Fahad Quran Complex",
-    "languageName": "Thai",
-    "translator": "King Fahad Quran Complex",
+    "name": "Thai - King Fahad Quran Complex",
     "language": "th",
-    "locale": "th-TH"
+    "translator": "King Fahad Quran Complex"
   },
   {
     "id": "tr-diyanet",
-    "name": "Diyanet Isleri",
-    "languageName": "Turkish",
-    "translator": "Diyanet Isleri",
+    "name": "Turkish - Diyanet Isleri",
     "language": "tr",
-    "locale": "tr-CY"
+    "translator": "Diyanet Isleri"
   },
   {
     "id": "tr-yazir",
-    "name": "Elmalili Hamdi Yazîr",
-    "languageName": "Turkish",
-    "translator": "Elmalili Hamdi Yazîr",
+    "name": "Turkish - Elmalili Hamdi Yazîr",
     "language": "tr",
-    "locale": "tr-CY"
+    "translator": "Elmalili Hamdi Yazîr"
   },
   {
     "id": "tr-shahin",
-    "name": "Muslim Shahin",
-    "languageName": "Turkish",
-    "translator": "Turkish Shahin",
+    "name": "Turkish - Muslim Shahin",
     "language": "tr",
-    "locale": "tr-CY"
+    "translator": "Turkish Shahin"
   },
   {
     "id": "tr-rwwad",
-    "name": "Rowwad Translation Center",
-    "languageName": "Turkish",
-    "translator": "Turkish Rwwad Center",
+    "name": "Turkish - Rowwad Translation Center",
     "language": "tr",
-    "locale": "tr-CY"
+    "translator": "Turkish Rwwad Center"
   },
   {
     "id": "tr-shaban",
-    "name": "Shaban Britch",
-    "languageName": "Turkish",
-    "translator": "Turkish Shaban",
+    "name": "Turkish - Shaban Britch",
     "language": "tr",
-    "locale": "tr-CY"
+    "translator": "Turkish Shaban"
   },
   {
     "id": "uk-mikhailo",
-    "name": "Dr. Mikhailo Yaqubovic",
-    "languageName": "Ukrainian",
-    "translator": "Dr. Mikhailo Yaqubovic",
+    "name": "Ukrainian - Dr. Mikhailo Yaqubovic",
     "language": "uk",
-    "locale": "uk-UA"
+    "translator": "Dr. Mikhailo Yaqubovic"
   },
   {
     "id": "ur-junagarhi",
-    "name": "Muhammad Junagarhi",
-    "languageName": "Urdu",
-    "translator": "Muhammad Junagarhi",
+    "name": "Urdu - Muhammad Junagarhi",
     "language": "ur",
-    "locale": "ur-IN"
+    "translator": "Muhammad Junagarhi"
   },
   {
     "id": "ug-saleh",
-    "name": "Muhammad Saleh",
-    "languageName": "Uyghur",
-    "translator": "Muhammad Saleh",
+    "name": "Uyghur - Muhammad Saleh",
     "language": "ug",
-    "locale": "ug-CN"
+    "translator": "Muhammad Saleh"
   },
   {
     "id": "uz-mansour",
-    "name": "Alauddin Mansour",
-    "languageName": "Uzbek",
-    "translator": "Alauddin Mansour",
+    "name": "Uzbek - Alauddin Mansour",
     "language": "uz",
-    "locale": "uz-Arab-AF"
+    "translator": "Alauddin Mansour"
   },
   {
     "id": "uz-yusuf",
-    "name": "Muhammad Sodik Muhammad Yusuf",
-    "languageName": "Uzbek",
-    "translator": "Muhammad Sodik Muhammad Yusuf",
+    "name": "Uzbek - Muhammad Sodik Muhammad Yusuf",
     "language": "uz",
-    "locale": "uz-Arab-AF"
+    "translator": "Muhammad Sodik Muhammad Yusuf"
   },
   {
     "id": "vi-hasan",
-    "name": "Hasan Abdul-Karim",
-    "languageName": "Vietnamese",
-    "translator": "Hasan Abdul-Karim",
+    "name": "Vietnamese - Hasan Abdul-Karim",
     "language": "vi",
-    "locale": "vi-VN"
+    "translator": "Hasan Abdul-Karim"
   },
   {
     "id": "vi-ruwwad",
-    "name": "Rowwad Translation Center",
-    "languageName": "Vietnamese",
-    "translator": "Rowwad Translation Center with cooperation with Islamhouse.com",
+    "name": "Vietnamese - Rowwad Translation Center",
     "language": "vi",
-    "locale": "vi-VN"
+    "translator": "Rowwad Translation Center with cooperation with Islamhouse.com"
   },
   {
     "id": "yo-mikail",
-    "name": "Abu Rahima Mikhail Aikweiny",
-    "languageName": "Yoruba",
-    "translator": "Abu Rahima Mikhail Aikweiny",
+    "name": "Yoruba - Abu Rahima Mikhail Aikweiny",
     "language": "yo",
-    "locale": "yo-BJ"
+    "translator": "Abu Rahima Mikhail Aikweiny"
   }
 ]

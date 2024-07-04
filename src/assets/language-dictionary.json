@@ -1,0 +1,258 @@
+{
+  "aa": {
+    "name": "Afar",
+    "locale": "aa-DJ"
+  },
+  "am": {
+    "name": "Amharic",
+    "locale": "am-ET"
+  },
+  "ar": {
+    "name": "Arabic",
+    "locale": "ar-001"
+  },
+  "as": {
+    "name": "Assamese",
+    "locale": "as-IN"
+  },
+  "az": {
+    "name": "Azerbaijani",
+    "locale": "az-Cyrl-AZ"
+  },
+  "bg": {
+    "name": "Bulgarian",
+    "locale": "bg-BG"
+  },
+  "bn": {
+    "name": "Bengali",
+    "locale": "bn-BD"
+  },
+  "bs": {
+    "name": "Bosnian",
+    "locale": "bs-Cyrl-BA"
+  },
+  "dari": {
+    "name": "Dari",
+    "locale": null
+  },
+  "de": {
+    "name": "German",
+    "locale": "de-AT"
+  },
+  "dv": {
+    "name": "Divehi",
+    "locale": "dv-MV"
+  },
+  "en": {
+    "name": "English",
+    "locale": "en-001"
+  },
+  "es": {
+    "name": "Spanish",
+    "locale": "es-419"
+  },
+  "fa": {
+    "name": "Farsi",
+    "locale": "fa-AF"
+  },
+  "ff": {
+    "name": "Fulani",
+    "locale": "ff-Adlm-BF"
+  },
+  "fr": {
+    "name": "French",
+    "locale": "fr-029"
+  },
+  "gu": {
+    "name": "Gujrati",
+    "locale": "gu-IN"
+  },
+  "ha": {
+    "name": "Hausa",
+    "locale": "ha-GH"
+  },
+  "he": {
+    "name": "Hebrew",
+    "locale": "he-IL"
+  },
+  "hi": {
+    "name": "Hindi",
+    "locale": "hi-IN"
+  },
+  "id": {
+    "name": "Indonesian",
+    "locale": "id-ID"
+  },
+  "in": {
+    "name": "Indonesian",
+    "locale": null
+  },
+  "it": {
+    "name": "Italian",
+    "locale": "it-CH"
+  },
+  "ja": {
+    "name": "Japanese",
+    "locale": "ja-JP"
+  },
+  "kk": {
+    "name": "Kazakh",
+    "locale": "kk-KZ"
+  },
+  "km": {
+    "name": "Khmer",
+    "locale": "km-KH"
+  },
+  "ko": {
+    "name": "Korean",
+    "locale": "ko-KP"
+  },
+  "ku": {
+    "name": "Kurdish",
+    "locale": null
+  },
+  "lg": {
+    "name": "Luganda",
+    "locale": "lg-UG"
+  },
+  "ln": {
+    "name": "Lingala",
+    "locale": "ln-AO"
+  },
+  "mk": {
+    "name": "Macedonian",
+    "locale": "mk-MK"
+  },
+  "ml": {
+    "name": "Malayalam",
+    "locale": "ml-IN"
+  },
+  "mrw": {
+    "name": "Maranao",
+    "locale": null
+  },
+  "ms": {
+    "name": "Malay",
+    "locale": "ms-BN"
+  },
+  "N’ko": {
+    "name": "N’ko/ankobambara",
+    "locale": null
+  },
+  "ne": {
+    "name": "Nepali",
+    "locale": "ne-IN"
+  },
+  "nl": {
+    "name": "Dutch",
+    "locale": "nl-AW"
+  },
+  "ny": {
+    "name": "Chewa",
+    "locale": null
+  },
+  "om": {
+    "name": "Oromo",
+    "locale": "om-ET"
+  },
+  "ps": {
+    "name": "Pashto",
+    "locale": "ps-AF"
+  },
+  "pt": {
+    "name": "Portuguese",
+    "locale": "pt-AO"
+  },
+  "ro": {
+    "name": "Romania",
+    "locale": "ro-MD"
+  },
+  "ru": {
+    "name": "Russian",
+    "locale": "ru-BY"
+  },
+  "rw": {
+    "name": "Kinyarwanda",
+    "locale": "rw-RW"
+  },
+  "sd": {
+    "name": "Sindhi",
+    "locale": "sd-Arab-PK"
+  },
+  "si": {
+    "name": "Sinhala",
+    "locale": "si-LK"
+  },
+  "so": {
+    "name": "Somali",
+    "locale": "so-DJ"
+  },
+  "sq": {
+    "name": "Albanian",
+    "locale": "sq-AL"
+  },
+  "sr": {
+    "name": "Serbian",
+    "locale": "sr-Cyrl-BA"
+  },
+  "sv": {
+    "name": "Swedish",
+    "locale": "sv-AX"
+  },
+  "sw": {
+    "name": "Swahili",
+    "locale": "sw-CD"
+  },
+  "ta": {
+    "name": "Tamil",
+    "locale": "ta-IN"
+  },
+  "te": {
+    "name": "Telegu",
+    "locale": "te-IN"
+  },
+  "tg": {
+    "name": "Tajik",
+    "locale": "tg-TJ"
+  },
+  "th": {
+    "name": "Thai",
+    "locale": "th-TH"
+  },
+  "tl": {
+    "name": "Tagalog",
+    "locale": null
+  },
+  "tr": {
+    "name": "Turkish",
+    "locale": "tr-CY"
+  },
+  "ug": {
+    "name": "Uyghur",
+    "locale": "ug-CN"
+  },
+  "uk": {
+    "name": "Ukrainian",
+    "locale": "uk-UA"
+  },
+  "ur": {
+    "name": "Urdu",
+    "locale": "ur-IN"
+  },
+  "uz": {
+    "name": "Uzbek",
+    "locale": "uz-Arab-AF"
+  },
+  "vi": {
+    "name": "Vietnamese",
+    "locale": "vi-VN"
+  },
+  "yo": {
+    "name": "Yoruba",
+    "locale": "yo-BJ"
+  },
+  "zh": {
+    "name": "Chinese",
+    "locale": "zh-Hans-CN"
+  }
+}
