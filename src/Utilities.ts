@@ -31,3 +31,22 @@ export function getLanguageName(languageCode: string) {
 
     return languageDictionary[languageCode]?.name ?? languageCode;
 }
+
+export function secondsToTimeString(totalSeconds:number): string {
+    const totalHours = totalSeconds / 3600;
+    const hoursPart = Math.floor(totalHours);
+
+    const minutes = (totalHours - hoursPart) * 60;
+    const minutePart = Math.floor(minutes);
+
+    const secondPart = Math.round((minutes - minutePart) * 60);
+
+    if (hoursPart > 0){
+        return hoursPart.toString().padStart(2,'0') + ":" +  
+        minutePart.toString().padStart(2,'0') + ":" + 
+        secondPart.toString().padStart(2,'0');
+    } else{
+        return minutePart.toString().padStart(2,'0') + ":" + 
+        secondPart.toString().padStart(2,'0');
+    }
+}
