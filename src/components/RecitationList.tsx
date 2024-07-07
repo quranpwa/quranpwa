@@ -58,10 +58,11 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
 
     return <div>
         <ReactSortable list={selectedRecitations} setList={onChange}
-            tag="ul" className="list-group">
+            tag="ul" className="list-group"
+            handle='.sortable-handle'>
             {selectedRecitations.map((item) => (
-                <li key={item.id} className="list-group-item"
-                    style={{ cursor: 'move' }}>
+                <li key={item.id} className="list-group-item">
+                    <span className='sortable-handle' style={{ cursor: 'move' }}> :↕️: </span>
                     {item.name} - {item.style}
                 </li>
             ))}

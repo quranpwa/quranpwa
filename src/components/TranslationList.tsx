@@ -58,10 +58,11 @@ function TranslationList({ title, translationList, selectedTranslations, onChang
 
     return <div>
         <ReactSortable list={selectedTranslations} setList={onChange}
-            tag="ul" className="list-group">
+            tag="ul" className="list-group"
+            handle='.sortable-handle'>
             {selectedTranslations.map((item) => (
-                <li key={item.id} className="list-group-item"
-                    style={{ cursor: 'move' }}>
+                <li key={item.id} className="list-group-item">
+                    <span className='sortable-handle' style={{ cursor: 'move' }}> :↕️: </span>
                     {item.name}
                 </li>
             ))}
