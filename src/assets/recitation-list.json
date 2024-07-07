@@ -3,11 +3,12 @@
     "id": "mishari_alafasy",
     "name": "Mishary Rashid Al-Afasy",
     "language": "ar",
-    "url": "https://download.quranicaudio.com/quran/mishaari_raashid_al_3afaasee",
+    "url": "https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal",
     "byWBW": true,
     "isFilePerVerse": false,
     "isFilePerSura": true,
-    "style": "Murattal"
+    "style": "Murattal",
+    "hasFileNameLeadingZeros": false
   },
   {
     "id": "mishari_alafasy_california",

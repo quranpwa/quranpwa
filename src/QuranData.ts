@@ -271,7 +271,7 @@ export class QuranData {
                     if (!this.wbwTranslations.some(s => s.translationMeta.id === translation.id)) {
 
                         const texts = text.split(/\r\n|\n/);
-                        
+
                         this.wbwTranslations.push({ translationMeta: translation, texts: texts });
 
                         const isLastTranslationToFetch = notFetchedTranslations.indexOf(translation) == notFetchedTranslations.length - 1;
@@ -373,9 +373,15 @@ export class QuranData {
                             let timings: RecitationTiming[] = [];
 
                             for (var i = 0; i < fullTimingArray.length; i++) {
-                                let [sura, ayat, time, wordTimings] = fullTimingArray[i];
+                                let [sura, ayat, timeStart, duration, wordTimings] = fullTimingArray[i];
 
-                                timings.push({ sura: sura, ayat: ayat, time: time, wordTimings: wordTimings });
+                                timings.push({
+                                    sura: sura, 
+                                    ayat: ayat, 
+                                    timeStart: timeStart,
+                                    duration: duration,
+                                    wordTimings: wordTimings
+                                });
                             }
 
                             this.recitations.push({ recitaionMeta: recitation, timings: timings });
@@ -518,7 +524,8 @@ export interface Recitation {
 export interface RecitationTiming {
     sura: number,
     ayat: number,
-    time: number,
+    timeStart: number,
+    duration: number,
     wordTimings: [number[]]
 }
 
