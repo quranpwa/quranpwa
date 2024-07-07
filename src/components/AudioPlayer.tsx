@@ -1,11 +1,13 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useRef, useState } from 'react';
 import { Ayat, QuranData, Recitation, RecitationTiming } from '../QuranData';
-import { getAyatId, padLeft } from '../Utilities';
+import { getAyatId, padLeft, secondsToTimeString, sum } from '../Utilities';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 
 function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAyatChanged }: AudioPlayerProps) {
-    const [isPlaying, setIsPlaying] = useState<boolean>(false)
-    const [recitationIdx, setRecitationIdx] = useState<number>(0)
+    const [isPlaying, setIsPlaying] = useState<boolean>(false);
+    const [recitationIdx, setRecitationIdx] = useState<number>(0);
+    const spanRefCurrentTime = useRef<any>();
+
     const recitations = settingsData.recitaions;
 
     const getAudioUrl = (recitation: Recitation): string => {
@@ -29,6 +31,40 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         else return ''
     };
 
+    const getDurationInSecond = (endingAyat: Ayat, includeEndingAyat: boolean = true): number => {
+        if (!endingAyat)
+            return 0;
+
+        let startingAyat = ayats[0];
+
+        let totalDuration = 0;
+
+        recitations.forEach(recitation => {
+            if (recitation.isFilePerVerse) {
+                totalDuration += 0; //todo: assign file duration
+            }
+            else if (recitation.isFilePerSura) {
+                let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
+
+                let ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, endingAyat.serial - (includeEndingAyat ? 0 : 1));
+
+                totalDuration += sum(ayatsTimings.map(m => m.duration));
+            }
+        });
+
+        return totalDuration / 1000;
+    };
+
+    const getCurrentTime = (): string => {
+        const currentAyat = ayats[selectedAyat - ayats[0].serial];
+        return secondsToTimeString(getDurationInSecond(currentAyat, false))
+    };
+
+    const getTotalTime = (): string => {
+        const endingAyat = ayats[ayats.length - 1];
+        return secondsToTimeString(getDurationInSecond(endingAyat))
+    };
+
     const handlePlay = (p_recitationIdx: number, p_ayatSerial: number) => {
         let recitation = recitations[p_recitationIdx];
 
@@ -40,12 +76,13 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                     let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
                     let currentAyatTiming: RecitationTiming = recitationTimings[p_ayatSerial - 1];
                     let nextAyatTiming: RecitationTiming = recitationTimings[p_ayatSerial];
-                    let currentAyatStartTime = (currentAyatTiming.time || 0) / 1000;
-                    let nextAyatStartTime = nextAyatTiming.sura == currentAyatTiming.sura ? (nextAyatTiming.time || 0) / 1000 : Number.MAX_VALUE - 1;
+                    let currentAyatStartTime = (currentAyatTiming.timeStart || 0) / 1000;
+                    let nextAyatStartTime = nextAyatTiming.sura == currentAyatTiming.sura ? (nextAyatTiming.timeStart || 0) / 1000 : Number.MAX_VALUE - 1;
 
                     if (audioElement.currentTime < currentAyatStartTime
                         || audioElement.currentTime > nextAyatStartTime + 1) {
-                        audioElement.currentTime = (currentAyatTiming.time || 0) / 1000;
+                        audioElement.currentTime = (currentAyatTiming.timeStart || 0) / 1000;
+
                     }
                 }
                 audioElement.play();
@@ -117,7 +154,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
 
             let isCurrentTimeExceedingNextAyatStartTime = nextAyatTiming
                 && nextAyatTiming.sura == currentAyat.suraIdx + 1
-                && currentTimeInMS >= nextAyatTiming.time;
+                && currentTimeInMS >= nextAyatTiming.timeStart;
 
             let isCurrentTimeExceedingDuration = event.currentTarget.currentTime >= event.currentTarget.duration;
 
@@ -261,36 +298,39 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
                     </svg>
                 </button>
             }
-            {isPlaying && <>
+            {isPlaying &&
                 <button className="btn theme-colored border" type="button" onClick={handlePauseClick} title="Pause">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-pause-fill" viewBox="0 0 16 16">
                         <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5" />
                     </svg>
                 </button>
+            }
+            <span className='btn theme-colored border'>
+                <span ref={spanRefCurrentTime}>{getCurrentTime()}</span> / {getTotalTime()}
+            </span>
+            {isPlaying &&
                 <span className="btn theme-colored border">{recitations[recitationIdx]?.name}</span>
-            </>}
-            <div className="btn-group">
-                <button type="button" className="btn theme-colored border dropdown-toggle" data-bs-toggle="dropdown">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                    </svg>
-                </button>
-                <ul className="dropdown-menu">
-                    {recitations.map((r, i) =>
-                        <li key={r.id} className="dropdown-item">
-                            <p style={{ cursor: 'pointer' }}
-                                onClick={() => { setRecitationIdx(i); handlePlay(i, selectedAyat); }}>
-                                {recitationIdx == i ? '●' : ''} {r.name}
-                            </p>
-                            <audio id={r.id}
-                                src={getAudioUrl(r)}
-                                onTimeUpdate={handleOnTimeUpdate}
-                                onEnded={handleOnEnded}
-                                controls></audio>
-                        </li>
-                    )}
-                </ul>
-            </div>
+            }
+            <button type="button" className="btn theme-colored border dropdown-toggle" data-bs-toggle="dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                </svg>
+            </button>
+            <ul className="dropdown-menu">
+                {recitations.map((r, i) =>
+                    <li key={r.id} className="dropdown-item">
+                        <p style={{ cursor: 'pointer' }}
+                            onClick={() => { setRecitationIdx(i); handlePlay(i, selectedAyat); }}>
+                            {recitationIdx == i ? '●' : ''} {r.name}
+                        </p>
+                        <audio id={r.id}
+                            src={getAudioUrl(r)}
+                            onTimeUpdate={handleOnTimeUpdate}
+                            onEnded={handleOnEnded}
+                            controls></audio>
+                    </li>
+                )}
+            </ul>
         </div>
     </div>;
 }
