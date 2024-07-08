@@ -19,14 +19,14 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
     const selectedAyatSerial = navData.ayat;
     const dialog = document.getElementById("ayatDetailDialog") as HTMLDialogElement;
 
-    const handleAyatSelection = (selectedAyat: number, isTranslation = false) => {
-        onAyatSelection(selectedAyat, isTranslation);
+    const handleAyatSelection = (_selectedAyatSerial: number, isTranslation = false) => {
+        onAyatSelection(_selectedAyatSerial, isTranslation);
     };
 
-    const handleAyatNumberClick = (selectedAyatSerial: number) => {
+    const handleAyatNumberClick = (_selectedAyatSerial: number) => {
         let ayatDetailDialogTitleElement = dialog.querySelector('#ayatDetailDialogTitle');
         if (ayatDetailDialogTitleElement) {
-            let selectedAyat = ayats.filter(f => f.serial == selectedAyatSerial)[0];
+            let selectedAyat = ayats.filter(f => f.serial == _selectedAyatSerial)[0];
 
             if (selectedAyat) {
                 let sura = quranData.suras[selectedAyat.suraIdx];
@@ -262,7 +262,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 onClick={handleNext}>Next {navModeName} →</button>
         </div>
 
-        <AudioPlayer quranData={quranData} settingsData={settingsData} ayats={ayats} selectedAyat={selectedAyatSerial}
+        <AudioPlayer quranData={quranData} settingsData={settingsData} ayats={ayats} selectedAyatSerial={selectedAyatSerial}
             onPlayingAyatChanged={handlePlayingAyatChanged} />
     </article>;
 }
