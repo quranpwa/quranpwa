@@ -365,32 +365,28 @@ export class QuranData {
             !this.recitations.some(s => s.recitaionMeta.id === f.id));
 
         notFetchedRecitationTimings.forEach(recitation => {
-            if (recitation.isFilePerSura) {
-                fetch(`./recitaion-timings/${recitation.id}.json`)
-                    .then(response => response.json())
-                    .then(fullTimingArray => {
-                        if (!this.recitations.some(s => s.recitaionMeta.id === recitation.id)) {
-                            let timings: RecitationTiming[] = [];
+            fetch(`./recitaion-timings/${recitation.id}.json`)
+                .then(response => response.json())
+                .then(fullTimingArray => {
+                    if (!this.recitations.some(s => s.recitaionMeta.id === recitation.id)) {
+                        let timings: RecitationTiming[] = [];
 
-                            for (var i = 0; i < fullTimingArray.length; i++) {
-                                let [sura, ayat, timeStart, duration, wordTimings] = fullTimingArray[i];
+                        for (var i = 0; i < fullTimingArray.length; i++) {
+                            let [sura, ayat, timeStart, duration, wordTimings] = fullTimingArray[i];
 
-                                timings.push({
-                                    sura: sura, 
-                                    ayat: ayat, 
-                                    timeStart: timeStart,
-                                    duration: duration,
-                                    wordTimings: wordTimings
-                                });
-                            }
-
-                            this.recitations.push({ recitaionMeta: recitation, timings: timings });
+                            timings.push({
+                                sura: sura,
+                                ayat: ayat,
+                                timeStart: timeStart,
+                                duration: duration,
+                                wordTimings: wordTimings
+                            });
                         }
-                    })
-                    .catch(error => console.error(error));
-            } else {
-                this.recitations.push({ recitaionMeta: recitation, timings: [] });
-            }
+
+                        this.recitations.push({ recitaionMeta: recitation, timings: timings });
+                    }
+                })
+                .catch(error => console.error(error));
         });
     }
 

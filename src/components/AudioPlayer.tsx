@@ -40,16 +40,13 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyat, onPlayingAy
         let totalDuration = 0;
 
         recitations.forEach(recitation => {
-            if (recitation.isFilePerVerse) {
-                totalDuration += 0; //todo: assign file duration
-            }
-            else if (recitation.isFilePerSura) {
-                let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
 
-                let ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, endingAyat.serial - (includeEndingAyat ? 0 : 1));
+            let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
 
-                totalDuration += sum(ayatsTimings.map(m => m.duration));
-            }
+            let ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, endingAyat.serial - (includeEndingAyat ? 0 : 1)) ?? [];
+
+            totalDuration += sum(ayatsTimings.map(m => m.duration));
+
         });
 
         return totalDuration / 1000;
