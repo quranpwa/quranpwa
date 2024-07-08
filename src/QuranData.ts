@@ -514,7 +514,8 @@ export interface Recitation {
     isFilePerVerse: boolean,
     isFilePerSura: boolean,
     style: string,
-    hasFileNameLeadingZeros?: boolean
+    hasFileNameLeadingZeros?: boolean,
+    timingAdjustment?:number
 }
 
 export interface RecitationTiming {
