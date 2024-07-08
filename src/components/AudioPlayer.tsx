@@ -140,8 +140,9 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
                 }
             }
 
+            const timtingAdjustment = -200;
 
-            let isCurrentTimeExceedingAyatDuration = currentTimeInMS >= currentAyatTiming.timeStart + currentAyatTiming.duration;
+            let isCurrentTimeExceedingAyatDuration = currentTimeInMS >= currentAyatTiming.timeStart + currentAyatTiming.duration + timtingAdjustment;
 
             let isCurrentTimeExceedingFileDuration = event.currentTarget.currentTime >= event.currentTarget.duration;
 
