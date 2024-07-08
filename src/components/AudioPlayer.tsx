@@ -62,8 +62,8 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
         return secondsToTimeString(getDurationInSecond(endingAyat))
     };
 
-    const handlePlay = (p_recitationIdx: number, p_ayatSerial: number) => {
-        let recitation = recitations[p_recitationIdx];
+    const handlePlay = (_recitationIdx: number, _ayatSerial: number) => {
+        let recitation = recitations[_recitationIdx];
 
         let audioElements = document.getElementsByTagName('audio')
 
@@ -71,15 +71,12 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
             if (audioElement.id == recitation.id) {
                 if (recitation?.isFilePerSura) {
                     let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
-                    let currentAyatTiming: RecitationTiming = recitationTimings[p_ayatSerial - 1];
-                    let nextAyatTiming: RecitationTiming = recitationTimings[p_ayatSerial];
+                    let currentAyatTiming: RecitationTiming = recitationTimings[_ayatSerial - 1];
                     let currentAyatStartTime = (currentAyatTiming.timeStart || 0) / 1000;
-                    let nextAyatStartTime = nextAyatTiming.sura == currentAyatTiming.sura ? (nextAyatTiming.timeStart || 0) / 1000 : Number.MAX_VALUE - 1;
 
                     if (audioElement.currentTime < currentAyatStartTime
-                        || audioElement.currentTime > nextAyatStartTime + 1) {
-                        audioElement.currentTime = (currentAyatTiming.timeStart || 0) / 1000;
-
+                        || audioElement.currentTime > currentAyatTiming.duration + 1) {
+                        audioElement.currentTime = currentAyatStartTime;
                     }
                 }
                 audioElement.play();
@@ -118,17 +115,16 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
         if (recitation?.isFilePerSura) {
             let currentTimeInMS = event.currentTarget.currentTime * 1000;
             let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
+            let currentAyatTiming = recitationTimings[selectedAyatSerial - 1];
 
             if (recitation.byWBW) {
 
-                let thisAyatTiming = recitationTimings[selectedAyatSerial - 1];
-
-                let currentWordTiming = thisAyatTiming.wordTimings.filter(t =>
+                let currentWordTiming = currentAyatTiming.wordTimings.filter(t =>
                     t[1] /*startTime*/ <= currentTimeInMS && t[2] /*endTime*/ >= currentTimeInMS)[0]
 
                 if (currentWordTiming) {
                     let wordNumber = currentWordTiming[0];
-                    let currentWordId = 'word_' + thisAyatTiming.sura + '_' + thisAyatTiming.ayat + '_' + wordNumber;
+                    let currentWordId = 'word_' + currentAyatTiming.sura + '_' + currentAyatTiming.ayat + '_' + wordNumber;
 
                     if (previousWordId != currentWordId) {
                         //let previousWordElement = document.getElementById(previousWordId);
@@ -144,19 +140,15 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
                 }
             }
 
-            let currentAyatIdx = selectedAyatSerial - ayats[0].serial;
-            let currentAyat = ayats[currentAyatIdx];
-            let nextAyat = ayats[currentAyatIdx + 1];
-            let nextAyatTiming = recitationTimings[selectedAyatSerial];
 
-            let isCurrentTimeExceedingNextAyatStartTime = nextAyatTiming
-                && nextAyatTiming.sura == currentAyat.suraIdx + 1
-                && currentTimeInMS >= nextAyatTiming.timeStart;
+            let isCurrentTimeExceedingAyatDuration = currentTimeInMS >= currentAyatTiming.timeStart + currentAyatTiming.duration;
 
-            let isCurrentTimeExceedingDuration = event.currentTarget.currentTime >= event.currentTarget.duration;
+            let isCurrentTimeExceedingFileDuration = event.currentTarget.currentTime >= event.currentTarget.duration;
 
-            if (isCurrentTimeExceedingNextAyatStartTime || isCurrentTimeExceedingDuration) {
+            if (isCurrentTimeExceedingAyatDuration || isCurrentTimeExceedingFileDuration) {
                 setTimeout(() => {
+                    let currentAyatIdx = selectedAyatSerial - ayats[0].serial;
+                    let nextAyat = ayats[currentAyatIdx + 1];
                     ayatEnded(currentAyatIdx, nextAyat);
                 });
             }
