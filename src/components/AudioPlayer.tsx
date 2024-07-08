@@ -134,7 +134,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
             let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
             let currentAyatTiming = recitationTimings[selectedAyatSerial - 1];
 
-            if (recitation.byWBW) {
+            if (recitation.byWBW && currentAyatTiming.wordTimings) {
 
                 let currentWordTiming = currentAyatTiming.wordTimings.filter(t =>
                     t[1] /*startTime*/ <= currentTimeInMS && t[2] /*endTime*/ >= currentTimeInMS)[0]
