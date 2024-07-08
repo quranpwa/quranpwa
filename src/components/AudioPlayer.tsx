@@ -1,4 +1,4 @@
-﻿import React, { useRef, useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Ayat, QuranData, Recitation, RecitationTiming } from '../QuranData';
 import { getAyatId, padLeft, secondsToTimeString, sum } from '../Utilities';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
@@ -6,7 +6,6 @@ import { ReadingMode, SettingsModel } from './SettingsPanel';
 function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPlayingAyatChanged }: AudioPlayerProps) {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [recitationIdx, setRecitationIdx] = useState<number>(0);
-    const spanRefCurrentTime = useRef<any>();
 
     const recitations = settingsData.recitaions;
 
@@ -52,14 +51,32 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
         return totalDuration / 1000;
     };
 
-    const getCurrentTime = (): string => {
+    const getTimeInfo = (): { totalTime: number, currentTime: number, currentPercentage: number } => {
+        const endingAyat = ayats[ayats.length - 1];
+        const totalTime = getDurationInSecond(endingAyat);
+
         const currentAyat = ayats[selectedAyatSerial - ayats[0].serial];
-        return secondsToTimeString(getDurationInSecond(currentAyat, false))
+        const currentTime = getDurationInSecond(currentAyat, false);
+
+        return {
+            totalTime: totalTime,
+            currentTime: currentTime,
+            currentPercentage: currentTime / totalTime * 100
+        };
+    };
+
+    const timeInfo = getTimeInfo();
+
+    const getCurrentTime = (): string => {
+        return secondsToTimeString(timeInfo.currentTime);
     };
 
     const getTotalTime = (): string => {
-        const endingAyat = ayats[ayats.length - 1];
-        return secondsToTimeString(getDurationInSecond(endingAyat))
+        return secondsToTimeString(timeInfo.totalTime)
+    };
+
+    const getCurrentPercentage = (): string => {
+        return timeInfo.currentPercentage + '%';
     };
 
     const handlePlay = (_recitationIdx: number, _ayatSerial: number) => {
@@ -278,50 +295,57 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
         }
     };
 
-    return <div className='fixed-bottom d-flex p-2' style={{ justifyContent: 'center' }}>
-        <div className="btn-group">
-            {!isPlaying &&
-                <button className="btn theme-colored border" type="button" onClick={handlePlayClick} title="Recite">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16">
-                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393" />
+    return <>
+        <div className='fixed-bottom d-flex p-2' style={{ justifyContent: 'center' }}>
+            <div className="btn-group">
+                {!isPlaying &&
+                    <button className="btn theme-colored border" type="button" onClick={handlePlayClick} title="Recite">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16">
+                            <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393" />
+                        </svg>
+                    </button>
+                }
+                {isPlaying &&
+                    <button className="btn theme-colored border" type="button" onClick={handlePauseClick} title="Pause">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-pause-fill" viewBox="0 0 16 16">
+                            <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5" />
+                        </svg>
+                    </button>
+                }
+                <span className='btn theme-colored border'>
+                    {getCurrentTime()} / {getTotalTime()}
+                </span>
+                {isPlaying &&
+                    <span className="btn theme-colored border">{recitations[recitationIdx]?.name}</span>
+                }
+                <button type="button" className="btn theme-colored border dropdown-toggle" data-bs-toggle="dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
                     </svg>
                 </button>
-            }
-            {isPlaying &&
-                <button className="btn theme-colored border" type="button" onClick={handlePauseClick} title="Pause">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-pause-fill" viewBox="0 0 16 16">
-                        <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5" />
-                    </svg>
-                </button>
-            }
-            <span className='btn theme-colored border'>
-                <span ref={spanRefCurrentTime}>{getCurrentTime()}</span> / {getTotalTime()}
-            </span>
-            {isPlaying &&
-                <span className="btn theme-colored border">{recitations[recitationIdx]?.name}</span>
-            }
-            <button type="button" className="btn theme-colored border dropdown-toggle" data-bs-toggle="dropdown">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                </svg>
-            </button>
-            <ul className="dropdown-menu">
-                {recitations.map((r, i) =>
-                    <li key={r.id} className="dropdown-item">
-                        <p style={{ cursor: 'pointer' }}
-                            onClick={() => { setRecitationIdx(i); handlePlay(i, selectedAyatSerial); }}>
-                            {recitationIdx == i ? '●' : ''} {r.name}
-                        </p>
-                        <audio id={r.id}
-                            src={getAudioUrl(r)}
-                            onTimeUpdate={handleOnTimeUpdate}
-                            onEnded={handleOnEnded}
-                            controls></audio>
-                    </li>
-                )}
-            </ul>
+                <ul className="dropdown-menu">
+                    {recitations.map((r, i) =>
+                        <li key={r.id} className="dropdown-item">
+                            <p style={{ cursor: 'pointer' }}
+                                onClick={() => { setRecitationIdx(i); handlePlay(i, selectedAyatSerial); }}>
+                                {recitationIdx == i ? '●' : ''} {r.name}
+                            </p>
+                            <audio id={r.id}
+                                src={getAudioUrl(r)}
+                                onTimeUpdate={handleOnTimeUpdate}
+                                onEnded={handleOnEnded}
+                                controls></audio>
+                        </li>
+                    )}
+                </ul>
+            </div>
         </div>
-    </div>;
+        {isPlaying &&
+            <div className="progress fixed-bottom" style={{ height: '0.5rem' }}>
+                <div className="progress-bar" style={{ width: getCurrentPercentage() }}></div>
+            </div>
+        }
+    </>;
 }
 
 export default AudioPlayer
