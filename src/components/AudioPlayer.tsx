@@ -316,7 +316,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
                     {getCurrentTime()} / {getTotalTime()}
                 </span>
                 {isPlaying &&
-                    <span className="btn theme-colored border">{recitations[recitationIdx]?.name}</span>
+                    <span className="btn theme-colored border d-none d-md-inline">{recitations[recitationIdx]?.name}</span>
                 }
                 <button type="button" className="btn theme-colored border dropdown-toggle" data-bs-toggle="dropdown">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
