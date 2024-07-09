@@ -55,8 +55,16 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     };
 
     const handleResetSettings = () => {
-        settingsData = getDefaultSettings();        
+        settingsData = getDefaultSettings();
         onChange(settingsData);
+    };
+
+    const handleClearCache = () => {
+        caches.keys().then(keyList =>
+            Promise.all(keyList.map(key => caches.delete(key)))
+        ).finally(()=>{
+            location.reload();
+        });
     };
 
     const translationsGroupByLang = groupBy(translationList, x => x.language);
@@ -77,7 +85,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {translationList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(translationsGroupByLang).length}</small>
             </h5>
-            <TranslationList title='Translations' 
+            <TranslationList title='Translations'
                 translationList={translationList}
                 selectedTranslations={settingsData.translations}
                 onChange={checkedTranslations => {
@@ -87,7 +95,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             <h5 className="mt-3">Word-by-Word
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {wbwTranslationList.length}</small>
             </h5>
-            <TranslationList title='Word-by-Word Translations' 
+            <TranslationList title='Word-by-Word Translations'
                 translationList={wbwTranslationList}
                 selectedTranslations={settingsData.wbwTranslations}
                 onChange={checkedWbwTranslations => {
@@ -99,7 +107,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 <small className="badge bg-secondary mx-1" style={{ fontSize: '0.8rem' }}>Total: {tafsirList.length}</small>
                 <small className="badge bg-secondary" style={{ fontSize: '0.8rem' }}>Languages: {Object.keys(tafsirsGroupByLang).length}</small>
             </h5>
-            <TranslationList title='Tafsirs' 
+            <TranslationList title='Tafsirs'
                 translationList={tafsirList}
                 selectedTranslations={settingsData.tafsirs}
                 onChange={checkedTafsirs => {
@@ -188,6 +196,11 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 className={hasSettingsChanged() ? "btn btn-danger border" : "btn btn-danger border disabled"}
                 onClick={handleResetSettings}>
                 Reset Settings
+            </button>
+            <button type="button"
+                className="btn btn-danger border"
+                onClick={handleClearCache}>
+                Clear Cache
             </button>
             <Link to="/about" className="btn btn-info border">About Quran PWA</Link>
         </div>
