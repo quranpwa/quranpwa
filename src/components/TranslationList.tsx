@@ -70,7 +70,7 @@ function TranslationList({ title, translationList, selectedTranslations, onChang
             ))}
         </ReactSortable>
 
-        <button className='btn btn-outline-secondary w-100 mt-2'
+        <button className='btn btn-outline-secondary w-100'
             onClick={() => dialogRef.current?.showModal()}>
             Select More
         </button>
