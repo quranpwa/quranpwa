@@ -197,16 +197,16 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
             <ThemeSwitch />
             <hr />
             <button type="button"
-                className={hasSettingsChanged() ? "btn btn-danger border" : "btn btn-danger border disabled"}
+                className={"btn btn-outline-danger border w-100 " + (hasSettingsChanged() ? "" : "disabled")}
                 onClick={handleResetSettings}>
                 Reset Settings
             </button>
             <button type="button"
-                className="btn btn-danger border"
+                className="btn btn-outline-danger border w-100 mt-2"
                 onClick={handleClearCache}>
                 Clear Cache
             </button>
-            <Link to="/about" className="btn btn-info border">About Quran PWA</Link>
+            <Link to="/about" className="btn btn-outline-info border w-100 mt-2">About Quran PWA</Link>
         </div>
     </div>;
 }
