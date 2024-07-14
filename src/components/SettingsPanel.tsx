@@ -55,16 +55,20 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     };
 
     const handleResetSettings = () => {
-        settingsData = getDefaultSettings();
-        onChange(settingsData);
+        if (confirm('Your settings will be lost. Are you sure?')) {
+            settingsData = getDefaultSettings();
+            onChange(settingsData);
+        }
     };
 
     const handleClearCache = () => {
-        caches.keys().then(keyList =>
-            Promise.all(keyList.map(key => caches.delete(key)))
-        ).finally(() => {
-            location.reload();
-        });
+        if (confirm('Cached data will be deleted. Are you sure?')) {
+            caches.keys().then(keyList =>
+                Promise.all(keyList.map(key => caches.delete(key)))
+            ).finally(() => {
+                location.reload();
+            });
+        }
     };
 
     const translationsGroupByLang = groupBy(translationList, x => x.language);
@@ -152,7 +156,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     </select>
                 </div>
 
-                <div className='col-12 mt-3'>                
+                <div className='col-12 mt-3'>
                     <h6>Contents</h6>
 
                     <div className="form-check">
