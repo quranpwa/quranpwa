@@ -62,7 +62,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     const handleClearCache = () => {
         caches.keys().then(keyList =>
             Promise.all(keyList.map(key => caches.delete(key)))
-        ).finally(()=>{
+        ).finally(() => {
             location.reload();
         });
     };
@@ -137,36 +137,39 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     </select>
                 </div>
 
-                <h6>Contents</h6>
-                <div className="form-check ms-2">
-                    <input className="form-check-input" type="checkbox" id="ShowQuranTextInput"
-                        checked={settingsData.showQuranText}
-                        onChange={handleShowQuranTextChange} />
-                    <label className="form-check-label" htmlFor="ShowQuranTextInput">Show Quran Text</label>
-                </div>
-                <div className="form-check ms-2">
-                    <input className="form-check-input" type="checkbox" id="ShowWbwInput"
-                        checked={settingsData.showWbw}
-                        onChange={handleShowWbwChange} />
-                    <label className="form-check-label" htmlFor="ShowWbwInput">Show Word By Word</label>
-                </div>
-                <div className="form-check ms-2">
-                    <input className="form-check-input" type="checkbox" id="showWbwTranslationInput"
-                        checked={settingsData.showWbwTranslation}
-                        onChange={handleShowWbwTranslationChange} />
-                    <label className="form-check-label" htmlFor="showWbwTranslationInput">Show Word By Word Translation</label>
-                </div>
-                <div className="form-check ms-2">
-                    <input className="form-check-input" type="checkbox" id="showTranslationInput"
-                        checked={settingsData.showTranslation}
-                        onChange={handleShowTranslationChange} />
-                    <label className="form-check-label" htmlFor="showTranslationInput">Show Translation</label>
-                </div>
-                <div className="form-check ms-2">
-                    <input className="form-check-input" type="checkbox" id="showTafsirInput"
-                        checked={settingsData.showTafsir}
-                        onChange={handleShowTafsirChange} />
-                    <label className="form-check-label" htmlFor="showTafsirInput">Show Tafsir</label>
+                <div className='col-12 mt-3'>                
+                    <h6>Contents</h6>
+
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="ShowQuranTextInput"
+                            checked={settingsData.showQuranText}
+                            onChange={handleShowQuranTextChange} />
+                        <label className="form-check-label" htmlFor="ShowQuranTextInput">Show Quran Text</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="ShowWbwInput"
+                            checked={settingsData.showWbw}
+                            onChange={handleShowWbwChange} />
+                        <label className="form-check-label" htmlFor="ShowWbwInput">Show Word By Word</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="showWbwTranslationInput"
+                            checked={settingsData.showWbwTranslation}
+                            onChange={handleShowWbwTranslationChange} />
+                        <label className="form-check-label" htmlFor="showWbwTranslationInput">Show Word By Word Translation</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="showTranslationInput"
+                            checked={settingsData.showTranslation}
+                            onChange={handleShowTranslationChange} />
+                        <label className="form-check-label" htmlFor="showTranslationInput">Show Translation</label>
+                    </div>
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" id="showTafsirInput"
+                            checked={settingsData.showTafsir}
+                            onChange={handleShowTafsirChange} />
+                        <label className="form-check-label" htmlFor="showTafsirInput">Show Tafsir</label>
+                    </div>
                 </div>
             </div>
 
