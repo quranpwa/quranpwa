@@ -137,6 +137,21 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                     </select>
                 </div>
 
+                <label className="col-sm-5 col-form-label" htmlFor="QuranFontSelect">Quran Font</label>
+                <div className="col-sm-7">
+                    <select id="QuranFontSelect" className="form-select"
+                        value={settingsData.quranFont}
+                        onChange={handleQuranFontChange}>
+                        <option value="hafs">KFGQPC HAFS</option>
+                        <option value="me_quran">Me Quran</option>
+                        <option value="amiri_quran">Amiri Quran</option>
+                        <option value="kitab">Kitab</option>
+                        <option value="noorehidayat">Noore Hidayat</option>
+                        <option value="noorehira">Noore Hira</option>
+                        <option value="noorehuda">Noore Huda</option>
+                    </select>
+                </div>
+
                 <div className='col-12 mt-3'>                
                     <h6>Contents</h6>
 
@@ -170,24 +185,6 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                             onChange={handleShowTafsirChange} />
                         <label className="form-check-label" htmlFor="showTafsirInput">Show Tafsir</label>
                     </div>
-                </div>
-            </div>
-
-            <h5 className="mt-3">Quran Font</h5>
-            <div className="row">
-                <label className="col-sm-5 col-form-label" htmlFor="QuranFontSelect">Quran Font</label>
-                <div className="col-sm-7">
-                    <select id="QuranFontSelect" className="form-select"
-                        value={settingsData.quranFont}
-                        onChange={handleQuranFontChange}>
-                        <option value="hafs">KFGQPC HAFS</option>
-                        <option value="me_quran">Me Quran</option>
-                        <option value="amiri_quran">Amiri Quran</option>
-                        <option value="kitab">Kitab</option>
-                        <option value="noorehidayat">Noore Hidayat</option>
-                        <option value="noorehira">Noore Hira</option>
-                        <option value="noorehuda">Noore Huda</option>
-                    </select>
                 </div>
             </div>
             <hr />
