@@ -61,9 +61,11 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
             tag="ul" className="list-group"
             handle='.sortable-handle'>
             {selectedRecitations.map((item) => (
-                <li key={item.id} className="list-group-item">
-                    <span className='sortable-handle' style={{ cursor: 'move' }}> :↕️: </span>
-                    {item.name} - {item.style}
+                <li key={item.id} className="btn-group">
+                    <button className='sortable-handle btn theme-colored border' style={{ cursor: 'move' }}>:↕️:</button>
+                    <span className='btn theme-colored border'>{item.name} - {item.style}</span>
+                    <button className='btn theme-colored border'
+                        onClick={() => { onChange(selectedRecitations.filter(f => f.id != item.id)) }}>-</button>
                 </li>
             ))}
         </ReactSortable>
