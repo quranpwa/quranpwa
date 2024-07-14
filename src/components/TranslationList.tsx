@@ -61,9 +61,11 @@ function TranslationList({ title, translationList, selectedTranslations, onChang
             tag="ul" className="list-group"
             handle='.sortable-handle'>
             {selectedTranslations.map((item) => (
-                <li key={item.id} className="list-group-item">
-                    <span className='sortable-handle' style={{ cursor: 'move' }}> :↕️: </span>
-                    {item.name}
+                <li key={item.id} className="btn-group">
+                    <button className='sortable-handle btn theme-colored border' style={{ flex:0, cursor: 'move' }}>:↕️:</button>
+                    <span className='btn theme-colored border'  style={{ cursor: 'default' }}>{item.name}</span>
+                    <button className='btn theme-colored border' style={{flex:0}}
+                        onClick={() => { onChange(selectedTranslations.filter(f => f.id != item.id)) }}>-</button>
                 </li>
             ))}
         </ReactSortable>
