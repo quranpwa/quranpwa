@@ -70,7 +70,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
     const translationsGroupByLang = groupBy(translationList, x => x.language);
     const tafsirsGroupByLang = groupBy(tafsirList, x => x.language);
 
-    return <div className="offcanvas offcanvas-end" id="offcanvasRight" data-bs-theme="light" data-bs-scroll="true" aria-labelledby="offcanvasRightLabel">
+    return <div className="offcanvas offcanvas-end" id="offcanvasRight" data-bs-scroll="true" aria-labelledby="offcanvasRightLabel">
         <div className="offcanvas-header">
             <h4 id="offcanvasRightLabel">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-sliders2 me-2" viewBox="0 0 16 16">
@@ -78,7 +78,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 </svg>
                 Settings
             </h4>
-            <button type="button" className="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div className="offcanvas-body">
             <h5>Translations
