@@ -138,13 +138,13 @@
     "style": "Translation"
   },
   {
-    "id": "mahbub_subhan_quran.gov.bd",
+    "id": "mahbub_subhan_bengali_quran.gov.bd",
     "name": "Mahbub Subhan (Bangla)",
     "language": "bn",
-    "url": "https://raw.githubusercontent.com/islam-apps/quran-audio/main/mahbub_subhan_quran.gov.bd",
+    "url": "https://raw.githubusercontent.com/islam-apps/quran-audio/main/mahbub_subhan_bengali_quran.gov.bd",
     "byWBW": false,
-    "isFilePerVerse": true,
-    "isFilePerSura": false,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
     "style": "Translation"
   },
   {
