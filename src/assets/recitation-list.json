@@ -151,10 +151,10 @@
     "id": "mahmudur_rahman_english_quran.gov.bd",
     "name": "Mahmudur Rahman (English)",
     "language": "en",
-    "url": "https://raw.githubusercontent.com/islam-apps/quran-audio/main/mahmudur_rahman_english_quran.gov.bd",
+    "url": "https://raw.githubusercontent.com/islam-apps/quran-audio/main/mahmudur_rahman_english_quran.gov.bd/gapless",
     "byWBW": false,
-    "isFilePerVerse": true,
-    "isFilePerSura": false,
+    "isFilePerVerse": false,
+    "isFilePerSura": true,
     "style": "Translation"
   },
   {
