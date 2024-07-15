@@ -51,17 +51,43 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
     const getCurrentTimeInSecond = (): number => {
 
         const startingAyat = ayats[0];
-        const currentAyat = ayats[selectedAyatSerial - ayats[0].serial];
+        const currentAyat = ayats[selectedAyatSerial - ayats[0].serial] ?? ayats[0];
 
         let totalDuration = 0;
 
-        recitations.forEach(recitation => {
-            const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
+        if (settingsData.readingMode == ReadingMode.Ayat_By_Ayat) {
+            recitations.forEach(recitation => {
+                const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
 
-            const ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, currentAyat.serial - 1) ?? [];
+                const ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, currentAyat.serial - 1) ?? [];
 
+                totalDuration += sum(ayatsTimings.map(m => m.duration));
+            });
+        } else if (settingsData.readingMode == ReadingMode.Ruku_By_Ruku) {
+            const currentRukuStartingAyat = ayats.find(f => f.rukuIdx == currentAyat.rukuIdx) ?? startingAyat;
+
+            //played by all reciters prior to current ruku
+            recitations.forEach(recitation => {
+                const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
+                const ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, currentRukuStartingAyat.serial - 1) ?? [];
+                totalDuration += sum(ayatsTimings.map(m => m.duration));
+            });
+
+            //current ruku: played by prior reciters from recitationIdx
+            const currentRukuEndingAyat = ayats.findLast(f => f.rukuIdx == currentAyat.rukuIdx) ?? currentAyat;
+            for (let i = 0; i < recitationIdx; i++) {
+                const recitation = recitations[i];
+                const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
+                const ayatsTimings = recitationTimings.slice(currentRukuStartingAyat.serial - 1, currentRukuEndingAyat.serial) ?? [];
+                totalDuration += sum(ayatsTimings.map(m => m.duration));
+            }
+
+            //current ruku: played by current reciter
+            const currentRecitation = recitations[recitationIdx];
+            const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == currentRecitation.id)?.timings ?? [];
+            const ayatsTimings = recitationTimings.slice(currentRukuStartingAyat.serial - 1, currentAyat.serial) ?? [];
             totalDuration += sum(ayatsTimings.map(m => m.duration));
-        });
+        }
 
         return totalDuration / 1000;
     };
@@ -219,12 +245,12 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
 
             if (isLastAyatInThisRuku) {
                 pauseAll();
-                setRecitationIdx(nextRecitationId);
                 let nextRecitation = recitations[nextRecitationId];
                 let isTranslation = nextRecitation.language != 'ar';
 
                 if (isLastRecitaion) {
                     if (!isLastAyat && nextAyat) {
+                        setRecitationIdx(nextRecitationId);
                         onPlayingAyatChanged(nextAyat, isTranslation);
                         handlePlay(nextRecitationId, nextAyat.serial);
                     } else {
@@ -233,6 +259,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
                 } else {
                     let firstAyatInThisRuku = ayats.find(a => a.rukuIdx == currentAyat.rukuIdx);
                     if (firstAyatInThisRuku) {
+                        setRecitationIdx(nextRecitationId);
                         onPlayingAyatChanged(firstAyatInThisRuku, isTranslation);
                         handlePlay(nextRecitationId, firstAyatInThisRuku.serial);
                     }
