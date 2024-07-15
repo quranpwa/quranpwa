@@ -233,16 +233,16 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
         <dialog id="ayatDetailDialog" onClick={handleAyatDetailDialogClick} onClose={handleAyatDetailDialogClose}>
             <form method="dialog">
-                <div className="d-flex justify-content-between">
-                    <span id="ayatDetailDialogTitle" className="h5 pe-4 pb-3"></span>
+                <div className="dialog-header d-flex justify-content-between">
+                    <span id="ayatDetailDialogTitle" className="fs-5"></span>
                     <button type="submit" className="btn-close bg-theme-text" value="close"></button>
                 </div>
                 {selectedAyatCorpus.length > 0 &&
-                    <div className="d-flex flex-wrap rtl pb-3">
+                    <div className="dialog-content d-flex flex-wrap rtl pb-3">
                         {getWbwAyatText(selectedAyatCorpus, true)}
                     </div>
                 }
-                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div className="dialog-footer btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div className="btn-group me-2" role="group" aria-label="First group">
                         <button type="submit" className="btn btn-primary" value="bookmark">Bookmark</button>
                     </div>
