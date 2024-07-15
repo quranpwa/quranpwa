@@ -62,9 +62,9 @@ function TranslationList({ title, translationList, selectedTranslations, onChang
             handle='.sortable-handle'>
             {selectedTranslations.map((item) => (
                 <li key={item.id} className="btn-group">
-                    <button className='sortable-handle btn theme-colored border' style={{ flex:0, cursor: 'move' }}>:↕️:</button>
+                    <button className='sortable-handle btn theme-colored border' style={{ flex: 0, cursor: 'move' }}>:↕️:</button>
                     <span className='btn theme-colored border' style={{ cursor: 'default' }}>{item.name}</span>
-                    <button className='btn theme-colored border' style={{flex:0}}
+                    <button className='btn theme-colored border' style={{ flex: 0 }}
                         onClick={() => { onChange(selectedTranslations.filter(f => f.id != item.id)) }}>-</button>
                 </li>
             ))}
@@ -79,18 +79,16 @@ function TranslationList({ title, translationList, selectedTranslations, onChang
             onClick={handleDialogClick}
             onClose={handleDialogClose}>
             <form method="dialog">
-                <div className="d-flex justify-content-between">
-                    <span className="h5 pe-4">{title}</span>
+                <div className="dialog-header d-flex justify-content-between">
+                    <span className="fs-5">{title}</span>
                     <button type="submit" className="btn-close bg-theme-text" value="close"></button>
                 </div>
-                {translationCheckItems}
-                <div className="btn-toolbar mt-4" role="toolbar" aria-label="Toolbar with button groups">
-                    <div className="btn-group me-2" role="group" aria-label="First group">
-                        <button type="submit" className="btn btn-primary" value="ok">OK</button>
-                    </div>
-                    <div className="btn-group" role="group" aria-label="Second group">
-                        <button type="submit" className="btn btn-secondary" value="close">Close</button>
-                    </div>
+                <div className="dialog-content">
+                    {translationCheckItems}
+                </div>
+                <div className="dialog-footer d-flex justify-content-end">
+                    <button type="submit" className="btn btn-primary" value="ok"><span className="emoji-icon">✔️</span> OK</button>
+                    <button type="submit" className="btn btn-secondary ms-2" value="close"><span className="emoji-icon">✖️</span> Close</button>
                 </div>
             </form>
         </dialog>
