@@ -30,19 +30,25 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
         else return ''
     };
 
-    const getTotalTimeInSecond = (): number => {
+    const getDuration = (recitationId: string, startingAyatSerial: number, endingAyatSerial: number): number => {
 
+        const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitationId)?.timings ?? [];
+
+        const ayatsTimings = recitationTimings.slice(startingAyatSerial - 1, endingAyatSerial) ?? [];
+
+        let totalDuration = sum(ayatsTimings.map(m => m.duration));
+
+        return totalDuration;
+    };
+
+    const getTotalTimeInSecond = (): number => {
         const startingAyat = ayats[0];
         const endingAyat = ayats[ayats.length - 1];
 
         let totalDuration = 0;
 
         recitations.forEach(recitation => {
-            const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
-
-            const ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, endingAyat.serial) ?? [];
-
-            totalDuration += sum(ayatsTimings.map(m => m.duration));
+            totalDuration += getDuration(recitation.id, startingAyat.serial, endingAyat.serial);
         });
 
         return totalDuration / 1000;
@@ -57,36 +63,26 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
 
         if (settingsData.readingMode == ReadingMode.Ayat_By_Ayat) {
             recitations.forEach(recitation => {
-                const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
-
-                const ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, currentAyat.serial - 1) ?? [];
-
-                totalDuration += sum(ayatsTimings.map(m => m.duration));
+                totalDuration += getDuration(recitation.id, startingAyat.serial, currentAyat.serial - 1);
             });
         } else if (settingsData.readingMode == ReadingMode.Ruku_By_Ruku) {
             const currentRukuStartingAyat = ayats.find(f => f.rukuIdx == currentAyat.rukuIdx) ?? startingAyat;
 
             //played by all reciters prior to current ruku
             recitations.forEach(recitation => {
-                const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
-                const ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, currentRukuStartingAyat.serial - 1) ?? [];
-                totalDuration += sum(ayatsTimings.map(m => m.duration));
+                totalDuration += getDuration(recitation.id, startingAyat.serial, currentRukuStartingAyat.serial - 1);
             });
 
-            //current ruku: played by prior reciters from recitationIdx
+            //current ruku: played by prior reciters
             const currentRukuEndingAyat = ayats.findLast(f => f.rukuIdx == currentAyat.rukuIdx) ?? currentAyat;
             for (let i = 0; i < recitationIdx; i++) {
                 const recitation = recitations[i];
-                const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
-                const ayatsTimings = recitationTimings.slice(currentRukuStartingAyat.serial - 1, currentRukuEndingAyat.serial) ?? [];
-                totalDuration += sum(ayatsTimings.map(m => m.duration));
+                totalDuration += getDuration(recitation.id, currentRukuStartingAyat.serial, currentRukuEndingAyat.serial);
             }
 
             //current ruku: played by current reciter
             const currentRecitation = recitations[recitationIdx];
-            const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == currentRecitation.id)?.timings ?? [];
-            const ayatsTimings = recitationTimings.slice(currentRukuStartingAyat.serial - 1, currentAyat.serial) ?? [];
-            totalDuration += sum(ayatsTimings.map(m => m.duration));
+            totalDuration += getDuration(currentRecitation.id, currentRukuStartingAyat.serial, currentAyat.serial);
         }
 
         return totalDuration / 1000;
