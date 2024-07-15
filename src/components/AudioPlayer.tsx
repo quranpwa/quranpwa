@@ -30,33 +30,46 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
         else return ''
     };
 
-    const getDurationInSecond = (endingAyat: Ayat, includeEndingAyat: boolean = true): number => {
-        if (!endingAyat)
-            return 0;
+    const getTotalTimeInSecond = (): number => {
 
-        let startingAyat = ayats[0];
+        const startingAyat = ayats[0];
+        const endingAyat = ayats[ayats.length - 1];
 
         let totalDuration = 0;
 
         recitations.forEach(recitation => {
+            const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
 
-            let recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
-
-            let ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, endingAyat.serial - (includeEndingAyat ? 0 : 1)) ?? [];
+            const ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, endingAyat.serial) ?? [];
 
             totalDuration += sum(ayatsTimings.map(m => m.duration));
+        });
 
+        return totalDuration / 1000;
+    };
+
+    const getCurrentTimeInSecond = (): number => {
+
+        const startingAyat = ayats[0];
+        const currentAyat = ayats[selectedAyatSerial - ayats[0].serial];
+
+        let totalDuration = 0;
+
+        recitations.forEach(recitation => {
+            const recitationTimings = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id)?.timings ?? [];
+
+            const ayatsTimings = recitationTimings.slice(startingAyat.serial - 1, currentAyat.serial - 1) ?? [];
+
+            totalDuration += sum(ayatsTimings.map(m => m.duration));
         });
 
         return totalDuration / 1000;
     };
 
     const getTimeInfo = (): { totalTime: number, currentTime: number, currentPercentage: number } => {
-        const endingAyat = ayats[ayats.length - 1];
-        const totalTime = getDurationInSecond(endingAyat);
+        const totalTime = getTotalTimeInSecond();
 
-        const currentAyat = ayats[selectedAyatSerial - ayats[0].serial];
-        const currentTime = getDurationInSecond(currentAyat, false);
+        const currentTime = getCurrentTimeInSecond();
 
         return {
             totalTime: totalTime,
