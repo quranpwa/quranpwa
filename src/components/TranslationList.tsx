@@ -5,7 +5,7 @@ import { ReactSortable } from 'react-sortablejs';
 
 function TranslationList({ title, translationList, selectedTranslations, onChange }: TranslationListProps) {
     const dialogRef = useRef<any>();
-    ``
+
     const handleSelectionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let isChecked = event.target.checked;
         let _id = event.target.id;
