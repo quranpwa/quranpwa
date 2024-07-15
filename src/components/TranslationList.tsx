@@ -2,6 +2,7 @@
 import { Translation } from '../QuranData';
 import { getLanguageName, groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
+import { FaCheck, FaTimes } from 'react-icons/fa';
 
 function TranslationList({ title, translationList, selectedTranslations, onChange }: TranslationListProps) {
     const dialogRef = useRef<any>();
@@ -87,8 +88,8 @@ function TranslationList({ title, translationList, selectedTranslations, onChang
                     {translationCheckItems}
                 </div>
                 <div className="dialog-footer d-flex justify-content-end">
-                    <button type="submit" className="btn btn-primary" value="ok"><span className="emoji-icon">✔️</span> OK</button>
-                    <button type="submit" className="btn btn-secondary ms-2" value="close"><span className="emoji-icon">✖️</span> Close</button>
+                    <button type="submit" className="btn btn-primary" value="ok"><FaCheck /> OK</button>
+                    <button type="submit" className="btn btn-secondary ms-2" value="close"><FaTimes /> Close</button>
                 </div>
             </form>
         </dialog>

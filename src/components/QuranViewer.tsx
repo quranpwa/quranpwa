@@ -7,6 +7,7 @@ import { NavigationModel } from './NavBar';
 import './QuranViewer.css';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 import SuraHeader from './SuraHeader';
+import { FaBookmark, FaTimes } from 'react-icons/fa';
 
 function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelection }: QuranViewerProps) {
 
@@ -244,10 +245,10 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 }
                 <div className="dialog-footer btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <div className="btn-group me-2" role="group" aria-label="First group">
-                        <button type="submit" className="btn btn-primary" value="bookmark"><span className="emoji-icon">🔖</span> Bookmark</button>
+                        <button type="submit" className="btn btn-primary" value="bookmark"><FaBookmark /> Bookmark</button>
                     </div>
                     <div className="btn-group" role="group" aria-label="Second group">
-                        <button type="submit" className="btn btn-secondary" value="close"><span className="emoji-icon">✖️</span> Close</button>
+                        <button type="submit" className="btn btn-secondary" value="close"><FaTimes /> Close</button>
                     </div>
                 </div>
             </form>

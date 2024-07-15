@@ -2,6 +2,7 @@
 import { Ayat, QuranData, Recitation, RecitationTiming } from '../QuranData';
 import { getAyatId, padLeft, secondsToTimeString, sum } from '../Utilities';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
+import { FaEllipsisV, FaPause, FaPlay } from 'react-icons/fa';
 
 function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPlayingAyatChanged }: AudioPlayerProps) {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -336,16 +337,12 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
             <div className="btn-group">
                 {!isPlaying &&
                     <button className="btn theme-colored border" type="button" onClick={handlePlayClick} title="Recite">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-play-fill" viewBox="0 0 16 16">
-                            <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393" />
-                        </svg>
+                        <FaPlay />
                     </button>
                 }
                 {isPlaying &&
                     <button className="btn theme-colored border" type="button" onClick={handlePauseClick} title="Pause">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-pause-fill" viewBox="0 0 16 16">
-                            <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5" />
-                        </svg>
+                        <FaPause />
                     </button>
                 }
                 <span className='btn theme-colored border'>
@@ -355,9 +352,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
                     <span className="btn theme-colored border d-none d-md-inline">{recitations[recitationIdx]?.name}</span>
                 }
                 <button type="button" className="btn theme-colored border dropdown-toggle" data-bs-toggle="dropdown">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                    </svg>
+                    <FaEllipsisV />
                 </button>
                 <ul className="dropdown-menu">
                     {recitations.map((r, i) =>

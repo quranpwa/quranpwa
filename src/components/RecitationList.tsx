@@ -2,6 +2,7 @@
 import { Recitation } from '../QuranData';
 import { groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
+import { FaTimes, FaCheck } from 'react-icons/fa';
 
 function RecitationList({ recitationList, selectedRecitations, onChange }: RecitationListProps) {
     const dialogRef = useRef<any>();
@@ -87,8 +88,8 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
                     {recitationCheckItems}
                 </div>
                 <div className="dialog-footer d-flex justify-content-end">
-                    <button type="submit" className="btn btn-primary" value="ok"><span className="emoji-icon">✔️</span> OK</button>
-                    <button type="submit" className="btn btn-secondary ms-2" value="close"><span className="emoji-icon">✖️</span> Close</button>
+                    <button type="submit" className="btn btn-primary" value="ok"><FaCheck /> OK</button>
+                    <button type="submit" className="btn btn-secondary ms-2" value="close"><FaTimes /> Close</button>
                 </div>
             </form>
         </dialog>
