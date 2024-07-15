@@ -79,18 +79,16 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
             onClick={handleDialogClick}
             onClose={handleDialogClose}>
             <form method="dialog">
-                <div className="d-flex justify-content-between">
-                    <span id="ayatDetailDialogTitle" className="h5 pe-4">Reciters</span>
+                <div className="dialog-header d-flex justify-content-between">
+                    <span className="fs-5">Reciters</span>
                     <button type="submit" className="btn-close bg-theme-text" value="close"></button>
+                </div>                
+                <div className="dialog-content">
+                    {recitationCheckItems}
                 </div>
-                {recitationCheckItems}
-                <div className="btn-toolbar mt-4" role="toolbar" aria-label="Toolbar with button groups">
-                    <div className="btn-group me-2" role="group" aria-label="First group">
-                        <button type="submit" className="btn btn-primary" value="ok">OK</button>
-                    </div>
-                    <div className="btn-group" role="group" aria-label="Second group">
-                        <button type="submit" className="btn btn-secondary" value="close">Close</button>
-                    </div>
+                <div className="dialog-footer d-flex justify-content-end">
+                    <button type="submit" className="btn btn-primary" value="ok"><span className="emoji-icon">✔️</span> OK</button>
+                    <button type="submit" className="btn btn-secondary ms-2" value="close"><span className="emoji-icon">✖️</span> Close</button>
                 </div>
             </form>
         </dialog>
