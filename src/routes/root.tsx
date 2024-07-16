@@ -194,21 +194,23 @@ function Root() {
         {navMode != NavigationMode.Sura && getCardsForAyatRanges(navMode)}
 
         <hr />
-        <footer className="mb-5">
-            <ThemeSwitch />
-            <br />
-            <br />
+        <ThemeSwitch />
 
-            <button className="btn btn btn-outline-secondary me-2" type="button" style={{ alignSelf: 'flex-end' }}
-                data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                <FaSlidersH className="me-2" /> Change Settings
-            </button>
+        <div className="row mt-2 mb-5">
+            <div className="col-12 col-md-6 col-lg-3">
+                <button className="btn btn btn-outline-secondary my-1 w-100" type="button" style={{ alignSelf: 'flex-end' }}
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <FaSlidersH className="me-2" /> Settings
+                </button>
+            </div>
 
-            <SettingsPanel settingsData={settingsData}
-                onChange={onSettingsChanged} />
+            <div className="col-12 col-md-6 col-lg-3">
+                <Link to="/about" className="btn btn-outline-info my-1 w-100">About Quran PWA</Link>
+            </div>
+        </div>
 
-            <Link to="/about" className="btn btn-outline-info ms-2">About Quran PWA</Link>
-        </footer>
+        <SettingsPanel settingsData={settingsData}
+            onChange={onSettingsChanged} />
     </div>)
 }
 
