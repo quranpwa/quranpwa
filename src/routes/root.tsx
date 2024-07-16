@@ -97,6 +97,13 @@ function Root() {
                 <button className={"nav-link " + (navShortcutType == NavigationShortcutType.Bookmarks ? 'active' : 'text-theme')}
                     onClick={() => setNavShortcutType(NavigationShortcutType.Bookmarks)}>Bookmarks</button>
             </li>
+            <li className="nav-item">
+                <button className="btn btn btn-outline-secondary my-1 w-100" type="button" style={{ alignSelf: 'flex-end' }}
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <FaSlidersH />
+                    <span className="d-none d-sm-inline ms-2">Settings</span>
+                </button>
+            </li>
         </ul>
 
         {navShortcutType == NavigationShortcutType.Recents &&
