@@ -2,7 +2,7 @@
 import { Recitation } from '../QuranData';
 import { groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
-import { FaTimes, FaCheck } from 'react-icons/fa';
+import { FaTimes, FaCheck, FaGripVertical } from 'react-icons/fa';
 
 function RecitationList({ recitationList, selectedRecitations, onChange }: RecitationListProps) {
     const dialogRef = useRef<any>();
@@ -63,7 +63,7 @@ function RecitationList({ recitationList, selectedRecitations, onChange }: Recit
             handle='.sortable-handle'>
             {selectedRecitations.map((item) => (
                 <li key={item.id} className="btn-group">
-                    <button className='sortable-handle btn theme-colored border'  style={{ flex:0, cursor: 'move' }}>:↕️:</button>
+                    <button className='sortable-handle btn theme-colored border'  style={{ flex:0, cursor: 'move' }}><FaGripVertical /></button>
                     <span className='btn theme-colored border' style={{ cursor: 'default' }}>{item.name} - {item.style}</span>
                     <button className='btn theme-colored border' style={{flex:0}}
                         onClick={() => { onChange(selectedRecitations.filter(f => f.id != item.id)) }}>-</button>

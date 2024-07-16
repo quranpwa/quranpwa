@@ -2,7 +2,7 @@
 import { Translation } from '../QuranData';
 import { getLanguageName, groupBy } from '../Utilities';
 import { ReactSortable } from 'react-sortablejs';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import { FaCheck, FaGripVertical, FaTimes } from 'react-icons/fa';
 
 function TranslationList({ title, translationList, selectedTranslations, onChange }: TranslationListProps) {
     const dialogRef = useRef<any>();
@@ -63,7 +63,7 @@ function TranslationList({ title, translationList, selectedTranslations, onChang
             handle='.sortable-handle'>
             {selectedTranslations.map((item) => (
                 <li key={item.id} className="btn-group">
-                    <button className='sortable-handle btn theme-colored border' style={{ flex: 0, cursor: 'move' }}>:↕️:</button>
+                    <button className='sortable-handle btn theme-colored border' style={{ flex: 0, cursor: 'move' }}><FaGripVertical /></button>
                     <span className='btn theme-colored border' style={{ cursor: 'default' }}>{item.name}</span>
                     <button className='btn theme-colored border' style={{ flex: 0 }}
                         onClick={() => { onChange(selectedTranslations.filter(f => f.id != item.id)) }}>-</button>
