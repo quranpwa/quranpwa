@@ -83,7 +83,8 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
 
             //current ruku: played by current reciter
             const currentRecitation = recitations[recitationIdx];
-            totalDuration += getDuration(currentRecitation.id, currentRukuStartingAyat.serial, currentAyat.serial);
+            if (currentRecitation)
+                totalDuration += getDuration(currentRecitation.id, currentRukuStartingAyat.serial, currentAyat.serial);
         }
 
         return totalDuration / 1000;
