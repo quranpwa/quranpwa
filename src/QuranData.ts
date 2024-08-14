@@ -440,6 +440,7 @@ export interface Sura {
     type: string,
     charLength?: number,
     readingTimeInSecond?: number
+    audioDownloadState?: AudioDownloadState
 }
 
 export interface AyatRange {
@@ -551,4 +552,10 @@ export interface NavigationShortcutItem {
     navData: NavigationModel,
     link: string,
     date: Date
+}
+
+export enum AudioDownloadState {
+    NotDownlaoded,
+    Downlaoding,
+    Downlaoded,
 }

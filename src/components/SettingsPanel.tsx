@@ -204,6 +204,7 @@ function SettingsPanel({ settingsData, onChange }: SettingsPanelProps) {
                 onClick={handleClearCache}>
                 Clear Cache
             </button>
+            <Link to="/audio-manager" className="btn btn-outline-info border w-100 mt-2">Audio Manager</Link>
             <Link to="/about" className="btn btn-outline-info border w-100 mt-2">About Quran PWA</Link>
         </div>
     </div>;

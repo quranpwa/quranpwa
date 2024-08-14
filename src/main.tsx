@@ -8,6 +8,7 @@ import './index.css'
 import About from './routes/about.tsx'
 import Quran from './routes/quran.tsx'
 import Root from './routes/root.tsx'
+import AudioManager from './routes/audio-manager.tsx'
 
 QuranData.instance.setAyats().then(() => {
 
@@ -23,6 +24,10 @@ QuranData.instance.setAyats().then(() => {
         {
             path: "/quran",
             element: <Quran />
+        },
+        {
+            path: "/audio-manager",
+            element: <AudioManager />
         },
         {
             path: "/about",
