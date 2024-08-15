@@ -11,6 +11,7 @@ function AudioManager() {
 
     const [reciterId, setReciterId] = useState(recitationList[0].id);
     const [suraList, setSuraList] = useState(quranData.suras);
+    const [downloadingAll, setDownloadingAll] = useState(false);
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     const loadStoredSuraSerials = (reciterId: string) => {
@@ -42,10 +43,13 @@ function AudioManager() {
 
     const download = async (sura: Sura) => {
         if (!sura) return;
-        sura.audioDownloadState = AudioDownloadState.Downlaoding;
 
         const recitation = recitationList.find(f => f.id == reciterId);
         if (!recitation) return;
+
+        sura.audioDownloadState = AudioDownloadState.Downlaoding;
+        setSuraList(suraList);
+        forceUpdate();
 
         const suraSerial = recitation.hasFileNameLeadingZeros === false
             ? sura.serial
@@ -60,8 +64,15 @@ function AudioManager() {
         audioDBService.storeData({ id: sura.serial, mp3Blob: mp3Blob })
             .then(() => loadStoredSuraSerials(reciterId))
             .catch(error => console.error('Error storing data:', error));
+    };
 
-        forceUpdate();
+    const downloadAll = async () => {
+        if (downloadingAll) return;
+
+        setDownloadingAll(true);
+
+        for (const sura of suraList.filter(f => f.audioDownloadState == AudioDownloadState.NotDownlaoded))
+            await download(sura);
     };
 
     return (<div className="container mb-5">
@@ -83,8 +94,12 @@ function AudioManager() {
                         </option>)}
                 </select>
             </div>
-            <div className="col-12">
+            <div className="col-12 mt-3">
+                <p>Sura Downloaded: {suraList.filter(f => f.audioDownloadState == AudioDownloadState.Downlaoded).length}</p>
 
+                <button className="btn btn-primary" onClick={() => downloadAll()}>
+                    {downloadingAll ? <FaSpinner className="icon-spin" /> : <FaFileDownload />} Download All
+                </button>
             </div>
         </div>
         <hr />
