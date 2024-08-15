@@ -353,7 +353,7 @@ export class QuranData {
             updateUI();
     }
 
-    setRecitations(recitations: Recitation[]) {
+    setRecitations(recitations: Recitation[], updateUI: () => void) {
         if (!recitations) {
             this.recitations = [];
             return;
@@ -385,6 +385,8 @@ export class QuranData {
                         }
 
                         let recitationWithData: RecitationWithData = { recitaionMeta: recitation, timings: timings, suraUrls: [] }
+                        this.recitations.push(recitationWithData);
+                        const isLastRecitationToFetch = notFetchedRecitationTimings.indexOf(recitation) == notFetchedRecitationTimings.length - 1;
 
                         const audioDBService = new IndexedDBService<SuraAudio>('audioDatabase', recitation.id);
 
@@ -407,12 +409,11 @@ export class QuranData {
 
                                     recitationWithData.suraUrls.push(suraUrl);
                                 });
-                            })
-                            .catch(error => console.error('Error retrieving all keys:', error))
-                            .finally(() => {
-                                this.recitations.push(recitationWithData);
-                            });
 
+                                if (isLastRecitationToFetch)
+                                    updateUI();
+                            })
+                            .catch(error => console.error('Error retrieving all keys:', error));
                     }
                 })
                 .catch(error => console.error(error));

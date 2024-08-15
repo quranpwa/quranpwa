@@ -75,7 +75,7 @@ function Root() {
         quranData.setTranslations(settingsData.translations, forceUpdate);
         quranData.setWbwTranslations(settingsData.wbwTranslations, forceUpdate);
         quranData.setTafsirs(settingsData.tafsirs, forceUpdate);
-        quranData.setRecitations(settingsData.recitaions);
+        quranData.setRecitations(settingsData.recitaions, forceUpdate);
     }
 
     const navMode = navData.navMode;
