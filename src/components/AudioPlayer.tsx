@@ -22,11 +22,18 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
             return `${recitation.url}/${ayatId}.mp3`;
         }
         else if (recitation.isFilePerSura) {
-            let suraSerial = recitation.hasFileNameLeadingZeros === false
-                ? startingAyat.suraIdx + 1
-                : padLeft((startingAyat.suraIdx + 1).toString(), 3);
+            const recitationWithData = quranData.recitations.find(f => f.recitaionMeta?.id == recitation.id);
+            let suraUrl = recitationWithData?.suraUrls[startingAyat.suraIdx];
 
-            return `${recitation.url}/${suraSerial}.mp3`;
+            if (suraUrl)
+                return suraUrl
+            else {
+                let suraSerial = recitation.hasFileNameLeadingZeros === false
+                    ? startingAyat.suraIdx + 1
+                    : padLeft((startingAyat.suraIdx + 1).toString(), 3);
+
+                return `${recitation.url}/${suraSerial}.mp3`;
+            }
         }
         else return ''
     };
@@ -367,6 +374,8 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
                                 onTimeUpdate={handleOnTimeUpdate}
                                 onEnded={handleOnEnded}
                                 controls></audio>
+
+                            <label>{getAudioUrl(r).startsWith('blob')? 'Offline': 'Online'}</label>
                         </li>
                     )}
                 </ul>

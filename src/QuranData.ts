@@ -1,6 +1,7 @@
 ﻿import quranData from './assets/quran-data.json'
 import { NavigationModel } from './components/NavBar';
-import { sum } from './Utilities';
+import { IndexedDBService } from './IndexedDBService';
+import { padLeft, sum } from './Utilities';
 
 export class QuranData {
 
@@ -383,7 +384,35 @@ export class QuranData {
                             });
                         }
 
-                        this.recitations.push({ recitaionMeta: recitation, timings: timings });
+                        let recitationWithData: RecitationWithData = { recitaionMeta: recitation, timings: timings, suraUrls: [] }
+
+                        const audioDBService = new IndexedDBService<SuraAudio>('audioDatabase', recitation.id);
+
+                        audioDBService.getAllData()
+                            .then(suraAudios => {
+                                this.suras.forEach(sura => {
+                                    let suraUrl = '';
+
+                                    let suraAudio = suraAudios.find(s => s.id == sura.serial);
+
+                                    if (suraAudio?.mp3Blob) {
+                                        suraUrl = URL.createObjectURL(suraAudio.mp3Blob);
+                                    } else {
+                                        const suraSerial = recitation.hasFileNameLeadingZeros === false
+                                            ? sura.serial
+                                            : padLeft((sura.serial).toString(), 3);
+
+                                        suraUrl = `${recitation.url}/${suraSerial}.mp3`;
+                                    }
+
+                                    recitationWithData.suraUrls.push(suraUrl);
+                                });
+                            })
+                            .catch(error => console.error('Error retrieving all keys:', error))
+                            .finally(() => {
+                                this.recitations.push(recitationWithData);
+                            });
+
                     }
                 })
                 .catch(error => console.error(error));
@@ -516,7 +545,7 @@ export interface Recitation {
     isFilePerSura: boolean,
     style: string,
     hasFileNameLeadingZeros?: boolean,
-    timingAdjustment?:number
+    timingAdjustment?: number
 }
 
 export interface RecitationTiming {
@@ -529,7 +558,8 @@ export interface RecitationTiming {
 
 export interface RecitationWithData {
     recitaionMeta: Recitation,
-    timings: RecitationTiming[]
+    timings: RecitationTiming[],
+    suraUrls: string[]
 }
 
 export enum NavigationMode {
@@ -552,6 +582,11 @@ export interface NavigationShortcutItem {
     navData: NavigationModel,
     link: string,
     date: Date
+}
+
+export interface SuraAudio {
+    id: number;
+    mp3Blob: any;
 }
 
 export enum AudioDownloadState {

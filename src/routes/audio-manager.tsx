@@ -1,5 +1,5 @@
-﻿import { useEffect, useState } from "react";
-import { AudioDownloadState, QuranData, Sura } from "../QuranData";
+﻿import { useEffect, useReducer, useState } from "react";
+import { AudioDownloadState, QuranData, Sura, SuraAudio } from "../QuranData";
 import { FaCheck, FaFileDownload, FaSpinner } from "react-icons/fa";
 import { IndexedDBService } from "../IndexedDBService";
 import { padLeft } from "../Utilities";
@@ -11,16 +11,21 @@ function AudioManager() {
 
     const [reciterId, setReciterId] = useState(recitationList[0].id);
     const [suraList, setSuraList] = useState(quranData.suras);
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-    const loadStoredSuraSerials = (reciterId) => {
-        const audioDBService = new IndexedDBService<SuraAudio>('audioDatabase', reciterId, recitationList.map(item => item.id));
+    const loadStoredSuraSerials = (reciterId: string) => {
+        const audioDBService = new IndexedDBService<SuraAudio>('audioDatabase', reciterId);
 
         audioDBService.getAllKeys()
             .then(allKeys => {
-                allKeys.forEach(suraSerial => {
-                    suraList[suraSerial - 1].audioDownloadState = AudioDownloadState.Downlaoded
+                suraList.forEach(sura => {
+                    if (allKeys.some(s => s == sura.serial))
+                        sura.audioDownloadState = AudioDownloadState.Downlaoded
+                    else
+                        sura.audioDownloadState = AudioDownloadState.NotDownlaoded
                 });
                 setSuraList(suraList);
+                forceUpdate();
             })
             .catch(error => console.error('Error retrieving all keys:', error));
     };
@@ -55,6 +60,8 @@ function AudioManager() {
         audioDBService.storeData({ id: sura.serial, mp3Blob: mp3Blob })
             .then(() => loadStoredSuraSerials(reciterId))
             .catch(error => console.error('Error storing data:', error));
+
+        forceUpdate();
     };
 
     return (<div className="container">
@@ -98,8 +105,3 @@ function AudioManager() {
 }
 
 export default AudioManager;
-
-interface SuraAudio {
-    id: number;
-    mp3Blob: any;
-}

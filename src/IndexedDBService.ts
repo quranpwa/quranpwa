@@ -1,15 +1,13 @@
 export class IndexedDBService<T> {
     private dbName: string;
-    private allStoreNames: string[];
     private storeName: string;
 
-    constructor(dbName: string, storeName: string, allStoreNames?: string[]) {
+    constructor(dbName: string, storeName: string) {
         this.dbName = dbName;
         this.storeName = storeName;
-        this.allStoreNames = allStoreNames ?? [storeName];
     }
 
-    private openDatabase(): Promise<IDBDatabase> {
+    public initDatabase(allStoreNames: string[]): Promise<IDBDatabase> {
         return new Promise((resolve, reject) => {
             const request = indexedDB.open(this.dbName);
 
@@ -23,11 +21,25 @@ export class IndexedDBService<T> {
 
             request.onupgradeneeded = (event) => {
                 const db = (event.target as IDBOpenDBRequest).result;
-                this.allStoreNames.forEach(storeName => {
+                allStoreNames.forEach(storeName => {
                     if (!db.objectStoreNames.contains(storeName)) {
                         db.createObjectStore(storeName, { keyPath: 'id' });
                     }
                 });
+            };
+        });
+    }
+
+    private openDatabase(): Promise<IDBDatabase> {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(this.dbName);
+
+            request.onerror = (event) => {
+                reject(`Database error: ${(event.target as IDBOpenDBRequest).error?.message}`);
+            };
+
+            request.onsuccess = (event) => {
+                resolve((event.target as IDBOpenDBRequest).result);
             };
         });
     }
