@@ -106,13 +106,15 @@ function Quran() {
         location.hash = isTranslation ? 't' + selectedAyat : String(selectedAyat);
     }
 
-    const onSettingsChanged = (settingsData: SettingsModel) => {
+    const onSettingsChanged = async (settingsData: SettingsModel) => {
         storeSettingsData(settingsData);
 
-        quranData.setTranslations(settingsData.translations, forceUpdate);
-        quranData.setWbwTranslations(settingsData.wbwTranslations, forceUpdate);
-        quranData.setTafsirs(settingsData.tafsirs, forceUpdate);
-        quranData.setRecitations(settingsData.recitaions, forceUpdate);
+        await quranData.setTranslations(settingsData.translations);
+        await quranData.setWbwTranslations(settingsData.wbwTranslations);
+        await quranData.setTafsirs(settingsData.tafsirs);
+        await quranData.setRecitations(settingsData.recitaions);
+
+        forceUpdate();
     }
 
     return (

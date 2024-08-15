@@ -253,7 +253,7 @@ export class QuranData {
         })
     }
 
-    setWbwTranslations(wbwTranslations: Translation[], updateUI: () => void) {
+    async setWbwTranslations(wbwTranslations: Translation[]) {
         if (!wbwTranslations) {
             this.wbwTranslations = [];
             return;
@@ -265,30 +265,19 @@ export class QuranData {
         let notFetchedTranslations = wbwTranslations.filter(f =>
             !this.wbwTranslations.some(s => s.translationMeta.id === f.id));
 
-        notFetchedTranslations.forEach(translation => {
-            fetch(`./corpus/${translation.id}.txt`)
-                .then<string>(response => response.text())
-                .then(text => {
-                    if (!this.wbwTranslations.some(s => s.translationMeta.id === translation.id)) {
+        for (const translation of notFetchedTranslations) {
+            const response = await fetch(`./corpus/${translation.id}.txt`);
+            const responseText = await response.text();
 
-                        const texts = text.split(/\r\n|\n/);
+            if (!this.wbwTranslations.some(s => s.translationMeta.id === translation.id)) {
+                const texts = responseText.split(/\r\n|\n/);
 
-                        this.wbwTranslations.push({ translationMeta: translation, texts: texts });
-
-                        const isLastTranslationToFetch = notFetchedTranslations.indexOf(translation) == notFetchedTranslations.length - 1;
-                        if (isLastTranslationToFetch)
-                            updateUI();
-                    }
-                })
-                .catch(error => console.error(error));
-        });
-
-        if (notFetchedTranslations.length == 0)
-            updateUI();
-
+                this.wbwTranslations.push({ translationMeta: translation, texts: texts });
+            }
+        }
     }
 
-    setTranslations(translations: Translation[], updateUI: () => void) {
+    async setTranslations(translations: Translation[]) {
         if (!translations) {
             this.translations = [];
             return;
@@ -300,28 +289,17 @@ export class QuranData {
         let notFetchedTranslations = translations.filter(f =>
             !this.translations.some(s => s.translationMeta.id === f.id));
 
-        notFetchedTranslations.forEach(translation => {
-            fetch(`./translations/${translation.id}.json`)
-                .then<string[]>(response => response.json())
-                .then(texts => {
-                    if (!this.translations.some(s => s.translationMeta.id === translation.id)) {
+        for (const translation of notFetchedTranslations) {
+            const response = await fetch(`./translations/${translation.id}.json`);
+            const texts = await response.json() as string[];
 
-                        this.translations.push({ translationMeta: translation, texts: texts });
-
-                        const isLastTranslationToFetch = notFetchedTranslations.indexOf(translation) == notFetchedTranslations.length - 1;
-                        if (isLastTranslationToFetch)
-                            updateUI();
-                    }
-                })
-                .catch(error => console.error(error));
-        });
-
-        if (notFetchedTranslations.length == 0)
-            updateUI();
-
+            if (!this.translations.some(s => s.translationMeta.id === translation.id)) {
+                this.translations.push({ translationMeta: translation, texts: texts });
+            }
+        }
     }
 
-    setTafsirs(tafsirs: Translation[], updateUI: () => void) {
+    async setTafsirs(tafsirs: Translation[]) {
         if (!tafsirs) {
             this.tafsirs = [];
             return;
@@ -333,27 +311,17 @@ export class QuranData {
         let notFetchedTafsirs = tafsirs.filter(f =>
             !this.tafsirs.some(s => s.translationMeta.id === f.id));
 
-        notFetchedTafsirs.forEach(translation => {
-            fetch(`./tafsirs/${translation.id}.json`)
-                .then<string[]>(response => response.json())
-                .then(texts => {
-                    if (!this.tafsirs.some(s => s.translationMeta.id === translation.id)) {
+        for (const translation of notFetchedTafsirs) {
+            const response = await fetch(`./tafsirs/${translation.id}.json`);
+            const texts = await response.json() as string[];
 
-                        this.tafsirs.push({ translationMeta: translation, texts: texts });
-
-                        const isLastTranslationToFetch = notFetchedTafsirs.indexOf(translation) == notFetchedTafsirs.length - 1;
-                        if (isLastTranslationToFetch)
-                            updateUI();
-                    }
-                })
-                .catch(error => console.error(error));
-        });
-
-        if (notFetchedTafsirs.length == 0)
-            updateUI();
+            if (!this.tafsirs.some(s => s.translationMeta.id === translation.id)) {
+                this.tafsirs.push({ translationMeta: translation, texts: texts });
+            }
+        }
     }
 
-    setRecitations(recitations: Recitation[], updateUI: () => void) {
+    async setRecitations(recitations: Recitation[]) {
         if (!recitations) {
             this.recitations = [];
             return;
@@ -365,59 +333,50 @@ export class QuranData {
         let notFetchedRecitationTimings = recitations.filter(f =>
             !this.recitations.some(s => s.recitaionMeta.id === f.id));
 
-        notFetchedRecitationTimings.forEach(recitation => {
-            fetch(`./recitaion-timings/${recitation.id}.json`)
-                .then(response => response.json())
-                .then(fullTimingArray => {
-                    if (!this.recitations.some(s => s.recitaionMeta.id === recitation.id)) {
-                        let timings: RecitationTiming[] = [];
+        for (const recitation of notFetchedRecitationTimings) {
+            const response = await fetch(`./recitaion-timings/${recitation.id}.json`);
+            const fullTimingArray = await response.json();
 
-                        for (var i = 0; i < fullTimingArray.length; i++) {
-                            let [sura, ayat, timeStart, duration, wordTimings] = fullTimingArray[i];
+            if (!this.recitations.some(s => s.recitaionMeta.id === recitation.id)) {
+                let timings: RecitationTiming[] = [];
 
-                            timings.push({
-                                sura: sura,
-                                ayat: ayat,
-                                timeStart: timeStart,
-                                duration: duration,
-                                wordTimings: wordTimings
-                            });
-                        }
+                for (var i = 0; i < fullTimingArray.length; i++) {
+                    let [sura, ayat, timeStart, duration, wordTimings] = fullTimingArray[i];
 
-                        let recitationWithData: RecitationWithData = { recitaionMeta: recitation, timings: timings, suraUrls: [] }
-                        this.recitations.push(recitationWithData);
-                        const isLastRecitationToFetch = notFetchedRecitationTimings.indexOf(recitation) == notFetchedRecitationTimings.length - 1;
+                    timings.push({
+                        sura: sura,
+                        ayat: ayat,
+                        timeStart: timeStart,
+                        duration: duration,
+                        wordTimings: wordTimings
+                    });
+                }
 
-                        const audioDBService = new IndexedDBService<SuraAudio>('audioDatabase', recitation.id);
+                let recitationWithData: RecitationWithData = { recitaionMeta: recitation, timings: timings, suraUrls: [] }
+                this.recitations.push(recitationWithData);
 
-                        audioDBService.getAllData()
-                            .then(suraAudios => {
-                                this.suras.forEach(sura => {
-                                    let suraUrl = '';
+                const audioDBService = new IndexedDBService<SuraAudio>('audioDatabase', recitation.id);
+                const suraAudios: SuraAudio[] = await audioDBService.getAllData();
 
-                                    let suraAudio = suraAudios.find(s => s.id == sura.serial);
+                this.suras.forEach(sura => {
+                    let suraUrl = '';
 
-                                    if (suraAudio?.mp3Blob) {
-                                        suraUrl = URL.createObjectURL(suraAudio.mp3Blob);
-                                    } else {
-                                        const suraSerial = recitation.hasFileNameLeadingZeros === false
-                                            ? sura.serial
-                                            : padLeft((sura.serial).toString(), 3);
+                    let suraAudio = suraAudios.find(s => s.id == sura.serial);
 
-                                        suraUrl = `${recitation.url}/${suraSerial}.mp3`;
-                                    }
+                    if (suraAudio?.mp3Blob) {
+                        suraUrl = URL.createObjectURL(suraAudio.mp3Blob);
+                    } else {
+                        const suraSerial = recitation.hasFileNameLeadingZeros === false
+                            ? sura.serial
+                            : padLeft((sura.serial).toString(), 3);
 
-                                    recitationWithData.suraUrls.push(suraUrl);
-                                });
-
-                                if (isLastRecitationToFetch)
-                                    updateUI();
-                            })
-                            .catch(error => console.error('Error retrieving all keys:', error));
+                        suraUrl = `${recitation.url}/${suraSerial}.mp3`;
                     }
-                })
-                .catch(error => console.error(error));
-        });
+
+                    recitationWithData.suraUrls.push(suraUrl);
+                });
+            }
+        }
     }
 
     getReadingTimeInSecond(ayatRange: Sura | AyatRange) {
