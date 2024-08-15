@@ -131,28 +131,6 @@ export class IndexedDBService<T> {
             }
         });
     }
-
-    public exists(key: IDBValidKey): Promise<boolean> {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const db = await this.openDatabase();
-                const transaction = db.transaction([this.storeName], 'readonly');
-                const objectStore = transaction.objectStore(this.storeName);
-
-                const request = objectStore.get(key);
-
-                request.onerror = (event) => {
-                    reject(`Existency check error: ${(event.target as IDBRequest).error?.message}`);
-                };
-
-                request.onsuccess = (event) => {
-                    resolve((event.target as IDBRequest).result !== undefined);
-                };
-            } catch (error) {
-                reject(`Transaction error: ${error}`);
-            }
-        });
-    }
 }
 
 /*
@@ -187,14 +165,4 @@ dbService.getAllData()
     .then(allData => console.log('All data retrieved:', allData))
     .catch(error => console.error('Error retrieving all data:', error));
 
-// Check if data exists
-dbService.exists(1)
-    .then(exists => {
-        if (exists) {
-            console.log('Data exists for the provided key.');
-        } else {
-            console.log('No data exists for the provided key.');
-        }
-    })
-    .catch(error => console.error('Error checking existency:', error));
 */
