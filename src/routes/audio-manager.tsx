@@ -74,8 +74,8 @@ function AudioManager() {
         <h2 className="text-center">Audio Manager</h2>
 
         <div className="row">
-            <label htmlFor="ReciterSelect" className="form-label text-end col-sm-2">Reciter</label>
-            <div className="col-sm-10">
+            <label htmlFor="ReciterSelect" className="form-label text-md-end col-md-2">Reciter</label>
+            <div className="col-md-10">
                 <select id="ReciterSelect" className="form-select" onChange={handleReciterChange} title="Reciter">
                     {recitationList.map(item =>
                         <option key={item.id} value={item.id}>
