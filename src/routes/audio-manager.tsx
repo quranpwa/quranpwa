@@ -64,7 +64,7 @@ function AudioManager() {
         forceUpdate();
     };
 
-    return (<div className="container">
+    return (<div className="container mb-5">
 
         <h1 className="text-center my-3">
             <img className="rounded me-2" src="/images/quran-rehal.svg" alt="Quran Rehal" height="40" />
@@ -83,6 +83,9 @@ function AudioManager() {
                         </option>)}
                 </select>
             </div>
+            <div className="col-12">
+
+            </div>
         </div>
         <hr />
         <ul className="list-group">
@@ -98,9 +101,11 @@ function AudioManager() {
             )}
         </ul>
         <hr />
-        <ThemeSwitch />
-        <br />
+        <div className="d-none">
+            <ThemeSwitch />
+        </div>
         <button className="btn btn-primary" onClick={() => history.back()}>Go Back</button>
+        <br />
     </div>)
 }
 
