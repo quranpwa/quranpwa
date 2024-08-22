@@ -61,6 +61,8 @@
 
 .ayat-number {
     cursor: pointer;
+    font-family: hafs;
+    font-size: 2rem;
 }
 
 .translation-ayat-number {

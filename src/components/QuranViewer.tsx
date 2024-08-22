@@ -180,12 +180,18 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 </h3>
 
                 {settingsData.showQuranText &&
-                    <div className={colClass + "ps-md-4 pt-md-4 quran-text mt-2"}>
+                    <div className={colClass + "ps-md-4 pt-md-4 mt-2 text-justify"}>
                         {rukuAyats.map(ayat =>
                             <span id={ayat.serial.toString()} key={ayat.serial}
                                 onClick={() => handleAyatSelection(ayat.serial)}
                                 className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : 'ayat'}>
-                                <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
+                                {!settingsData.showWbw &&
+                                    <span className='quran-text' style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
+                                }
+                                {settingsData.showWbw &&
+                                    getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
+                                        && f.ayah == ayat.serialInSura), settingsData.showWbwTranslation)
+                                }
                                 <span className="ayat-number" style={{ fontFamily: 'hafs' }}
                                     onClick={() => handleAyatNumberClick(ayat.serial)}> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
                             </span>)}
