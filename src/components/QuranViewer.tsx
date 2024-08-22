@@ -90,7 +90,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
         return ayatCorpus.map(c => <span className="text-center my-3"
             key={c.surah + '_' + c.ayah + '_' + c.word}
             id={'word_' + c.surah + '_' + c.ayah + '_' + c.word}>
-            <span className="quran-text px-1">{c.ar1 + c.ar2 + c.ar3 + c.ar4 + c.ar5 + ' '}</span>
+            <span className="quran-text">{c.ar1 + c.ar2 + c.ar3 + c.ar4 + c.ar5 + ' '}</span>
             {showWbwTranslation && quranData.wbwTranslations.length > 0 &&
                 <span className="d-block px-1" style={{ borderRight: 'solid 1px gray' }}>
                     {quranData.wbwTranslations.map(translation =>
@@ -117,8 +117,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                     {settingsData.showQuranText && !settingsData.showWbw &&
                         <div className="quran-text rtl">
                             <span style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
-                            <span className="ayat-number" style={{ fontFamily: 'hafs' }}
-                                onClick={() => handleAyatNumberClick(ayat.serial)}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
+                            <span className="ayat-number"
+                                onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString('ar-SA')}</span>
                         </div>
 
                     }
@@ -126,8 +126,8 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                         <div className="d-flex flex-wrap rtl">
                             {getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
                                 && f.ayah == ayat.serialInSura), settingsData.showWbwTranslation)}
-                            <span className="ayat-number quran-text my-3 px-1" style={{ fontFamily: 'hafs' }}
-                                onClick={() => handleAyatNumberClick(ayat.serial)}> {ayat.serialInSura.toLocaleString('ar-SA')} </span>
+                            <span className="ayat-number quran-text my-3 px-1"
+                                onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString('ar-SA')}</span>
                         </div>
                     }
                     {settingsData.showTranslation && quranData.translations.map(translation => {
@@ -180,20 +180,20 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                 </h3>
 
                 {settingsData.showQuranText &&
-                    <div className={colClass + "ps-md-4 pt-md-4 mt-2 text-justify"}>
+                    <div className={colClass + "ps-md-4 pt-md-4 mt-2"} style={{ textAlign: 'justify' }}>
                         {rukuAyats.map(ayat =>
                             <span id={ayat.serial.toString()} key={ayat.serial}
                                 onClick={() => handleAyatSelection(ayat.serial)}
-                                className={selectedAyatSerial == ayat.serial ? 'selected-ayat' : 'ayat'}>
+                                className={(selectedAyatSerial == ayat.serial ? 'selected-ayat' : 'ayat') + (settingsData.showWbwTranslation ? ' d-flex flex-wrap' : '')}>
                                 {!settingsData.showWbw &&
-                                    <span className='quran-text' style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText}</span>
+                                    <span className='quran-text' style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText} </span>
                                 }
                                 {settingsData.showWbw &&
                                     getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
                                         && f.ayah == ayat.serialInSura), settingsData.showWbwTranslation)
                                 }
-                                <span className="ayat-number" style={{ fontFamily: 'hafs' }}
-                                    onClick={() => handleAyatNumberClick(ayat.serial)}> {(ayat.serialInSura.toLocaleString('ar-SA'))} </span>
+                                <span className="ayat-number"
+                                    onClick={() => handleAyatNumberClick(ayat.serial)}>{(ayat.serialInSura.toLocaleString('ar-SA'))}</span>
                             </span>)}
                     </div>
                 }

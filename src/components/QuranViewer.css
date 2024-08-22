@@ -55,7 +55,7 @@
 
 .quran-translation {
     font-size: 1.1rem;
-    line-height: 1.8rem;
+    line-height: 2rem;
     text-align: justify;
 }
 
@@ -63,6 +63,8 @@
     cursor: pointer;
     font-family: hafs;
     font-size: 2rem;
+    align-content: center;
+    padding-left: 1rem;
 }
 
 .translation-ayat-number {
