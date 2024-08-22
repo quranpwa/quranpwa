@@ -38,6 +38,11 @@ export default defineConfig({
             ]
         }
     })],
+    esbuild: {
+        supported: {
+            'top-level-await': true
+        },
+    },
     define: {
         APP_VERSION: JSON.stringify(process.env.npm_package_version),
         APP_BUILD_DATE: JSON.stringify(new Date().toISOString().substring(0, 10)),
