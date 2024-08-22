@@ -14,8 +14,10 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
     const [selectedAyatCorpus, setSelectedAyatCorpus] = useState<Corpus[]>([]);
 
     const { start, end } = quranData.getAyatRangeByNavSerial(navData?.navMode, navData?.serial);
-    let ayats: Ayat[] = quranData.ayats.slice(start, end);;
-    let maxSerial = quranData.getMaxNavSerial(navData?.navMode);
+    const ayats: Ayat[] = quranData.ayats.slice(start, end);
+    const corpus = quranData.corpus.filter(f=>f.ayatSerial >= start && f.ayatSerial <= end);
+
+    const maxSerial = quranData.getMaxNavSerial(navData?.navMode);
 
     const selectedAyatSerial = navData.ayat;
     const dialog = document.getElementById("ayatDetailDialog") as HTMLDialogElement;
@@ -34,7 +36,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
 
                 ayatDetailDialogTitleElement.textContent = `${sura.tname} [${sura.serial}:${selectedAyat.serialInSura}]`;
 
-                setSelectedAyatCorpus(quranData.corpus.filter(f => f.surah == sura.serial
+                setSelectedAyatCorpus(corpus.filter(f => f.surah == sura.serial
                     && f.ayah == selectedAyat.serialInSura));
             }
         }
@@ -124,7 +126,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                     }
                     {settingsData.showQuranText && settingsData.showWbw &&
                         <div className="d-flex flex-wrap rtl">
-                            {getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
+                            {getWbwAyatText(corpus.filter(f => f.surah == ayat.suraIdx + 1
                                 && f.ayah == ayat.serialInSura), settingsData.showWbwTranslation)}
                             <span className="ayat-number quran-text my-3 px-1"
                                 onClick={() => handleAyatNumberClick(ayat.serial)}>{ayat.serialInSura.toLocaleString('ar-SA')}</span>
@@ -189,7 +191,7 @@ function QuranViewer({ quranData, navData, settingsData, onNavigate, onAyatSelec
                                     <span className='quran-text' style={{ fontFamily: settingsData.quranFont || 'hafs' }}>{ayat.arabicText} </span>
                                 }
                                 {settingsData.showWbw &&
-                                    getWbwAyatText(quranData.corpus.filter(f => f.surah == ayat.suraIdx + 1
+                                    getWbwAyatText(corpus.filter(f => f.surah == ayat.suraIdx + 1
                                         && f.ayah == ayat.serialInSura), settingsData.showWbwTranslation)
                                 }
                                 <span className="ayat-number"

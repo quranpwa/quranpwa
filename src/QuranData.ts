@@ -228,11 +228,17 @@ export class QuranData {
         let idx = 0;
 
         lines.map((line: string) => {
-            const values = line.split(',')
+            const values = line.split(',');
+            
+            const suraSerial = +values[0];
+            const ayatSerialInSura = +values[1];
+            const ayat = this.ayats.filter(f => f.suraIdx == suraSerial - 1 && f.serialInSura == ayatSerialInSura)[0];
+
             this.corpus.push({
                 idx: idx++,
-                surah: +values[0],
-                ayah: +values[1],
+                ayatSerial: ayat?.serial,
+                surah: suraSerial,
+                ayah: ayatSerialInSura,
                 word: +values[2],
                 ar1: values[3],
                 ar2: values[4],
@@ -475,6 +481,7 @@ export interface Ayat {
 
 export interface Corpus {
     idx: number
+    ayatSerial: number
     surah: number,
     ayah: number,
     word: number,
