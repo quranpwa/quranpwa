@@ -12,13 +12,6 @@ import AudioManager from './routes/audio-manager.tsx'
 import { IndexedDBService } from './IndexedDBService.ts'
 import recitationList from './assets/recitation-list.json';
 
-await QuranData.instance.setAyats();
-
-QuranData.instance.setCorpus().then(() => { });
-
-const audioDBService = new IndexedDBService<SuraAudio>('audioDatabase', QuranData.instance.recitations[0]?.recitaionMeta?.id);
-await audioDBService.initDatabase(recitationList.map(item => item.id));
-
 const router = createBrowserRouter([
     {
         path: "/",
@@ -38,8 +31,16 @@ const router = createBrowserRouter([
     }
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <RouterProvider router={router} />
-    </React.StrictMode>,
-)
+QuranData.instance.setAyats().then(() => {
+    QuranData.instance.setCorpus().then(() => { });
+
+    const audioDBService = new IndexedDBService<SuraAudio>('audioDatabase', QuranData.instance.recitations[0]?.recitaionMeta?.id);
+    audioDBService.initDatabase(recitationList.map(item => item.id)).then(() => {
+
+        ReactDOM.createRoot(document.getElementById('root')!).render(
+            <React.StrictMode>
+                <RouterProvider router={router} />
+            </React.StrictMode>,
+        )
+    });
+});
