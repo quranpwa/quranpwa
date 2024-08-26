@@ -13,10 +13,6 @@ export default defineConfig({
                 handler: 'CacheFirst',
                 urlPattern: /.*\.(json|csv|txt)$/,
                 options: { cacheName: 'textData' }
-            }, {
-                handler: 'CacheFirst',
-                urlPattern: /.*\.mp3$/,
-                options: { cacheName: 'audioData', rangeRequests: true }
             }]
         },
         manifest: {
