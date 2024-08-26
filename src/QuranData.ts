@@ -1,5 +1,6 @@
 ﻿import quranData from './assets/quran-data.json'
 import { NavigationModel } from './components/NavBar';
+import { SettingsModel } from './components/SettingsPanel';
 import { IndexedDBService } from './IndexedDBService';
 import { padLeft, sum } from './Utilities';
 
@@ -229,7 +230,7 @@ export class QuranData {
 
         lines.map((line: string) => {
             const values = line.split(',');
-            
+
             const suraSerial = +values[0];
             const ayatSerialInSura = +values[1];
             const ayat = this.ayats.filter(f => f.suraIdx == suraSerial - 1 && f.serialInSura == ayatSerialInSura)[0];
@@ -383,6 +384,13 @@ export class QuranData {
                 });
             }
         }
+    }
+
+    async setSettingsData(settingsData: SettingsModel) {
+        await this.setTranslations(settingsData.translations);
+        await this.setWbwTranslations(settingsData.wbwTranslations);
+        await this.setTafsirs(settingsData.tafsirs);
+        await this.setRecitations(settingsData.recitaions);
     }
 
     getReadingTimeInSecond(ayatRange: Sura | AyatRange) {

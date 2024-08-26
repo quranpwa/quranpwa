@@ -60,7 +60,7 @@ function Quran() {
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
     useEffect(() => {
-        onSettingsChanged(storedSettingsData);
+        quranData.setSettingsData(storedSettingsData).then(()=> forceUpdate());
 
         let selectedAyatElement = document.getElementById(location.hash.substring(1));
         if (selectedAyatElement) {
@@ -106,15 +106,11 @@ function Quran() {
         location.hash = isTranslation ? 't' + selectedAyat : String(selectedAyat);
     }
 
-    const onSettingsChanged = async (settingsData: SettingsModel) => {
-        storeSettingsData(settingsData);
-
-        await quranData.setTranslations(settingsData.translations);
-        await quranData.setWbwTranslations(settingsData.wbwTranslations);
-        await quranData.setTafsirs(settingsData.tafsirs);
-        await quranData.setRecitations(settingsData.recitaions);
-
-        forceUpdate();
+    const onSettingsChanged = async (_settingsData: SettingsModel) => {
+        if (storeSettingsData(_settingsData)) {
+            await quranData.setSettingsData(_settingsData);
+            forceUpdate();
+        }
     }
 
     return (

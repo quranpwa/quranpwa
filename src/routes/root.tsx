@@ -69,15 +69,11 @@ function Root() {
 
     const settingsData = getStoredSettingsData();
 
-    const onSettingsChanged = async (settingsData: SettingsModel) => {
-        storeSettingsData(settingsData);
-
-        await quranData.setTranslations(settingsData.translations);
-        await quranData.setWbwTranslations(settingsData.wbwTranslations);
-        await quranData.setTafsirs(settingsData.tafsirs);
-        await quranData.setRecitations(settingsData.recitaions);
-
-        forceUpdate();
+    const onSettingsChanged = async (_settingsData: SettingsModel) => {
+        if (storeSettingsData(_settingsData)) {
+            await quranData.setSettingsData(_settingsData);
+            forceUpdate();
+        }
     }
 
     const navMode = navData.navMode;

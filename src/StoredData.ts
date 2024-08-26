@@ -26,7 +26,7 @@ export function storeNavData(navData: NavigationModel) {
 export function getDefaultSettings(): SettingsModel {
     let navLang = navigator.languages[navigator.languages.length - 1] ?? 'en';
     navLang = navLang.substring(0, 2);
-    
+
     let translation = translationList.filter(f => f.language == navLang)[0];
     let wbwTranslation = wbwTranslationList.filter(f => f.language == navLang)[0];
 
@@ -53,8 +53,8 @@ export function getStoredSettingsData(): SettingsModel {
     let settingsData = storedSettingsDataString ? JSON.parse(storedSettingsDataString)
         : defaultSettings;
 
-    for(let prop in defaultSettings){
-        if (settingsData[prop] == null || settingsData[prop] == undefined){
+    for (let prop in defaultSettings) {
+        if (settingsData[prop] == null || settingsData[prop] == undefined) {
             settingsData[prop] = defaultSettings[prop];
         }
     }
@@ -62,8 +62,16 @@ export function getStoredSettingsData(): SettingsModel {
     return settingsData;
 }
 
-export function storeSettingsData(settingsData: SettingsModel) {
-    localStorage.setItem(settingsDataStorageKey, JSON.stringify(settingsData));
+export function storeSettingsData(settingsData: SettingsModel): boolean {
+    const storedSettingsDataString = localStorage.getItem(settingsDataStorageKey);
+    const settingsDataString = JSON.stringify(settingsData);
+
+    if (storedSettingsDataString != settingsDataString){
+        localStorage.setItem(settingsDataStorageKey, settingsDataString);
+        return true;
+    }
+    
+    return false;
 }
 
 const recentlyReadsStorageKey = 'RecentlyReads';
@@ -78,7 +86,7 @@ export function getStoredRecentlyReads(): NavigationShortcutItem[] {
 export function storeRecentlyRead(item: NavigationShortcutItem) {
     let storedRecentlyReads: NavigationShortcutItem[] = getStoredRecentlyReads();
 
-    storedRecentlyReads = storedRecentlyReads.filter(s => 
+    storedRecentlyReads = storedRecentlyReads.filter(s =>
         s.navData?.navMode != item.navData?.navMode
         || s.navData?.serial != item.navData?.serial);
 
