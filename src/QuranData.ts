@@ -5,16 +5,17 @@ import { IndexedDBService } from './IndexedDBService';
 import { padLeft, sum } from './Utilities';
 
 export class QuranData {
+    id = 1; //to store in indexedDB
 
-    suras: Sura[];
-    manzils: AyatRange[];
-    juzs: AyatRange[];
-    hizb: AyatRange[];
-    hizb_quarters: AyatRange[];
-    rukus: AyatRange[];
-    pages: AyatRange[];
+    suras: Sura[] = [];
+    manzils: AyatRange[] = [];
+    juzs: AyatRange[] = [];
+    hizb: AyatRange[] = [];
+    hizb_quarters: AyatRange[] = [];
+    rukus: AyatRange[] = [];
+    pages: AyatRange[] = [];
 
-    sajdas: Sajdah[];
+    sajdas: Sajdah[] = [];
 
     ayats: Ayat[] = [];
     corpus: Corpus[] = [];
@@ -23,17 +24,23 @@ export class QuranData {
     tafsirs: TranslationWithData[] = [];
     recitations: RecitationWithData[] = [];
 
-    constructor() {
-        this.suras = this.getSuras();
+    constructor(storedQuranData?: QuranData) {
+        if (storedQuranData) {
+            for (let prop in storedQuranData) {
+                this[prop] = storedQuranData[prop];
+            }
+        } else {
+            this.suras = this.getSuras();
 
-        this.manzils = [];// this.getAyatRange(quranData.manzils);
-        this.juzs = this.getAyatRange(quranData.juzs);
-        this.hizb = this.getAyatRange(this.transformHizbQuarterToHizb(quranData.hizb_quarters));
-        this.hizb_quarters = this.getAyatRange(quranData.hizb_quarters);
-        this.rukus = this.getAyatRange(quranData.rukus);
-        this.pages = this.getAyatRange(quranData.pages);
+            this.manzils = [];// this.getAyatRange(quranData.manzils);
+            this.juzs = this.getAyatRange(quranData.juzs);
+            this.hizb = this.getAyatRange(this.transformHizbQuarterToHizb(quranData.hizb_quarters));
+            this.hizb_quarters = this.getAyatRange(quranData.hizb_quarters);
+            this.rukus = this.getAyatRange(quranData.rukus);
+            this.pages = this.getAyatRange(quranData.pages);
 
-        this.sajdas = this.getSajdas();
+            this.sajdas = this.getSajdas();
+        }
     }
 
     private getSuras(): Sura[] {
@@ -426,7 +433,13 @@ export class QuranData {
         if (!(window as any)[globalQuranData])
             (window as any)[globalQuranData] = new QuranData();
 
-        return (window as any)[globalQuranData]
+        return (window as any)[globalQuranData];
+    }
+
+    static set instance(storedQuranData: QuranData) {
+        const globalQuranData = "globalQuranData";
+
+        (window as any)[globalQuranData] = new QuranData(storedQuranData);
     }
 }
 

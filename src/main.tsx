@@ -31,16 +31,27 @@ const router = createBrowserRouter([
     }
 ]);
 
-QuranData.instance.setAyats().then(() => {
-    QuranData.instance.setCorpus().then(() => { });
+async function initQuranData() {
+    const quranDBService = new IndexedDBService<QuranData>('quranDatabase', 'quranStore');
+    let quranData = await quranDBService.getData(1);
+
+    if (quranData) {
+        QuranData.instance = quranData
+    } else {
+        await QuranData.instance.setAyats();
+        await QuranData.instance.setCorpus();
+
+        await quranDBService.storeData(QuranData.instance);
+    }
 
     const audioDBService = new IndexedDBService<SuraAudio>('audioDatabase', QuranData.instance.recitations[0]?.recitaionMeta?.id);
-    audioDBService.initDatabase(recitationList.map(item => item.id)).then(() => {
+    await audioDBService.initDatabase(recitationList.map(item => item.id));
+}
 
-        ReactDOM.createRoot(document.getElementById('root')!).render(
-            <React.StrictMode>
-                <RouterProvider router={router} />
-            </React.StrictMode>,
-        )
-    });
+initQuranData().then(() => {
+    ReactDOM.createRoot(document.getElementById('root')!).render(
+        <React.StrictMode>
+            <RouterProvider router={router} />
+        </React.StrictMode>,
+    )
 });
