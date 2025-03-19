@@ -61,11 +61,6 @@ function Quran() {
 
     useEffect(() => {
         quranData.setSettingsData(storedSettingsData).then(()=> forceUpdate());
-
-        let selectedAyatElement = document.getElementById(location.hash.substring(1));
-        if (selectedAyatElement) {
-            selectedAyatElement.scrollIntoView();
-        }
     }, []);
 
     function setNavDataToSearchParams(navData: NavigationModel) {
@@ -96,6 +91,13 @@ function Quran() {
         storeNavData(navData);
         setNavDataToSearchParams(navData);
         forceUpdate();
+
+        let selectedAyatElement = document.getElementById(location.hash.substring(1));
+        if (selectedAyatElement) {
+            selectedAyatElement.scrollIntoView();
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 
     const onAyatSelection = (selectedAyat: number, isTranslation?: boolean) => {
