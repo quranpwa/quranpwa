@@ -30,7 +30,7 @@
     --bg-color: #242424;
     --nav-bg-color: #000;
     --selected-bg-color: #212b35;
-    --selected-font-color: #71c8d1;
+    --selected-font-color: #e2c667;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -42,7 +42,7 @@
         --bg-color: #242424;
         --nav-bg-color: #000;
         --selected-bg-color: #212b35;
-        --selected-font-color: #71c8d1;
+        --selected-font-color: #e2c667;
     }
 }
 
