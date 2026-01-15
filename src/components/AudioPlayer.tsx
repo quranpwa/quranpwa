@@ -3,11 +3,14 @@ import { Ayat, QuranData, Recitation, RecitationTiming } from '../QuranData';
 import { getAyatId, padLeft, secondsToTimeString, sum } from '../Utilities';
 import { ReadingMode, SettingsModel } from './SettingsPanel';
 import { FaEllipsisV, FaPause, FaPlay } from 'react-icons/fa';
+import { useKeepScreenAwake } from './useKeepScreenAwake';
 
 function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPlayingAyatChanged }: AudioPlayerProps) {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [recitationIdx, setRecitationIdx] = useState<number>(0);
-
+    
+    useKeepScreenAwake(isPlaying);
+    
     const recitations = settingsData.recitaions;
 
     const getAudioUrl = (recitation: Recitation): string => {
@@ -375,6 +378,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
                                 onTimeUpdate={handleOnTimeUpdate}
                                 onEnded={handleOnEnded}
                                 controls
+                                playsInline
                                 style={{ height: 25 }}></video>
                         </li>
                     )}
