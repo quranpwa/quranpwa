@@ -126,7 +126,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
     const handlePlay = (_recitationIdx: number, _ayatSerial: number) => {
         let recitation = recitations[_recitationIdx];
 
-        let audioElements = document.getElementsByTagName('audio')
+        let audioElements = document.getElementsByTagName('video')
 
         for (let audioElement of audioElements) {
             if (audioElement.id == recitation.id) {
@@ -149,7 +149,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
     };
 
     const pauseAll = () => {
-        let audioElements = document.getElementsByTagName('audio')
+        let audioElements = document.getElementsByTagName('video')
 
         for (let audioElement of audioElements) {
             audioElement.pause();
@@ -170,7 +170,7 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
 
     let previousWordId: string;
 
-    const handleOnTimeUpdate = (event: React.SyntheticEvent<HTMLAudioElement>) => {
+    const handleOnTimeUpdate = (event: React.SyntheticEvent<HTMLVideoElement>) => {
         let recitation = recitations[recitationIdx];
 
         if (recitation?.isFilePerSura) {
@@ -368,14 +368,14 @@ function AudioPlayer({ quranData, settingsData, ayats, selectedAyatSerial, onPla
                             <p style={{ cursor: 'pointer' }}
                                 onClick={() => { setRecitationIdx(i); handlePlay(i, selectedAyatSerial); }}>
                                 {recitationIdx == i ? '●' : ''} {r.name}
+                                <label className='badge'>{getAudioUrl(r).startsWith('blob')? 'Offline': 'Online'}</label>
                             </p>
-                            <audio id={r.id}
+                            <video id={r.id}
                                 src={getAudioUrl(r)}
                                 onTimeUpdate={handleOnTimeUpdate}
                                 onEnded={handleOnEnded}
-                                controls></audio>
-
-                            <label>{getAudioUrl(r).startsWith('blob')? 'Offline': 'Online'}</label>
+                                controls
+                                style={{ height: 25 }}></video>
                         </li>
                     )}
                 </ul>
